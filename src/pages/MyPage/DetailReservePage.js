@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../../components/common/Header";
 import DetailedItem from "../../components/common/Reservation/DetailedItem";
+import { styled } from "styled-components";
 
 const DetailReservePage = () => {
   return (
@@ -16,3 +17,5 @@ const DetailReservePage = () => {
 };
 
 export default DetailReservePage;
+
+const Wrapper = styled.div``;
