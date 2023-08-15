@@ -50,8 +50,8 @@ const Header = () => {
             </Search>
           )}
           <Menu>
-            <div className="subMenu">스팟</div>
             <div className="subMenu">사진작가</div>
+            <div className="subMenu">스팟</div>
             <img className="mypage" src={profile} alt="마이페이지" />
             <img className="menu" onClick={openModal} src={menu} alt="메뉴" />
           </Menu>{" "}
@@ -76,12 +76,7 @@ const Header = () => {
 };
 
 export default Header;
-const Wrapper = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-`;
+const Wrapper = styled.div``;
 
 const HeaderDiv = styled.div`
   width: 100%;
@@ -117,14 +112,14 @@ const Main = styled.div`
   }
 
   .logo {
-    margin-right: 72px;
+    margin-right: 3rem;
     img {
-      width: 161px;
-      height: 35px;
+      width: 13rem;
+      /* height: 35px; */
 
       @media (max-width: 768px) {
         width: 98px;
-        height: 21px;
+        /* height: 21px; */
       }
     }
   }
@@ -144,11 +139,10 @@ const Menu = styled.div`
     display: inline-flex;
     align-items: flex-start;
     justify-content: center;
-    color: var(--sub-2, #008ede);
-    font-family: "Godo B";
+    color: #3c3aac;
     font-size: 18px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     line-height: normal;
 
     @media (max-width: 768px) {
@@ -160,7 +154,7 @@ const Menu = styled.div`
     width: 44px;
     height: 44px;
     margin-right: 16px;
-    margin-left: 27px;
+    margin-left: 1rem;
 
     @media (max-width: 768px) {
       margin-right: 16px;
@@ -190,13 +184,13 @@ const SearchDiv = styled.div`
 const Search = styled.div`
   display: flex;
   width: 511px;
-  height: 60px;
+  height: 3rem;
   justify-content: space-between;
   align-items: center;
 
   border-radius: 52px;
   background: #e6e6e6;
-  margin-right: 71px;
+  margin-right: 2rem;
 
   @media (max-width: 768px) {
     width: 358px;
@@ -209,12 +203,11 @@ const Search = styled.div`
     height: 20px;
     border: none;
     background-color: #e6e6e6;
-    font-family: Godo M;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    margin-left: 26px;
+    margin-left: 30px;
     @media (max-width: 768px) {
       width: 256px;
       height: 20px;
@@ -230,9 +223,10 @@ const Search = styled.div`
     color: var(--transparent-grey, rgba(129, 129, 129, 0.4));
   }
   img {
-    width: 32px;
-    height: 32px;
-    margin-right: 32px;
+    /* width: 32px;
+    height: 32px; */
+    width: 1.5rem;
+    margin-right: 2rem;
     @media (max-width: 768px) {
       width: 16px;
       height: 16px;
