@@ -70,20 +70,19 @@ const Reservation = () => {
   );
 };
 
-const Footer = styled.img`
-  width: 100vw;
-  margin: 0;
-`;
-
 const Container = styled.div`
   margin-left: 6%;
   margin-right: 6%;
-  margin-bottom: 20rem;
   margin-top: 4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+const Footer = styled.img`
+  width: 100vw;
+  vertical-align: bottom;
 `;
 
 const Title = styled.h2`
