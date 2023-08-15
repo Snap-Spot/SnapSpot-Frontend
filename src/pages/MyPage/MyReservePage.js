@@ -8,8 +8,6 @@ const MyReservePage = () => {
     <div>
       <Header />
       <Wrapper>
-        <div className="title">스냅 예약 내역</div>
-        <div className="dropdown"></div>
         <div className="container">
           <ReservationList />
         </div>
@@ -20,4 +18,11 @@ const MyReservePage = () => {
 
 export default MyReservePage;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  .container {
+    margin-top: 94px;
+    @media (max-width: 768px) {
+      margin-top: 17px;
+    }
+  }
+`;
