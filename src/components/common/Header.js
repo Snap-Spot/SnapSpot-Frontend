@@ -85,8 +85,6 @@ const HeaderDiv = styled.div`
   position: relative;
   flex-direction: row;
   justify-content: center;
-  /* align-items: center; */
-  /* margin: 0; */
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -108,18 +106,16 @@ const Main = styled.div`
     justify-content: space-between;
 
     margin: 14px 16px 14px 17px;
-    /* margin-bottom: 17px; */
   }
 
   .logo {
     margin-right: 3rem;
+
     img {
       width: 13rem;
-      /* height: 35px; */
 
       @media (max-width: 768px) {
         width: 98px;
-        /* height: 21px; */
       }
     }
   }
@@ -198,6 +194,11 @@ const Search = styled.div`
     margin-right: 0px;
   }
 
+  @media (max-width: 280px) {
+    width: 258px;
+    height: 34px;
+  }
+
   input {
     width: 356px;
     height: 20px;
@@ -208,10 +209,19 @@ const Search = styled.div`
     font-weight: 400;
     line-height: normal;
     margin-left: 30px;
+
     @media (max-width: 768px) {
       width: 256px;
       height: 20px;
       font-size: 12px;
+      margin-left: 20px;
+    }
+
+    @media (max-width: 280px) {
+      width: 256px;
+      height: 20px;
+      font-size: 9px;
+      margin-left: 15px;
     }
   }
 
@@ -223,8 +233,6 @@ const Search = styled.div`
     color: var(--transparent-grey, rgba(129, 129, 129, 0.4));
   }
   img {
-    /* width: 32px;
-    height: 32px; */
     width: 1.5rem;
     margin-right: 2rem;
     @media (max-width: 768px) {
