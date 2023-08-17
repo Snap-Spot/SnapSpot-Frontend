@@ -133,17 +133,17 @@ const Menu = styled.div`
   justify-content: center;
 
   .subMenu {
-    width: 66px;
     padding: 12px;
     gap: 12px;
     display: inline-flex;
     align-items: flex-start;
     justify-content: center;
     color: #3c3aac;
-    font-size: 18px;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 700;
-    line-height: normal;
+    line-height: 68.5%;
+    min-width: 4.375rem;
 
     @media (max-width: 768px) {
       display: none;
