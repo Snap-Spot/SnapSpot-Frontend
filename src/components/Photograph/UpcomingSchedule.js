@@ -63,6 +63,11 @@ const ReservationNum = styled.p`
 const Padding = styled.div`
   padding-left: 2rem;
   padding-right: 2rem;
+
+  @media (max-width: 768px) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 `;
 
 const Container = styled.div`
@@ -130,6 +135,10 @@ const NickName = styled.p`
   font-size: 0.9rem;
   margin-left: 0.5rem;
   margin-right: 1.6rem;
+
+  @media (max-width: 768px) {
+    margin-right: 1rem;
+  }
 `;
 
 const Btn = styled.button`
@@ -152,6 +161,10 @@ const SnapType = styled.p`
   font-size: 1rem;
   margin: 0;
   margin-top: 0.4rem;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
 `;
 
 const Headcount = styled.p`
@@ -159,16 +172,29 @@ const Headcount = styled.p`
   color: var(--darkgrey, #777);
   margin: 0;
   margin-top: 0.4rem;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
 `;
 
 const SubTitle = styled.h3`
   font-size: 1rem;
   margin-bottom: 0;
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+    margin-top: 0.6rem;
+  }
 `;
 
 const Content = styled.p`
   margin-bottom: 0;
   font-size: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
 `;
 
 export default UpcomingSchedule;

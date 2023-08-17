@@ -71,47 +71,49 @@ const Calendar = ({ setSelect, select }) => {
   }
 
   return (
-    <Container>
-      <Row>
-        <PrevBtn src={prev} onClick={() => setMonth(month - 1)} />
-        <CurrentDate>
-          {current_year}년 {month + 1}월
-        </CurrentDate>
-        <NextBtn src={next} onClick={() => setMonth(month + 1)} />
-      </Row>
-      <Row2>
-        {week.map((el, i) => (
-          <Week key={i}>{el}</Week>
+    <Center>
+      <Container>
+        <Row>
+          <PrevBtn src={prev} onClick={() => setMonth(month - 1)} />
+          <CurrentDate>
+            {current_year}년 {month + 1}월
+          </CurrentDate>
+          <NextBtn src={next} onClick={() => setMonth(month + 1)} />
+        </Row>
+        <Row2>
+          {week.map((el, i) => (
+            <Week key={i}>{el}</Week>
+          ))}
+        </Row2>
+        <Line />
+        {daysInMonthGrid.map((week, weekIndex) => (
+          <Row3 key={weekIndex}>
+            {week.map((day, dayIndex) => {
+              if (
+                (weekIndex === 0 && IsPrevMonth(day)) ||
+                (weekIndex === daysInMonthGrid.length - 1 && IsNextMonth(day))
+              ) {
+                return (
+                  <Day2 key={dayIndex} cur="true">
+                    {day}
+                  </Day2>
+                );
+              } else {
+                return (
+                  <Day
+                    key={dayIndex}
+                    onClick={() => setSelect(day)}
+                    isSelect={select === day ? true : false}
+                  >
+                    {day}
+                  </Day>
+                );
+              }
+            })}
+          </Row3>
         ))}
-      </Row2>
-      <Line />
-      {daysInMonthGrid.map((week, weekIndex) => (
-        <Row3 key={weekIndex}>
-          {week.map((day, dayIndex) => {
-            if (
-              (weekIndex === 0 && IsPrevMonth(day)) ||
-              (weekIndex === daysInMonthGrid.length - 1 && IsNextMonth(day))
-            ) {
-              return (
-                <Day2 key={dayIndex} cur="true">
-                  {day}
-                </Day2>
-              );
-            } else {
-              return (
-                <Day
-                  key={dayIndex}
-                  onClick={() => setSelect(day)}
-                  isSelect={select === day ? true : false}
-                >
-                  {day}
-                </Day>
-              );
-            }
-          })}
-        </Row3>
-      ))}
-    </Container>
+      </Container>
+    </Center>
   );
 };
 
@@ -130,6 +132,10 @@ const Day = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
 `;
 
 const Day2 = styled(Day)`
@@ -142,16 +148,37 @@ const Line = styled.div`
   height: 1.5px;
   background-color: #3c3aac;
   margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    height: 1px;
+  }
 `;
 
 const Week = styled.p`
   font-weight: 600;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
+`;
+
+const Center = styled.div`
+  @media (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 const Container = styled.div`
   width: 28rem;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    width: 90%;
+    margin-bottom: 2.5rem;
+  }
 `;
 
 const Row = styled.div`
@@ -166,6 +193,11 @@ const PrevBtn = styled.img`
   height: 20px;
   margin-right: 1rem;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 10px;
+    height: 16px;
+  }
 `;
 
 const Row2 = styled(Row)`
@@ -176,6 +208,11 @@ const Row2 = styled(Row)`
 const Row3 = styled(Row2)`
   padding-top: 1rem;
   padding-bottom: 2em;
+
+  @media (max-width: 768px) {
+    padding-top: 0.9rem;
+    padding-bottom: 1em;
+  }
 `;
 
 const NextBtn = styled(PrevBtn)`
@@ -186,6 +223,10 @@ const CurrentDate = styled.p`
   color: #3c3aac;
   font-size: 20px;
   font-weight: 700;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 export default Calendar;

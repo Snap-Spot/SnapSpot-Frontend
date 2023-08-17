@@ -68,6 +68,10 @@ const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: 3rem;
+
+  @media (max-width: 768px) {
+    margin-right: 1rem;
+  }
 `;
 
 const ContentContainer = styled.div`
@@ -86,6 +90,10 @@ const Container = styled.div`
   padding-left: 1.7rem;
   padding-right: 1.7rem;
   margin-bottom: 1.7rem;
+
+  @media (max-width: 768px) {
+    padding-right: 0.7rem;
+  }
 `;
 
 const Profile = styled.img`
@@ -108,6 +116,10 @@ const NickName = styled.p`
   font-size: 0.9rem;
   margin-left: 0.5rem;
   margin-right: 1.6rem;
+
+  @media (max-width: 768px) {
+    margin-right: 1rem;
+  }
 `;
 
 const Btn = styled.button`
@@ -128,6 +140,10 @@ const SnapType = styled.p`
   font-size: 1rem;
   margin: 0;
   margin-top: 0.4rem;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
 `;
 
 const Headcount = styled.p`
@@ -135,16 +151,29 @@ const Headcount = styled.p`
   color: var(--darkgrey, #777);
   margin: 0;
   margin-top: 0.4rem;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
 `;
 
 const SubTitle = styled.h3`
   font-size: 1rem;
   margin-bottom: 0;
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+    margin-top: 0.6rem;
+  }
 `;
 
 const Content = styled.p`
   margin-bottom: 0;
   font-size: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
 `;
 
 export default ScheduleBox;

@@ -92,6 +92,10 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 768px) {
+    margin-top: 1rem;
+  }
 `;
 
 const Footer = styled.img`
@@ -103,6 +107,11 @@ const Title = styled.h2`
   font-size: 1.2rem;
   margin-bottom: 2.5rem;
   align-self: flex-start;
+
+  @media (max-width: 768px) {
+    margin-left: 1.2rem;
+    margin-bottom: 1.7rem;
+  }
 `;
 
 const Schedule = styled.div`
@@ -112,11 +121,19 @@ const Schedule = styled.div`
   background: var(--lesswhite, #f6f6f6);
   padding-top: 1rem;
   width: 40%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const SelectedDate = styled.h2`
   font-size: 1.2rem;
   padding-left: 1.4rem;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const Row = styled.div`
@@ -124,6 +141,11 @@ const Row = styled.div`
   margin-bottom: 7rem;
   justify-content: space-around;
   width: 100%;
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2.5rem;
+  }
 `;
 
 export default Reservation;
