@@ -1,12 +1,10 @@
 import React from "react";
-import Header from "../../components/common/Header";
 import ReservationList from "../../components/common/Reservation/ReservationList";
 import { styled } from "styled-components";
 
 const MyReservePage = () => {
   return (
     <div>
-      <Header />
       <Wrapper>
         <div className="container">
           <ReservationList />
