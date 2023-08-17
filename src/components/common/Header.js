@@ -66,7 +66,7 @@ const Header = () => {
           </SearchDiv>
         ) : null}
       </HeaderDiv>
-      {isHomeMenuOpen && (
+      {isMobile && isHomeMenuOpen && (
         <HomeMenu
           isHomeMenuOpen={isHomeMenuOpen}
           setIsHomeMenuOpen={setIsHomeMenuOpen}
