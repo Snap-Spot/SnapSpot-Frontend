@@ -1,10 +1,10 @@
 import { React, useState, useEffect } from "react";
 import { styled } from "styled-components";
-import profile from "../../assets/profile.png";
-import logo from "../../assets/logo.png";
+import profile from "../../assets/header/profile.png";
+import logo from "../../assets/header/logo.png";
 import mobilelogo from "../../assets/header/mobilelogo.png";
-import search from "../../assets/search.png";
-import menu from "../../assets/menu.png";
+import search from "../../assets/header/search.png";
+import menu from "../../assets/header/menu.png";
 import HomeMenu from "./HomeMenu";
 
 const Header = () => {
