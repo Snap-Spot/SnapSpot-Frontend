@@ -112,7 +112,7 @@ const NickName = styled.p`
 
 const Btn = styled.button`
   border-radius: 6px;
-  background: var(--main-font-color, #3c3aac);
+  background: #5170de;
   color: var(--lesswhite, #f6f6f6);
   font-size: 0.8rem;
   width: 3.7rem;

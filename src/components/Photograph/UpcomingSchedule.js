@@ -68,8 +68,7 @@ const Padding = styled.div`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  /* width: 58rem; */
-  width: 88%;
+  width: 100%;
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
   border-radius: 32px;
@@ -135,7 +134,7 @@ const NickName = styled.p`
 
 const Btn = styled.button`
   border-radius: 6px;
-  background: var(--main-font-color, #3c3aac);
+  background: #5170de;
   color: var(--lesswhite, #f6f6f6);
   font-size: 0.8rem;
   width: 3.7rem;
