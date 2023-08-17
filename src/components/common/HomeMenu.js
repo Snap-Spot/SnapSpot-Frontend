@@ -54,7 +54,7 @@ const Menu = styled.div`
 
   p {
     color: #000;
-    font-family: Godo M;
+    font-family: Noto Sans KR;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -63,7 +63,7 @@ const Menu = styled.div`
   }
 
   &:hover {
-    background: #00c2ff;
+    background: #3c3aac;
   }
 
   &:hover p {
