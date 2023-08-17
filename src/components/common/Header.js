@@ -1,9 +1,10 @@
 import { React, useState, useEffect } from "react";
 import { styled } from "styled-components";
-import profile from "../../assets/profile.png";
-import logo from "../../assets/logo.png";
-import search from "../../assets/search.png";
-import menu from "../../assets/menu.png";
+import profile from "../../assets/header/profile.png";
+import logo from "../../assets/header/logo.png";
+import mobilelogo from "../../assets/header/mobilelogo.png";
+import search from "../../assets/header/search.png";
+import menu from "../../assets/header/menu.png";
 import HomeMenu from "./HomeMenu";
 
 const Header = () => {
@@ -41,7 +42,7 @@ const Header = () => {
       <HeaderDiv>
         <Main>
           <div className="logo">
-            <img src={logo} alt="로고" />
+            <img src={isMobile ? mobilelogo : logo} alt="로고" />
           </div>{" "}
           {isMobile ? null : ( //모바일이 아닐 경우 Search Box
             <Search>
@@ -65,7 +66,7 @@ const Header = () => {
           </SearchDiv>
         ) : null}
       </HeaderDiv>
-      {isHomeMenuOpen && (
+      {isMobile && isHomeMenuOpen && (
         <HomeMenu
           isHomeMenuOpen={isHomeMenuOpen}
           setIsHomeMenuOpen={setIsHomeMenuOpen}
@@ -80,13 +81,11 @@ const Wrapper = styled.div``;
 
 const HeaderDiv = styled.div`
   width: 100%;
-  height: 98px;
+  height: 6.125rem;
   display: flex;
   position: relative;
   flex-direction: row;
   justify-content: center;
-  /* align-items: center; */
-  /* margin: 0; */
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -107,19 +106,18 @@ const Main = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    margin: 14px 16px 14px 17px;
-    /* margin-bottom: 17px; */
+    margin: 0.875rem 1rem 0.875rem 1rem;
   }
 
   .logo {
     margin-right: 3rem;
+
     img {
       width: 13rem;
-      /* height: 35px; */
 
       @media (max-width: 768px) {
-        width: 98px;
-        /* height: 21px; */
+        width: 1.84rem;
+        height: 1.5rem;
       }
     }
   }
@@ -133,17 +131,17 @@ const Menu = styled.div`
   justify-content: center;
 
   .subMenu {
-    width: 66px;
-    padding: 12px;
-    gap: 12px;
+    padding: 0.75rem;
+    gap: 0.75rem;
     display: inline-flex;
     align-items: flex-start;
     justify-content: center;
     color: #3c3aac;
-    font-size: 18px;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 700;
-    line-height: normal;
+    line-height: 68.5%;
+    min-width: 4.375rem;
 
     @media (max-width: 768px) {
       display: none;
@@ -151,19 +149,19 @@ const Menu = styled.div`
   }
 
   .mypage {
-    width: 44px;
-    height: 44px;
-    margin-right: 16px;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-right: 1rem;
     margin-left: 1rem;
 
     @media (max-width: 768px) {
-      margin-right: 16px;
+      margin-right: 1rem;
     }
   }
 
   .menu {
-    width: 20px;
-    height: 17px;
+    width: 1.25rem;
+    height: 1.063rem;
     display: none;
 
     @media (max-width: 768px) {
@@ -183,35 +181,49 @@ const SearchDiv = styled.div`
 
 const Search = styled.div`
   display: flex;
-  width: 511px;
+  width: 31.94rem;
   height: 3rem;
   justify-content: space-between;
   align-items: center;
 
-  border-radius: 52px;
+  border-radius: 3.25rem;
   background: #e6e6e6;
   margin-right: 2rem;
 
   @media (max-width: 768px) {
-    width: 358px;
-    height: 38px;
-    margin-right: 0px;
+    width: 22.375rem;
+    height: 2.375rem;
+    margin-right: 0rem;
+  }
+
+  @media (max-width: 280px) {
+    width: 16.125rem;
+    height: 2.125rem;
   }
 
   input {
-    width: 356px;
-    height: 20px;
+    width: 22.25rem;
+    height: 1.25rem;
     border: none;
     background-color: #e6e6e6;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    margin-left: 30px;
+    margin-left: 1.875rem;
+
     @media (max-width: 768px) {
-      width: 256px;
-      height: 20px;
-      font-size: 12px;
+      width: 16rem;
+      height: 1.25rem;
+      font-size: 0.75rem;
+      margin-left: 1.25rem;
+    }
+
+    @media (max-width: 280px) {
+      width: 16rem;
+      height: 1.25rem;
+      font-size: 0.563rem;
+      margin-left: 0.938rem;
     }
   }
 
@@ -223,15 +235,13 @@ const Search = styled.div`
     color: var(--transparent-grey, rgba(129, 129, 129, 0.4));
   }
   img {
-    /* width: 32px;
-    height: 32px; */
     width: 1.5rem;
     margin-right: 2rem;
     @media (max-width: 768px) {
-      width: 16px;
-      height: 16px;
+      width: 1rem;
+      height: 1rem;
 
-      margin-right: 16px;
+      margin-right: 1rem;
     }
   }
 `;
