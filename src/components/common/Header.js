@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react";
 import { styled } from "styled-components";
 import profile from "../../assets/profile.png";
 import logo from "../../assets/logo.png";
+import mobilelogo from "../../assets/header/mobilelogo.png";
 import search from "../../assets/search.png";
 import menu from "../../assets/menu.png";
 import HomeMenu from "./HomeMenu";
@@ -41,7 +42,7 @@ const Header = () => {
       <HeaderDiv>
         <Main>
           <div className="logo">
-            <img src={logo} alt="로고" />
+            <img src={isMobile ? mobilelogo : logo} alt="로고" />
           </div>{" "}
           {isMobile ? null : ( //모바일이 아닐 경우 Search Box
             <Search>
@@ -115,7 +116,8 @@ const Main = styled.div`
       width: 13rem;
 
       @media (max-width: 768px) {
-        width: 98px;
+        width: 29.455px;
+        height: 24px;
       }
     }
   }
