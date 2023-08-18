@@ -42,7 +42,7 @@ const MyPage = () => {
           <Arrow src={arrow} />
         </MenuContainer>
         <Line2 />
-        <MenuContainer>
+        <MenuContainer onClick={() => navigate("/photograph-custom")}>
           <Icon src={icon3} />
           <Menu>작가 페이지 커스텀</Menu>
           <Arrow src={arrow} />
@@ -81,6 +81,7 @@ const MenuContainer = styled.div`
   align-items: center;
   width: 409px;
   justify-content: flex-start;
+  cursor: pointer;
 
   @media (max-width: 768px) {
     width: 95%;
