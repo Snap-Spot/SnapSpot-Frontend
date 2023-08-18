@@ -1,5 +1,5 @@
 import React from "react";
-import DetailedItem from "../../components/common/Reservation/DetailedItem";
+import DetailedItem from "../../components/Reservation/DetailedItem";
 import { styled } from "styled-components";
 
 const DetailReservePage = () => {
