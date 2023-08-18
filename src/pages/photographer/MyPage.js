@@ -52,6 +52,10 @@ const Menus = styled.div`
   flex-direction: column;
   width: 100%;
   max-width: 50rem;
+
+  @media (max-width: 768px) {
+    align-items: center;
+  }
 `;
 
 const Icon = styled.img`
@@ -71,10 +75,18 @@ const MenuContainer = styled.div`
   align-items: center;
   width: 409px;
   justify-content: flex-start;
+
+  @media (max-width: 768px) {
+    width: 95%;
+  }
 `;
 
 const Menu = styled.p`
   font-weight: 500;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const Arrow = styled.img`
@@ -88,6 +100,10 @@ const Line = styled.div`
   background-color: #e6e6e6;
   margin-top: 2.5rem;
   margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    margin-top: 2rem;
+  }
 `;
 
 const Center = styled.div`
@@ -110,6 +126,13 @@ const Title = styled.h2`
   align-self: flex-start;
   margin-bottom: 3rem;
   /* margin-left: -4rem; */
+
+  @media (max-width: 768px) {
+    margin-top: 2rem;
+    font-size: 18px;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const Column = styled.div``;
@@ -118,6 +141,10 @@ const Row = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 `;
 
 const NickName = styled.h3`
@@ -142,18 +169,33 @@ const Btn = styled.button`
   line-height: 128.5%;
   margin-left: auto;
   margin-right: 2rem;
+
+  @media (max-width: 768px) {
+    margin-right: 0;
+  }
 `;
 
 const SubTitle = styled.h2`
   font-size: 20px;
   color: #3c3aac;
   align-self: flex-start;
+
+  @media (max-width: 768px) {
+    margin-left: 1.2rem;
+    font-size: 18px;
+    margin-bottom: 1.2rem;
+  }
 `;
 
 const Profile = styled.img`
   width: 80px;
   height: 80px;
   margin-right: 2rem;
+  @media (max-width: 768px) {
+    width: 50px;
+    height: 50px;
+    margin-right: 1rem;
+  }
 `;
 
 const Setting = styled.img`
