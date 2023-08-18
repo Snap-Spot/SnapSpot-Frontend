@@ -70,6 +70,7 @@ const Center = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 130vh;
 `;
 
 const Container = styled.div`

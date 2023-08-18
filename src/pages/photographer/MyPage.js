@@ -30,7 +30,7 @@ const MyPage = () => {
         <SubTitle>고객관리</SubTitle>
       </Container>
       <Menus>
-        <MenuContainer>
+        <MenuContainer onClick={() => navigate("/photograph-reserve")}>
           <Icon src={icon1} />
           <Menu>스냅 사진 예약/일정 관리</Menu>
           <Arrow src={arrow} />
