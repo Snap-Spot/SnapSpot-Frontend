@@ -5,8 +5,11 @@ import arrow from "../../assets/photograph/arrow.png";
 import icon1 from "../../assets/photograph/icon1.png";
 import icon2 from "../../assets/photograph/icon2.png";
 import icon3 from "../../assets/photograph/icon3.png";
+import { useNavigate } from "react-router-dom";
 
 const MyPage = () => {
+  const navigate = useNavigate();
+
   return (
     <Center>
       <Container>
@@ -17,7 +20,10 @@ const MyPage = () => {
             <NickName>닉네임</NickName>
             <Email>hello@snapspot.com</Email>
           </Column>
-          <Setting src={setting} />
+          <Setting
+            src={setting}
+            onClick={() => navigate("/photograph-setting")}
+          />
           <Btn>로그아웃</Btn>
         </Row>
         <Line />
@@ -203,6 +209,7 @@ const Setting = styled.img`
   height: 19px;
   align-self: flex-start;
   margin-top: 1.4rem;
+  cursor: pointer;
 `;
 
 export default MyPage;
