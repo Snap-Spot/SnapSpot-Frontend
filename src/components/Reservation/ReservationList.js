@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import ReservationItem from "./ReservationItem";
 import { styled } from "styled-components";
+import Dropdown from "./Dropdown";
 const ReservationList = () => {
   const [list, setList] = useState([1, 2, 3]);
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <Wrapper>
       <div className="titleNdropdown">
         <div className="title">스냅 예약 내역</div>
-        <div className="dropdown">드롭다운</div>
+        <div className="dropdown">
+          <Dropdown isOpen={isOpen} />
+        </div>
       </div>
 
       <div className="list">
