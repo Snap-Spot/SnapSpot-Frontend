@@ -6,9 +6,9 @@ const DetailReservePage = () => {
   return (
     <div>
       <Wrapper>
-        <div className="title"></div>
-        <div className="container"></div>
-        <DetailedItem />
+        <div className="container">
+          <DetailedItem />
+        </div>
       </Wrapper>
     </div>
   );
@@ -16,4 +16,11 @@ const DetailReservePage = () => {
 
 export default DetailReservePage;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  .container {
+    margin-top: 94px;
+    @media (max-width: 768px) {
+      margin-top: 17px;
+    }
+  }
+`;
