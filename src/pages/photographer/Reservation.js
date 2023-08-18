@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import arrow from "../../assets/photograph/arrow.png";
-import ScheduleBox from "../../components/Photograph/ScheduleBox";
-import UpcomingSchedule from "../../components/Photograph/UpcomingSchedule";
+import ScheduleBox from "../../components/Photographer/Reservation/ScheduleBox";
+import UpcomingSchedule from "../../components/Photographer/Reservation/UpcomingSchedule";
 import footer from "../../assets/photograph/Footer.png";
-import Calendar from "../../components/Photograph/Calendar";
+import Calendar from "../../components/Photographer/Reservation/Calendar";
 import { useState, useEffect } from "react";
 
 const Reservation = () => {
@@ -151,7 +151,7 @@ const Footer = styled.img`
 `;
 
 const Title = styled.h2`
-  font-size: 1.2rem;
+  font-size: 24px;
   margin-bottom: 2.5rem;
   align-self: flex-start;
 

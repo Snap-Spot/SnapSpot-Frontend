@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
-import prev from "../../assets/photograph/prev_btn.png";
-import next from "../../assets/photograph/next_btn.png";
+import prev from "../../../assets/photograph/prev_btn.png";
+import next from "../../../assets/photograph/next_btn.png";
 import { useState } from "react";
 
 const Calendar = ({ setSelect, select }) => {

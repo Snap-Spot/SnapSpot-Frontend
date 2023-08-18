@@ -1,36 +1,32 @@
 import styled from "styled-components";
-import profile from "../../assets/photograph/profile.png";
-import arrow from "../../assets/photograph/arrow.png";
-import line from "../../assets/photograph/line.png";
+import profile from "../../../assets/photograph/profile.png";
+import arrow from "../../../assets/photograph/arrow.png";
+import line from "../../../assets/photograph/line.png";
 
-const UpcomingSchedule = ({
+const ScheduleBox = ({
   nickname,
   snapType,
   headCount,
   time,
   place,
   requirement,
-  date,
-  num,
+  idx,
 }) => {
   return (
-    <Container>
-      <Padding>
+    <>
+      {/* 나중에 idx 받아서 0일 때만 안보이게끔 설정 */}
+      {idx !== "0" && <BottomLine />}
+      <Container>
         <Row2>
-          <Date>{date}</Date>
+          <Row>
+            <Profile src={profile} />
+            <NickName>{nickname}</NickName>
+            <Btn>예약완료</Btn>
+          </Row>
           <Detail>
             상세보기 <Arrow src={arrow} />
           </Detail>
         </Row2>
-        <ReservationNum>스냅 예약번호 {num}</ReservationNum>
-      </Padding>
-      <BottomLine />
-      <Padding>
-        <Row>
-          <Profile src={profile} />
-          <NickName>{nickname}</NickName>
-          <Btn>예약신청</Btn>
-        </Row>
         <Row>
           <SnapType>{snapType}</SnapType>
           <Line src={line} />
@@ -48,44 +44,17 @@ const UpcomingSchedule = ({
             <Content>{requirement}</Content>
           </ContentContainer>
         </Row>
-      </Padding>
-    </Container>
+      </Container>
+    </>
   );
 };
-
-const ReservationNum = styled.p`
-  font-size: 0.9rem;
-  color: #777777;
-  margin-top: 0.3rem;
-  font-weight: 400;
-`;
-
-const Padding = styled.div`
-  padding-left: 2rem;
-  padding-right: 2rem;
-
-  @media (max-width: 768px) {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-  border-radius: 32px;
-  border: 1px solid var(--lightgrey-2, #dbdbdb);
-  margin-bottom: 2rem;
-`;
 
 const BottomLine = styled.div`
   width: 100%;
   height: 1px;
   background: #dbdbdb;
-  margin-bottom: 0.5rem;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
+  margin-bottom: 1.2rem;
 `;
 
 const Line = styled.img`
@@ -99,6 +68,10 @@ const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: 3rem;
+
+  @media (max-width: 768px) {
+    margin-right: 1rem;
+  }
 `;
 
 const ContentContainer = styled.div`
@@ -111,16 +84,24 @@ const Arrow = styled.img`
   margin-left: 0.2rem;
 `;
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-left: 1.7rem;
+  padding-right: 1.7rem;
+  margin-bottom: 1.7rem;
+
+  @media (max-width: 768px) {
+    padding-right: 0.7rem;
+  }
+`;
+
 const Profile = styled.img`
   width: 1.5rem;
   height: 1.5rem;
 `;
 
-const Date = styled.h2`
-  font-size: 1rem;
-  margin-top: 0;
-  margin-bottom: 0;
-`;
+const Date = styled.h2``;
 
 const Row = styled.div`
   display: flex;
@@ -153,8 +134,6 @@ const Btn = styled.button`
 
 const Detail = styled.p`
   font-size: 0.9rem;
-  margin-top: 0;
-  margin-bottom: 0;
 `;
 
 const SnapType = styled.p`
@@ -197,4 +176,4 @@ const Content = styled.p`
   }
 `;
 
-export default UpcomingSchedule;
+export default ScheduleBox;

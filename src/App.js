@@ -2,6 +2,7 @@ import "./styles/Font.css";
 import Header from "./components/common/Header";
 import ReservationDetail from "./pages/photographer/ReservationDetail";
 import Reservation from "./pages/photographer/Reservation";
+import MyPage from "./pages/photographer/MyPage";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
     <>
       <Header />
       <Routes>
+        <Route path="/photograph-mypage" element={<MyPage />} />
         <Route path="/photograph-reserve" element={<Reservation />} />
         <Route path="/photograph-reserve/:id" element={<ReservationDetail />} />
       </Routes>
