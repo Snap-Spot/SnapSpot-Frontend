@@ -29,7 +29,7 @@ const UpcomingSchedule = ({
         <Row>
           <Profile src={profile} />
           <NickName>{nickname}</NickName>
-          <Btn>예약완료</Btn>
+          <Btn>예약신청</Btn>
         </Row>
         <Row>
           <SnapType>{snapType}</SnapType>

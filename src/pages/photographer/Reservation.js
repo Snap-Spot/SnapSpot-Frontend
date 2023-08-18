@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import arrow from "../../assets/photograph/arrow.png";
 import ScheduleBox from "../../components/Photograph/ScheduleBox";
 import UpcomingSchedule from "../../components/Photograph/UpcomingSchedule";
 import footer from "../../assets/photograph/Footer.png";
@@ -38,7 +39,44 @@ const Reservation = () => {
               />
             </Schedule>
           </Row>
-          <Title>촬영날이 곧 다가와요!</Title>
+          <Title>
+            새로 들어온 <Highlight>촬영 요청</Highlight>이 있어요{" "}
+            <Arrow src={arrow} />
+          </Title>
+          <UpcomingSchedule
+            nickname="kui01"
+            snapType="우정스냅"
+            headCount="4"
+            time="12:30 ~ 14:30"
+            place="뚝섬유원지"
+            requirement="편안한 분위기에서 촬영하고 싶어요!"
+            date="2023.07.23(일)"
+            num="0123920293848"
+          />
+          <UpcomingSchedule
+            nickname="kui01"
+            snapType="우정스냅"
+            headCount="4"
+            time="12:30 ~ 14:30"
+            place="뚝섬유원지"
+            requirement="편안한 분위기에서 촬영하고 싶어요!"
+            date="2023.07.23(일)"
+            num="0123920293848"
+          />
+          <UpcomingSchedule
+            nickname="kui01"
+            snapType="우정스냅"
+            headCount="4"
+            time="12:30 ~ 14:30"
+            place="뚝섬유원지"
+            requirement="편안한 분위기에서 촬영하고 싶어요!"
+            date="2023.07.23(일)"
+            num="0123920293848"
+          />
+          <Title2>
+            곧 돌아오는 <Highlight>촬영 일정</Highlight>이 있어요{" "}
+            <Arrow src={arrow} />
+          </Title2>
           <UpcomingSchedule
             nickname="kui01"
             snapType="우정스냅"
@@ -82,6 +120,15 @@ const Center = styled.div`
   align-items: center;
 `;
 
+const Arrow = styled.img`
+  width: 0.6rem;
+  margin-left: 0.4rem;
+`;
+
+const Highlight = styled.span`
+  color: #3c3aac;
+`;
+
 const Container = styled.div`
   width: 100%;
   max-width: 66rem;
@@ -112,6 +159,10 @@ const Title = styled.h2`
     margin-left: 1.2rem;
     margin-bottom: 1.7rem;
   }
+`;
+
+const Title2 = styled(Title)`
+  margin-top: 5rem;
 `;
 
 const Schedule = styled.div`
