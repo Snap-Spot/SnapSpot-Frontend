@@ -1,61 +1,74 @@
+import { React, useState, useEffect } from "react";
+
 import styled from "styled-components";
 import footer from "../../assets/photograph/Footer.png";
 import more from "../../assets/search/more.png";
+import glass from "../../assets/search/glass.png";
 import SearchBox from "../../components/search/SearchBox";
 
 const SearchPage = () => {
+  const [info, setInfo] = useState(true);
+
   return (
     <Wrapper>
       <SearchTitle>
         <div class="subject">'에밀리’</div>에 대한 검색결과
       </SearchTitle>
-      <RegionTitle>
-        <div class="subject">'제주도’</div>에서 활동하는 작가
-        <img src={more} />
-      </RegionTitle>
-      <div class="grid">
+      {info ? (
         <div>
-          <SearchBox
-            tag="#커플스냅 #유채꽃 #화사함"
-            photographer="에밀리"
-            star="4.7"
-            region="제주도 서귀포"
-            price="130,000"
-            review="238"
-          />
+          <RegionTitle>
+            <div class="subject">'제주도’</div>에서 활동하는 작가
+            <img src={more} />
+          </RegionTitle>
+          <div class="grid">
+            <div>
+              <SearchBox
+                tag="#커플스냅 #유채꽃 #화사함"
+                photographer="에밀리"
+                star="4.7"
+                region="제주도 서귀포"
+                price="130,000"
+                review="238"
+              />
+            </div>
+            <div>
+              <SearchBox
+                tag="#커플스냅 #유채꽃 #화사함"
+                photographer="에밀리"
+                star="4.7"
+                region="제주도 서귀포"
+                price="130,000"
+                review="238"
+              />
+            </div>
+            <div>
+              <SearchBox
+                tag="#커플스냅 #유채꽃 #화사함"
+                photographer="에밀리"
+                star="4.7"
+                region="제주도 서귀포"
+                price="130,000"
+                review="238"
+              />
+            </div>
+            <div>
+              <SearchBox
+                tag="#커플스냅 #유채꽃 #화사함"
+                photographer="에밀리"
+                star="4.7"
+                region="제주도 서귀포"
+                price="130,000"
+                review="238"
+              />
+            </div>
+          </div>
+          {/* <Footer src={footer} /> */}
         </div>
-        <div>
-          <SearchBox
-            tag="#커플스냅 #유채꽃 #화사함"
-            photographer="에밀리"
-            star="4.7"
-            region="제주도 서귀포"
-            price="130,000"
-            review="238"
-          />
-        </div>
-        <div>
-          <SearchBox
-            tag="#커플스냅 #유채꽃 #화사함"
-            photographer="에밀리"
-            star="4.7"
-            region="제주도 서귀포"
-            price="130,000"
-            review="238"
-          />
-        </div>
-        <div>
-          <SearchBox
-            tag="#커플스냅 #유채꽃 #화사함"
-            photographer="에밀리"
-            star="4.7"
-            region="제주도 서귀포"
-            price="130,000"
-            review="238"
-          />
-        </div>
-      </div>
-      {/* <Footer src={footer} /> */}
+      ) : (
+        <EmptySection>
+          <img src={glass} /> 검색된 정보가 없습니다.
+        </EmptySection>
+      )}
     </Wrapper>
   );
 };
@@ -158,7 +171,40 @@ const RegionTitle = styled.div`
     }
   }
 `;
-const Footer = styled.img`
-  width: 100vw;
-  vertical-align: bottom;
+// const Footer = styled.img`
+//   width: 100vw;
+//   vertical-align: bottom;
+// `;
+
+const EmptySection = styled.div`
+  display: flex;
+  /* width: 320px;*/
+  height: 420px;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #dbdbdb;
+  font-family: Noto Sans KR;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 3rem;
+
+    @media (max-width: 768px) {
+      width: 36px;
+      height: 36px;
+    }
+  }
 `;
