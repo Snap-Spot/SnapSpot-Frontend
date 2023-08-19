@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import footer from "../../assets/photograph/Footer.png";
 import more from "../../assets/search/more.png";
-
 import SearchBox from "../../components/search/SearchBox";
+
 const SearchPage = () => {
   return (
     <Wrapper>
@@ -55,6 +55,7 @@ const SearchPage = () => {
           />
         </div>
       </div>
+      {/* <Footer src={footer} /> */}
     </Wrapper>
   );
 };
@@ -156,4 +157,8 @@ const RegionTitle = styled.div`
       height: 13.333px;
     }
   }
+`;
+const Footer = styled.img`
+  width: 100vw;
+  vertical-align: bottom;
 `;
