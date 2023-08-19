@@ -19,10 +19,6 @@ const SearchBox = ({ tag, photographer, star, region, price, review }) => {
         </TopInfo>
         <Region>{region}에서 활동중</Region>
         <Price>{price}원 ~</Price>
-        <Review>
-          <img src={reviewIcon} />
-          후기 {review}개
-        </Review>
       </Info>
     </Wrapper>
   );
@@ -80,7 +76,7 @@ const Photographer = styled.div`
   /* margin-top: 20px; */
 `;
 const Region = styled.div`
-  color: rgba(129, 129, 129, 0.4);
+  color: #777;
 
   /* web_m18 */
   font-family: Noto Sans KR;
@@ -105,25 +101,7 @@ const Price = styled.div`
   height: 35px;
   margin-top: 6px;
 `;
-const Review = styled.div`
-  color: #060606;
 
-  /* mob_m12 */
-  font-family: Noto Sans KR;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 128.5%; /* 15.42px */
-
-  /* width: 56px; */
-  height: 15px;
-
-  img {
-    margin-right: 8px;
-    width: 16px;
-    height: 16px;
-  }
-`;
 const TopInfo = styled.div`
   display: flex;
   flex-direction: row;
@@ -140,7 +118,12 @@ const Star = styled.div`
   font-weight: 500;
   line-height: normal;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
   img {
+    margin-right: 0.4rem;
+    /* padding-top: 0.5rem; */
     width: 24px;
     height: 24px;
   }

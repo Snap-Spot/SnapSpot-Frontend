@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import footer from "../../assets/photograph/Footer.png";
+import more from "../../assets/search/more.png";
+
 import SearchBox from "../../components/search/SearchBox";
 const SearchPage = () => {
   return (
@@ -9,6 +11,7 @@ const SearchPage = () => {
       </Title>
       <Title>
         <div class="regionName">'제주도’</div>에서 활동하는 작가
+        <img src={more} />
       </Title>
       <div class="grid">
         <div>
@@ -74,7 +77,7 @@ const Wrapper = styled.div`
     column-gap: 44px;
     row-gap: 100px;
 
-    margin-top: 5rem;
+    margin-top: 3.5rem;
   }
 `;
 
@@ -102,5 +105,12 @@ const Title = styled.div`
   .searchTitle,
   .regionName {
     color: #3c3aac;
+  }
+
+  img {
+    margin-left: 1.1rem;
+    margin-top: 0.2rem;
+    width: 12px;
+    height: 20px;
   }
 `;
