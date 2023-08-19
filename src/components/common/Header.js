@@ -110,7 +110,7 @@ const Main = styled.div`
   }
 
   .logo {
-    margin-right: 3rem;
+    margin-right: 6.625rem;
 
     img {
       width: 13rem;
@@ -129,6 +129,8 @@ const Menu = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+
+  margin-left: 2.5rem;
 
   .subMenu {
     padding: 0.75rem;
@@ -157,6 +159,9 @@ const Menu = styled.div`
 
     @media (max-width: 768px) {
       margin-right: 1rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 1.5rem;
     }
   }
 
@@ -192,14 +197,10 @@ const Search = styled.div`
   margin-right: 2rem;
 
   @media (max-width: 768px) {
-    width: 22.375rem;
+    /* width: 22.375rem; */
+    width: 95%;
     height: 2.375rem;
     margin-right: 0rem;
-  }
-
-  @media (max-width: 280px) {
-    width: 16.125rem;
-    height: 2.125rem;
   }
 
   input {
