@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import profile from "../../assets/header/profile.png";
 import logo from "../../assets/header/logo.png";
@@ -8,7 +9,7 @@ import menu from "../../assets/header/menu.png";
 import HomeMenu from "./HomeMenu";
 
 const Header = () => {
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [isMobile, setisMobile] = useState(false);
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false);
@@ -37,12 +38,20 @@ const Header = () => {
     setIsHomeMenuOpen(!isHomeMenuOpen);
   };
 
+  const onClickLogo = () => {
+    navigate(`/`);
+  };
+
   return (
     <Wrapper>
       <HeaderDiv>
         <Main>
           <div className="logo">
-            <img src={isMobile ? mobilelogo : logo} alt="로고" />
+            <img
+              src={isMobile ? mobilelogo : logo}
+              alt="로고"
+              onClick={onClickLogo}
+            />
           </div>{" "}
           {isMobile ? null : ( //모바일이 아닐 경우 Search Box
             <Search>
