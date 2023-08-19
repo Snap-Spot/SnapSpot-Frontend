@@ -52,7 +52,7 @@ const Header = () => {
           )}
           <Menu>
             <div className="subMenu">사진작가</div>
-            <div className="subMenu">스팟</div>
+            <div className="subMenu">피드</div>
             <img className="mypage" src={profile} alt="마이페이지" />
             <img className="menu" onClick={openModal} src={menu} alt="메뉴" />
           </Menu>{" "}
@@ -151,6 +151,7 @@ const Menu = styled.div`
   .mypage {
     width: 2.75rem;
     height: 2.75rem;
+    border-radius: 2.75rem;
     margin-right: 1rem;
     margin-left: 1rem;
 
@@ -181,7 +182,7 @@ const SearchDiv = styled.div`
 
 const Search = styled.div`
   display: flex;
-  width: 31.94rem;
+  width: 31.938rem;
   height: 3rem;
   justify-content: space-between;
   align-items: center;
