@@ -1,29 +1,38 @@
 import styled from "styled-components";
 import profile from "../../assets/photograph/ex_profile.png";
+import Modal from "../../components/Photographer/MyPage/Modal";
+import Header from "../../components/common/Header";
+import { useState } from "react";
 
 const Setting = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <Center>
-      <Container>
-        <Title>계정 설정</Title>
-        <Line />
-        <Row>
-          <PhotoContainer>
-            <Profile src={profile} />
-            <Change>사진 변경</Change>
-          </PhotoContainer>
-          <InputContainer>
-            <SubTitle>닉네임</SubTitle>
-            <Input />
-            <SubTitle>이메일</SubTitle>
-            <Input />
-            <SubTitle>비밀번호</SubTitle>
-            <Input />
-            <ChangeBtn>변경하기</ChangeBtn>
-            <WithDraw>회원 탈퇴하기</WithDraw>
-          </InputContainer>
-        </Row>
-      </Container>
+      {isOpen && <Modal setIsOpen={setIsOpen} />}
+      <Header />
+      <Center>
+        <Container>
+          <Title>계정 설정</Title>
+          <Line />
+          <Row>
+            <PhotoContainer>
+              <Profile src={profile} />
+              <Change>사진 변경</Change>
+            </PhotoContainer>
+            <InputContainer>
+              <SubTitle>닉네임</SubTitle>
+              <Input />
+              <SubTitle>이메일</SubTitle>
+              <Input />
+              <SubTitle>비밀번호</SubTitle>
+              <Input />
+              <ChangeBtn>변경하기</ChangeBtn>
+              <WithDraw onClick={() => setIsOpen(true)}>회원 탈퇴하기</WithDraw>
+            </InputContainer>
+          </Row>
+        </Container>
+      </Center>
     </Center>
   );
 };
@@ -32,6 +41,7 @@ const ChangeBtn = styled.button`
   border-radius: 30px;
   background: var(--main-font-color, #3c3aac);
   margin-top: 5rem;
+  cursor: pointer;
 
   display: flex;
   width: 516px;
@@ -47,7 +57,8 @@ const ChangeBtn = styled.button`
 `;
 
 const WithDraw = styled(ChangeBtn)`
-  background-color: #777777;
+  background-color: #dbdbdb;
+  cursor: pointer;
 `;
 
 const PhotoContainer = styled.div`

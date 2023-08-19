@@ -10,7 +10,6 @@ import { Routes, Route } from "react-router-dom";
 function App() {
   return (
     <>
-      <Header />
       <Routes>
         <Route path="/photograph-mypage" element={<MyPage />} />
         <Route path="/photograph-reserve" element={<Reservation />} />

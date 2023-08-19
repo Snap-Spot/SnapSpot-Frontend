@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import profile from "../../assets/photograph/ex_profile.png";
+import plus from "../../assets/photograph/plus.png";
+import imgPlus from "../../assets/photograph/imgPlus.png";
 
 const Custom = () => {
   return (
@@ -16,8 +18,11 @@ const Custom = () => {
             <SubTitle>작가명</SubTitle>
             <Input />
             <SubTitle>가격표 사진 업로드</SubTitle>
-            <InputImg />
-            <InputImg />
+            <Row2>
+              <InputImg />
+              <InputImg />
+              <Plus src={plus} />
+            </Row2>
           </InputContainer>
         </Row>
         <Line2 />
@@ -25,19 +30,32 @@ const Custom = () => {
           <SubTitle>활동 지역 설정</SubTitle>
           <Input />
           <SubTitle>SNS 등록</SubTitle>
-          <Input />
+          <Row2>
+            <Input3 />
+            <Plus src={plus} />
+          </Row2>
           <SubTitle>한 줄 소개글 등록 (최대 500자)</SubTitle>
           <Input2 />
+          <SubTitle>전문 분야 등록</SubTitle>
+          <Input />
+          <SubTitle>태그 입력</SubTitle>
+          <Input />
           <SubTitle>대표 사진 업로드 (최대 10장)</SubTitle>
-          <InputImg />
-          <InputImg />
-          <InputImg />
+          <InputImg2 src={imgPlus} />
+          <InputImg2 src={imgPlus} />
+          <InputImg2 src={imgPlus} />
         </InputContainer>
         <ChangeBtn>변경하기</ChangeBtn>
       </Container>
     </Center>
   );
 };
+
+const Plus = styled.img`
+  width: 38px;
+  height: 50.091px;
+  margin-top: -1rem;
+`;
 
 const ChangeBtn = styled.button`
   border-radius: 30px;
@@ -73,11 +91,15 @@ const Row = styled.div`
   margin-top: 2rem;
 `;
 
+const Row2 = styled(Row)`
+  align-items: center;
+`;
+
 const Center = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 160vh;
+  height: 200vh;
 `;
 
 const Container = styled.div`
@@ -123,13 +145,24 @@ const Input = styled.input`
   outline: none;
 `;
 
+const Input3 = styled(Input)`
+  width: 450px;
+  margin-right: 1rem;
+`;
+
 const Input2 = styled(Input)`
   height: 137px;
 `;
 
 const InputImg = styled(Input)`
   width: 110px;
-  height: 108px;
+  height: 110px;
+  margin-right: 1rem;
+`;
+
+const InputImg2 = styled.img`
+  width: 110px;
+  height: 110px;
   margin-right: 1rem;
 `;
 
