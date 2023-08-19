@@ -3,11 +3,11 @@ import { React, useState, useEffect } from "react";
 import styled from "styled-components";
 import footer from "../../assets/photograph/Footer.png";
 import more from "../../assets/search/more.png";
-import glass from "../../assets/search/glass.png";
 import SearchBox from "../../components/search/SearchBox";
+import EamptySearch from "../../components/search/EamptySearch";
 
 const SearchPage = () => {
-  const [info, setInfo] = useState(true);
+  const [info, setInfo] = useState(false);
 
   return (
     <Wrapper>
@@ -62,12 +62,9 @@ const SearchPage = () => {
               />
             </div>
           </div>
-          {/* <Footer src={footer} /> */}
         </div>
       ) : (
-        <EmptySection>
-          <img src={glass} /> 검색된 정보가 없습니다.
-        </EmptySection>
+        <EamptySearch />
       )}
     </Wrapper>
   );
@@ -110,7 +107,7 @@ const SearchTitle = styled.div`
   /* margin-left: 14%; */
   color: var(--black, #060606);
   font-family: Noto Sans KR;
-  font-size: 20px;
+  font-size: 24px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -168,43 +165,6 @@ const RegionTitle = styled.div`
       margin-top: 0.3rem;
       width: 8px;
       height: 13.333px;
-    }
-  }
-`;
-// const Footer = styled.img`
-//   width: 100vw;
-//   vertical-align: bottom;
-// `;
-
-const EmptySection = styled.div`
-  display: flex;
-  /* width: 320px;*/
-  height: 420px;
-
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: #dbdbdb;
-  font-family: Noto Sans KR;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-
-  @media (max-width: 768px) {
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-  }
-
-  img {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 3rem;
-
-    @media (max-width: 768px) {
-      width: 36px;
-      height: 36px;
     }
   }
 `;
