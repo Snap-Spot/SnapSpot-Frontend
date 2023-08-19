@@ -47,8 +47,8 @@ const Photo = styled.div`
   gap: 8px;
   border-radius: 12px;
   @media (max-width: 768px) {
-    width: 112px;
-    height: 112px;
+    width: 6.625rem;
+    height: 6.625rem;
     border-radius: 8px;
   }
   background: linear-gradient(
@@ -70,6 +70,10 @@ const Tag = styled.p`
   line-height: normal;
 
   margin: 0 1.25rem;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Info = styled.div`
@@ -81,6 +85,12 @@ const Info = styled.div`
   background: #f6f6f6;
   /* left: 10px; */
   top: -15px;
+  @media (max-width: 768px) {
+    width: 6.625rem;
+    height: 3.225rem;
+    border-radius: 12px;
+    top: -15px;
+  }
 `;
 const Photographer = styled.div`
   color: #000;
@@ -94,7 +104,9 @@ const Photographer = styled.div`
   height: 35px;
   /* margin-top: 20px; */
   @media (max-width: 768px) {
+    margin: 0.4rem 0.5rem 0rem 0.5rem;
     font-size: 10px;
+    font-weight: 400;
     height: 15px;
   }
 `;
@@ -117,6 +129,8 @@ const Price = styled.div`
     font-size: 5px;
     width: 108px;
     height: 10px;
+
+    margin: 0rem 0.5rem;
   }
 `;
 
@@ -128,7 +142,7 @@ const TopInfo = styled.div`
 
   margin: 0.875rem 1.25rem 0 1.25rem;
   @media (max-width: 768px) {
-    margin-top: 10px;
+    margin: 0;
   }
 `;
 const Star = styled.div`
@@ -143,16 +157,14 @@ const Star = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: 768px) {
+    display: none;
+  }
   img {
     margin-right: 0.4rem;
     /* padding-top: 0.5rem; */
     width: 24px;
     height: 24px;
-    @media (max-width: 768px) {
-      margin-right: 0.1rem;
-      width: 8px;
-      height: 8px;
-    }
   }
   @media (max-width: 768px) {
     font-size: 5px;

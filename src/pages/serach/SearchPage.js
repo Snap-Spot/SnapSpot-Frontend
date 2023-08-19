@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
 
 import styled from "styled-components";
+import Header from "../../components/common/Header";
 import footer from "../../assets/photograph/Footer.png";
 import more from "../../assets/search/more.png";
 import SearchBox from "../../components/search/SearchBox";
@@ -132,7 +133,7 @@ const RegionTitle = styled.div`
   display: flex;
   width: 1050px;
   /* margin-left: 14%; */
-  color: var(--black, #060606);
+  color:  #060606;
   font-family: Noto Sans KR;
   font-size: 20px;
   font-style: normal;

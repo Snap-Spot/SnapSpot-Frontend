@@ -76,6 +76,7 @@ const Tag = styled.p`
 const Info = styled.div`
   display: flex;
   flex-direction: column;
+  
 `;
 const Photographer = styled.div`
   color: #000;

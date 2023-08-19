@@ -114,6 +114,8 @@ const Title = styled.div`
   @media (max-width: 768px) {
     font-size: 16px;
     margin-top: 1.063rem;
+    margin-bottom: 0.75rem;
+    width: 100%;
   }
 `;
 
@@ -123,4 +125,7 @@ const RecommendList = styled.div`
   align-items: center;
   justify-content: center;
   gap: 2.5rem;
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
 `;
