@@ -168,6 +168,7 @@ const Infos = styled.div`
   .status {
     display: inline-flex;
     padding: 0.5rem 0.6rem;
+    margin-top: -5px;
     @media (max-width: 768px) {
       //모바일
       padding: 0.25rem 0.5rem;
