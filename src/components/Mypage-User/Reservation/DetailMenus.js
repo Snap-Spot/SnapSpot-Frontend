@@ -1,28 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 import arrow from "../../../assets/mypage/reservation/arrow.png";
 import ReviewModal from "../Modals/ReviewModal";
+import ModalTemplate from "../Modals/ModalTemplate";
 const DetailMenus = ({ status }) => {
   //status -> 0: 에약완료 / 1: 촬영진행됨 / 2: 사진전달됨
+  const [showModal, setShowModal] = useState(false);
+  const [modalContent, setModalContent] = useState();
+  const [modalTitle, setModalTitle] = useState("");
   const list = [
-    ["예약 변경하기", "예약 취소하기", "영수증 보러가기", "작가에게 문의하기"],
-    ["영수증 보러가기", "작가에게 문의하기"],
-    ["리뷰 쓰러가기", "영수증 보러가기", "작가에게 문의하기"],
+    [
+      { menu: "예약 변경하기", title: "", content: <></> },
+      { menu: "예약 취소하기" },
+      { menu: "영수증 보러가기" },
+      { menu: "작가에게 문의하기" },
+    ],
+    [{ menu: "영수증 보러가기" }, { menu: "작가에게 문의하기" }],
+    [
+      { menu: "리뷰 쓰러가기", title: "리뷰쓰기", content: <ReviewModal /> },
+      { menu: "영수증 보러가기", title: "영수증 조회" },
+      { menu: "작가에게 문의하기" },
+    ],
   ];
+  const openModal = (title, content) => {
+    setModalContent(content);
+    setModalTitle(title);
+    setShowModal(true);
+  };
   return (
-    <List>
-      {list[status].map((el) => {
-        return (
-          <>
-            <Item>
-              <div className="title">{el}</div>
-              <img src={arrow} alt="" />
-            </Item>
-            <Line />
-          </>
-        );
-      })}
-    </List>
+    <>
+      {showModal && (
+        <ModalTemplate
+          title={modalTitle}
+          content={modalContent}
+          setShowModal={setShowModal}
+        />
+      )}
+      <List>
+        {list[2].map((el) => {
+          return (
+            <>
+              <Item onClick={() => openModal(el.title, el.content)}>
+                <div className="title">{el.menu}</div>
+                <img src={arrow} alt="" />
+              </Item>
+              <Line />
+            </>
+          );
+        })}
+      </List>
+    </>
   );
 };
 
