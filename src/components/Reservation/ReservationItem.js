@@ -78,11 +78,17 @@ const Header = styled.div`
 
   .date {
     font-weight: 500;
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
   }
   .id {
     color: var(--darkgrey, #777);
     font-size: 0.9rem;
     margin-top: 3px;
+    @media (max-width: 768px) {
+      font-size: 12px;
+    }
   }
 
   .right-content {
@@ -143,6 +149,11 @@ const Infos = styled.div`
 
   p {
     margin: 6px 0 8px 0;
+    @media (max-width: 768px) {
+      //모바일
+      margin: 4px 0 8px 0;
+      font-size: 14px;
+    }
     display: flex;
     font-size: 1rem;
     font-weight: 500;
@@ -160,7 +171,8 @@ const Infos = styled.div`
     @media (max-width: 768px) {
       //모바일
       padding: 0.25rem 0.5rem;
-      margin-top: 4px;
+      margin-top: 2px;
+      font-size: 14px;
     }
     justify-content: center;
     align-items: center;
@@ -174,10 +186,16 @@ const Infos = styled.div`
   .dateNtime {
     color: #000;
     font-size: 0.85rem;
+    @media (max-width: 768px) {
+      font-size: 12px;
+    }
   }
   .count {
     margin-top: 4px;
     color: var(--darkgrey, #777);
     font-size: 0.85rem;
+    @media (max-width: 768px) {
+      font-size: 12px;
+    }
   }
 `;
