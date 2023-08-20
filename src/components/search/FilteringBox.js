@@ -202,6 +202,10 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding-top: 2rem;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    height: 100%;
+  }
 `;
 
 const List = styled.div`
@@ -209,6 +213,9 @@ const List = styled.div`
   flex-direction: row;
   height: 90%;
   margin-top: 0.8rem;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 const RegionTab = styled.div`
   width: 22%;
@@ -222,12 +229,18 @@ const DateTab = styled.div`
   height: 100%;
   border-right: solid 0.1rem rgba(129, 129, 129, 0.4);
   padding: 0 2rem;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 const SectionTab = styled.div`
   width: 8%;
   height: 100%;
   border-right: solid 0.1rem rgba(129, 129, 129, 0.4);
   padding: 0 2rem;
+  @media (max-width: 768px) {
+    width: 80%;
+  }
 `;
 const OrderTab = styled.div`
   width: 8%;
@@ -252,12 +265,21 @@ const Calendar = styled.div`
     margin-top: 2rem;
     width: 235.32px;
     height: 335px;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 `;
 const RegionList = styled.div`
   width: 6rem;
   overflow: auto;
   border-right: solid 0.063rem #e6e6e6;
+  @media (max-width: 768px) {
+    width: 8rem;
+    display: flex;
+    flex-direction: row;
+  }
 `;
 
 const Region = styled.div`
@@ -320,6 +342,11 @@ const SectionList = styled.div`
   /* margin-left: 1.563rem; */
   width: 7rem;
   margin-top: 0.8rem;
+  @media (max-width: 768px) {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
 `;
 
 const Section = styled.div`
@@ -335,7 +362,11 @@ const Section = styled.div`
   overflow: auto;
   margin: 0.2rem 1rem 0.2rem 0;
   /* margin: 0.1rem; */
-
+  @media (max-width: 768px) {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
   ${(props) =>
     props.isSelected &&
     `

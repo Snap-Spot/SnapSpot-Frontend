@@ -83,11 +83,18 @@ export default Photographerlist;
 const Box = styled.div`
   width: 100%;
   height: 3.983rem;
-  border: 1px solid rgba(129, 129, 129, 0.4);
+  border-width: 1px 0;
+  border-style: solid;
+  border-color: rgba(129, 129, 129, 0.4);
+  /* border: 1px solid rgba(129, 129, 129, 0.4); */
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  @media (max-width: 768px) {
+    height: 2.5rem;
+    margin-top: 0.563rem;
+  }
 `;
 const Tab = styled.div`
   color: #000;
@@ -99,6 +106,9 @@ const Tab = styled.div`
 
   width: 7rem;
   text-align: center;
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 const TabBox = styled.div`
   display: flex;
@@ -106,6 +116,9 @@ const TabBox = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  @media (max-width: 768px) {
+    width: 62%;
+  }
   /* margin-right:30rem; */
 `;
 const SearchTag = styled.div`
@@ -120,7 +133,10 @@ const SearchTag = styled.div`
   border-color: rgba(129, 129, 129, 0.4);
   border-style: solid;
   /* margin-left: 35rem; */
-
+  @media (max-width: 768px) {
+    width: 35%;
+    border-right: none;
+  }
   input {
     /* width: 13rem; */
     width: 100%;
@@ -134,19 +150,9 @@ const SearchTag = styled.div`
     /* padding: 1rem; */
     /* margin-left: 1.875rem; */
 
-    /* @media (max-width: 768px) {
-      width: 16rem;
-      height: 1.25rem;
-      font-size: 0.75rem;
-      margin-left: 1.25rem;
+    @media (max-width: 768px) {
+      font-size: 0.875rem;
     }
-
-    @media (max-width: 280px) {
-      width: 16rem;
-      height: 1.25rem;
-      font-size: 0.563rem;
-      margin-left: 0.938rem;
-    } */
   }
 
   input:focus {
@@ -160,6 +166,11 @@ const SearchTag = styled.div`
   img {
     width: 1.875rem;
     margin: 1rem;
+    @media (max-width: 768px) {
+      width: 16px;
+      height: 16px;
+      margin-right: 0.2rem;
+    }
   }
 `;
 
