@@ -6,6 +6,8 @@ import ReservationDetail from "./pages/photographer/ReservationDetail";
 import Reservation from "./pages/photographer/Reservation";
 import { Routes, Route } from "react-router-dom";
 import Footer from "./components/common/Footer";
+import SignUpInfoPage from "./pages/SignUpInfoPage";
+import SignUpMemberPage from "./pages/SignUpMemberPage";
 
 function App() {
   return (
@@ -14,6 +16,9 @@ function App() {
       <Routes>
         <Route path="mypage/reservation" element={<MyReservePage />} />
         <Route path="mypage/reservation/:id" element={<DetailReservePage />} />
+        {/* 회원가입 */}
+        <Route path="/signup/member" element={<SignUpMemberPage />} />
+        <Route path="/signup/:memberType/info" element={<SignUpInfoPage />} />
         <Route path="/photograph-reserve" element={<Reservation />} />
         <Route path="/photograph-reserve/:id" element={<ReservationDetail />} />
       </Routes>
