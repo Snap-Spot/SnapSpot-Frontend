@@ -247,11 +247,13 @@ const Form = styled.textarea`
   margin-bottom: 20px;
   outline: none;
   resize: none;
+  font-size: 16px;
   @media (max-width: 768px) {
     display: flex;
     min-height: 100px;
     padding: 12px 20px;
     align-items: flex-start;
+    font-size: 12px;
   }
 `;
 const PreviewContainer = styled.div`
