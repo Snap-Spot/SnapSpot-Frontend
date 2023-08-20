@@ -4,6 +4,7 @@ import arrow from "../../../assets/mypage/reservation/arrow.png";
 import ReviewModal from "../Modals/ReviewModal";
 import ModalTemplate from "../Modals/ModalTemplate";
 import ReceiptModal from "../Modals/ReceiptModal";
+import QuestionModal from "../Modals/QuestionModal";
 const DetailMenus = ({ status }) => {
   //status -> 0: 에약완료 / 1: 촬영진행됨 / 2: 사진전달됨
   const [showModal, setShowModal] = useState(false);
@@ -18,7 +19,11 @@ const DetailMenus = ({ status }) => {
         title: "영수증 조회",
         content: <ReceiptModal />,
       },
-      { menu: "작가에게 문의하기" },
+      {
+        menu: "작가에게 문의하기",
+        title: "문의하기",
+        content: <QuestionModal />,
+      },
     ],
     [
       {
@@ -35,7 +40,11 @@ const DetailMenus = ({ status }) => {
         title: "영수증 조회",
         content: <ReceiptModal />,
       },
-      { menu: "작가에게 문의하기" },
+      {
+        menu: "작가에게 문의하기",
+        title: "문의하기",
+        content: <QuestionModal />,
+      },
     ],
   ];
   const openModal = (title, content) => {
