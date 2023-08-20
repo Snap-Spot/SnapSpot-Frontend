@@ -1,40 +1,90 @@
 import { React, useState, useEffect } from "react";
 import styled from "styled-components";
 import search from "../../assets/header/search.png";
+import FilteringBox from "../../components/search/FilteringBox";
+import SearchBox from "../../components/search/SearchBox";
 
 const Photographerlist = () => {
+  const [info, setInfo] = useState(true);
+  const [isFilteringOpen, setIsFilteringOpen] = useState(false);
+
+  const handleTabClick = () => {
+    setIsFilteringOpen(!isFilteringOpen);
+  };
+
+  const tabs = ["지역", "날짜", "전문분야", "순서"];
+
   return (
-    <Wrapper>
+    <div>
       <Box>
         <TabBox>
-          <Tab>지역</Tab>
-          <Tab>날짜</Tab>
-          <Tab>전문분야</Tab>
-          <Tab>순서</Tab>
+          {tabs.map((tab, index) => (
+            <Tab key={index} onClick={handleTabClick}>
+              {tab}
+            </Tab>
+          ))}
         </TabBox>
         <SearchTag>
           <input placeholder="태그 검색"></input>
           <img src={search} alt="검색하기" />
         </SearchTag>
       </Box>
-    </Wrapper>
+      {isFilteringOpen && <FilteringBox />}
+      <GridBox>
+        <div class="grid">
+          <div>
+            <SearchBox
+              tag="#커플스냅 #유채꽃 #화사함"
+              photographer="에밀리"
+              star="4.7"
+              region="제주도 서귀포"
+              price="130,000"
+              review="238"
+            />
+          </div>
+          <div>
+            <SearchBox
+              tag="#커플스냅 #유채꽃 #화사함"
+              photographer="에밀리"
+              star="4.7"
+              region="제주도 서귀포"
+              price="130,000"
+              review="238"
+            />
+          </div>
+          <div>
+            <SearchBox
+              tag="#커플스냅 #유채꽃 #화사함"
+              photographer="에밀리"
+              star="4.7"
+              region="제주도 서귀포"
+              price="130,000"
+              review="238"
+            />
+          </div>
+          <div>
+            <SearchBox
+              tag="#커플스냅 #유채꽃 #화사함"
+              photographer="에밀리"
+              star="4.7"
+              region="제주도 서귀포"
+              price="130,000"
+              review="238"
+            />
+          </div>
+        </div>
+      </GridBox>
+    </div>
   );
 };
 
 export default Photographerlist;
 
-const Wrapper = styled.div`
+const Box = styled.div`
   width: 100%;
   height: 3.983rem;
   border: 1px solid rgba(129, 129, 129, 0.4);
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`;
-const Box = styled.div`
-  display: flex;
-  width: 100%;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -110,5 +160,37 @@ const SearchTag = styled.div`
   img {
     width: 1.875rem;
     margin: 1rem;
+  }
+`;
+
+const GridBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relatvie;
+
+  .grid {
+    position: absolute;
+    z-index: -1;
+    top: 140px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: 320px 320px 320px;
+    grid-template-rows: repeat(3, minmax(100px, auto));
+    column-gap: 44px;
+    row-gap: 100px;
+
+    margin-top: 8rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 112px 112px 112px;
+      grid-template-rows: repeat(3, minmax(20px, auto));
+      column-gap: 15px;
+      row-gap: 20px;
+
+      margin-top: 1.25rem;
+    }
   }
 `;
