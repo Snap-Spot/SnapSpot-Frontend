@@ -2,8 +2,30 @@ import styled from "styled-components";
 import profile from "../../assets/photograph/ex_profile.png";
 import plus from "../../assets/photograph/plus.png";
 import imgPlus from "../../assets/photograph/imgPlus.png";
+import deleteIcon from "../../assets/photograph/deleteIcon.png";
+import { useState, useRef } from "react";
 
 const Custom = () => {
+  const [imgfile, setImgFile] = useState([]);
+  const imgRef = useRef([]);
+
+  const saveImgFile = () => {
+    const file = imgRef.current[imgfile.length].files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImgFile((prevImgFiles) => [...prevImgFiles, reader.result]);
+    };
+  };
+  // 이미지 프리뷰 삭제
+  const deleteFileImg = (index) => {
+    const updatedFiles = [...imgfile];
+    updatedFiles[index] = null;
+    setImgFile(updatedFiles);
+    // URL.revokeObjectURL(imgfile);
+    // setImgFile("");
+  };
+
   return (
     <Center>
       <Container>
@@ -19,9 +41,27 @@ const Custom = () => {
             <Input />
             <SubTitle>가격표 사진 업로드</SubTitle>
             <Row2>
-              <InputImg />
-              <InputImg />
-              <Plus src={plus} />
+              {imgfile.map((imgFile, index) => (
+                <ImgContainer key={index} imgfile={imgFile}>
+                  <DeleteImgBtn
+                    imgfile={imgFile}
+                    onClick={() => deleteFileImg(index)}
+                    src={deleteIcon}
+                  />
+                  <PreImg src={imgFile ? imgFile : ``} />
+                </ImgContainer>
+              ))}
+              <InputImg
+                type="file"
+                name="file"
+                id={`file-${imgfile.length}`}
+                accept="image/*"
+                onChange={saveImgFile}
+                ref={(el) => (imgRef.current[imgfile.length] = el)}
+              />
+              <label htmlFor={`file-${imgfile.length}`}>
+                <Plus src={plus} />
+              </label>
             </Row2>
           </InputContainer>
         </Row>
@@ -44,6 +84,8 @@ const Custom = () => {
           <InputImg2 src={imgPlus} />
           <InputImg2 src={imgPlus} />
           <InputImg2 src={imgPlus} />
+          <InputImg2 src={imgPlus} />
+          <InputImg2 src={imgPlus} />
         </InputContainer>
         <ChangeBtn>변경하기</ChangeBtn>
       </Container>
@@ -51,10 +93,33 @@ const Custom = () => {
   );
 };
 
+const ImgContainer = styled.div`
+  display: ${(props) => (props.imgfile ? "block" : "none")};
+  height: ${(props) => (props.imgfile ? "100%" : "0px")};
+`;
+
+const DeleteImgBtn = styled.img`
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  margin-left: 90px;
+  margin-top: 7px;
+  cursor: pointer;
+  display: ${(props) => (props.imgfile ? "block" : "none")};
+`;
+
+const PreImg = styled.img`
+  width: 8rem;
+  height: 8rem;
+  border-radius: 22px;
+  margin-right: 2rem;
+`;
+
 const Plus = styled.img`
   width: 38px;
   height: 50.091px;
   margin-top: -1rem;
+  cursor: pointer;
 `;
 
 const ChangeBtn = styled.button`
@@ -138,7 +203,7 @@ const Profile = styled.img`
 const Input = styled.input`
   border-radius: 22px;
   background: var(--lesswhite, #f6f6f6);
-  width: 500px;
+  width: 560px;
   height: 44px;
   border: none;
   padding-left: 1rem;
@@ -146,7 +211,7 @@ const Input = styled.input`
 `;
 
 const Input3 = styled(Input)`
-  width: 450px;
+  width: 510px;
   margin-right: 1rem;
 `;
 
@@ -155,15 +220,13 @@ const Input2 = styled(Input)`
 `;
 
 const InputImg = styled(Input)`
-  width: 110px;
-  height: 110px;
-  margin-right: 1rem;
+  display: none;
 `;
 
 const InputImg2 = styled.img`
   width: 110px;
   height: 110px;
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 `;
 
 const SubTitle = styled.h3`

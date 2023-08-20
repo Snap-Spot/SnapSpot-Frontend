@@ -37,11 +37,18 @@ const ScheduleDetail = ({
             <Content>{time}</Content>
             <Content>{place}</Content>
             <Content>{requirement}</Content>
-            <Input placeholder="스냅사진 촬영 가격을 적어주세요!" />
+            <Row>
+              <PriceInput placeholder="ex. 120000" />
+              <Content1>원</Content1>
+            </Row>
+            {/* 카카오 맵 연결 */}
             <Input placeholder="처음 만나는 장소를 적어주세요!" />
           </ContentContainer>
         </Row>
         <MessageBox placeholder="입금 요청 시, 추가적인 공지사항과 입금받으실 계좌번호를 작성해주세요. (예약 거절시에는 거절 사유를 적어주세요.)" />
+        {/* 아래는 예약 완료시 보이게 */}
+        {/* <AlertBtn>공지사항 보내기</AlertBtn>
+        <SubTitle>지금까지 보낸 메세지 확인하기</SubTitle> */}
       </Container>
     </>
   );
@@ -58,10 +65,18 @@ const RejectBtn = styled.button`
   font-weight: 600;
   font-size: 18px;
   margin-right: 0.8rem;
+  cursor: pointer;
 `;
 
 const RequestBtn = styled(RejectBtn)`
   background-color: #a6b9ff;
+`;
+
+const AlertBtn = styled(RequestBtn)`
+  width: 10rem;
+  margin-top: 2rem;
+  margin-left: auto;
+  margin-right: -1.5rem;
 `;
 
 const MessageBox = styled.textarea`
@@ -90,6 +105,11 @@ const Input = styled.input`
   margin-bottom: 0.5rem;
   margin-top: 1rem;
   text-align: center;
+`;
+
+const PriceInput = styled(Input)`
+  width: 150px;
+  font-size: 16px;
 `;
 
 const TitleContainer = styled.div`
@@ -196,6 +216,11 @@ const Content = styled.p`
   @media (max-width: 768px) {
     font-size: 13px;
   }
+`;
+
+const Content1 = styled(Content)`
+  margin-left: 0.5rem;
+  margin-bottom: 0.7rem;
 `;
 
 export default ScheduleDetail;
