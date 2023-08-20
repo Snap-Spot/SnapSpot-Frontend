@@ -2,6 +2,7 @@ import styled from "styled-components";
 import profile from "../../../assets/photograph/profile.png";
 import arrow from "../../../assets/photograph/arrow.png";
 import line from "../../../assets/photograph/line.png";
+import { useNavigate } from "react-router-dom";
 
 const ScheduleBox = ({
   nickname,
@@ -11,7 +12,10 @@ const ScheduleBox = ({
   place,
   requirement,
   idx,
+  id,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <>
       {/* 나중에 idx 받아서 0일 때만 안보이게끔 설정 */}
@@ -23,7 +27,7 @@ const ScheduleBox = ({
             <NickName>{nickname}</NickName>
             <Btn>예약완료</Btn>
           </Row>
-          <Detail>
+          <Detail onClick={() => navigate(`/photograph-reserve/${id}`)}>
             상세보기 <Arrow src={arrow} />
           </Detail>
         </Row2>
@@ -133,6 +137,7 @@ const Btn = styled.button`
 `;
 
 const Detail = styled.p`
+  cursor: pointer;
   font-size: 0.9rem;
 `;
 

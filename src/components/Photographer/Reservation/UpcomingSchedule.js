@@ -2,6 +2,7 @@ import styled from "styled-components";
 import profile from "../../../assets/photograph/profile.png";
 import arrow from "../../../assets/photograph/arrow.png";
 import line from "../../../assets/photograph/line.png";
+import { useNavigate } from "react-router-dom";
 
 const UpcomingSchedule = ({
   nickname,
@@ -12,13 +13,16 @@ const UpcomingSchedule = ({
   requirement,
   date,
   num,
+  id,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <Container>
       <Padding>
         <Row2>
           <Date>{date}</Date>
-          <Detail>
+          <Detail onClick={() => navigate(`/photograph-reserve/${id}`)}>
             상세보기 <Arrow src={arrow} />
           </Detail>
         </Row2>
@@ -155,6 +159,7 @@ const Detail = styled.p`
   font-size: 0.9rem;
   margin-top: 0;
   margin-bottom: 0;
+  cursor: pointer;
 `;
 
 const SnapType = styled.p`

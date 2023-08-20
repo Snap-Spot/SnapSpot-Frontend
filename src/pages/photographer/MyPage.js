@@ -36,7 +36,7 @@ const MyPage = () => {
           <Arrow src={arrow} />
         </MenuContainer>
         <Line2 />
-        <MenuContainer>
+        <MenuContainer onClick={() => navigate("/photograph-review")}>
           <Icon src={icon2} />
           <Menu>상세 리뷰 보기</Menu>
           <Arrow src={arrow} />

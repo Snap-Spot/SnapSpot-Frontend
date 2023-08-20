@@ -4,7 +4,7 @@ import ScheduleBox from "../../components/Photographer/Reservation/ScheduleBox";
 import UpcomingSchedule from "../../components/Photographer/Reservation/UpcomingSchedule";
 import footer from "../../assets/photograph/Footer.png";
 import Calendar from "../../components/Photographer/Reservation/Calendar";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const Reservation = () => {
   const date = new Date();
@@ -27,6 +27,7 @@ const Reservation = () => {
                 place="뚝섬유원지"
                 requirement="편안한 분위기에서 촬영하고 싶어요!"
                 idx="0"
+                id="ex"
               />
               <ScheduleBox
                 nickname="kui01"
@@ -36,6 +37,7 @@ const Reservation = () => {
                 place="뚝섬유원지"
                 requirement="편안한 분위기에서 촬영하고 싶어요!"
                 idx="1"
+                id="ex"
               />
             </Schedule>
           </Row>
@@ -52,6 +54,7 @@ const Reservation = () => {
             requirement="편안한 분위기에서 촬영하고 싶어요!"
             date="2023.07.23(일)"
             num="0123920293848"
+            id="ex"
           />
           <UpcomingSchedule
             nickname="kui01"
@@ -62,6 +65,7 @@ const Reservation = () => {
             requirement="편안한 분위기에서 촬영하고 싶어요!"
             date="2023.07.23(일)"
             num="0123920293848"
+            id="ex"
           />
           <UpcomingSchedule
             nickname="kui01"
@@ -72,6 +76,7 @@ const Reservation = () => {
             requirement="편안한 분위기에서 촬영하고 싶어요!"
             date="2023.07.23(일)"
             num="0123920293848"
+            id="ex"
           />
           <Title2>
             곧 돌아오는 <Highlight>촬영 일정</Highlight>이 있어요{" "}
@@ -109,7 +114,7 @@ const Reservation = () => {
           />
         </Container>
       </Center>
-      <Footer src={footer} />
+      {/* <Footer src={footer} /> */}
     </>
   );
 };
