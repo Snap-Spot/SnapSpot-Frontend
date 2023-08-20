@@ -183,9 +183,10 @@ const Form = styled.textarea`
   resize: none;
   font-size: 16px;
   @media (max-width: 768px) {
+    border-radius: 12px;
     display: flex;
     min-height: 100px;
-    padding: 12px 20px;
+    padding: 12px 12px;
     align-items: flex-start;
     font-size: 12px;
   }

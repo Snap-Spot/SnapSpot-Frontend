@@ -66,9 +66,9 @@ const Modal = styled.div`
 
   @media (max-width: 768px) {
     //모바일
-    width: 85vw;
+    width: 80vw;
 
-    padding: 20px 15px;
+    padding: 20px 20px;
   }
   .title {
     margin-bottom: 20px;
