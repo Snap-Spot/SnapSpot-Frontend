@@ -8,10 +8,12 @@ import { Routes, Route } from "react-router-dom";
 import Footer from "./components/common/Footer";
 import SignUpInfoPage from "./pages/SignUpInfoPage";
 import SignUpMemberPage from "./pages/SignUpMemberPage";
+import ReviewModal from "./components/Mypage-User/Modals/ReviewModal";
 
 function App() {
   return (
     <>
+      <ReviewModal />
       <Header />
       <Routes>
         <Route path="mypage/reservation" element={<MyReservePage />} />

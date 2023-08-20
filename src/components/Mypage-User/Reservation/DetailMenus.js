@@ -1,6 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
 import arrow from "../../../assets/mypage/reservation/arrow.png";
+import ReviewModal from "../Modals/ReviewModal";
 const DetailMenus = ({ status }) => {
   //status -> 0: 에약완료 / 1: 촬영진행됨 / 2: 사진전달됨
   const list = [
