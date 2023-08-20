@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "styled-components";
-import arrow from "../../assets/mypage/reservation/arrow.png";
+import arrow from "../../../assets/mypage/reservation/arrow.png";
 const ReservationItem = () => {
   return (
     <Wrapper>

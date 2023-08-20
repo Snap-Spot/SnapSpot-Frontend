@@ -1,5 +1,5 @@
 import React from "react";
-import ReservationList from "../../components/Reservation/ReservationList";
+import ReservationList from "../../components/Mypage-User/Reservation/ReservationList";
 import { styled } from "styled-components";
 
 const MyReservePage = () => {
