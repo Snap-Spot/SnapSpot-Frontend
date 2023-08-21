@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import profile from "../../assets/header/profile.png";
 import logo from "../../assets/header/logo.png";
@@ -8,7 +9,7 @@ import menu from "../../assets/header/menu.png";
 import HomeMenu from "./HomeMenu";
 
 const Header = () => {
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [isMobile, setisMobile] = useState(false);
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false);
@@ -37,12 +38,20 @@ const Header = () => {
     setIsHomeMenuOpen(!isHomeMenuOpen);
   };
 
+  const onClickLogo = () => {
+    navigate(`/`);
+  };
+
   return (
     <Wrapper>
       <HeaderDiv>
         <Main>
           <div className="logo">
-            <img src={isMobile ? mobilelogo : logo} alt="로고" />
+            <img
+              src={isMobile ? mobilelogo : logo}
+              alt="로고"
+              onClick={onClickLogo}
+            />
           </div>{" "}
           {isMobile ? null : ( //모바일이 아닐 경우 Search Box
             <Search>
@@ -52,7 +61,7 @@ const Header = () => {
           )}
           <Menu>
             <div className="subMenu">사진작가</div>
-            <div className="subMenu">스팟</div>
+            <div className="subMenu">피드</div>
             <img className="mypage" src={profile} alt="마이페이지" />
             <img className="menu" onClick={openModal} src={menu} alt="메뉴" />
           </Menu>{" "}
@@ -110,7 +119,7 @@ const Main = styled.div`
   }
 
   .logo {
-    margin-right: 3rem;
+    margin-right: 6.625rem;
 
     img {
       width: 13rem;
@@ -129,6 +138,8 @@ const Menu = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+
+  margin-left: 2.5rem;
 
   .subMenu {
     padding: 0.75rem;
@@ -151,11 +162,15 @@ const Menu = styled.div`
   .mypage {
     width: 2.75rem;
     height: 2.75rem;
+    border-radius: 2.75rem;
     margin-right: 1rem;
     margin-left: 1rem;
 
     @media (max-width: 768px) {
       margin-right: 1rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 1.5rem;
     }
   }
 
@@ -181,7 +196,7 @@ const SearchDiv = styled.div`
 
 const Search = styled.div`
   display: flex;
-  width: 31.94rem;
+  width: 31.938rem;
   height: 3rem;
   justify-content: space-between;
   align-items: center;
@@ -191,14 +206,10 @@ const Search = styled.div`
   margin-right: 2rem;
 
   @media (max-width: 768px) {
-    width: 22.375rem;
+    /* width: 22.375rem; */
+    width: 95%;
     height: 2.375rem;
     margin-right: 0rem;
-  }
-
-  @media (max-width: 280px) {
-    width: 16.125rem;
-    height: 2.125rem;
   }
 
   input {
