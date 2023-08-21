@@ -72,8 +72,8 @@ const Map = styled.div`
   z-index: -1;
 `;
 const Container = styled.div`
-  width: 80%;
-  height: 80%;
+  width: 70%;
+  height: 60%;
   margin: 0px auto;
   margin-top: 35px;
 
