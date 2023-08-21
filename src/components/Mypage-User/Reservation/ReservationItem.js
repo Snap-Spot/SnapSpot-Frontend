@@ -1,7 +1,9 @@
 import React from "react";
 import { styled } from "styled-components";
 import arrow from "../../../assets/mypage/reservation/arrow.png";
+import { useNavigate } from "react-router-dom";
 const ReservationItem = () => {
+  const navigate = useNavigate();
   return (
     <Wrapper>
       <Header>
@@ -9,7 +11,10 @@ const ReservationItem = () => {
           <div className="date">2023.7.23(일)</div>
           <div className="id">스냅 예약번호&nbsp;&nbsp;0123920293848</div>
         </div>
-        <div className="right-content">
+        <div
+          className="right-content"
+          onClick={() => navigate("/mypage/reservation/1")}
+        >
           상세보기
           <div className="arrow">
             <img src={arrow} />
@@ -92,6 +97,7 @@ const Header = styled.div`
   }
 
   .right-content {
+    cursor: pointer;
     display: flex;
     color: #060606;
     font-size: 0.9rem;

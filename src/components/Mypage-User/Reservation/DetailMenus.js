@@ -85,6 +85,7 @@ const List = styled.div`
   width: 100%;
 `;
 const Item = styled.div`
+  cursor: pointer;
   width: 100%;
   height: 79px;
   font-weight: 500;

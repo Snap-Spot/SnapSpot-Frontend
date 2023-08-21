@@ -24,6 +24,7 @@ const Wrapper = styled.div`
     margin-bottom: 20px;
   }
   .button {
+    cursor: pointer;
     margin: auto;
     display: flex;
     width: 240px;

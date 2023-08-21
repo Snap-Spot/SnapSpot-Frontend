@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import nullstar from "../../../assets/mypage/modals/nullstar.png";
 import filledstar from "../../../assets/mypage/modals/filledstar.png";
 import photo from "../../../assets/mypage/modals/photo.png";
+import { hasPointerEvents } from "@testing-library/user-event/dist/utils";
 
 const ReviewModal = () => {
   const [starCount, setStarCount] = useState();
@@ -13,7 +14,7 @@ const ReviewModal = () => {
       <Stars setStarCount={setStarCount} />
       <Form placeholder="리뷰를 작성해주세요.(1000자 이내)"></Form>
 
-      <div className="subTitle">
+      <div className="subTitle" style={{ cursor: "pointer" }}>
         사진 첨부하기 <img src={photo} alt="" />
       </div>
 
@@ -126,6 +127,7 @@ const Wrapper = styled.div`
     }
   }
   .button {
+    cursor: pointer;
     margin: auto;
     display: flex;
     width: 240px;

@@ -78,6 +78,7 @@ const Modal = styled.div`
     font-size: 24px;
     font-weight: 700;
     img {
+      cursor: pointer;
       height: 32px;
       width: 32px;
     }

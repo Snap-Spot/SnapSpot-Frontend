@@ -84,6 +84,7 @@ const Container = styled.div`
     margin-top: 17px;
   }
   .button {
+    cursor: pointer;
     display: flex;
     justify-content: end;
     align-items: center;
