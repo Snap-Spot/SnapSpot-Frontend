@@ -83,7 +83,7 @@ const MessageBox = styled.textarea`
   width: 1048px;
   padding: 20px;
   border-radius: 32px;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   background: var(--lightgrey-1, #e6e6e6);
   border: none;
   outline: none;
