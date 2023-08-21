@@ -8,8 +8,6 @@ import { Routes, Route } from "react-router-dom";
 import Footer from "./components/common/Footer";
 import SignUpInfoPage from "./pages/SignUpInfoPage";
 import SignUpMemberPage from "./pages/SignUpMemberPage";
-import ReviewModal from "./components/Mypage-User/Modals/ReviewModal";
-import ModalTemplate from "./components/Mypage-User/Modals/ModalTemplate";
 
 function App() {
   return (
