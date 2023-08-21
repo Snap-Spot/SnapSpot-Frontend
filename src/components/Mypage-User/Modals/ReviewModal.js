@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import nullstar from "../../../assets/mypage/modals/nullstar.png";
 import filledstar from "../../../assets/mypage/modals/filledstar.png";
 import photo from "../../../assets/mypage/modals/photo.png";
-import ModalTemplate from "./ModalTemplate";
 
 const ReviewModal = () => {
   const [starCount, setStarCount] = useState();
@@ -72,30 +71,6 @@ const Stars = ({ setStarCount }) => {
 const Preview = () => {
   return (
     <PreviewContainer>
-      <div className="image">
-        <img src="" alt="" />
-      </div>
-      <div className="image">
-        <img src="" alt="" />
-      </div>
-      <div className="image">
-        <img src="" alt="" />
-      </div>
-      <div className="image">
-        <img src="" alt="" />
-      </div>
-      <div className="image">
-        <img src="" alt="" />
-      </div>
-      <div className="image">
-        <img src="" alt="" />
-      </div>
-      <div className="image">
-        <img src="" alt="" />
-      </div>
-      <div className="image">
-        <img src="" alt="" />
-      </div>
       <div className="image">
         <img src="" alt="" />
       </div>
