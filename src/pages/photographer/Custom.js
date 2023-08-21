@@ -6,9 +6,22 @@ import deleteIcon from "../../assets/photograph/deleteIcon.png";
 import { useState, useRef } from "react";
 
 const Custom = () => {
-  const [imgfile, setImgFile] = useState([]);
+  const [imgfile, setImgFile] = useState([]); // 가격표 이미지
+  const [profileImg, setProfileImg] = useState(""); // 프로필 이미지
   const imgRef = useRef([]);
+  const imgRef2 = useRef();
 
+  // 프로필 이미지 프리뷰 생성
+  const saveProfileImgFile = () => {
+    const file = imgRef2.current.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setProfileImg(reader.result);
+    };
+  };
+
+  // 가격표 이미지 프리뷰
   const saveImgFile = () => {
     const file = imgRef.current[imgfile.length].files[0];
     const reader = new FileReader();
@@ -17,13 +30,12 @@ const Custom = () => {
       setImgFile((prevImgFiles) => [...prevImgFiles, reader.result]);
     };
   };
-  // 이미지 프리뷰 삭제
+
+  // 가격표 이미지 프리뷰 삭제
   const deleteFileImg = (index) => {
     const updatedFiles = [...imgfile];
     updatedFiles[index] = null;
     setImgFile(updatedFiles);
-    // URL.revokeObjectURL(imgfile);
-    // setImgFile("");
   };
 
   return (
@@ -32,10 +44,20 @@ const Custom = () => {
         <Title>작가 페이지 커스텀</Title>
         <Line />
         <Row>
-          <PhotoContainer>
-            <Profile src={profile} />
-            <Change>작가 사진 변경</Change>
-          </PhotoContainer>
+          <label htmlFor="file">
+            <PhotoContainer>
+              <Profile src={profileImg ? profileImg : profile} />
+              <InputImg
+                type="file"
+                name="file"
+                id="file"
+                accept="image/*"
+                onChange={saveProfileImgFile}
+                ref={imgRef2}
+              ></InputImg>
+              <Change>작가 사진 변경</Change>
+            </PhotoContainer>
+          </label>
           <InputContainer>
             <SubTitle>작가명</SubTitle>
             <Input />
@@ -109,8 +131,8 @@ const DeleteImgBtn = styled.img`
 `;
 
 const PreImg = styled.img`
-  width: 8rem;
-  height: 8rem;
+  width: 8.5rem;
+  height: 8.5rem;
   border-radius: 22px;
   margin-right: 2rem;
 `;
@@ -149,6 +171,7 @@ const PhotoContainer = styled.div`
 
 const Change = styled.h3`
   font-size: 18px;
+  cursor: pointer;
 `;
 
 const Row = styled.div`
@@ -198,6 +221,8 @@ const Line2 = styled(Line)`
 const Profile = styled.img`
   width: 116px;
   height: 116px;
+  border-radius: 100%;
+  cursor: pointer;
 `;
 
 const Input = styled.input`
@@ -208,6 +233,7 @@ const Input = styled.input`
   border: none;
   padding-left: 1rem;
   outline: none;
+  font-size: 16px;
 `;
 
 const Input3 = styled(Input)`
@@ -215,8 +241,15 @@ const Input3 = styled(Input)`
   margin-right: 1rem;
 `;
 
-const Input2 = styled(Input)`
+const Input2 = styled.textarea`
   height: 137px;
+  border-radius: 22px;
+  background: var(--lesswhite, #f6f6f6);
+  width: 550px;
+  border: none;
+  padding: 1rem;
+  outline: none;
+  font-size: 16px;
 `;
 
 const InputImg = styled(Input)`
