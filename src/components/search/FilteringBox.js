@@ -29,28 +29,32 @@ const FilteringBox = ({}) => {
         <List>
           <RegionList>
             {regions.map((region, index) => (
-              <Region
-                key={index}
-                onClick={() => handleRegionClick(region)}
-                isSelected={selectedRegion === region}
-              >
-                {region.name}
-              </Region>
+              <div>
+                <Region
+                  key={index}
+                  onClick={() => handleRegionClick(region)}
+                  isSelected={selectedRegion === region}
+                >
+                  {region.name}
+                </Region>
+              </div>
             ))}
           </RegionList>
           <SubregionList>
             {selectedRegion && (
-              <div>
+              <SubregionBox>
                 {selectedRegion.subregions.map((subregion, index) => (
-                  <Subregion
-                    key={index}
-                    onClick={() => handleSubRegionClick(subregion)}
-                    isSelected={selectedSubRegion === subregion}
-                  >
-                    {subregion}
-                  </Subregion>
+                  <SubregionBox>
+                    <Subregion
+                      key={index}
+                      onClick={() => handleSubRegionClick(subregion)}
+                      isSelected={selectedSubRegion === subregion}
+                    >
+                      {subregion}
+                    </Subregion>
+                  </SubregionBox>
                 ))}
-              </div>
+              </SubregionBox>
             )}
           </SubregionList>
         </List>
@@ -134,59 +138,198 @@ const regions = [
   },
   {
     name: "경기",
-    subregions: ["강남", "강북", "송파"],
+    subregions: [
+      "수원 인계",
+      "수원역/구운/행궁/장안구",
+      "수원시청/권선/영통/세류",
+      "안양/평촌/인덕원/과천",
+      "성남/분당/위례",
+      "용인",
+      "동탄/화성/오산/병점",
+      "하남/광주/여주/이천",
+      "안산 중앙역",
+      "안산 고잔/상록수/선부동/월피동",
+      "군포/의왕/금정/산본",
+      "시흥/월곶",
+      "광명",
+      "평택/송탄/안성",
+      "부천",
+      "일산/고양",
+      "파주",
+      "김포",
+      "의정부",
+      "구리",
+      "남양주",
+      "포천",
+      "양주/동두천/연천",
+      "양평",
+      "가평/청평",
+    ],
   },
   {
     name: "인천",
-    subregions: ["제주시", "서귀포"],
+    subregions: [
+      "부평",
+      "구월",
+      "석남/서구청/검단",
+      "작전/경인교대",
+      "주안",
+      "송도/연수",
+      "인천공항/을왕리/영종도",
+      "월미도/신포/동인천/연안부두",
+      "강화/웅진",
+      "동암/간석",
+      "소래포구/호구포",
+      "용현/숭의/도화/동구",
+    ],
   },
   {
     name: "강원",
-    subregions: ["제주시", "서귀포"],
+    subregions: [
+      "춘천/강촌",
+      "원주",
+      "경포대/사천/주문진/정동진",
+      "강릉역/교동/옥계",
+      "영월/정선",
+      "속초/고성",
+      "양양",
+      "동해/삼척/태백",
+      "평창",
+      "홍천/횡성",
+      "화천/철원/인제/양구",
+    ],
   },
   {
     name: "제주",
-    subregions: ["제주시", "서귀포"],
+    subregions: [
+      "서귀포시/중문/모슬포",
+      "이호테우/하귀/애월/한림/협재",
+      "함덕/김녕/세화",
+      "남원/표선/성산",
+      "용담/도두/뎐동/노형동",
+      "제주시청/탑동/건입동",
+    ],
   },
   {
     name: "대전",
-    subregions: ["제주시", "서귀포"],
+    subregions: [
+      "유성구",
+      "은행/대흥/선화/유천",
+      "용전/복합터미널",
+      "둔산/용문/월평",
+      "중리/신탄진",
+    ],
   },
   {
     name: "충북",
-    subregions: ["제주시", "서귀포"],
+    subregions: [
+      "청주 흥덕구/서원구",
+      "청주 상당구/청원구",
+      "충주/수안보",
+      "제천/단양",
+      "진천/음성",
+      "보은/옥천/괴산/증평/영동",
+    ],
   },
   {
     name: "충남/세종",
-    subregions: ["제주시", "서귀포"],
+    subregions: [
+      "천안 서북구",
+      "천안 동남구",
+      "아산",
+      "공주/동학사/세종",
+      "계룡/금산/논산/청양",
+      "예산/홍성",
+      "태안/안면도/서산",
+      "당진",
+      "보령/대천해수욕장",
+      "서천/부여",
+    ],
   },
   {
     name: "부산",
-    subregions: ["제주시", "서귀포"],
+    subregions: [
+      "해운대/센텀시티/재송",
+      "송정/기장/정관/오시리아 관광단지",
+      "광안리/수영",
+      "경성대/대연/용호동/문현",
+      "서면/양정/초읍/부산시민공원",
+      "남포동/중앙동/태종대/송도/영도",
+      "부산역/범일동/부산진역",
+      "연산/토곡",
+      "동래/사직/미남/온천장/부산대/구서/서동",
+      "사상/엄궁/학장",
+      "덕천/화명/만덕/구포",
+      "하단/명지/김해공항/다대포/강서/신호/괴정/지사",
+    ],
   },
   {
     name: "울산",
-    subregions: ["제주시", "서귀포"],
+    subregions: ["남구/중구", "동구/북구/울주군"],
   },
   {
     name: "경남",
-    subregions: ["제주시", "서귀포"],
+    subregions: [
+      "창원 상남동/용호동/중앙동/창원시청",
+      "창원 명서동/봉곡동/팔용동/북면온천/창원종합버스터미널",
+      "마산",
+      "진해",
+      "김해/장유",
+      "양산/밀양",
+      "진주",
+      "거제/통영/고성",
+      "사천/남해",
+      "하동/산청/함양",
+      "거창/함안/창녕/합천/의령",
+    ],
   },
   {
     name: "대구",
-    subregions: ["제주시", "서귀포"],
+    subregions: [
+      "동성로/서문시장/대구역/경북대/엑스코",
+      "동대구역/신천동/수성못/범어/라이온즈파크/알파시티/시지",
+      "대구공항/혁신도시/동촌유원지/팔공산/이시아폴리스/군위",
+      "서대구역/북부정류장/평리/비산/칠곡지구/동천동/금호지구",
+      "두류/이월드/본리동/죽전동/서부정류장/앞산공원/안지랑/대명동/봉덕동",
+      "성서/계명대/상인동/대곡/현풍/테크노폴리스/가창/달성군",
+    ],
   },
   {
     name: "경북",
-    subregions: ["제주시", "서귀포"],
+    subregions: [
+      "포항 남구",
+      "포항 북구",
+      "경주",
+      "구미",
+      "경산",
+      "안동",
+      "영천/청도",
+      "김천/칠곡/성주",
+      "문경/상주/영주/예천/의성/봉화",
+      "울진/영덕/청송",
+      "울릉도",
+    ],
   },
   {
     name: "광주",
-    subregions: ["제주시", "서귀포"],
+    subregions: [
+      "상무지구/금호지구/유스퀘어/서구",
+      "충장로/대인시장/국립아시아문화전당/동구/남구",
+      "첨단지구/양산동",
+      "하남/광주여대/송정역/광산구",
+      "광주역/기아챔피언스월드/전대사거리/북구",
+    ],
   },
   {
     name: "전북",
-    subregions: ["제주시", "서귀포"],
+    subregions: [
+      "전주 덕진구",
+      "전주 완산구/완주",
+      "군산",
+      "익산",
+      "남원/임실/순창/무주/진안/장수",
+      "정읍/부안/김제/고창",
+    ],
   },
 ];
 const sections = ["커플스냅", "우정스냅", "졸업스냅", "웨딩스냅", "가족스냅"];
@@ -221,9 +364,8 @@ const RegionTab = styled.div`
   width: 22%;
   border-right: solid 0.1rem rgba(129, 129, 129, 0.4);
   height: 100%;
-  /* border-width: 0.1rem;
-  border-style: solid; */
 `;
+
 const DateTab = styled.div`
   width: 16.5%;
   height: 100%;
@@ -233,6 +375,7 @@ const DateTab = styled.div`
     display: none;
   }
 `;
+
 const SectionTab = styled.div`
   width: 8%;
   height: 100%;
@@ -242,23 +385,22 @@ const SectionTab = styled.div`
     width: 80%;
   }
 `;
+
 const OrderTab = styled.div`
   width: 8%;
-  /* height: 370px; */
   height: 100%;
   padding: 0 2rem;
-  /* border-width: 0.1rem;
-  border-style: solid; */
 `;
+
 const Title = styled.div`
   color: #000;
-  /* web_b18 */
   font-family: Noto Sans KR;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
 `;
+
 const Calendar = styled.div`
   height: 320px;
   img {
@@ -271,8 +413,9 @@ const Calendar = styled.div`
     }
   }
 `;
+
 const RegionList = styled.div`
-  width: 6rem;
+  width: 7rem;
   overflow: auto;
   border-right: solid 0.063rem #e6e6e6;
   @media (max-width: 768px) {
@@ -283,7 +426,6 @@ const RegionList = styled.div`
 `;
 
 const Region = styled.div`
-  /* margin-right: 3rem; */
   cursor: pointer;
   color: #060606;
   display: inline-block;
@@ -311,9 +453,10 @@ const Region = styled.div`
 const SubregionList = styled.div`
   overflow: auto;
   margin-left: 1.563rem;
-  width: 12rem;
+  width: 14rem;
+  /* display: flex; */
+  /* flex-direction: column; */
 `;
-
 const Subregion = styled.div`
   cursor: pointer;
   color: #060606;
@@ -326,7 +469,7 @@ const Subregion = styled.div`
   line-height: normal;
   overflow: auto;
   margin: 0.2rem 1rem 0.2rem 0;
-  /* margin: 0.1rem; */
+  /* margin: auto; */
 
   ${(props) =>
     props.isSelected &&
@@ -337,9 +480,10 @@ const Subregion = styled.div`
     border-radius: 4px;
   `}
 `;
+
+const SubregionBox = styled.div``;
 const SectionList = styled.div`
   overflow: auto;
-  /* margin-left: 1.563rem; */
   width: 7rem;
   margin-top: 0.8rem;
   @media (max-width: 768px) {
@@ -361,7 +505,6 @@ const Section = styled.div`
   line-height: normal;
   overflow: auto;
   margin: 0.2rem 1rem 0.2rem 0;
-  /* margin: 0.1rem; */
   @media (max-width: 768px) {
     width: 100%;
     display: flex;
