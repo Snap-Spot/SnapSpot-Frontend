@@ -24,88 +24,456 @@ const FilteringBox = ({}) => {
 
   return (
     <Wrapper>
-      <RegionTab>
-        <Title>지역</Title>
-        <List>
-          <RegionList>
-            {regions.map((region, index) => (
-              <div>
-                <Region
-                  key={index}
-                  onClick={() => handleRegionClick(region)}
-                  isSelected={selectedRegion === region}
-                >
-                  {region.name}
-                </Region>
-              </div>
-            ))}
-          </RegionList>
-          <SubregionList>
-            {selectedRegion && (
-              <SubregionBox>
-                {selectedRegion.subregions.map((subregion, index) => (
-                  <SubregionBox>
-                    <Subregion
-                      key={index}
-                      onClick={() => handleSubRegionClick(subregion)}
-                      isSelected={selectedSubRegion === subregion}
-                    >
-                      {subregion}
-                    </Subregion>
-                  </SubregionBox>
+      <Tab>
+        <RegionTab>
+          <Title>지역</Title>
+          <List>
+            <RegionList>
+              {regions.map((region, index) => (
+                <SectionBox>
+                  <Region
+                    key={index}
+                    onClick={() => handleRegionClick(region)}
+                    isSelected={selectedRegion === region}
+                  >
+                    {region.name}
+                  </Region>
+                </SectionBox>
+              ))}
+            </RegionList>
+            <SubregionList>
+              {selectedRegion && (
+                <SectionBox>
+                  {selectedRegion.subregions.map((subregion, index) => (
+                    <SubregionBox>
+                      <Subregion
+                        key={index}
+                        onClick={() => handleSubRegionClick(subregion)}
+                        isSelected={selectedSubRegion === subregion}
+                      >
+                        {subregion}
+                      </Subregion>
+                    </SubregionBox>
+                  ))}
+                </SectionBox>
+              )}
+            </SubregionList>
+          </List>
+        </RegionTab>
+        <DateTab>
+          <Title>날짜</Title>
+          <CalendarBox>
+            <Calendar></Calendar>
+          </CalendarBox>
+        </DateTab>
+        <SectionTab>
+          <Title>전문분야</Title>
+          <SectionList>
+            {sections && (
+              <SectionBox>
+                {sections.map((section, index) => (
+                  <Section
+                    key={index}
+                    onClick={() => handleSectionClick(section)}
+                    isSelected={selectedSection === section}
+                  >
+                    {section}
+                  </Section>
                 ))}
-              </SubregionBox>
+              </SectionBox>
             )}
-          </SubregionList>
-        </List>
-      </RegionTab>
-      <DateTab>
-        <Title>날짜</Title>
-        <Calendar>
-          <img src={calendar} alt="검색하기" />
-        </Calendar>
-      </DateTab>
-      <SectionTab>
-        <Title>전문분야</Title>
-        <SectionList>
-          {sections && (
-            <div>
-              {sections.map((section, index) => (
-                <Section
-                  key={index}
-                  onClick={() => handleSectionClick(section)}
-                  isSelected={selectedSection === section}
-                >
-                  {section}
-                </Section>
-              ))}
-            </div>
-          )}
-        </SectionList>
-      </SectionTab>
-      <OrderTab>
-        <Title>순서</Title>{" "}
-        <SectionList>
-          {orders && (
-            <div>
-              {orders.map((order, index) => (
-                <Section
-                  key={index}
-                  onClick={() => handleOrderClick(order)}
-                  isSelected={selectedOrder === order}
-                >
-                  {order}
-                </Section>
-              ))}
-            </div>
-          )}
-        </SectionList>
-      </OrderTab>
+          </SectionList>
+        </SectionTab>
+        <OrderTab>
+          <Title>순서</Title>{" "}
+          <SectionList>
+            {orders && (
+              <SectionBox>
+                {orders.map((order, index) => (
+                  <Section
+                    key={index}
+                    onClick={() => handleOrderClick(order)}
+                    isSelected={selectedOrder === order}
+                  >
+                    {order}
+                  </Section>
+                ))}
+              </SectionBox>
+            )}
+          </SectionList>
+        </OrderTab>
+      </Tab>
+      <BtnTab>
+        <FilteringBtn>조회하기</FilteringBtn>
+      </BtnTab>
     </Wrapper>
   );
 };
 
 export default FilteringBox;
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 35.625rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  box-shadow: 0px 16px 51px 0px rgba(0, 0, 0, 0.1);
+  @media (max-width: 768px) {
+    height: 80vh;
+  }
+`;
+
+const Tab = styled.div`
+  width: 100%;
+  height: 26.875rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    height: 100%;
+    margin: 0;
+  }
+`;
+const FilteringBtn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+  width: 335px;
+  height: 41px;
+  border-radius: 8px;
+  background: var(--main-font-color, #3c3aac);
+  color: #fff;
+  text-align: center;
+  font-family: Noto Sans KR;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  @media (max-width: 768px) {
+    margin: 0;
+  }
+`;
+const BtnTab = styled.div`
+  @media (max-width: 768px) {
+  }
+`;
+
+const List = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 90%;
+  margin-top: 0.3rem;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+const RegionTab = styled.div`
+  width: 24%;
+  height: 100%;
+  @media (max-width: 768px) {
+    height: 24%;
+    width: 90%;
+    border-bottom: 0.063rem solid #dbdbdb;
+  }
+`;
+
+const DateTab = styled.div`
+  width: 20%;
+  height: 100%;
+  padding: 0 2rem;
+  @media (max-width: 768px) {
+    height: 33%;
+    width: 90%;
+    border-bottom: 0.063rem solid #dbdbdb;
+    padding: 0.5rem 0;
+  }
+`;
+
+const SectionTab = styled.div`
+  width: 6%;
+  height: 100%;
+  padding: 0 2rem;
+  @media (max-width: 768px) {
+    width: 90%;
+    height: 15%;
+    border-bottom: 0.063rem solid #dbdbdb;
+    padding: 0.5rem 0;
+  }
+`;
+
+const OrderTab = styled.div`
+  width: 8%;
+  height: 100%;
+  padding: 0 2rem;
+  @media (max-width: 768px) {
+    width: 90%;
+    height: 15%;
+    padding: 0.5rem 0;
+  }
+`;
+
+const Title = styled.div`
+  color: #000;
+  font-family: Noto Sans KR;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  @media (max-width: 768px) {
+    font-size: 12px;
+    font-weight: 700;
+  }
+`;
+
+const Calendar = styled.div`
+  height: 320px;
+  width: 235.32px;
+  border: 1rem solid black;
+
+  @media (max-width: 768px) {
+    border: 0.2rem solid black;
+    height: 120px;
+    width: 130.32px;
+  }
+`;
+const CalendarBox = styled.div`
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+const RegionList = styled.div`
+  width: 7rem;
+  overflow: auto;
+  border-right: solid 0.063rem #e6e6e6;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+    padding-bottom: 0.5rem;
+    border: none;
+  }
+`;
+const Region = styled.div`
+  cursor: pointer;
+  color: #060606;
+  display: inline-block;
+  padding: 0.1rem;
+  font-family: Noto Sans KR;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  overflow: auto;
+  margin-right: 1rem;
+
+  margin: 0.2rem 1rem 0.2rem 0;
+
+  ${(props) =>
+    props.isSelected &&
+    `
+    color: #3C3AAC;
+    font-weight: 700;
+
+  `}
+
+  
+@media (max-width: 768px) {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    white-space: nowrap;
+    justify-content: center;
+    align-items: center;
+    
+    color: #000;
+    text-align: center;
+    /* mob_m14 */
+    font-family: Noto Sans KR;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 128.5%;
+
+    margin-bottom: 0.5rem;
+    ${(props) =>
+      props.isSelected &&
+      `
+      font-weight: 700;
+      color: #3C3AAC;
+;
+`}
+`;
+
+const SubregionList = styled.div`
+  overflow: auto;
+  margin-left: 1.563rem;
+  width: 12rem;
+  @media (max-width: 768px) {
+    width: 100%;
+    margin: 0;
+    padding-bottom: 0.5rem;
+  }
+`;
+const Subregion = styled.div`
+  cursor: pointer;
+  color: #060606;
+  display: inline-block;
+  padding: 0.1rem;
+  font-family: Noto Sans KR;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  overflow: auto;
+  margin: 0.2rem 1rem 0.2rem 0;
+  /* margin: auto; */
+
+  ${(props) =>
+    props.isSelected &&
+    `
+    color: #3C3AAC;
+    font-weight: 700;
+    border: 1px solid #3C3AAC; 
+    border-radius: 4px;
+  `}
+
+@media (max-width: 768px) {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    white-space: nowrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    border: 1px solid var(--lightgrey-2, #dbdbdb);
+    background: var(--lesswhite, #f6f6f6);
+    padding: 11px 16px;
+    color: var(--darkgrey, #777);
+    text-align: center;
+    /* mob_m14 */
+    font-family: Noto Sans KR;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    line-height: 128.5%;
+    ${(props) =>
+      props.isSelected &&
+      `
+    border-radius: 8px;
+    border: 1px solid #5170DE;
+    background: #FFF;
+    box-shadow: 2px 2px 8px 0px rgba(166, 185, 255, 0.60);
+    color: #3C3AAC;
+    text-align: center;
+    font-family: Noto Sans KR;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 128.5%;
+
+`}
+`;
+
+const SubregionBox = styled.div`
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+  }
+`;
+
+const SectionList = styled.div`
+  /* overflow: auto; */
+  width: 7rem;
+  margin-top: 0.8rem;
+  @media (max-width: 768px) {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+    padding-bottom: 0.5rem;
+  }
+`;
+
+const Section = styled.div`
+  cursor: pointer;
+  color: #060606;
+  display: inline-block;
+  padding: 0.1rem;
+  font-family: Noto Sans KR;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0.2rem 1rem 0.2rem 0;
+
+  ${(props) =>
+    props.isSelected &&
+    `
+    color: #3C3AAC;
+    font-weight: 700;
+    border: 1px solid #3C3AAC; 
+    border-radius: 4px;
+    `}
+
+  @media (max-width: 768px) {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    white-space: nowrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    border: 1px solid var(--lightgrey-2, #dbdbdb);
+    background: var(--lesswhite, #f6f6f6);
+    padding: 11px 16px;
+    margin-bottom: 0.5rem;
+    color: var(--darkgrey, #777);
+    text-align: center;
+    /* mob_m14 */
+    font-family: Noto Sans KR;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 128.5%;
+    ${(props) =>
+      props.isSelected &&
+      `
+    border-radius: 8px;
+    border: 1px solid #5170DE;
+    background: #FFF;
+    box-shadow: 2px 2px 8px 0px rgba(166, 185, 255, 0.60);
+    color: #3C3AAC;
+    text-align: center;
+    font-family: Noto Sans KR;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 128.5%;
+
+`}
+  }
+`;
+
+const SectionBox = styled.div`
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: row;
+  }
+`;
 
 const regions = [
   {
@@ -334,188 +702,3 @@ const regions = [
 ];
 const sections = ["커플스냅", "우정스냅", "졸업스냅", "웨딩스냅", "가족스냅"];
 const orders = ["기본", "별점 높은 순", "가격 낮은 순", "후기 많은 순"];
-
-const Wrapper = styled.div`
-  width: 100%;
-  height: 26.875rem;
-  background: #fff;
-  box-shadow: 0px 16px 51px 0px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding-top: 2rem;
-  @media (max-width: 768px) {
-    flex-direction: column;
-    height: 100%;
-  }
-`;
-
-const List = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 90%;
-  margin-top: 0.8rem;
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-const RegionTab = styled.div`
-  width: 22%;
-  border-right: solid 0.1rem rgba(129, 129, 129, 0.4);
-  height: 100%;
-`;
-
-const DateTab = styled.div`
-  width: 16.5%;
-  height: 100%;
-  border-right: solid 0.1rem rgba(129, 129, 129, 0.4);
-  padding: 0 2rem;
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-
-const SectionTab = styled.div`
-  width: 8%;
-  height: 100%;
-  border-right: solid 0.1rem rgba(129, 129, 129, 0.4);
-  padding: 0 2rem;
-  @media (max-width: 768px) {
-    width: 80%;
-  }
-`;
-
-const OrderTab = styled.div`
-  width: 8%;
-  height: 100%;
-  padding: 0 2rem;
-`;
-
-const Title = styled.div`
-  color: #000;
-  font-family: Noto Sans KR;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-`;
-
-const Calendar = styled.div`
-  height: 320px;
-  img {
-    margin-top: 2rem;
-    width: 235.32px;
-    height: 335px;
-
-    @media (max-width: 768px) {
-      display: none;
-    }
-  }
-`;
-
-const RegionList = styled.div`
-  width: 7rem;
-  overflow: auto;
-  border-right: solid 0.063rem #e6e6e6;
-  @media (max-width: 768px) {
-    width: 8rem;
-    display: flex;
-    flex-direction: row;
-  }
-`;
-
-const Region = styled.div`
-  cursor: pointer;
-  color: #060606;
-  display: inline-block;
-  padding: 0.1rem;
-  font-family: Noto Sans KR;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  overflow: auto;
-  margin-right: 1rem;
-
-  margin: 0.2rem 1rem 0.2rem 0;
-
-  ${(props) =>
-    props.isSelected &&
-    `
-    color: #3C3AAC;
-    font-weight: 700;
-    border: 1px solid #3C3AAC; 
-    border-radius: 4px;
-  `}
-`;
-
-const SubregionList = styled.div`
-  overflow: auto;
-  margin-left: 1.563rem;
-  width: 14rem;
-  /* display: flex; */
-  /* flex-direction: column; */
-`;
-const Subregion = styled.div`
-  cursor: pointer;
-  color: #060606;
-  display: inline-block;
-  padding: 0.1rem;
-  font-family: Noto Sans KR;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  overflow: auto;
-  margin: 0.2rem 1rem 0.2rem 0;
-  /* margin: auto; */
-
-  ${(props) =>
-    props.isSelected &&
-    `
-    color: #3C3AAC;
-    font-weight: 700;
-    border: 1px solid #3C3AAC; 
-    border-radius: 4px;
-  `}
-`;
-
-const SubregionBox = styled.div``;
-const SectionList = styled.div`
-  overflow: auto;
-  width: 7rem;
-  margin-top: 0.8rem;
-  @media (max-width: 768px) {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-  }
-`;
-
-const Section = styled.div`
-  cursor: pointer;
-  color: #060606;
-  display: inline-block;
-  padding: 0.1rem;
-  font-family: Noto Sans KR;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  overflow: auto;
-  margin: 0.2rem 1rem 0.2rem 0;
-  @media (max-width: 768px) {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-  }
-  ${(props) =>
-    props.isSelected &&
-    `
-    color: #3C3AAC;
-    font-weight: 700;
-    border: 1px solid #3C3AAC; 
-    border-radius: 4px;
-  `}
-`;
