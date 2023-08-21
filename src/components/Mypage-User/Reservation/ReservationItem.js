@@ -97,6 +97,7 @@ const Header = styled.div`
     font-size: 0.9rem;
     font-weight: 500;
     img {
+      margin-top: 5px;
       margin-left: 8px;
       width: 12px;
       height: 20px;
