@@ -10,11 +10,13 @@ import Footer from "./components/common/Footer";
 import SignUpInfoPage from "./pages/SignUpInfoPage";
 import SignUpMemberPage from "./pages/SignUpMemberPage";
 import Photographerlist from "./pages/serach/Photographerlist";
+import UserMypage from "./pages/MyPage/UserMypage";
 
 function App() {
   return (
     <>
       <Routes>
+        <Route path="mypage" element={<UserMypage />} />
         <Route path="mypage/reservation" element={<MyReservePage />} />
         <Route path="mypage/reservation/:id" element={<DetailReservePage />} />
         {/* 회원가입 */}
