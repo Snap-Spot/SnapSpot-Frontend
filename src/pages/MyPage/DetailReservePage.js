@@ -1,16 +1,18 @@
 import React from "react";
 import DetailedItem from "../../components/Mypage-User/Reservation/DetailedItem";
 import { styled } from "styled-components";
+import Header from "../../components/common/Header";
 
 const DetailReservePage = () => {
   return (
-    <div id="modal-bg">
+    <>
+      <Header />
       <Wrapper>
         <div className="container">
           <DetailedItem />
         </div>
       </Wrapper>
-    </div>
+    </>
   );
 };
 

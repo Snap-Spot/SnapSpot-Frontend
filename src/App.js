@@ -14,7 +14,6 @@ import Photographerlist from "./pages/serach/Photographerlist";
 function App() {
   return (
     <>
-      <Header />
       <Routes>
         <Route path="mypage/reservation" element={<MyReservePage />} />
         <Route path="mypage/reservation/:id" element={<DetailReservePage />} />
