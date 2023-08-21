@@ -1,8 +1,10 @@
 import React from "react";
 import { styled } from "styled-components";
 import DetailMenus from "./DetailMenus";
+import KakaoMap from "./KakaoMap";
 const DetailedItem = () => {
   const status = 0;
+
   return (
     <>
       <Title>예약내역 상세</Title>
@@ -41,6 +43,7 @@ const DetailedItem = () => {
           </Main>
         </div>
         <DetailMenus status={status} />
+        <KakaoMap />
       </Wrapper>
     </>
   );
