@@ -89,7 +89,7 @@ const InputBox = styled.input`
 
 const PasswordMatchText = styled.div`
   font-family: Noto Sans KR;
-  font-size: 14px;
+  font-size: 0.8rem;
   color: var(--lessred, #ff3d3d);
 
   width: ${INPUT_WIDTH}%;
@@ -147,7 +147,7 @@ const LoginButton = styled.button`
 
 const EmailLoginBtn = styled(LoginButton)`
   background-color: var(--main-font-color, #3c3aac);
-  font-size: 17px;
+  font-size: ${BASIC_FONT_SIZE}rem;
   font-weight: 500;
   color: var(--white, #fff);
 `;

@@ -1,7 +1,7 @@
 import React from "react";
-import SignUpForm from "../components/SignUp/SignUpForm";
+import SignUpForm from "../../components/SignUp/SignUpForm";
 import { styled } from "styled-components";
-import Logo from "../assets/header/logo.png";
+import Logo from "../../assets/header/logo.png";
 import { useParams } from "react-router";
 
 const SignUpInfoPage = () => {
