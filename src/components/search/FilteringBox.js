@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { React, useState, useEffect } from "react";
-import calendar from "../../assets/search/calendar.png";
+import CustomCalender from "./CustomCalender";
 
 const FilteringBox = ({}) => {
   const [selectedRegion, setSelectedRegion] = useState(null);
@@ -63,7 +63,7 @@ const FilteringBox = ({}) => {
         <DateTab>
           <Title>날짜</Title>
           <CalendarBox>
-            <Calendar></Calendar>
+            <CustomCalender />
           </CalendarBox>
         </DateTab>
         <SectionTab>
@@ -72,13 +72,16 @@ const FilteringBox = ({}) => {
             {sections && (
               <SectionBox>
                 {sections.map((section, index) => (
-                  <Section
-                    key={index}
-                    onClick={() => handleSectionClick(section)}
-                    isSelected={selectedSection === section}
-                  >
-                    {section}
-                  </Section>
+                  <>
+                    <Section
+                      key={index}
+                      onClick={() => handleSectionClick(section)}
+                      isSelected={selectedSection === section}
+                    >
+                      {section}
+                    </Section>
+                    {index !== sections.length - 1 && <Line />}
+                  </>
                 ))}
               </SectionBox>
             )}
@@ -90,13 +93,16 @@ const FilteringBox = ({}) => {
             {orders && (
               <SectionBox>
                 {orders.map((order, index) => (
-                  <Section
-                    key={index}
-                    onClick={() => handleOrderClick(order)}
-                    isSelected={selectedOrder === order}
-                  >
-                    {order}
-                  </Section>
+                  <>
+                    <Section
+                      key={index}
+                      onClick={() => handleOrderClick(order)}
+                      isSelected={selectedOrder === order}
+                    >
+                      {order}
+                    </Section>
+                    {index !== orders.length - 1 && <Line />}
+                  </>
                 ))}
               </SectionBox>
             )}
@@ -111,7 +117,6 @@ const FilteringBox = ({}) => {
 };
 
 export default FilteringBox;
-
 const Wrapper = styled.div`
   width: 100%;
   height: 35.625rem;
@@ -122,7 +127,10 @@ const Wrapper = styled.div`
   background: #fff;
   box-shadow: 0px 16px 51px 0px rgba(0, 0, 0, 0.1);
   @media (max-width: 768px) {
-    height: 80vh;
+    height: 81vh;
+  }
+  @media (max-height: 680px) {
+    height: 92vh;
   }
 `;
 
@@ -196,7 +204,7 @@ const DateTab = styled.div`
 `;
 
 const SectionTab = styled.div`
-  width: 6%;
+  width: 5.5%;
   height: 100%;
   padding: 0 2rem;
   @media (max-width: 768px) {
@@ -231,23 +239,13 @@ const Title = styled.div`
   }
 `;
 
-const Calendar = styled.div`
-  height: 320px;
-  width: 235.32px;
-  border: 1rem solid black;
-
-  @media (max-width: 768px) {
-    border: 0.2rem solid black;
-    height: 120px;
-    width: 130.32px;
-  }
-`;
 const CalendarBox = styled.div`
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 0;
   }
 `;
 
@@ -394,7 +392,15 @@ const SubregionBox = styled.div`
     width: 90%;
   }
 `;
-
+const Line = styled.div`
+  width: 85px;
+  height: 1px;
+  background: #cecece;
+  margin: 10px 0;
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
 const SectionList = styled.div`
   /* overflow: auto; */
   width: 7rem;
@@ -418,7 +424,7 @@ const Section = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  margin: 0.2rem 1rem 0.2rem 0;
+  /* margin: 0.3rem 1rem 0.3rem 0; */
 
   ${(props) =>
     props.isSelected &&
@@ -441,6 +447,7 @@ const Section = styled.div`
     background: var(--lesswhite, #f6f6f6);
     padding: 11px 16px;
     margin-bottom: 0.5rem;
+    margin-right: 1rem;
     color: var(--darkgrey, #777);
     text-align: center;
     /* mob_m14 */
