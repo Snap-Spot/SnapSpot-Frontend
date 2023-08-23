@@ -1,6 +1,6 @@
 // FilteringBox에 사용되는 리스트 목록입니다.
 
-const regions = [
+export const regions = [
   {
     name: "서울",
     subregions: [
@@ -226,6 +226,6 @@ const regions = [
   },
 ];
 
-const sections = ["커플스냅", "우정스냅", "졸업스냅", "웨딩스냅", "가족스냅"];
+export const sections = ["커플스냅", "우정스냅", "졸업스냅", "웨딩스냅", "가족스냅"];
 
-const orders = ["기본", "별점 높은 순", "가격 낮은 순", "후기 많은 순"];
+export const orders = ["기본", "별점 높은 순", "가격 낮은 순", "후기 많은 순"];

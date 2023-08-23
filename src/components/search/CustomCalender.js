@@ -81,13 +81,16 @@ export default CustomCalender;
 
 const StyledCalendar = styled.div`
   margin-top: 1rem;
+
   @media (max-width: 768px) {
-    font-size: 15px;
+    font-size: 1rem;
     margin: 0;
   }
+
   .react-datepicker {
     border: none;
   }
+
   .react-datepicker__header {
     background-color: white;
     border: 0;
@@ -97,12 +100,12 @@ const StyledCalendar = styled.div`
     color: var(--black, #060606);
     text-align: center;
     font-family: Noto Sans KR;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
     @media (max-width: 768px) {
-      font-size: 15px;
+      font-size: 1rem;
     }
   }
 
@@ -111,12 +114,12 @@ const StyledCalendar = styled.div`
     text-align: center;
 
     font-family: Noto Sans KR;
-    font-size: 16px;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     @media (max-width: 768px) {
-      font-size: 15px;
+      font-size: 1rem;
     }
   }
   .react-datepicker__day-name {
@@ -131,12 +134,11 @@ const StyledCalendar = styled.div`
     text-align: center;
 
     font-family: Noto Sans KR;
-    font-size: 16px;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     @media (max-width: 768px) {
-      font-size: 15px;
       width: 2.5rem;
       margin: 0.1rem 0.4rem;
     }
@@ -151,7 +153,7 @@ const StyledCalendar = styled.div`
   .react-datepicker__day--outside-month.react-datepicker__day--weekend {
     color: var(--sub-color-2, #a6b9ff);
     @media (max-width: 768px) {
-      font-size: 15px;
+      font-size: 1rem;
     }
   }
   .react-datepicker__day--selected,
@@ -161,14 +163,14 @@ const StyledCalendar = styled.div`
 
     /* web_r16 */
     font-family: Noto Sans KR;
-    font-size: 16px;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 400;
     border-radius: 4px;
     background: var(--main-font-color, #3c3aac);
     line-height: normal;
     @media (max-width: 768px) {
-      font-size: 15px;
+      font-size: 1rem;
     }
   }
   .react-datepicker__day--in-selecting-range {

@@ -1,9 +1,7 @@
 import styled from "styled-components";
 import { React, useState, useEffect } from "react";
 import CustomCalender from "./CustomCalender";
-import regions from "./FilteringList.js";
-import sections from "./FilteringList.js";
-import orders from "./FilteringList.js";
+import { regions, sections, orders } from "./FilteringList.js";
 
 const FilteringBox = ({}) => {
   const [selectedRegion, setSelectedRegion] = useState(null);
@@ -471,7 +469,7 @@ const Box = styled.div`
 `;
 
 const Line = styled.div`
-  width: 5.313rem
+  width: 5.313rem;
   height: 0.063rem;
   background: #cecece;
   margin: 0.625rem 0;
@@ -503,7 +501,4 @@ const Btn = styled.div`
   }
 `;
 
-const BtnTab = styled.div`
-  /* @media (max-width: 768px) {
-  } */
-`;
+const BtnTab = styled.div``;
