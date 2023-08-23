@@ -207,9 +207,9 @@ const Title = styled.div`
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 700;
-  line-height: normal;
+
   @media (max-width: 768px) {
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 700;
   }
 `;
@@ -219,6 +219,7 @@ const List = styled.div`
   flex-direction: row;
   height: 90%;
   margin-top: 0.3rem;
+
   @media (max-width: 768px) {
     flex-direction: column;
   }
@@ -244,10 +245,9 @@ const Region = styled.div`
   display: inline-block;
   padding: 0.1rem;
   font-family: Noto Sans KR;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
   overflow: auto;
   margin-right: 1rem;
 
@@ -272,9 +272,9 @@ const Region = styled.div`
     
     color: #000;
     text-align: center;
-    /* mob_m14 */
+
     font-family: Noto Sans KR;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
     font-weight: 400;
     line-height: 128.5%;
@@ -293,6 +293,7 @@ const SubregionList = styled.div`
   overflow: auto;
   margin-left: 1.563rem;
   width: 12rem;
+
   @media (max-width: 768px) {
     width: 100%;
     margin: 0;
@@ -300,18 +301,22 @@ const SubregionList = styled.div`
     padding-bottom: 0.5rem;
   }
 `;
+
 const Subregion = styled.div`
   cursor: pointer;
   color: #060606;
   display: inline-block;
-  padding: 0.1rem;
+
+
   font-family: Noto Sans KR;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+
   overflow: auto;
-  margin: 0.2rem 1rem 0.2rem 0;
+  margin: 0.2rem 1rem 0.2rem 0;  
+  padding: 0.1rem;
   /* margin: auto; */
 
   ${(props) =>
@@ -319,8 +324,8 @@ const Subregion = styled.div`
     `
     color: #3C3AAC;
     font-weight: 700;
-    border: 1px solid #3C3AAC; 
-    border-radius: 4px;
+    border: 0.063rem solid #3C3AAC; 
+    border-radius: 0.25rem;
   `}
 
 @media (max-width: 768px) {
@@ -330,34 +335,36 @@ const Subregion = styled.div`
     white-space: nowrap;
     justify-content: center;
     align-items: center;
-    border-radius: 8px;
-    border: 1px solid var(--lightgrey-2, #dbdbdb);
+
+    border-radius: 0.5rem;
+    border: 0.063rem solid var(--lightgrey-2, #dbdbdb);
     background: var(--lesswhite, #f6f6f6);
-    padding: 11px 16px;
+    padding: 0.688rem 1rem;
     color: var(--darkgrey, #777);
     text-align: center;
-    /* mob_m14 */
+
     font-family: Noto Sans KR;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
     font-weight: 400;
     margin-bottom: 0.5rem;
     line-height: 128.5%;
+
     ${(props) =>
       props.isSelected &&
       `
-    border-radius: 8px;
-    border: 1px solid #5170DE;
+    border-radius: 0.5rem;
+    border: 0.063rem solid #5170DE;
     background: #FFF;
-    box-shadow: 2px 2px 8px 0px rgba(166, 185, 255, 0.60);
+    box-shadow: 0.125rem 0.125rem 0.5rem 0rem rgba(166, 185, 255, 0.60);
     color: #3C3AAC;
+
     text-align: center;
     font-family: Noto Sans KR;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
     font-weight: 700;
     line-height: 128.5%;
-
 `}
 `;
 
@@ -380,7 +387,6 @@ const CalendarBox = styled.div`
 `;
 
 const SectionList = styled.div`
-  /* overflow: auto; */
   width: 7rem;
   margin-top: 0.8rem;
   @media (max-width: 768px) {
@@ -398,11 +404,10 @@ const Section = styled.div`
   display: inline-block;
   padding: 0.1rem;
   font-family: Noto Sans KR;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  /* margin: 0.3rem 1rem 0.3rem 0; */
 
   ${(props) =>
     props.isSelected &&
@@ -420,7 +425,8 @@ const Section = styled.div`
     white-space: nowrap;
     justify-content: center;
     align-items: center;
-    border-radius: 8px;
+
+    border-radius: 0.5rem;
     border: 1px solid var(--lightgrey-2, #dbdbdb);
     background: var(--lesswhite, #f6f6f6);
     padding: 11px 16px;
@@ -428,27 +434,28 @@ const Section = styled.div`
     margin-right: 1rem;
     color: var(--darkgrey, #777);
     text-align: center;
-    /* mob_m14 */
+
     font-family: Noto Sans KR;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
     font-weight: 400;
     line-height: 128.5%;
+
     ${(props) =>
       props.isSelected &&
       `
-    border-radius: 8px;
-    border: 1px solid #5170DE;
+    border-radius: 0.5rem;
+    border: 0.063rem solid #5170DE;
     background: #FFF;
-    box-shadow: 2px 2px 8px 0px rgba(166, 185, 255, 0.60);
+    box-shadow: 0.125rem 0.125rem 0.5rem 0rem rgba(166, 185, 255, 0.60);
     color: #3C3AAC;
+
     text-align: center;
     font-family: Noto Sans KR;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
     font-weight: 700;
     line-height: 128.5%;
-
 `}
   }
 `;
@@ -461,10 +468,10 @@ const Box = styled.div`
 `;
 
 const Line = styled.div`
-  width: 85px;
-  height: 1px;
+  width: 5.313rem
+  height: 0.063rem;
   background: #cecece;
-  margin: 10px 0;
+  margin: 0.625rem 0;
   @media (max-width: 768px) {
     display: none;
   }
@@ -475,24 +482,26 @@ const Btn = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 1.5rem;
-  width: 335px;
-  height: 41px;
-  border-radius: 8px;
+  width: 20.9rem;
+  height: 2.563rem;
+  border-radius: 0.5rem;
   background: var(--main-font-color, #3c3aac);
   color: #fff;
   text-align: center;
+
   font-family: Noto Sans KR;
   font-size: 20px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  
   @media (max-width: 768px) {
     margin: 0;
   }
 `;
 const BtnTab = styled.div`
-  @media (max-width: 768px) {
-  }
+  /* @media (max-width: 768px) {
+  } */
 `;
 
 const regions = [
