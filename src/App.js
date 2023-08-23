@@ -11,53 +11,14 @@ import { Routes, Route } from "react-router-dom";
 function App() {
   return (
     <>
+      <Header />
       <Routes>
-        <Route
-          path="/photograph-mypage"
-          element={
-            <>
-              <Header />
-              <MyPage />
-            </>
-          }
-        />
-        <Route
-          path="/photograph-reserve"
-          element={
-            <>
-              <Header />
-              <Reservation />
-            </>
-          }
-        />
-        <Route
-          path="/photograph-reserve/:id"
-          element={
-            <>
-              <Header />
-              <ReservationDetail />
-            </>
-          }
-        />
+        <Route path="/photograph-mypage" element={<MyPage />} />
+        <Route path="/photograph-reserve" element={<Reservation />} />
+        <Route path="/photograph-reserve/:id" element={<ReservationDetail />} />
         <Route path="/photograph-setting" element={<Setting />} />
-        <Route
-          path="/photograph-custom"
-          element={
-            <>
-              <Header />
-              <Custom />
-            </>
-          }
-        />
-        <Route
-          path="/photograph-review"
-          element={
-            <>
-              <Header />
-              <Review />
-            </>
-          }
-        />
+        <Route path="/photograph-custom" element={<Custom />} />
+        <Route path="/photograph-review" element={<Review />} />
       </Routes>
     </>
   );

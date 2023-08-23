@@ -1,25 +1,46 @@
 import styled from "styled-components";
 import profile from "../../assets/photograph/ex_profile.png";
 import Modal from "../../components/Photographer/MyPage/Modal";
-import Header from "../../components/common/Header";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const Setting = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); // 모달 오픈
+  const [imgfile, setImgFile] = useState(""); // 프로필 이미지
+
+  const imgRef = useRef();
+
+  // 프로필 이미지 프리뷰 생성
+  const saveProfileImgFile = () => {
+    const file = imgRef.current.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImgFile(reader.result);
+    };
+  };
 
   return (
     <Center>
       {isOpen && <Modal setIsOpen={setIsOpen} />}
-      <Header />
       <Center>
+        <Title>계정 설정</Title>
+        <Line />
         <Container>
-          <Title>계정 설정</Title>
-          <Line />
           <Row>
-            <PhotoContainer>
-              <Profile src={profile} />
-              <Change>사진 변경</Change>
-            </PhotoContainer>
+            <label htmlFor="file">
+              <PhotoContainer>
+                <Profile src={imgfile ? imgfile : profile} />
+                <InputImg
+                  type="file"
+                  name="file"
+                  id="file"
+                  accept="image/*"
+                  onChange={saveProfileImgFile}
+                  ref={imgRef}
+                ></InputImg>
+                <Change>사진 변경</Change>
+              </PhotoContainer>
+            </label>
             <InputContainer>
               <SubTitle>닉네임</SubTitle>
               <Input />
@@ -70,6 +91,7 @@ const PhotoContainer = styled.div`
 
 const Change = styled.h3`
   font-size: 18px;
+  cursor: pointer;
 `;
 
 const Row = styled.div`
@@ -82,6 +104,7 @@ const Center = styled.div`
   flex-direction: column;
   align-items: center;
   height: 130vh;
+  width: 100%;
 `;
 
 const Container = styled.div`
@@ -97,10 +120,11 @@ const Title = styled.h2`
   font-size: 18px;
   align-self: flex-start;
   margin-bottom: 2rem;
+  margin-left: 10%;
 `;
 
 const Line = styled.div`
-  width: 100%;
+  width: 80%;
   height: 1px;
   background-color: black;
 `;
@@ -108,6 +132,8 @@ const Line = styled.div`
 const Profile = styled.img`
   width: 116px;
   height: 116px;
+  border-radius: 100%;
+  cursor: pointer;
 `;
 
 const Input = styled.input`
@@ -118,6 +144,10 @@ const Input = styled.input`
   border: none;
   padding-left: 1rem;
   outline: none;
+`;
+
+const InputImg = styled(Input)`
+  display: none;
 `;
 
 const SubTitle = styled.h3`

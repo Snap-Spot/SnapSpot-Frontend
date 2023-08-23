@@ -176,6 +176,7 @@ const Btn = styled.button`
   line-height: 128.5%;
   margin-left: auto;
   margin-right: 2rem;
+  cursor: pointer;
 
   @media (max-width: 768px) {
     margin-right: 0;
