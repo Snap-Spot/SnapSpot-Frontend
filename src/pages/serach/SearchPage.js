@@ -8,7 +8,7 @@ import SearchBox from "../../components/search/SearchBox";
 import EamptySearch from "../../components/search/EamptySearch";
 
 const SearchPage = () => {
-  const [info, setInfo] = useState(false);
+  const [info, setInfo] = useState(true);
 
   return (
     <Wrapper>

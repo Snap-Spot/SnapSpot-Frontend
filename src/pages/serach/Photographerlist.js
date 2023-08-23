@@ -29,7 +29,12 @@ const Photographerlist = () => {
           <img src={search} alt="검색하기" />
         </SearchTag>
       </Box>
-      {isFilteringOpen && <FilteringBox />}
+      {isFilteringOpen && (
+        <FilteringBox
+          isFilteringOpen={isFilteringOpen}
+          setIsFilteringOpen={setIsFilteringOpen}
+        />
+      )}
       <GridBox>
         <div class="grid">
           <div>

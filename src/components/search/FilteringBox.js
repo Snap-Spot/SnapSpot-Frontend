@@ -3,7 +3,7 @@ import { React, useState, useEffect } from "react";
 import CustomCalender from "./CustomCalender";
 import { regions, sections, orders } from "./FilteringList.js";
 
-const FilteringBox = ({}) => {
+const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [selectedSubRegion, setSelectedSubRegion] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
@@ -16,11 +16,17 @@ const FilteringBox = ({}) => {
   const handleSubRegionClick = (subregion) => {
     setSelectedSubRegion(subregion);
   };
+
   const handleSectionClick = (section) => {
     setSelectedSection(section);
   };
+
   const handleOrderClick = (order) => {
     setSelectedOrder(order);
+  };
+
+  const handleSearchBtnClick = (isFilteringOpen) => {
+    setIsFilteringOpen(!isFilteringOpen);
   };
 
   return (
@@ -116,7 +122,7 @@ const FilteringBox = ({}) => {
       </FilterTab>
       {/* 조회하기 버튼이 있는 Tab */}
       <BtnTab>
-        <Btn>조회하기</Btn>
+        <Btn onClick={handleSearchBtnClick}>조회하기</Btn>
       </BtnTab>
     </Wrapper>
   );
