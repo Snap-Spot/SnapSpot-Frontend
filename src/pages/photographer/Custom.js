@@ -3,6 +3,7 @@ import profile from "../../assets/photograph/ex_profile.png";
 import plus from "../../assets/photograph/plus.png";
 import imgPlus from "../../assets/photograph/imgPlus.png";
 import deleteIcon from "../../assets/photograph/deleteIcon.png";
+import Dropdown from "../../components/Photographer/MyPage/Dropdown";
 import { useState, useRef } from "react";
 
 const Custom = () => {
@@ -88,27 +89,27 @@ const Custom = () => {
           </InputContainer>
         </Row>
         <Line2 />
-        <InputContainer>
-          <SubTitle>활동 지역 설정</SubTitle>
-          <Input />
-          <SubTitle>SNS 등록</SubTitle>
-          <Row2>
-            <Input3 />
-            <Plus src={plus} />
-          </Row2>
-          <SubTitle>한 줄 소개글 등록 (최대 500자)</SubTitle>
-          <Input2 />
-          <SubTitle>전문 분야 등록</SubTitle>
-          <Input />
-          <SubTitle>태그 입력</SubTitle>
-          <Input />
-          <SubTitle>대표 사진 업로드 (최대 10장)</SubTitle>
-          <InputImg2 src={imgPlus} />
-          <InputImg2 src={imgPlus} />
-          <InputImg2 src={imgPlus} />
-          <InputImg2 src={imgPlus} />
-          <InputImg2 src={imgPlus} />
-        </InputContainer>
+        <Center2>
+          <InputContainer>
+            <SubTitle>활동 지역 설정</SubTitle>
+            <Input />
+            <SubTitle>SNS 등록</SubTitle>
+            <Row2>
+              <Input3 />
+              <Plus src={plus} />
+            </Row2>
+            <SubTitle>한 줄 소개글 등록 (최대 500자)</SubTitle>
+            <Input2 />
+            <SubTitle>전문 분야 등록</SubTitle>
+            <Dropdown />
+            <SubTitle>태그 입력</SubTitle>
+            <TagInput />
+            <TagInput />
+            <TagInput />
+            <SubTitle>대표 사진 업로드 (최대 10장)</SubTitle>
+            <InputImg2 src={imgPlus} />
+          </InputContainer>
+        </Center2>
         <ChangeBtn>변경하기</ChangeBtn>
       </Container>
     </Center>
@@ -140,7 +141,6 @@ const PreImg = styled.img`
 const Plus = styled.img`
   width: 38px;
   height: 50.091px;
-  margin-top: -1rem;
   cursor: pointer;
 `;
 
@@ -148,18 +148,18 @@ const ChangeBtn = styled.button`
   border-radius: 30px;
   background: var(--main-font-color, #3c3aac);
   margin-top: 5rem;
-
   display: flex;
-  width: 516px;
+  width: 37rem;
   height: 46px;
   padding: 6px 15px;
   justify-content: center;
   align-items: center;
-  gap: 10px;
   color: white;
   font-weight: 500;
   font-size: 1.2rem;
   border: none;
+  margin-bottom: 10rem;
+  margin-left: 11rem;
 `;
 
 const PhotoContainer = styled.div`
@@ -181,13 +181,17 @@ const Row = styled.div`
 
 const Row2 = styled(Row)`
   align-items: center;
+  margin-top: 1rem;
 `;
 
 const Center = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 200vh;
+`;
+
+const Center2 = styled(Center)`
+  margin-left: 12rem;
 `;
 
 const Container = styled.div`
@@ -231,14 +235,21 @@ const Input = styled.input`
   width: 560px;
   height: 44px;
   border: none;
-  padding-left: 1rem;
+  padding-left: 1.4rem;
   outline: none;
   font-size: 16px;
+  margin-bottom: 1rem;
 `;
 
 const Input3 = styled(Input)`
   width: 510px;
   margin-right: 1rem;
+`;
+
+const TagInput = styled(Input)`
+  width: 9.5rem;
+  margin-right: 1.4rem;
+  margin-bottom: 1rem;
 `;
 
 const Input2 = styled.textarea`
@@ -250,6 +261,7 @@ const Input2 = styled.textarea`
   padding: 1rem;
   outline: none;
   font-size: 16px;
+  margin-bottom: 1rem;
 `;
 
 const InputImg = styled(Input)`
@@ -266,6 +278,8 @@ const SubTitle = styled.h3`
   font-size: 1.2rem;
 `;
 
-const InputContainer = styled.div``;
+const InputContainer = styled.div`
+  width: 100%;
+`;
 
 export default Custom;

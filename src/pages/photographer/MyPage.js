@@ -61,6 +61,7 @@ const Menus = styled.div`
 
   @media (max-width: 768px) {
     align-items: center;
+    width: 95%;
   }
 `;
 
@@ -74,6 +75,10 @@ const Line2 = styled.div`
   background: #e6e6e6;
   width: 409px;
   height: 1px;
+
+  @media (max-width: 768px) {
+    width: 95%;
+  }
 `;
 
 const MenuContainer = styled.div`
@@ -126,13 +131,16 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 768px) {
+    width: 95%;
+  }
 `;
 
 const Title = styled.h2`
   font-size: 24px;
   align-self: flex-start;
   margin-bottom: 3rem;
-  /* margin-left: -4rem; */
 
   @media (max-width: 768px) {
     margin-top: 2rem;
@@ -157,6 +165,10 @@ const Row = styled.div`
 const NickName = styled.h3`
   font-size: 20px;
   margin-bottom: 0;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
 `;
 
 const Email = styled.p`
@@ -180,6 +192,7 @@ const Btn = styled.button`
 
   @media (max-width: 768px) {
     margin-right: 0;
+    font-weight: 500;
   }
 `;
 
@@ -189,7 +202,7 @@ const SubTitle = styled.h2`
   align-self: flex-start;
 
   @media (max-width: 768px) {
-    margin-left: 1.2rem;
+    margin-left: 1rem;
     font-size: 18px;
     margin-bottom: 1.2rem;
   }
@@ -212,6 +225,10 @@ const Setting = styled.img`
   align-self: flex-start;
   margin-top: 1.4rem;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    margin-left: -1rem;
+  }
 `;
 
 export default MyPage;

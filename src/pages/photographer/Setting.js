@@ -42,13 +42,20 @@ const Setting = () => {
               </PhotoContainer>
             </label>
             <InputContainer>
-              <SubTitle>닉네임</SubTitle>
-              <Input />
-              <SubTitle>이메일</SubTitle>
-              <Input />
-              <SubTitle>비밀번호</SubTitle>
-              <Input />
+              <Display>
+                <SubTitle>닉네임</SubTitle>
+                <Input />
+              </Display>
+              <Display>
+                <SubTitle>이메일</SubTitle>
+                <Input />
+              </Display>
+              <Display>
+                <SubTitle>비밀번호</SubTitle>
+                <Input />
+              </Display>
               <ChangeBtn>변경하기</ChangeBtn>
+              <Line2 />
               <WithDraw onClick={() => setIsOpen(true)}>회원 탈퇴하기</WithDraw>
             </InputContainer>
           </Row>
@@ -58,6 +65,16 @@ const Setting = () => {
   );
 };
 
+const Display = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    margin-bottom: 1rem;
+  }
+`;
+
 const ChangeBtn = styled.button`
   border-radius: 30px;
   background: var(--main-font-color, #3c3aac);
@@ -65,21 +82,33 @@ const ChangeBtn = styled.button`
   cursor: pointer;
 
   display: flex;
-  width: 516px;
+  width: 32rem;
   height: 46px;
   padding: 6px 15px;
   justify-content: center;
   align-items: center;
-  gap: 10px;
   color: white;
   font-weight: 500;
   font-size: 1.2rem;
   border: none;
+
+  @media (max-width: 768px) {
+    width: 22rem;
+    height: 2.5rem;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-top: 4rem;
+  }
 `;
 
 const WithDraw = styled(ChangeBtn)`
   background-color: #dbdbdb;
   cursor: pointer;
+  margin-top: 4rem;
+
+  @media (max-width: 768px) {
+    margin-top: 3rem;
+  }
 `;
 
 const PhotoContainer = styled.div`
@@ -87,16 +116,32 @@ const PhotoContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-right: 4rem;
+
+  @media (max-width: 768px) {
+    margin-right: 0;
+    flex-direction: row;
+    margin-top: -1rem;
+    margin-bottom: 1.5rem;
+    margin-left: 0.7rem;
+  }
 `;
 
 const Change = styled.h3`
   font-size: 18px;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const Row = styled.div`
   display: flex;
   margin-top: 2rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const Center = styled.div`
@@ -105,6 +150,10 @@ const Center = styled.div`
   align-items: center;
   height: 130vh;
   width: 100%;
+
+  @media (max-width: 768px) {
+    height: 80vh;
+  }
 `;
 
 const Container = styled.div`
@@ -121,12 +170,35 @@ const Title = styled.h2`
   align-self: flex-start;
   margin-bottom: 2rem;
   margin-left: 10%;
+
+  @media (max-width: 768px) {
+    margin-left: 5%;
+    margin-top: 3rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const Line = styled.div`
   width: 80%;
   height: 1px;
   background-color: black;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
+const Line2 = styled(Line)`
+  margin-top: 3rem;
+  width: 50rem;
+  margin-left: -12rem;
+  background-color: #e6e6e6;
+
+  @media (max-width: 768px) {
+    width: 23rem;
+    margin-left: 0;
+  }
 `;
 
 const Profile = styled.img`
@@ -134,6 +206,12 @@ const Profile = styled.img`
   height: 116px;
   border-radius: 100%;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 40px;
+    height: 40px;
+    margin-right: 1rem;
+  }
 `;
 
 const Input = styled.input`
@@ -144,6 +222,11 @@ const Input = styled.input`
   border: none;
   padding-left: 1rem;
   outline: none;
+
+  @media (max-width: 768px) {
+    width: 17rem;
+    height: 2.5rem;
+  }
 `;
 
 const InputImg = styled(Input)`
@@ -152,8 +235,20 @@ const InputImg = styled(Input)`
 
 const SubTitle = styled.h3`
   font-size: 1.2rem;
+
+  @media (max-width: 768px) {
+    margin-right: 1rem;
+    font-size: 1rem;
+  }
 `;
 
-const InputContainer = styled.div``;
+const InputContainer = styled.div`
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+`;
 
 export default Setting;
