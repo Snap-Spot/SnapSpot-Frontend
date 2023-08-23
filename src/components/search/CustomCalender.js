@@ -100,7 +100,7 @@ const StyledCalendar = styled.div`
     color: var(--black, #060606);
     text-align: center;
     font-family: Noto Sans KR;
-    font-size: 1.25rem;
+    font-size: 1.45rem;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -114,7 +114,7 @@ const StyledCalendar = styled.div`
     text-align: center;
 
     font-family: Noto Sans KR;
-    font-size: 1rem;
+    font-size: 1.3rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -123,24 +123,31 @@ const StyledCalendar = styled.div`
     }
   }
   .react-datepicker__day-name {
+    width: 2rem;
     @media (max-width: 768px) {
       width: 2.5rem;
       margin: 0.1rem 0.4rem;
+      /* font-size: 1rem; */
     }
+  }
+
+  .react-datepicker__day--keyboard-selected {
+    background: none;
   }
 
   .react-datepicker__day {
     color: #616161;
     text-align: center;
-
+    width: 2rem;
     font-family: Noto Sans KR;
-    font-size: 1rem;
+    font-size: 1.3rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     @media (max-width: 768px) {
       width: 2.5rem;
       margin: 0.1rem 0.4rem;
+      font-size: 1rem;
     }
   }
   .react-datepicker__day--outside-month {
@@ -161,9 +168,8 @@ const StyledCalendar = styled.div`
     color: var(--lesswhite, #f6f6f6);
     text-align: center;
 
-    /* web_r16 */
     font-family: Noto Sans KR;
-    font-size: 1rem;
+    font-size: 1.3rem;
     font-style: normal;
     font-weight: 400;
     border-radius: 4px;
