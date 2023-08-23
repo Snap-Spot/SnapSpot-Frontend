@@ -24,13 +24,14 @@ const FilteringBox = ({}) => {
 
   return (
     <Wrapper>
-      <Tab>
+      <FilterTab>
+        {/* 지역필터링 */}
         <RegionTab>
           <Title>지역</Title>
           <List>
             <RegionList>
               {regions.map((region, index) => (
-                <SectionBox>
+                <Box>
                   <Region
                     key={index}
                     onClick={() => handleRegionClick(region)}
@@ -38,12 +39,12 @@ const FilteringBox = ({}) => {
                   >
                     {region.name}
                   </Region>
-                </SectionBox>
+                </Box>
               ))}
             </RegionList>
             <SubregionList>
               {selectedRegion && (
-                <SectionBox>
+                <Box>
                   {selectedRegion.subregions.map((subregion, index) => (
                     <SubregionBox>
                       <Subregion
@@ -55,22 +56,24 @@ const FilteringBox = ({}) => {
                       </Subregion>
                     </SubregionBox>
                   ))}
-                </SectionBox>
+                </Box>
               )}
             </SubregionList>
           </List>
         </RegionTab>
+        {/* 날짜 필터링 */}
         <DateTab>
           <Title>날짜</Title>
           <CalendarBox>
             <CustomCalender />
           </CalendarBox>
         </DateTab>
+        {/* 전문분야 필터링 */}
         <SectionTab>
           <Title>전문분야</Title>
           <SectionList>
             {sections && (
-              <SectionBox>
+              <Box>
                 {sections.map((section, index) => (
                   <>
                     <Section
@@ -83,15 +86,16 @@ const FilteringBox = ({}) => {
                     {index !== sections.length - 1 && <Line />}
                   </>
                 ))}
-              </SectionBox>
+              </Box>
             )}
           </SectionList>
         </SectionTab>
+        {/* 순서 필터링 */}
         <OrderTab>
           <Title>순서</Title>{" "}
           <SectionList>
             {orders && (
-              <SectionBox>
+              <Box>
                 {orders.map((order, index) => (
                   <>
                     <Section
@@ -104,19 +108,21 @@ const FilteringBox = ({}) => {
                     {index !== orders.length - 1 && <Line />}
                   </>
                 ))}
-              </SectionBox>
+              </Box>
             )}
           </SectionList>
         </OrderTab>
-      </Tab>
+      </FilterTab>
+      {/* 조회하기 버튼이 있는 Tab */}
       <BtnTab>
-        <FilteringBtn>조회하기</FilteringBtn>
+        <Btn>조회하기</Btn>
       </BtnTab>
     </Wrapper>
   );
 };
 
 export default FilteringBox;
+
 const Wrapper = styled.div`
   width: 100%;
   height: 35.625rem;
@@ -125,16 +131,18 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   background: #fff;
-  box-shadow: 0px 16px 51px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 1rem 3.188rem 0rem rgba(0, 0, 0, 0.1);
   @media (max-width: 768px) {
     height: 81vh;
   }
   @media (max-height: 680px) {
+    //비율 유지를 위해 height가 작은 기종일 경우 높이 별도 설정
     height: 92vh;
   }
 `;
 
-const Tab = styled.div`
+const FilterTab = styled.div`
+  //조회하기 버튼을 제외한 Filter 컴포넌트가 위치
   width: 100%;
   height: 26.875rem;
   display: flex;
@@ -147,45 +155,12 @@ const Tab = styled.div`
     margin: 0;
   }
 `;
-const FilteringBtn = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1.5rem;
-  width: 335px;
-  height: 41px;
-  border-radius: 8px;
-  background: var(--main-font-color, #3c3aac);
-  color: #fff;
-  text-align: center;
-  font-family: Noto Sans KR;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  @media (max-width: 768px) {
-    margin: 0;
-  }
-`;
-const BtnTab = styled.div`
-  @media (max-width: 768px) {
-  }
-`;
 
-const List = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 90%;
-  margin-top: 0.3rem;
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-`;
 const RegionTab = styled.div`
   width: 24%;
   height: 100%;
   @media (max-width: 768px) {
-    height: 24%;
+    height: 22%;
     width: 90%;
     border-bottom: 0.063rem solid #dbdbdb;
   }
@@ -196,7 +171,7 @@ const DateTab = styled.div`
   height: 100%;
   padding: 0 2rem;
   @media (max-width: 768px) {
-    height: 33%;
+    height: 36%;
     width: 90%;
     border-bottom: 0.063rem solid #dbdbdb;
     padding: 0.5rem 0;
@@ -229,7 +204,7 @@ const OrderTab = styled.div`
 const Title = styled.div`
   color: #000;
   font-family: Noto Sans KR;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -239,13 +214,13 @@ const Title = styled.div`
   }
 `;
 
-const CalendarBox = styled.div`
+const List = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 90%;
+  margin-top: 0.3rem;
   @media (max-width: 768px) {
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
   }
 `;
 
@@ -321,6 +296,7 @@ const SubregionList = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     margin: 0;
+    margin-top: 0.3rem;
     padding-bottom: 0.5rem;
   }
 `;
@@ -392,15 +368,17 @@ const SubregionBox = styled.div`
     width: 90%;
   }
 `;
-const Line = styled.div`
-  width: 85px;
-  height: 1px;
-  background: #cecece;
-  margin: 10px 0;
+
+const CalendarBox = styled.div`
   @media (max-width: 768px) {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
   }
 `;
+
 const SectionList = styled.div`
   /* overflow: auto; */
   width: 7rem;
@@ -475,10 +453,45 @@ const Section = styled.div`
   }
 `;
 
-const SectionBox = styled.div`
+const Box = styled.div`
   @media (max-width: 768px) {
     display: flex;
     flex-direction: row;
+  }
+`;
+
+const Line = styled.div`
+  width: 85px;
+  height: 1px;
+  background: #cecece;
+  margin: 10px 0;
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const Btn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+  width: 335px;
+  height: 41px;
+  border-radius: 8px;
+  background: var(--main-font-color, #3c3aac);
+  color: #fff;
+  text-align: center;
+  font-family: Noto Sans KR;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  @media (max-width: 768px) {
+    margin: 0;
+  }
+`;
+const BtnTab = styled.div`
+  @media (max-width: 768px) {
   }
 `;
 
