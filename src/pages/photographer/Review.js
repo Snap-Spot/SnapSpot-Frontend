@@ -94,7 +94,8 @@ const Review = () => {
     setIndexOfLastPost(currentPage * postPerPage);
     setIndexOfFirstPost(indexOfLastPost - postPerPage);
     setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
-  }, [currentPage, indexOfLastPost, indexOfFirstPost, products, postPerPage]);
+  }, [currentPage, postPerPage, indexOfLastPost, indexOfFirstPost]);
+  // 나중에 deps에 products 추가
 
   const setPage = (error) => {
     setCurrentPage(error);
@@ -141,12 +142,21 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 66rem;
+
+  @media (max-width: 768px) {
+    width: 21rem;
+  }
 `;
 
 const Title = styled.h2`
   font-size: 18px;
   align-self: flex-start;
   margin-bottom: 3rem;
+
+  @media (max-width: 768px) {
+    margin-top: 2.2rem;
+    margin-bottom: 0.9rem;
+  }
 `;
 
 const Length = styled.p`
@@ -166,6 +176,10 @@ const ReviewContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 7rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 3rem;
+  }
 `;
 
 export default Review;

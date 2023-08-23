@@ -1,7 +1,21 @@
 import styled from "styled-components";
 import star from "../../../assets/photograph/star.png";
+import { useState, useEffect } from "react";
 
 const ReviewBox = ({ profile, nickname, title, content, date, score }) => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // 모바일 너비에서는 리뷰 상세내용 50자로 잘라서 보여주기
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <ReviewContainer>
       <ProfileContainer>
@@ -10,7 +24,11 @@ const ReviewBox = ({ profile, nickname, title, content, date, score }) => {
       </ProfileContainer>
       <ContentContainer>
         <Title>{title}</Title>
-        <Content>{content}</Content>
+        {windowWidth <= 700 ? (
+          <Content>{content.slice(0, 50)}...</Content>
+        ) : (
+          <Content>{content}</Content>
+        )}
         <Date>{date}</Date>
       </ContentContainer>
       <ScoreContainer>
@@ -24,12 +42,23 @@ const ReviewBox = ({ profile, nickname, title, content, date, score }) => {
 const ScoreContainer = styled.div`
   display: flex;
   align-items: baseline;
+
+  @media (max-width: 768px) {
+    width: 21rem;
+    justify-content: flex-end;
+  }
 `;
 
 const Star = styled.img`
   width: 26px;
   height: 26px;
   margin-right: 0.7rem;
+
+  @media (max-width: 768px) {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.3rem;
+  }
 `;
 
 const ReviewContainer = styled.div`
@@ -39,17 +68,34 @@ const ReviewContainer = styled.div`
   padding-top: 2.5rem;
   border-bottom: 1px solid #d9d9d9;
   display: flex;
+
+  @media (max-width: 768px) {
+    width: 21rem;
+    padding-top: 1.5rem;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    height: 9.5rem;
+  }
 `;
 
 const ProfileContainer = styled.div`
   display: flex;
   margin-right: 3rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    margin-right: 1rem;
+  }
 `;
 
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 40rem;
+
+  @media (max-width: 768px) {
+    width: 65rem;
+  }
 `;
 
 const Profile = styled.img`
@@ -60,11 +106,18 @@ const Profile = styled.img`
 
 const NickName = styled.p`
   font-weight: 500;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const Title = styled.p`
   font-weight: 700;
   margin-bottom: 0.2rem;
+  @media (max-width: 768px) {
+    margin-top: 0.3rem;
+  }
 `;
 
 const Content = styled.p`
@@ -73,12 +126,20 @@ const Content = styled.p`
 
 const Date = styled.p`
   font-size: 0.8rem;
+
+  @media (max-width: 768px) {
+    margin: 0;
+  }
 `;
 
 const Score = styled.p`
   font-weight: 500;
   position: relative;
   top: -0.3rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
 `;
 
 export default ReviewBox;
