@@ -133,7 +133,7 @@ const RegionTitle = styled.div`
   display: flex;
   width: 1050px;
   /* margin-left: 14%; */
-  color:  #060606;
+  color: #060606;
   font-family: Noto Sans KR;
   font-size: 20px;
   font-style: normal;

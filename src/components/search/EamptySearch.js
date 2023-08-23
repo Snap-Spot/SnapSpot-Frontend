@@ -8,7 +8,7 @@ const EamptySearch = () => {
       <EmptySection>
         <img src={glass} /> 검색된 정보가 없습니다.
       </EmptySection>
-      <RecommendSection>
+      <div>
         <Title>이 사진작가는 어떠세요?</Title>
         <RecommendList>
           <RecommendBox
@@ -33,7 +33,7 @@ const EamptySearch = () => {
             review="238"
           />
         </RecommendList>
-      </RecommendSection>
+      </div>
     </Wrapper>
   );
 };
@@ -42,10 +42,6 @@ export default EamptySearch;
 
 const Wrapper = styled.div`
   width: 1050px;
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
 
   @media (max-width: 768px) {
     width: 95%;
@@ -54,20 +50,20 @@ const Wrapper = styled.div`
 
 const EmptySection = styled.div`
   display: flex;
-  height: 32.188rem;
+  height: 25rem;
 
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: #dbdbdb;
   font-family: Noto Sans KR;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
 
   @media (max-width: 768px) {
-    font-size: 16px;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 400;
 
@@ -75,23 +71,15 @@ const EmptySection = styled.div`
   }
 
   img {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 3rem;
+    width: 3.75rem;
+    height: 3.75rem;
+    margin-bottom: 3.75rem;
 
     @media (max-width: 768px) {
-      width: 36px;
-      height: 36px;
+      width: 2.25rem;
+      height: 2.25rem;
     }
   }
-`;
-const RecommendSection = styled.div`
-  /* display: flex;
-  @media (max-width: 768px) {
-    width: 95%;
-  } */
-  /* display: flex;
-  flex-direction: row; */
 `;
 
 const Title = styled.div`
@@ -100,7 +88,7 @@ const Title = styled.div`
   /* margin-left: 14%; */
   color: var(--black, #060606);
   font-family: Noto Sans KR;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -108,11 +96,11 @@ const Title = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 3rem;
+  margin-top: 1rem;
   margin-bottom: 2.5rem;
 
   @media (max-width: 768px) {
-    font-size: 16px;
+    font-size: 1rem;
     margin-top: 1.063rem;
     margin-bottom: 0.75rem;
     width: 100%;
