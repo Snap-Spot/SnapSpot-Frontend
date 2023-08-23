@@ -146,7 +146,7 @@ const StyledCalendar = styled.div`
     line-height: normal;
     @media (max-width: 768px) {
       width: 2.5rem;
-      margin: 0.1rem 0.4rem;
+      margin: 0.17rem 0.4rem;
       font-size: 1rem;
     }
   }
