@@ -15,7 +15,7 @@ const Photographerlist = () => {
   const tabs = ["지역", "날짜", "전문분야", "순서"];
 
   return (
-    <div>
+    <Wrapper>
       <Box>
         <TabBox>
           {tabs.map((tab, index) => (
@@ -79,19 +79,26 @@ const Photographerlist = () => {
           </div>
         </div>
       </GridBox>
-    </div>
+    </Wrapper>
   );
 };
 
 export default Photographerlist;
 
+const Wrapper = styled.div`
+  margin-bottom: 70rem;
+
+  @media (max-width: 768px) {
+    .wrapper {
+      display: none;
+    }
+  }
+`;
+
 const Box = styled.div`
-  width: 100%;
   height: 3.5rem;
-  border-width: 1px 0;
-  border-style: solid;
-  border-color: rgba(129, 129, 129, 0.4);
-  /* border: 1px solid rgba(129, 129, 129, 0.4); */
+  border-top: 1px solid rgba(129, 129, 129, 0.4);
+  border-bottom: 3px solid #a6b9ff;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -126,10 +133,9 @@ const TabBox = styled.div`
   @media (max-width: 768px) {
     width: 62%;
   }
-  /* margin-right:30rem; */
 `;
+
 const SearchTag = styled.div`
-  /* width: 18.5rem; */
   width: 23%;
   height: 2.125rem;
   display: flex;
@@ -139,13 +145,11 @@ const SearchTag = styled.div`
   border-width: 0 0.063rem 0 0.063rem;
   border-color: rgba(129, 129, 129, 0.4);
   border-style: solid;
-  /* margin-left: 35rem; */
   @media (max-width: 768px) {
     width: 35%;
     border-right: none;
   }
   input {
-    /* width: 13rem; */
     width: 100%;
     border: none;
     font-size: 1rem;
@@ -185,7 +189,6 @@ const GridBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relatvie;
 
   .grid {
     position: absolute;
@@ -199,7 +202,7 @@ const GridBox = styled.div`
     column-gap: 44px;
     row-gap: 100px;
 
-    margin-top: 8rem;
+    margin-top: 7rem;
 
     @media (max-width: 768px) {
       grid-template-columns: 112px 112px 112px;
