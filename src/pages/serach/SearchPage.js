@@ -8,7 +8,7 @@ import SearchBox from "../../components/search/SearchBox";
 import EamptySearch from "../../components/search/EamptySearch";
 
 const SearchPage = () => {
-  const [info, setInfo] = useState(true);
+  const [info, setInfo] = useState(false);
 
   return (
     <Wrapper>
@@ -108,7 +108,7 @@ const SearchTitle = styled.div`
   /* margin-left: 14%; */
   color: var(--black, #060606);
   font-family: Noto Sans KR;
-  font-size: 24px;
+  font-size: 1.1rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;

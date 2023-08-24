@@ -50,14 +50,14 @@ const Wrapper = styled.div`
 
 const EmptySection = styled.div`
   display: flex;
-  height: 25rem;
+  height: 17rem;
 
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: #dbdbdb;
   font-family: Noto Sans KR;
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -88,7 +88,7 @@ const Title = styled.div`
   /* margin-left: 14%; */
   color: var(--black, #060606);
   font-family: Noto Sans KR;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;

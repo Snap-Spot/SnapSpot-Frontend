@@ -80,7 +80,7 @@ const Info = styled.div`
   position: relative;
   z-index: 1;
   width: 316px;
-  height: 116px;
+  height: 125px;
   border-radius: 12px;
   background: #f6f6f6;
   /* left: 10px; */
