@@ -87,7 +87,7 @@ export default Photographerlist;
 
 const Box = styled.div`
   width: 100%;
-  height: 3.983rem;
+  height: 3.5rem;
   border-width: 1px 0;
   border-style: solid;
   border-color: rgba(129, 129, 129, 0.4);
@@ -104,17 +104,19 @@ const Box = styled.div`
 const Tab = styled.div`
   color: #000;
   font-family: Noto Sans KR;
-  font-size: 18px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
 
-  width: 7rem;
+  width: 6.5rem;
   text-align: center;
+
   @media (max-width: 768px) {
     font-size: 12px;
   }
 `;
+
 const TabBox = styled.div`
   display: flex;
   width: 57%;
@@ -146,14 +148,13 @@ const SearchTag = styled.div`
     /* width: 13rem; */
     width: 100%;
     border: none;
-    font-size: 1.125rem;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
     text-align: left;
     margin: 1rem;
-    /* padding: 1rem; */
-    /* margin-left: 1.875rem; */
+    font-family: Noto Sans KR;
 
     @media (max-width: 768px) {
       font-size: 0.875rem;
@@ -169,7 +170,7 @@ const SearchTag = styled.div`
   }
 
   img {
-    width: 1.875rem;
+    width: 1.6rem;
     margin: 1rem;
     @media (max-width: 768px) {
       width: 16px;
