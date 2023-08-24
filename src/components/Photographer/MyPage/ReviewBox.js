@@ -68,6 +68,7 @@ const ReviewContainer = styled.div`
   padding-top: 2.5rem;
   border-bottom: 1px solid #d9d9d9;
   display: flex;
+  width: 63rem;
 
   @media (max-width: 768px) {
     width: 21rem;
@@ -80,11 +81,13 @@ const ReviewContainer = styled.div`
 
 const ProfileContainer = styled.div`
   display: flex;
-  margin-right: 3rem;
+  margin-right: 4rem;
+  margin-left: 2rem;
 
   @media (max-width: 768px) {
     flex-direction: column;
     margin-right: 1rem;
+    margin-left: 0;
   }
 `;
 
@@ -92,9 +95,11 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 40rem;
+  margin-right: 3rem;
 
   @media (max-width: 768px) {
     width: 65rem;
+    margin-right: 0;
   }
 `;
 
@@ -114,14 +119,22 @@ const NickName = styled.p`
 
 const Title = styled.p`
   font-weight: 700;
+  font-size: 18px;
   margin-bottom: 0.2rem;
+  margin-top: 0.8rem;
   @media (max-width: 768px) {
     margin-top: 0.3rem;
+    font-size: 14px;
   }
 `;
 
 const Content = styled.p`
   font-weight: 500;
+  font-size: 16px;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
 `;
 
 const Date = styled.p`

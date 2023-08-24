@@ -22,45 +22,43 @@ const Setting = () => {
   return (
     <Center>
       {isOpen && <Modal setIsOpen={setIsOpen} />}
-      <Center>
+      <Container>
         <Title>계정 설정</Title>
         <Line />
-        <Container>
-          <Row>
-            <label htmlFor="file">
-              <PhotoContainer>
-                <Profile src={imgfile ? imgfile : profile} />
-                <InputImg
-                  type="file"
-                  name="file"
-                  id="file"
-                  accept="image/*"
-                  onChange={saveProfileImgFile}
-                  ref={imgRef}
-                ></InputImg>
-                <Change>사진 변경</Change>
-              </PhotoContainer>
-            </label>
-            <InputContainer>
-              <Display>
-                <SubTitle>닉네임</SubTitle>
-                <Input />
-              </Display>
-              <Display>
-                <SubTitle>이메일</SubTitle>
-                <Input />
-              </Display>
-              <Display>
-                <SubTitle>비밀번호</SubTitle>
-                <Input />
-              </Display>
-              <ChangeBtn>변경하기</ChangeBtn>
-              <Line2 />
-              <WithDraw onClick={() => setIsOpen(true)}>회원 탈퇴하기</WithDraw>
-            </InputContainer>
-          </Row>
-        </Container>
-      </Center>
+        <Row>
+          <label htmlFor="file">
+            <PhotoContainer>
+              <Profile src={imgfile ? imgfile : profile} />
+              <InputImg
+                type="file"
+                name="file"
+                id="file"
+                accept="image/*"
+                onChange={saveProfileImgFile}
+                ref={imgRef}
+              ></InputImg>
+              <Change>사진 변경</Change>
+            </PhotoContainer>
+          </label>
+          <InputContainer>
+            <Display>
+              <SubTitle>닉네임</SubTitle>
+              <Input />
+            </Display>
+            <Display>
+              <SubTitle>이메일</SubTitle>
+              <Input />
+            </Display>
+            <Display>
+              <SubTitle>비밀번호</SubTitle>
+              <Input />
+            </Display>
+            <ChangeBtn>변경하기</ChangeBtn>
+            <Line2 />
+            <WithDraw onClick={() => setIsOpen(true)}>회원 탈퇴하기</WithDraw>
+          </InputContainer>
+        </Row>
+      </Container>
     </Center>
   );
 };
@@ -148,8 +146,7 @@ const Center = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 130vh;
-  width: 100%;
+  height: 120vh;
 
   @media (max-width: 768px) {
     height: 80vh;
@@ -169,7 +166,6 @@ const Title = styled.h2`
   font-size: 18px;
   align-self: flex-start;
   margin-bottom: 2rem;
-  margin-left: 10%;
 
   @media (max-width: 768px) {
     margin-left: 5%;
@@ -180,7 +176,7 @@ const Title = styled.h2`
 `;
 
 const Line = styled.div`
-  width: 80%;
+  width: 100%;
   height: 1px;
   background-color: black;
 

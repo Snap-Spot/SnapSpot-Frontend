@@ -142,25 +142,34 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 66rem;
+  width: 70rem;
+  margin-top: 2rem;
 
   @media (max-width: 768px) {
     width: 21rem;
+    margin-top: 1rem;
   }
 `;
 
 const Title = styled.h2`
-  font-size: 18px;
+  font-size: 24px;
   align-self: flex-start;
   margin-bottom: 3rem;
 
   @media (max-width: 768px) {
-    margin-top: 2.2rem;
+    margin-top: 1rem;
     margin-bottom: 0.9rem;
+    font-size: 18px;
   }
 `;
 
 const Length = styled.p`
   font-weight: 600;
+  font-size: 18px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const Filter = styled.div``;

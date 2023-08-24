@@ -2,7 +2,6 @@ import styled from "styled-components";
 import profile from "../../assets/photograph/ex_profile.png";
 import plus from "../../assets/photograph/plus.png";
 import imgPlus from "../../assets/photograph/imgPlus.png";
-import deleteIcon from "../../assets/photograph/deleteIcon.png";
 import Dropdown from "../../components/Photographer/MyPage/Dropdown";
 import { useState, useRef } from "react";
 
@@ -285,7 +284,7 @@ const Input3 = styled(Input)`
 `;
 
 const TagInput = styled(Input)`
-  width: 9.5rem;
+  width: 9.4rem;
   margin-right: 1.4rem;
   margin-bottom: 1rem;
 `;

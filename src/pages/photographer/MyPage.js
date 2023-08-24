@@ -122,6 +122,7 @@ const Center = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 1rem;
 `;
 
 const Container = styled.div`
@@ -143,9 +144,9 @@ const Title = styled.h2`
   margin-bottom: 3rem;
 
   @media (max-width: 768px) {
-    margin-top: 2rem;
+    margin-top: 1rem;
     font-size: 18px;
-    margin-left: 1rem;
+    margin-left: 0.7rem;
     margin-bottom: 1rem;
   }
 `;

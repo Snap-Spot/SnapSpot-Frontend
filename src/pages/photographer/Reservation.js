@@ -139,7 +139,7 @@ const Container = styled.div`
   max-width: 66rem;
   margin-left: 6%;
   margin-right: 6%;
-  margin-top: 4rem;
+  margin-top: 3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -164,6 +164,7 @@ const Title = styled.h2`
     margin-left: 1.2rem;
     margin-bottom: 1.7rem;
     font-size: 18px;
+    margin-top: 1rem;
   }
 `;
 
