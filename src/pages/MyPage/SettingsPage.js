@@ -11,7 +11,9 @@ const SettingsPage = () => {
   };
   return (
     <>
-      {showModal && <SignOutCheckModal setShowModal={setShowModal} />}
+      {showModal && (
+        <SignOutCheckModal setShowModal={setShowModal} isPhotographer={true} />
+      )}
       <Header />
       <Wrapper>
         <div className="title">계정 설정</div>

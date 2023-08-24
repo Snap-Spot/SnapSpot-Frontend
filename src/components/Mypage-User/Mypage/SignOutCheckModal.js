@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 import { useEffect } from "react";
 import warn from "../../../assets/mypage/userMypage/warn.png";
-const SignOutCheckModal = ({ setShowModal }) => {
+const SignOutCheckModal = ({ isPhotographer, setShowModal }) => {
   useEffect(() => {
     //모달 뒤 배경 스크롤 막기
     document.body.style.cssText = `
@@ -25,9 +25,16 @@ const SignOutCheckModal = ({ setShowModal }) => {
       <Modal onClick={(e) => e.stopPropagation()}>
         <img src={warn} alt="warn" />
         <div className="title">정말 탈퇴하시겠어요?</div>
-        <div className="subtitle">
-          사진작가 분들이 고객님을 기다리고 있어요!
-        </div>
+        {isPhotographer ? (
+          <div className="subtitle">
+            고객님들께서 작가님을 그리워 할 거에요..🥺
+          </div>
+        ) : (
+          <div className="subtitle">
+            사진작가 분들이 고객님을 기다리고 있어요!
+          </div>
+        )}
+
         <div className="btns">
           <div className="no" onClick={closeModal}>
             아직이에요
@@ -90,10 +97,16 @@ const Modal = styled.div`
     font-size: 1rem;
   }
   .subtitle {
+    width: 100%;
     margin-top: -30px;
     color: var(--darkgrey, #777);
     font-size: 1rem;
     font-weight: 500;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+
     @media (max-width: 768px) {
       //모바일
       font-size: 14px;
