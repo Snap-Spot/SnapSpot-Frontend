@@ -1,31 +1,55 @@
 import { React, useState } from "react";
 import { styled } from "styled-components";
 import kakaoLogo from "../../assets/signup/kakao.png";
+import { useNavigate } from "react-router";
 
-const SignUpForm = ({ memberType }) => {
+const LoginForm = () => {
+  const navigate = useNavigate();
+
+  // 회원가입 페이지로 이동
+  const navigateToPage = (pageName) => {
+    if (pageName === "signup") {
+      navigate("/signup/member");
+    } else {
+      // 비밀번호 찾기
+    }
+  };
+
   return (
     <SignUpWrapper>
       <InputWrapper>
-        <InputBox placeholder="닉네임" />
-        <InputBox placeholder="이메일" />
-        <InputBox placeholder="비밀번호" type="password" />
-        <InputBox placeholder="비밀번호 확인" type="password" />
-        <PasswordMatchText>비밀번호가 일치하지 않습니다.</PasswordMatchText>
+        <MainText>이메일</MainText>
+        <InputBox placeholder="example@snapspot.com" />
+        <MainText style={{ marginTop: "15px" }}>비밀번호</MainText>
+        <InputBox placeholder="password" />
+        <PasswordMatchText>
+          아이디 또는 비밀번호를 다시 확인해주세요.
+        </PasswordMatchText>
       </InputWrapper>
 
-      <EmailLoginBtn>이메일로 시작하기</EmailLoginBtn>
-
-      <OrText>또는</OrText>
+      <EmailLoginBtn>이메일로 로그인</EmailLoginBtn>
 
       <KakaoLoginBtn>
         <img src={kakaoLogo} alt="kakao" />
-        <p>카카오계정 로그인</p>
+        <p>카카오로 로그인</p>
       </KakaoLoginBtn>
+
+      <BottomDiv>
+        <EtcText
+          onClick={() => {
+            navigateToPage("signup");
+          }}
+        >
+          회원가입
+        </EtcText>
+        <EtcText>|</EtcText>
+        <EtcText>비밀번호 찾기</EtcText>
+      </BottomDiv>
     </SignUpWrapper>
   );
 };
 
-export default SignUpForm;
+export default LoginForm;
 
 // 1rem == 16px
 const BASIC_FONT_SIZE = 1;
@@ -34,7 +58,7 @@ const TEXT_INDENT = 32;
 const M_TEXT_INDENT = 18;
 
 const SignUpWrapper = styled.div`
-  width: 640px;
+  width: 450px;
   border-radius: 30px;
   border: 0.5px solid var(--lightgrey-2, #dbdbdb);
   background-color: white;
@@ -60,6 +84,19 @@ const InputWrapper = styled.div`
   align-items: center;
 
   margin: 60px 0;
+`;
+
+const MainText = styled.div`
+  width: ${INPUT_WIDTH}%;
+
+  font-family: Noto Sans KR;
+  font-size: ${BASIC_FONT_SIZE}rem;
+  text-indent: ${TEXT_INDENT}px;
+
+  @media screen and (max-width: 768px) {
+    font-weight: 400;
+    text-indent: ${M_TEXT_INDENT}px;
+  }
 `;
 
 const InputBox = styled.input`
@@ -89,7 +126,7 @@ const InputBox = styled.input`
 
 const PasswordMatchText = styled.div`
   font-family: Noto Sans KR;
-  font-size: 0.8rem;
+  font-size: 14px;
   color: var(--lessred, #ff3d3d);
 
   width: ${INPUT_WIDTH}%;
@@ -97,35 +134,6 @@ const PasswordMatchText = styled.div`
 
   @media screen and (max-width: 768px) {
     text-indent: ${M_TEXT_INDENT}px;
-  }
-`;
-
-const OrText = styled.div`
-  display: flex;
-  flex-basis: 100%;
-  align-items: center;
-  width: ${INPUT_WIDTH}%;
-
-  font-family: Noto Sans KR;
-  font-size: ${BASIC_FONT_SIZE}rem;
-
-  margin: 30px 0;
-
-  &::before,
-  &::after {
-    content: "";
-    flex-grow: 1;
-    height: 1px;
-    line-height: 0px;
-    background-color: #ececec;
-  }
-
-  &::before {
-    margin-right: 14px;
-  }
-
-  &::after {
-    margin-left: 14px;
   }
 `;
 
@@ -150,6 +158,8 @@ const EmailLoginBtn = styled(LoginButton)`
   font-size: ${BASIC_FONT_SIZE}rem;
   font-weight: 500;
   color: var(--white, #fff);
+
+  margin-bottom: 15px;
 `;
 
 const KakaoLoginBtn = styled(LoginButton)`
@@ -159,7 +169,7 @@ const KakaoLoginBtn = styled(LoginButton)`
   align-items: center;
   gap: 10px;
 
-  margin-bottom: 70px;
+  margin-bottom: 15px;
 
   img {
     width: 23px;
@@ -170,8 +180,21 @@ const KakaoLoginBtn = styled(LoginButton)`
     font-size: ${BASIC_FONT_SIZE}rem;
     font-weight: 500;
   }
+`;
+
+const BottomDiv = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-bottom: 40px;
 
   @media screen and (max-width: 768px) {
     margin-bottom: 0;
   }
+`;
+
+const EtcText = styled.span`
+  color: var(--darkgrey, #777);
+  font-family: Noto Sans KR;
+  font-weight: 400;
+  font-size: 0.8rem;
 `;
