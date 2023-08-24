@@ -9,8 +9,11 @@ import { useState, useRef } from "react";
 const Custom = () => {
   const [imgfile, setImgFile] = useState([]); // 가격표 이미지
   const [profileImg, setProfileImg] = useState(""); // 프로필 이미지
+  const [featuredImgfiles, setFeaturedImgFiles] = useState([]); // 대표 이미지
+
   const imgRef = useRef([]);
   const imgRef2 = useRef();
+  const featuredImgRef = useRef([]);
 
   // 프로필 이미지 프리뷰 생성
   const saveProfileImgFile = () => {
@@ -37,6 +40,22 @@ const Custom = () => {
     const updatedFiles = [...imgfile];
     updatedFiles[index] = null;
     setImgFile(updatedFiles);
+  };
+
+  // 대표 이미지 프리뷰
+  const saveImgFiles = () => {
+    const file = featuredImgRef.current[featuredImgfiles.length].files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setFeaturedImgFiles((prevImgFiles) => [...prevImgFiles, reader.result]);
+    };
+  };
+
+  // 대표 이미지 프리뷰 삭제
+  const deleteFileImgs = (index) => {
+    const updatedFiles = featuredImgfiles.filter((_, i) => i !== index);
+    setFeaturedImgFiles(updatedFiles);
   };
 
   return (
@@ -66,23 +85,21 @@ const Custom = () => {
             <Row2>
               {imgfile.map((imgFile, index) => (
                 <ImgContainer key={index} imgfile={imgFile}>
-                  <DeleteImgBtn
-                    imgfile={imgFile}
+                  <PreImgs
+                    src={imgFile ? imgFile : ``}
                     onClick={() => deleteFileImg(index)}
-                    src={deleteIcon}
                   />
-                  <PreImg src={imgFile ? imgFile : ``} />
                 </ImgContainer>
               ))}
               <InputImg
                 type="file"
                 name="file"
-                id={`file-${imgfile.length}`}
+                id={`file-${imgfile.length}-price`}
                 accept="image/*"
                 onChange={saveImgFile}
                 ref={(el) => (imgRef.current[imgfile.length] = el)}
               />
-              <label htmlFor={`file-${imgfile.length}`}>
+              <label htmlFor={`file-${imgfile.length}-price`}>
                 <Plus src={plus} />
               </label>
             </Row2>
@@ -107,7 +124,35 @@ const Custom = () => {
             <TagInput />
             <TagInput />
             <SubTitle>대표 사진 업로드 (최대 10장)</SubTitle>
-            <InputImg2 src={imgPlus} />
+            {featuredImgfiles.map((imgfile, index) => (
+              <ImgContainer key={index} imgfile={imgfile}>
+                {imgfile && (
+                  <PreImgs
+                    src={imgfile}
+                    onClick={() => deleteFileImgs(index)}
+                  />
+                )}
+              </ImgContainer>
+            ))}
+            <InputImg
+              type="file"
+              name="file"
+              id={`file-${featuredImgfiles.length}`}
+              accept="image/*"
+              onChange={saveImgFiles}
+              ref={(el) =>
+                (featuredImgRef.current[featuredImgfiles.length] = el)
+              }
+            />
+            <label htmlFor={`file-${featuredImgfiles.length}`}>
+              {featuredImgfiles.length < 10 && (
+                <>
+                  {[...Array(10 - featuredImgfiles.length)].map((_, index) => (
+                    <InputImg2 key={index} src={imgPlus} />
+                  ))}
+                </>
+              )}
+            </label>
           </InputContainer>
         </Center2>
         <ChangeBtn>변경하기</ChangeBtn>
@@ -116,26 +161,18 @@ const Custom = () => {
   );
 };
 
-const ImgContainer = styled.div`
-  display: ${(props) => (props.imgfile ? "block" : "none")};
-  height: ${(props) => (props.imgfile ? "100%" : "0px")};
-`;
-
-const DeleteImgBtn = styled.img`
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  margin-left: 90px;
-  margin-top: 7px;
-  cursor: pointer;
-  display: ${(props) => (props.imgfile ? "block" : "none")};
-`;
-
-const PreImg = styled.img`
-  width: 8.5rem;
-  height: 8.5rem;
+const PreImgs = styled.img`
+  width: 110px;
+  height: 110px;
+  margin-right: 0.5rem;
   border-radius: 22px;
-  margin-right: 2rem;
+  cursor: pointer;
+`;
+
+const ImgContainer = styled.div`
+  position: relative;
+  display: ${(props) => (props.imgfile ? "inline" : "none")};
+  height: ${(props) => (props.imgfile ? "100%" : "0px")};
 `;
 
 const Plus = styled.img`
@@ -182,6 +219,7 @@ const Row = styled.div`
 const Row2 = styled(Row)`
   align-items: center;
   margin-top: 1rem;
+  flex-wrap: wrap;
 `;
 
 const Center = styled.div`
@@ -272,6 +310,7 @@ const InputImg2 = styled.img`
   width: 110px;
   height: 110px;
   margin-right: 0.5rem;
+  cursor: pointer;
 `;
 
 const SubTitle = styled.h3`
@@ -280,6 +319,7 @@ const SubTitle = styled.h3`
 
 const InputContainer = styled.div`
   width: 100%;
+  max-width: 37rem;
 `;
 
 export default Custom;
