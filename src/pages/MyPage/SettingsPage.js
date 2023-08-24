@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 import SettingsForm from "../../components/Mypage-User/Mypage/SettingsForm";
 import SignOutCheckModal from "../../components/Mypage-User/Mypage/SignOutCheckModal";
 
-const UserSettingPage = () => {
+const SettingsPage = () => {
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
     setShowModal(true);
@@ -17,15 +17,17 @@ const UserSettingPage = () => {
         <div className="title">계정 설정</div>
         <div className="container">
           <SettingsForm />
-          <Line />
-          <SignOutBtn onClick={openModal}>회원 탈퇴하기</SignOutBtn>
         </div>
+      </Wrapper>
+      <Line />
+      <Wrapper>
+        <SignOutBtn onClick={openModal}>회원 탈퇴하기</SignOutBtn>
       </Wrapper>
     </>
   );
 };
 
-export default UserSettingPage;
+export default SettingsPage;
 const Wrapper = styled.div`
   width: 70%;
   @media (max-width: 768px) {
@@ -56,10 +58,15 @@ const Wrapper = styled.div`
 `;
 
 const Line = styled.div`
+  width: 70%;
+  margin: 0 auto;
   margin-top: 81px;
-  width: 100%;
   background: #e6e6e6;
   height: 1px;
+  @media (max-width: 768px) {
+    //모바일
+    width: 100vw;
+  }
 `;
 const SignOutBtn = styled.div`
   margin-left: 184px; // (116+84)
