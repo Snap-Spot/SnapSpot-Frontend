@@ -47,12 +47,12 @@ const Header = () => {
       <HeaderDiv>
         <Main>
           <div className="logo">
-            <img
-              src={isMobile ? mobilelogo : logo}
-              alt="로고"
-              onClick={onClickLogo}
-            />
-          </div>{" "}
+            {isMobile ? (
+              <img src={mobilelogo} alt="로고" onClick={onClickLogo} />
+            ) : (
+              <img src={logo} alt="로고" onClick={onClickLogo} />
+            )}
+          </div>
           {isMobile ? null : ( //모바일이 아닐 경우 Search Box
             <Search>
               <input placeholder="찾고 싶은 스팟이나 사진작가를 검색하세요."></input>
@@ -119,10 +119,16 @@ const Main = styled.div`
   }
 
   .logo {
-    margin-right: 6.625rem;
+    margin-right: 4.625rem;
 
     img {
-      width: 13rem;
+      display: flex;
+      width: 14.375rem;
+      height: 1.5rem;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 1.695rem;
+      flex-shrink: 0;
 
       @media (max-width: 768px) {
         width: 1.84rem;
@@ -139,16 +145,16 @@ const Menu = styled.div`
   align-items: center;
   justify-content: center;
 
-  margin-left: 2.5rem;
+  margin-left: 2rem;
 
   .subMenu {
-    padding: 0.75rem;
+    padding: 0.5rem;
     gap: 0.75rem;
     display: inline-flex;
     align-items: flex-start;
     justify-content: center;
     color: #3c3aac;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-style: normal;
     font-weight: 700;
     line-height: 68.5%;
@@ -160,9 +166,9 @@ const Menu = styled.div`
   }
 
   .mypage {
-    width: 2.75rem;
-    height: 2.75rem;
-    border-radius: 2.75rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 2.5rem;
     margin-right: 1rem;
     margin-left: 1rem;
 
@@ -196,8 +202,8 @@ const SearchDiv = styled.div`
 
 const Search = styled.div`
   display: flex;
-  width: 31.938rem;
-  height: 3rem;
+  width: 26rem;
+  height: 2.7rem;
   justify-content: space-between;
   align-items: center;
 
@@ -217,7 +223,7 @@ const Search = styled.div`
     height: 1.25rem;
     border: none;
     background-color: #e6e6e6;
-    font-size: 1.125rem;
+    font-size: 0.85rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -246,7 +252,7 @@ const Search = styled.div`
     color: var(--transparent-grey, rgba(129, 129, 129, 0.4));
   }
   img {
-    width: 1.5rem;
+    width: 1.3rem;
     margin-right: 2rem;
     @media (max-width: 768px) {
       width: 1rem;
