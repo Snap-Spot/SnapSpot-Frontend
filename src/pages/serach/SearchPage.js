@@ -108,7 +108,7 @@ const SearchTitle = styled.div`
   /* margin-left: 14%; */
   color: var(--black, #060606);
   font-family: Noto Sans KR;
-  font-size: 24px;
+  font-size: 1.1rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -133,7 +133,7 @@ const RegionTitle = styled.div`
   display: flex;
   width: 1050px;
   /* margin-left: 14%; */
-  color:  #060606;
+  color: #060606;
   font-family: Noto Sans KR;
   font-size: 20px;
   font-style: normal;

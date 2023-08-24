@@ -1,30 +1,24 @@
 import React from "react";
-import SignUpForm from "../components/SignUp/SignUpForm";
 import { styled } from "styled-components";
-import Logo from "../assets/header/logo.png";
-import { useParams } from "react-router";
+import Logo from "../../assets/header/logo.png";
+import LoginForm from "../../components/Login/LoginForm";
 
-const SignUpInfoPage = () => {
-  const params = useParams();
-
-  // 이전 페이지에서 받아온 멤버 유형(customer, photographer)
-  const memberType = params.memberType;
-
+const LoginPage = () => {
   return (
     <Wrapper>
       <div className="container">
         {window.innerWidth < 768 ? (
           <LogoImage src={Logo} alt="snapspot" />
         ) : (
-          <MainText>회원가입</MainText>
+          <MainText>로그인</MainText>
         )}
-        <SignUpForm memberType={memberType}/>
+        <LoginForm/>
       </div>
     </Wrapper>
   );
 };
 
-export default SignUpInfoPage;
+export default LoginPage;
 
 const Wrapper = styled.div`
   display: flex;

@@ -1,9 +1,10 @@
 import React from "react";
 import { styled } from "styled-components";
-import Customer from "../assets/signup/customer.png";
-import Photographer from "../assets/signup/photographer.png";
-import M_Customer from "../assets/signup/customer_mobile.png";
-import M_Photographer from "../assets/signup/photographer_mobile.png";
+import Customer from "../../assets/signup/customer.png";
+import Photographer from "../../assets/signup/photographer.png";
+import M_Customer from "../../assets/signup/customer_mobile.png";
+import M_Photographer from "../../assets/signup/photographer_mobile.png";
+import Arrow from "../../assets/signup/arrow_left.png";
 import { useNavigate } from "react-router";
 
 const SignUpMemberPage = () => {
@@ -17,6 +18,7 @@ const SignUpMemberPage = () => {
   return (
     <Wrapper>
       <div className="container">
+        <ArrowBack src={Arrow} alt="뒤로가기" />
         <MainText>회원가입 유형을 골라주세요!</MainText>
         <MainDiv>
           <MemberDiv>
@@ -111,5 +113,21 @@ const MemberText = styled.span`
 
   @media screen and (max-width: 768px) {
     font-size: 0.75rem;
+  }
+`;
+
+// 모바일에만 있는 뒤로가기 버튼
+const ArrowBack = styled.img`
+  display: none;
+  @media screen and (max-width: 768px) {
+    display: inline;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 30px;
+    margin-left: 30px;
+
+    width: 30px;
   }
 `;
