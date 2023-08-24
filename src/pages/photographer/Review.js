@@ -105,7 +105,7 @@ const Review = () => {
     <Center>
       <Container>
         <Title>리뷰 리스트</Title>
-        <Length>총 19개</Length>
+        <Length>총 {products.length}개</Length>
         <Filter></Filter>
         <Line />
         <ReviewContainer>

@@ -13,12 +13,15 @@ function App() {
     <>
       <Header />
       <Routes>
-        <Route path="/photograph-mypage" element={<MyPage />} />
-        <Route path="/photograph-reserve" element={<Reservation />} />
-        <Route path="/photograph-reserve/:id" element={<ReservationDetail />} />
-        <Route path="/photograph-setting" element={<Setting />} />
-        <Route path="/photograph-custom" element={<Custom />} />
-        <Route path="/photograph-review" element={<Review />} />
+        <Route path="/photographer/mypage" element={<MyPage />} />
+        <Route path="/photographer/reserve" element={<Reservation />} />
+        <Route
+          path="/photographer/reserve/:id"
+          element={<ReservationDetail />}
+        />
+        <Route path="/photographer/setting" element={<Setting />} />
+        <Route path="/photographer/custom" element={<Custom />} />
+        <Route path="/photographer/review" element={<Review />} />
       </Routes>
     </>
   );

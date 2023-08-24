@@ -27,7 +27,7 @@ const ScheduleBox = ({
             <NickName>{nickname}</NickName>
             <Btn>예약완료</Btn>
           </Row>
-          <Detail onClick={() => navigate(`/photograph-reserve/${id}`)}>
+          <Detail onClick={() => navigate(`/photographer/reserve/${id}`)}>
             상세보기 <Arrow src={arrow} />
           </Detail>
         </Row2>

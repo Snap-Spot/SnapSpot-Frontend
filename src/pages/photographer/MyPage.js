@@ -22,7 +22,7 @@ const MyPage = () => {
           </Column>
           <Setting
             src={setting}
-            onClick={() => navigate("/photograph-setting")}
+            onClick={() => navigate("/photographer/setting")}
           />
           <Btn>로그아웃</Btn>
         </Row>
@@ -30,19 +30,19 @@ const MyPage = () => {
         <SubTitle>고객관리</SubTitle>
       </Container>
       <Menus>
-        <MenuContainer onClick={() => navigate("/photograph-reserve")}>
+        <MenuContainer onClick={() => navigate("/photographer/reserve")}>
           <Icon src={icon1} />
           <Menu>스냅 사진 예약/일정 관리</Menu>
           <Arrow src={arrow} />
         </MenuContainer>
         <Line2 />
-        <MenuContainer onClick={() => navigate("/photograph-review")}>
+        <MenuContainer onClick={() => navigate("/photographer/review")}>
           <Icon src={icon2} />
           <Menu>상세 리뷰 보기</Menu>
           <Arrow src={arrow} />
         </MenuContainer>
         <Line2 />
-        <MenuContainer onClick={() => navigate("/photograph-custom")}>
+        <MenuContainer onClick={() => navigate("/photographer/custom")}>
           <Icon src={icon3} />
           <Menu>작가 페이지 커스텀</Menu>
           <Arrow src={arrow} />

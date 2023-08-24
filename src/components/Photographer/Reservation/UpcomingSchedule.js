@@ -22,7 +22,7 @@ const UpcomingSchedule = ({
       <Padding>
         <Row2>
           <Date>{date}</Date>
-          <Detail onClick={() => navigate(`/photograph-reserve/${id}`)}>
+          <Detail onClick={() => navigate(`/photographer/reserve/${id}`)}>
             상세보기 <Arrow src={arrow} />
           </Detail>
         </Row2>
