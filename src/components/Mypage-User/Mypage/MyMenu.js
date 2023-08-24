@@ -14,25 +14,27 @@ const MyMenu = ({ id }) => {
     [{ icon: booking, text: "스냅사진 예약 내역" }],
   ];
   return (
-    <Wrapper>
-      <div className="subtitle">{title[id]}</div>
-      <div className="menus">
-        {menus[id].map((el, index) => {
-          return (
-            <>
-              {menus[id].length !== 1 && index !== 0 && <Line />}
-              <Menu>
-                <div className="subject">
-                  <img className="icon" src={el.icon} alt="" />
-                  {el.text}
-                </div>
-                <img className="arrow" src={arrow} alt="" />
-              </Menu>
-            </>
-          );
-        })}
-      </div>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <div className="subtitle">{title[id]}</div>
+        <div className="menus">
+          {menus[id].map((el, index) => {
+            return (
+              <>
+                {menus[id].length !== 1 && index !== 0 && <Line />}
+                <Menu>
+                  <div className="subject">
+                    <img className="icon" src={el.icon} alt="" />
+                    {el.text}
+                  </div>
+                  <img className="arrow" src={arrow} alt="" />
+                </Menu>
+              </>
+            );
+          })}
+        </div>
+      </Wrapper>
+    </>
   );
 };
 
@@ -48,10 +50,12 @@ const Wrapper = styled.div`
 
   .menus {
     margin-top: 30px;
-    width: 65%;
+    width: 50%;
+    min-width: 419px;
     @media (max-width: 768px) {
       //모바일
       width: 100%;
+      min-width: 0;
     }
   }
 `;

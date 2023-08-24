@@ -13,7 +13,7 @@ const UserMypage = () => {
           <ProfileContainer />
           <Line />
           <MyMenu id="0" />
-          <Line />
+          <SeperateLine />
           <MyMenu id="1" />
         </div>
         <MobileLogout>로그아웃</MobileLogout>
@@ -53,6 +53,13 @@ const Wrapper = styled.div`
 `;
 
 const Line = styled.div`
+  width: 100%;
+  background: #e6e6e6;
+  height: 1px;
+`;
+
+const SeperateLine = styled.div`
+  margin-top: 31px;
   width: 100%;
   background: #e6e6e6;
   height: 1px;

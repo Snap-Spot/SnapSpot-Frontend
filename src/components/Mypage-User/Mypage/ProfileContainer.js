@@ -23,7 +23,7 @@ const ProfileContainer = () => {
 
 export default ProfileContainer;
 const Wrapper = styled.div`
-  margin: 40px 0px; //수정
+  margin: 45.77px 0px; //수정
 
   display: flex;
   align-items: center;
