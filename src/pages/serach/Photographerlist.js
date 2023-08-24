@@ -113,7 +113,7 @@ const Tab = styled.div`
   text-align: center;
 
   @media (max-width: 768px) {
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 `;
 
@@ -173,8 +173,8 @@ const SearchTag = styled.div`
     width: 1.6rem;
     margin: 1rem;
     @media (max-width: 768px) {
-      width: 16px;
-      height: 16px;
+      width: 1rem;
+      height: 1rem;
       margin-right: 0.2rem;
     }
   }
@@ -190,7 +190,7 @@ const GridBox = styled.div`
   .grid {
     position: absolute;
     z-index: -1;
-    top: 140px;
+    top: 8.75rem;
     display: grid;
     align-items: center;
     justify-content: center;

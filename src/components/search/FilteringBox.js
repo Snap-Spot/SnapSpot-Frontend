@@ -132,16 +132,21 @@ export default FilteringBox;
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 35.625rem;
+  height: 25.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background: #fff;
   box-shadow: 0rem 1rem 3.188rem 0rem rgba(0, 0, 0, 0.1);
+
+  border-top: 0.1rem solid #a6b9ff;
+
   @media (max-width: 768px) {
     height: 81vh;
+    justify-content: space-between;
   }
+
   @media (max-height: 680px) {
     //비율 유지를 위해 height가 작은 기종일 경우 높이 별도 설정
     height: 92vh;
@@ -149,9 +154,9 @@ const Wrapper = styled.div`
 `;
 
 const FilterTab = styled.div`
-  //조회하기 버튼을 제외한 Filter 컴포넌트가 위치
+  //조회하기 버튼을 제외한 Filter 컴포넌트
   width: 100%;
-  height: 26.875rem;
+  height: 21rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -167,7 +172,7 @@ const RegionTab = styled.div`
   width: 24%;
   height: 100%;
   @media (max-width: 768px) {
-    height: 22%;
+    height: 20%;
     width: 90%;
     border-bottom: 0.063rem solid #dbdbdb;
   }
@@ -178,7 +183,7 @@ const DateTab = styled.div`
   height: 100%;
   padding: 0 2rem;
   @media (max-width: 768px) {
-    height: 36%;
+    height: 40%;
     width: 90%;
     border-bottom: 0.063rem solid #dbdbdb;
     padding: 0.5rem 0;
@@ -211,12 +216,15 @@ const OrderTab = styled.div`
 const Title = styled.div`
   color: #000;
   font-family: Noto Sans KR;
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 700;
 
+  margin-bottom: 1rem;
+
   @media (max-width: 768px) {
-    font-size: 0.75rem;
+    margin: 0;
+    font-size: 0.8rem;
     font-weight: 700;
   }
 `;
@@ -224,7 +232,7 @@ const Title = styled.div`
 const List = styled.div`
   display: flex;
   flex-direction: row;
-  height: 90%;
+  height: 82%;
   margin-top: 0.3rem;
 
   @media (max-width: 768px) {
@@ -250,15 +258,15 @@ const Region = styled.div`
   cursor: pointer;
   color: #060606;
   display: inline-block;
-  padding: 0.1rem;
   font-family: Noto Sans KR;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-style: normal;
   font-weight: 400;
   overflow: auto;
   margin-right: 1rem;
 
-  margin: 0.2rem 1rem 0.2rem 0;
+  margin: 0.15rem 1rem 0.15rem 0;
+  padding: 0.05rem;
 
   ${(props) =>
     props.isSelected &&
@@ -316,14 +324,14 @@ const Subregion = styled.div`
 
 
   font-family: Noto Sans KR;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 
   overflow: auto;
-  margin: 0.2rem 1rem 0.2rem 0;  
-  padding: 0.1rem;
+  margin: 0.15rem 1rem 0.15rem 0;
+  padding: 0rem 0.2rem;
   /* margin: auto; */
 
   ${(props) =>
@@ -366,10 +374,6 @@ const Subregion = styled.div`
     box-shadow: 0.125rem 0.125rem 0.5rem 0rem rgba(166, 185, 255, 0.60);
     color: #3C3AAC;
 
-    text-align: center;
-    font-family: Noto Sans KR;
-    font-size: 0.875rem;
-    font-style: normal;
     font-weight: 700;
     line-height: 128.5%;
 `}
@@ -409,9 +413,9 @@ const Section = styled.div`
   cursor: pointer;
   color: #060606;
   display: inline-block;
-  padding: 0.1rem;
+  padding: 0rem 0.2rem;
   font-family: Noto Sans KR;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -437,7 +441,7 @@ const Section = styled.div`
     border: 1px solid var(--lightgrey-2, #dbdbdb);
     background: var(--lesswhite, #f6f6f6);
     padding: 11px 16px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
     margin-right: 1rem;
     color: var(--darkgrey, #777);
     text-align: center;
@@ -458,9 +462,7 @@ const Section = styled.div`
     color: #3C3AAC;
 
     text-align: center;
-    font-family: Noto Sans KR;
     font-size: 0.875rem;
-    font-style: normal;
     font-weight: 700;
     line-height: 128.5%;
 `}
@@ -475,7 +477,7 @@ const Box = styled.div`
 `;
 
 const Line = styled.div`
-  width: 5.313rem;
+  width: 5rem;
   height: 0.063rem;
   background: #cecece;
   margin: 0.625rem 0;
@@ -488,7 +490,6 @@ const Btn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 1.5rem;
   width: 20.9rem;
   height: 2.563rem;
   border-radius: 0.5rem;
@@ -503,8 +504,12 @@ const Btn = styled.div`
   line-height: normal;
 
   @media (max-width: 768px) {
-    margin: 0;
+    /* margin-top: 1rem; */
   }
 `;
 
-const BtnTab = styled.div``;
+const BtnTab = styled.div`
+  @media (max-width: 768px) {
+    height: 4rem;
+  }
+`;
