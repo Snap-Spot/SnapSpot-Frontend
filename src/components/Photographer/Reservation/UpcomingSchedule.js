@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import profile from "../../assets/photograph/profile.png";
-import arrow from "../../assets/photograph/arrow.png";
-import line from "../../assets/photograph/line.png";
+import profile from "../../../assets/photograph/profile.png";
+import arrow from "../../../assets/photograph/arrow.png";
+import line from "../../../assets/photograph/line.png";
+import { useNavigate } from "react-router-dom";
 
 const UpcomingSchedule = ({
   nickname,
@@ -12,13 +13,16 @@ const UpcomingSchedule = ({
   requirement,
   date,
   num,
+  id,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <Container>
       <Padding>
         <Row2>
           <Date>{date}</Date>
-          <Detail>
+          <Detail onClick={() => navigate(`/photographer/reserve/${id}`)}>
             상세보기 <Arrow src={arrow} />
           </Detail>
         </Row2>
@@ -29,7 +33,7 @@ const UpcomingSchedule = ({
         <Row>
           <Profile src={profile} />
           <NickName>{nickname}</NickName>
-          <Btn>예약완료</Btn>
+          <Btn>예약신청</Btn>
         </Row>
         <Row>
           <SnapType>{snapType}</SnapType>
@@ -63,13 +67,17 @@ const ReservationNum = styled.p`
 const Padding = styled.div`
   padding-left: 2rem;
   padding-right: 2rem;
+
+  @media (max-width: 768px) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 `;
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  /* width: 58rem; */
-  width: 88%;
+  width: 100%;
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
   border-radius: 32px;
@@ -131,11 +139,15 @@ const NickName = styled.p`
   font-size: 0.9rem;
   margin-left: 0.5rem;
   margin-right: 1.6rem;
+
+  @media (max-width: 768px) {
+    margin-right: 1rem;
+  }
 `;
 
 const Btn = styled.button`
   border-radius: 6px;
-  background: var(--main-font-color, #3c3aac);
+  background: #5170de;
   color: var(--lesswhite, #f6f6f6);
   font-size: 0.8rem;
   width: 3.7rem;
@@ -147,12 +159,17 @@ const Detail = styled.p`
   font-size: 0.9rem;
   margin-top: 0;
   margin-bottom: 0;
+  cursor: pointer;
 `;
 
 const SnapType = styled.p`
   font-size: 1rem;
   margin: 0;
   margin-top: 0.4rem;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
 `;
 
 const Headcount = styled.p`
@@ -160,16 +177,29 @@ const Headcount = styled.p`
   color: var(--darkgrey, #777);
   margin: 0;
   margin-top: 0.4rem;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
 `;
 
 const SubTitle = styled.h3`
   font-size: 1rem;
   margin-bottom: 0;
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+    margin-top: 0.6rem;
+  }
 `;
 
 const Content = styled.p`
   margin-bottom: 0;
   font-size: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
 `;
 
 export default UpcomingSchedule;
