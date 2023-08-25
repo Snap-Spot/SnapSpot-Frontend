@@ -161,8 +161,8 @@ const Custom = () => {
 };
 
 const PreImgs = styled.img`
-  width: 110px;
-  height: 110px;
+  width: 115px;
+  height: 115px;
   margin-right: 0.5rem;
   border-radius: 22px;
   cursor: pointer;
@@ -183,9 +183,9 @@ const Plus = styled.img`
 const ChangeBtn = styled.button`
   border-radius: 30px;
   background: var(--main-font-color, #3c3aac);
-  margin-top: 5rem;
+  margin-top: 7rem;
   display: flex;
-  width: 37rem;
+  width: 31rem;
   height: 46px;
   padding: 6px 15px;
   justify-content: center;
@@ -228,12 +228,13 @@ const Center = styled.div`
 `;
 
 const Center2 = styled(Center)`
-  margin-left: 12rem;
+  margin-left: 17rem;
+  width: 37rem;
 `;
 
 const Container = styled.div`
   width: 100%;
-  max-width: 66rem;
+  max-width: 64rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -284,8 +285,8 @@ const Input3 = styled(Input)`
 `;
 
 const TagInput = styled(Input)`
-  width: 9.4rem;
-  margin-right: 1.4rem;
+  width: 8rem;
+  margin-right: 1rem;
   margin-bottom: 1rem;
 `;
 
@@ -306,8 +307,8 @@ const InputImg = styled(Input)`
 `;
 
 const InputImg2 = styled.img`
-  width: 110px;
-  height: 110px;
+  width: 115px;
+  height: 115px;
   margin-right: 0.5rem;
   cursor: pointer;
 `;
