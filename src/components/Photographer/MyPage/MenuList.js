@@ -20,7 +20,7 @@ const MenuList = ({ icon, text, address }) => {
 const MenuContainer = styled.div`
   display: flex;
   align-items: center;
-  width: 20rem;
+  width: 24rem;
   justify-content: flex-start;
   cursor: pointer;
 
@@ -50,7 +50,7 @@ const Icon = styled.img`
 
 const Line2 = styled.div`
   background: #e6e6e6;
-  width: 20rem;
+  width: 24rem;
   height: 1px;
 
   @media (max-width: 768px) {

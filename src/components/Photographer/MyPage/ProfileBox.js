@@ -45,6 +45,7 @@ const NickName = styled.h3`
 
 const Email = styled.p`
   font-size: 12px;
+  font-weight: 400;
 `;
 
 const LogOutBtn = styled.button`
@@ -69,8 +70,8 @@ const LogOutBtn = styled.button`
 `;
 
 const Profile = styled.img`
-  width: 4rem;
-  height: 4rem;
+  width: 4.8rem;
+  height: 4.8rem;
   margin-right: 2rem;
 
   @media (max-width: 768px) {

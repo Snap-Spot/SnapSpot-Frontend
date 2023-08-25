@@ -51,10 +51,12 @@ const MenuContainer = styled.div`
   flex-direction: column;
   width: 100%;
   max-width: 50rem;
+  margin-left: 1rem;
 
   @media (max-width: 768px) {
     align-items: center;
-    width: 95%;
+    margin-left: 0;
+    width: 90%;
   }
 `;
 
@@ -87,6 +89,7 @@ const Container = styled.div`
 
   @media (max-width: 768px) {
     width: 95%;
+    margin-left: 1rem;
   }
 `;
 
