@@ -2,7 +2,6 @@ import styled from "styled-components";
 import arrow from "../../assets/photograph/arrow.png";
 import ScheduleBox from "../../components/Photographer/Reservation/ScheduleBox";
 import UpcomingSchedule from "../../components/Photographer/Reservation/UpcomingSchedule";
-import footer from "../../assets/photograph/Footer.png";
 import Calendar from "../../components/Photographer/Reservation/Calendar";
 import { useState } from "react";
 
@@ -10,112 +9,114 @@ const Reservation = () => {
   const date = new Date();
   const currentDate = date.getDate();
   const [select, setSelect] = useState(currentDate);
+
+  const mockData = [
+    {
+      nickname: "kui01",
+      snapType: "우정스냅",
+      headCount: "4",
+      time: "12:30 ~ 14:30",
+      place: "뚝섬유원지",
+      requirement: "편안한 분위기에서 촬영하고 싶어요!",
+      id: "ex",
+    },
+    {
+      nickname: "kui01",
+      snapType: "우정스냅",
+      headCount: "4",
+      time: "12:30 ~ 14:30",
+      place: "뚝섬유원지",
+      requirement: "편안한 분위기에서 촬영하고 싶어요!",
+      id: "ex",
+    },
+  ];
+
+  const mockData2 = [
+    {
+      nickname: "kui01",
+      snapType: "우정스냅",
+      headCount: "4",
+      time: "12:30 ~ 14:30",
+      place: "뚝섬유원지",
+      requirement: "편안한 분위기에서 촬영하고 싶어요!",
+      date: "2023.07.23(일)",
+      num: "0123920293848",
+      id: "ex",
+    },
+    {
+      nickname: "kui01",
+      snapType: "우정스냅",
+      headCount: "4",
+      time: "12:30 ~ 14:30",
+      place: "뚝섬유원지",
+      requirement: "편안한 분위기에서 촬영하고 싶어요!",
+      date: "2023.07.23(일)",
+      num: "0123920293848",
+      id: "ex",
+    },
+  ];
+
   return (
-    <>
-      <Center>
-        <Container>
-          <Title>스냅사진 예약 내역</Title>
-          <Row>
-            <Calendar setSelect={setSelect} select={select} />
-            <Schedule>
-              <SelectedDate>5월 16일 화요일</SelectedDate>
+    <Center>
+      <Container>
+        <Title>스냅사진 예약 내역</Title>
+        <ReservationContainer>
+          <Calendar setSelect={setSelect} select={select} />
+          <ScheduleContainer>
+            <SelectedDate>5월 16일 화요일</SelectedDate>
+            {mockData.map((item, idx) => (
               <ScheduleBox
-                nickname="kui01"
-                snapType="우정스냅"
-                headCount="4"
-                time="12:30 ~ 14:30"
-                place="뚝섬유원지"
-                requirement="편안한 분위기에서 촬영하고 싶어요!"
-                idx="0"
-                id="ex"
+                key={idx}
+                nickname={item.nickname}
+                snapType={item.snapType}
+                headCount={item.headCount}
+                time={item.time}
+                place={item.place}
+                requirement={item.requirement}
+                idx={idx}
+                id={item.id}
               />
-              <ScheduleBox
-                nickname="kui01"
-                snapType="우정스냅"
-                headCount="4"
-                time="12:30 ~ 14:30"
-                place="뚝섬유원지"
-                requirement="편안한 분위기에서 촬영하고 싶어요!"
-                idx="1"
-                id="ex"
-              />
-            </Schedule>
-          </Row>
-          <Title>
-            새로 들어온 <Highlight>촬영 요청</Highlight>이 있어요{" "}
-            <Arrow src={arrow} />
-          </Title>
+            ))}
+          </ScheduleContainer>
+        </ReservationContainer>
+        <Title>
+          새로 들어온 <Highlight>촬영 요청</Highlight>이 있어요
+          <Arrow src={arrow} />
+        </Title>
+        {mockData2.map((item, idx) => (
           <UpcomingSchedule
-            nickname="kui01"
-            snapType="우정스냅"
-            headCount="4"
-            time="12:30 ~ 14:30"
-            place="뚝섬유원지"
-            requirement="편안한 분위기에서 촬영하고 싶어요!"
-            date="2023.07.23(일)"
-            num="0123920293848"
-            id="ex"
+            key={idx}
+            nickname={item.nickname}
+            snapType={item.snapType}
+            headCount={item.headCount}
+            time={item.time}
+            place={item.place}
+            requirement={item.requirement}
+            date={item.date}
+            num={item.num}
+            id={item.id}
           />
+        ))}
+        <Title2>
+          곧 돌아오는 <Highlight>촬영 일정</Highlight>이 있어요
+          <Arrow src={arrow} />
+        </Title2>
+        {mockData2.map((item, idx) => (
           <UpcomingSchedule
-            nickname="kui01"
-            snapType="우정스냅"
-            headCount="4"
-            time="12:30 ~ 14:30"
-            place="뚝섬유원지"
-            requirement="편안한 분위기에서 촬영하고 싶어요!"
-            date="2023.07.23(일)"
-            num="0123920293848"
-            id="ex"
+            key={idx}
+            nickname={item.nickname}
+            snapType={item.snapType}
+            headCount={item.headCount}
+            time={item.time}
+            place={item.place}
+            requirement={item.requirement}
+            date={item.date}
+            num={item.num}
+            id={item.id}
           />
-          <UpcomingSchedule
-            nickname="kui01"
-            snapType="우정스냅"
-            headCount="4"
-            time="12:30 ~ 14:30"
-            place="뚝섬유원지"
-            requirement="편안한 분위기에서 촬영하고 싶어요!"
-            date="2023.07.23(일)"
-            num="0123920293848"
-            id="ex"
-          />
-          <Title2>
-            곧 돌아오는 <Highlight>촬영 일정</Highlight>이 있어요{" "}
-            <Arrow src={arrow} />
-          </Title2>
-          <UpcomingSchedule
-            nickname="kui01"
-            snapType="우정스냅"
-            headCount="4"
-            time="12:30 ~ 14:30"
-            place="뚝섬유원지"
-            requirement="편안한 분위기에서 촬영하고 싶어요!"
-            date="2023.07.23(일)"
-            num="0123920293848"
-          />
-          <UpcomingSchedule
-            nickname="kui01"
-            snapType="우정스냅"
-            headCount="4"
-            time="12:30 ~ 14:30"
-            place="뚝섬유원지"
-            requirement="편안한 분위기에서 촬영하고 싶어요!"
-            date="2023.07.23(일)"
-            num="0123920293848"
-          />
-          <UpcomingSchedule
-            nickname="kui01"
-            snapType="우정스냅"
-            headCount="4"
-            time="12:30 ~ 14:30"
-            place="뚝섬유원지"
-            requirement="편안한 분위기에서 촬영하고 싶어요!"
-            date="2023.07.23(일)"
-            num="0123920293848"
-          />
-        </Container>
-      </Center>
-      {/* <Footer src={footer} /> */}
-    </>
+        ))}
+      </Container>
+    </Center>
   );
 };
 
@@ -150,11 +151,6 @@ const Container = styled.div`
   }
 `;
 
-const Footer = styled.img`
-  width: 100vw;
-  vertical-align: bottom;
-`;
-
 const Title = styled.h2`
   font-size: 24px;
   margin-bottom: 2.5rem;
@@ -172,7 +168,7 @@ const Title2 = styled(Title)`
   margin-top: 5rem;
 `;
 
-const Schedule = styled.div`
+const ScheduleContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 32px;
@@ -194,7 +190,7 @@ const SelectedDate = styled.h2`
   }
 `;
 
-const Row = styled.div`
+const ReservationContainer = styled.div`
   display: flex;
   margin-bottom: 7rem;
   justify-content: space-around;
