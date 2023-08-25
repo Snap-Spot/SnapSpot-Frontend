@@ -66,6 +66,11 @@ const Line = styled.img`
   margin-left: 1rem;
   margin-right: 1rem;
   margin-top: 0.4rem;
+
+  @media (max-width: 768px) {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
 `;
 
 const TitleContainer = styled.div`
@@ -75,6 +80,7 @@ const TitleContainer = styled.div`
 
   @media (max-width: 768px) {
     margin-right: 1rem;
+    margin-top: 0.5rem;
   }
 `;
 
@@ -97,15 +103,19 @@ const Container = styled.div`
 
   @media (max-width: 768px) {
     padding-right: 0.7rem;
+    padding-left: 1rem;
   }
 `;
 
 const Profile = styled.img`
   width: 1.5rem;
   height: 1.5rem;
-`;
 
-const Date = styled.h2``;
+  @media (max-width: 768px) {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+`;
 
 const Row = styled.div`
   display: flex;
@@ -123,6 +133,7 @@ const NickName = styled.p`
 
   @media (max-width: 768px) {
     margin-right: 1rem;
+    font-size: 0.8rem;
   }
 `;
 
@@ -134,6 +145,12 @@ const Btn = styled.button`
   width: 3.7rem;
   height: 1.8rem;
   border: none;
+
+  @media (max-width: 768px) {
+    width: 4.5rem;
+    height: 2rem;
+    font-size: 0.9rem;
+  }
 `;
 
 const Detail = styled.p`
@@ -168,7 +185,7 @@ const SubTitle = styled.h3`
 
   @media (max-width: 768px) {
     font-size: 15px;
-    margin-top: 0.6rem;
+    margin-top: 0.3rem;
   }
 `;
 
@@ -178,6 +195,7 @@ const Content = styled.p`
 
   @media (max-width: 768px) {
     font-size: 13px;
+    margin-top: 0.5rem;
   }
 `;
 

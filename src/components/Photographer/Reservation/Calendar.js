@@ -171,12 +171,13 @@ const Center = styled.div`
 `;
 
 const Container = styled.div`
-  width: 28rem;
+  width: 27rem;
   display: flex;
   flex-direction: column;
 
   @media (max-width: 768px) {
-    width: 90%;
+    width: 85%;
+
     margin-bottom: 2.5rem;
   }
 `;

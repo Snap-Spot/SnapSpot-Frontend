@@ -83,6 +83,11 @@ const Container = styled.div`
   border-radius: 32px;
   border: 1px solid var(--lightgrey-2, #dbdbdb);
   margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    width: 93%;
+    padding-top: 1rem;
+  }
 `;
 
 const BottomLine = styled.div`
@@ -97,12 +102,21 @@ const Line = styled.img`
   margin-left: 1rem;
   margin-right: 1rem;
   margin-top: 0.4rem;
+
+  @media (max-width: 768px) {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
 `;
 
 const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: 3rem;
+
+  @media (max-width: 768px) {
+    margin-right: 1rem;
+  }
 `;
 
 const ContentContainer = styled.div`
@@ -118,6 +132,11 @@ const Arrow = styled.img`
 const Profile = styled.img`
   width: 1.5rem;
   height: 1.5rem;
+
+  @media (max-width: 768px) {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
 `;
 
 const Date = styled.h2`
@@ -142,6 +161,7 @@ const NickName = styled.p`
 
   @media (max-width: 768px) {
     margin-right: 1rem;
+    font-size: 0.8rem;
   }
 `;
 

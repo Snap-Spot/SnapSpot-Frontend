@@ -137,7 +137,7 @@ const Highlight = styled.span`
 
 const Container = styled.div`
   width: 100%;
-  max-width: 66rem;
+  max-width: 63rem;
   margin-left: 6%;
   margin-right: 6%;
   margin-top: 3rem;
@@ -157,7 +157,7 @@ const Title = styled.h2`
   align-self: flex-start;
 
   @media (max-width: 768px) {
-    margin-left: 1.2rem;
+    margin-left: 2rem;
     margin-bottom: 1.7rem;
     font-size: 18px;
     margin-top: 1rem;
@@ -174,10 +174,13 @@ const ScheduleContainer = styled.div`
   border-radius: 32px;
   background: var(--lesswhite, #f6f6f6);
   padding-top: 1rem;
-  width: 40%;
+  width: 45%;
 
   @media (max-width: 768px) {
-    width: 100%;
+    width: 93%;
+    padding-top: 0.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
 `;
 
@@ -186,7 +189,7 @@ const SelectedDate = styled.h2`
   padding-left: 1.4rem;
 
   @media (max-width: 768px) {
-    font-size: 16px;
+    font-size: 15px;
   }
 `;
 
@@ -195,6 +198,7 @@ const ReservationContainer = styled.div`
   margin-bottom: 7rem;
   justify-content: space-around;
   width: 100%;
+
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
