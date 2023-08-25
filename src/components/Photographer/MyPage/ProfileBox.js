@@ -87,9 +87,11 @@ const Setting = styled.img`
   align-self: flex-start;
   margin-top: 1.2rem;
   cursor: pointer;
+  margin-left: 1rem;
 
   @media (max-width: 768px) {
-    margin-left: -1rem;
+    margin-left: -3rem;
+    margin-top: 1.4rem;
   }
 `;
 

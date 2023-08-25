@@ -50,7 +50,7 @@ const MenuContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 50rem;
+  max-width: 45rem;
   margin-left: 1rem;
 
   @media (max-width: 768px) {
@@ -81,7 +81,7 @@ const Center = styled.div`
 
 const Container = styled.div`
   width: 100%;
-  max-width: 50rem;
+  max-width: 45rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
