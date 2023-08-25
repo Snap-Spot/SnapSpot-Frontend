@@ -2,7 +2,7 @@ import styled from "styled-components";
 import profile from "../../assets/photograph/ex_profile.png";
 import plus from "../../assets/photograph/plus.png";
 import imgPlus from "../../assets/photograph/imgPlus.png";
-import Dropdown from "../../components/Photographer/MyPage/Dropdown";
+import Dropdown from "../../components/Photographer/Custom/Dropdown";
 import { useState, useRef } from "react";
 
 const Custom = () => {

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import ReviewBox from "../../components/Photographer/MyPage/ReviewBox";
+import ReviewBox from "../../components/Photographer/Review/ReviewBox";
 import profile from "../../assets/photograph/profile.png";
-import Paging from "../../components/Photographer/MyPage/Paging/Paging";
+import Paging from "../../components/Photographer/Review/Paging/Paging";
 import { useEffect, useState } from "react";
 
 const Review = () => {

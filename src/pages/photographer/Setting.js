@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import profile from "../../assets/photograph/ex_profile.png";
-import Modal from "../../components/Photographer/MyPage/Modal";
+import Modal from "../../components/Photographer/Setting/Modal";
 import { useState, useRef } from "react";
 
 const Setting = () => {
