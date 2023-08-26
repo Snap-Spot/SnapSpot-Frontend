@@ -5,6 +5,7 @@ import ReviewModal from "../Modals/ReviewModal";
 import ModalTemplate from "../Modals/ModalTemplate";
 import ReceiptModal from "../Modals/ReceiptModal";
 import QuestionModal from "../Modals/QuestionModal";
+import ChangeModal from "../Modals/ChangeModal";
 const DetailMenus = ({ status }) => {
   //status -> 0: 에약완료 / 1: 촬영진행됨 / 2: 사진전달됨
   const [showModal, setShowModal] = useState(false);
@@ -12,7 +13,11 @@ const DetailMenus = ({ status }) => {
   const [modalTitle, setModalTitle] = useState("");
   const list = [
     [
-      { menu: "예약 변경하기", title: "", content: <></> },
+      {
+        menu: "예약 변경하기",
+        title: "무엇을 변경하고 싶으세요?",
+        content: <ChangeModal />,
+      },
       { menu: "예약 취소하기" },
       {
         menu: "영수증 보러가기",
@@ -62,7 +67,7 @@ const DetailMenus = ({ status }) => {
         />
       )}
       <List>
-        {list[2].map((el) => {
+        {list[0].map((el) => {
           return (
             <>
               <Item onClick={() => openModal(el.title, el.content)}>
