@@ -6,7 +6,10 @@ const Dropdown = ({ options }) => {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const handleSelect = (index) => {
     setSelected(index);
-    setIsOpenDropdown(false);
+
+    setTimeout(() => {
+      setIsOpenDropdown(false);
+    }, 300);
   };
   const openDropdown = () => {
     //수정
@@ -21,10 +24,16 @@ const Dropdown = ({ options }) => {
       {isOpenDropdown ? (
         <Open>
           {options.list.map((el, index) => {
+            var color = "";
+            if (index == selected) {
+              color = "blue";
+            }
             return (
               <>
                 {index !== 0 && <Line />}
-                <Item onClick={() => handleSelect(index)}>{el}</Item>
+                <Item $color={color} onClick={() => handleSelect(index)}>
+                  {el}
+                </Item>
               </>
             );
           })}
@@ -89,6 +98,8 @@ const Closed = styled.div`
 `;
 
 const Item = styled.div`
+  color: ${(props) => (props.$color === "blue" ? "#3C3AAC" : "black")};
+  z-index: ${(props) => (props.$isOpen ? 1 : 0)};
   margin: 12px auto;
   display: flex;
   align-items: center;
