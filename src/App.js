@@ -4,6 +4,10 @@ import "./styles/Font.css";
 import Header from "./components/common/Header";
 import ReservationDetail from "./pages/photographer/ReservationDetail";
 import Reservation from "./pages/photographer/Reservation";
+import MyPage from "./pages/photographer/MyPage";
+import Setting from "./pages/photographer/Setting";
+import Custom from "./pages/photographer/Custom";
+import Review from "./pages/photographer/Review";
 import SearchPage from "./pages/serach/SearchPage";
 import { Routes, Route } from "react-router-dom";
 import Footer from "./components/common/Footer";
@@ -20,6 +24,15 @@ function App() {
     <>
       <Routes>
         <Route path="mypage" element={<UserMypage />} />
+        <Route path="/photographer/mypage" element={<MyPage />} />
+        <Route path="/photographer/reserve" element={<Reservation />} />
+        <Route
+          path="/photographer/reserve/:id"
+          element={<ReservationDetail />}
+        />
+        <Route path="/photographer/setting" element={<Setting />} />
+        <Route path="/photographer/custom" element={<Custom />} />
+        <Route path="/photographer/review" element={<Review />} />
         <Route path="mypage/reservation" element={<MyReservePage />} />
         <Route path="mypage/reservation/:id" element={<DetailReservePage />} />
         <Route path="mypage/settings" element={<SettingsPage />} />
@@ -28,9 +41,6 @@ function App() {
         <Route path="/signup/member" element={<SignUpMemberPage />} />
         <Route path="/signup/:memberType/info" element={<SignUpInfoPage />} />
         <Route path="/login" element={<LoginPage />} />
-
-        <Route path="/photograph-reserve" element={<Reservation />} />
-        <Route path="/photograph-reserve/:id" element={<ReservationDetail />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/photographer" element={<Photographerlist />} />
       </Routes>
