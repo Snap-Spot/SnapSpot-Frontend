@@ -98,6 +98,16 @@ const Logout = styled.div`
   line-height: 128.5%; /* 17.99px */
 
   @media (max-width: 768px) {
-    display: none;
+    display: flex;
+
+    padding: 6px 15px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    text-align: center;
+
+    font-size: 10px;
+    line-height: 121.5%; /* 12.15px */
   }
 `;
