@@ -202,13 +202,17 @@ const RecommendList = styled.div`
   /* 모바일에서의 스타일 */
   @media (max-width: 768px) {
     .prev-button {
-      left: -5px;
-      top: 45px;
+      width: 20px;
+      height: 20px;
+      left: 0px;
+      top: 55px;
     }
 
     .next-button {
-      right: -5px;
-      top: 45px;
+      width: 20px;
+      height: 20px;
+      right: 0px;
+      top: 55px;
     }
   }
 `;
