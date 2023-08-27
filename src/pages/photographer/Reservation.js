@@ -8,7 +8,9 @@ import { useState } from "react";
 const Reservation = () => {
   const date = new Date();
   const currentDate = date.getDate();
-  const [select, setSelect] = useState(currentDate);
+  const currentMonth = date.getMonth();
+  const [selectDate, setSelectDate] = useState(currentDate);
+  const [selectMonth, setSelectMonth] = useState(currentMonth);
 
   const mockData = [
     {
@@ -61,9 +63,16 @@ const Reservation = () => {
       <Container>
         <Title>스냅사진 예약 내역</Title>
         <ReservationContainer>
-          <Calendar setSelect={setSelect} select={select} />
+          <Calendar
+            setSelect={setSelectDate}
+            select={selectDate}
+            setMonth={setSelectMonth}
+            month={selectMonth}
+          />
           <ScheduleContainer>
-            <SelectedDate>5월 16일 화요일</SelectedDate>
+            <SelectedDate>
+              {selectMonth + 1}월 {selectDate}일 화요일
+            </SelectedDate>
             {mockData.map((item, idx) => (
               <ScheduleBox
                 key={idx}

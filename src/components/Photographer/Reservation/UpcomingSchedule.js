@@ -20,12 +20,12 @@ const UpcomingSchedule = ({
   return (
     <Container>
       <Padding>
-        <Row2>
+        <DateContainer>
           <Date>{date}</Date>
           <Detail onClick={() => navigate(`/photographer/reserve/${id}`)}>
             상세보기 <Arrow src={arrow} />
           </Detail>
-        </Row2>
+        </DateContainer>
         <ReservationNum>스냅 예약번호 {num}</ReservationNum>
       </Padding>
       <BottomLine />
@@ -116,6 +116,7 @@ const TitleContainer = styled.div`
 
   @media (max-width: 768px) {
     margin-right: 1rem;
+    margin-top: 0.5rem;
   }
 `;
 
@@ -150,7 +151,7 @@ const Row = styled.div`
   align-items: center;
 `;
 
-const Row2 = styled(Row)`
+const DateContainer = styled(Row)`
   justify-content: space-between;
 `;
 
@@ -209,7 +210,7 @@ const SubTitle = styled.h3`
 
   @media (max-width: 768px) {
     font-size: 15px;
-    margin-top: 0.6rem;
+    margin-top: 0.3rem;
   }
 `;
 
@@ -219,6 +220,7 @@ const Content = styled.p`
 
   @media (max-width: 768px) {
     font-size: 13px;
+    margin-top: 0.5rem;
   }
 `;
 

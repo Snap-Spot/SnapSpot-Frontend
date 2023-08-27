@@ -18,25 +18,24 @@ const ScheduleBox = ({
 
   return (
     <>
-      {/* 나중에 idx 받아서 0일 때만 안보이게끔 설정 */}
-      {idx !== "0" && <BottomLine />}
+      {idx !== 0 && <BottomLine />}
       <Container>
-        <Row2>
-          <Row>
+        <Header>
+          <RowContainer>
             <Profile src={profile} />
             <NickName>{nickname}</NickName>
             <Btn>예약완료</Btn>
-          </Row>
+          </RowContainer>
           <Detail onClick={() => navigate(`/photographer/reserve/${id}`)}>
             상세보기 <Arrow src={arrow} />
           </Detail>
-        </Row2>
-        <Row>
+        </Header>
+        <RowContainer>
           <SnapType>{snapType}</SnapType>
           <Line src={line} />
           <Headcount>{headCount}인</Headcount>
-        </Row>
-        <Row>
+        </RowContainer>
+        <RowContainer>
           <TitleContainer>
             <SubTitle>시간</SubTitle>
             <SubTitle>장소</SubTitle>
@@ -47,7 +46,7 @@ const ScheduleBox = ({
             <Content>{place}</Content>
             <Content>{requirement}</Content>
           </ContentContainer>
-        </Row>
+        </RowContainer>
       </Container>
     </>
   );
@@ -117,12 +116,12 @@ const Profile = styled.img`
   }
 `;
 
-const Row = styled.div`
+const RowContainer = styled.div`
   display: flex;
   align-items: center;
 `;
 
-const Row2 = styled(Row)`
+const Header = styled(RowContainer)`
   justify-content: space-between;
 `;
 
