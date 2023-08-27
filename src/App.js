@@ -18,6 +18,7 @@ import UserMypage from "./pages/MyPage/UserMypage";
 import SettingsPage from "./pages/MyPage/SettingsPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import MyHeartsPage from "./pages/MyPage/MyHeartsPage";
+import SpotListPage from "./pages/SpotListPage/SpotListPage";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/photographer" element={<Photographerlist />} />
+        <Route path="/spotlist" element={<SpotListPage />} />
       </Routes>
       <Footer />
     </>
