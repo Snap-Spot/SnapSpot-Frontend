@@ -17,14 +17,16 @@ const SettingsPage = () => {
       <Header />
       <Wrapper>
         <div className="title">계정 설정</div>
+        <BlackLine />
         <div className="container">
           <SettingsForm />
         </div>
+        <Line />
       </Wrapper>
-      <Line />
-      <Wrapper>
+
+      <BtnWrapper>
         <SignOutBtn onClick={openModal}>회원 탈퇴하기</SignOutBtn>
-      </Wrapper>
+      </BtnWrapper>
     </>
   );
 };
@@ -47,11 +49,11 @@ const Wrapper = styled.div`
   }
 
   .title {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 700;
     @media (max-width: 768px) {
       //모바일
-      font-size: 18px;
+      font-size: 14px;
     }
   }
   .container {
@@ -59,20 +61,36 @@ const Wrapper = styled.div`
   }
 `;
 
-const Line = styled.div`
-  width: 70%;
-  margin: 0 auto;
-  margin-top: 81px;
-  background: #e6e6e6;
+const BlackLine = styled.div`
+  margin-top: 46px;
+  background: #060606;
   height: 1px;
+  min-width: 768px;
   @media (max-width: 768px) {
     //모바일
-    width: 100vw;
+    margin-top: 14px;
+    min-width: 0;
+  }
+`;
+
+const Line = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 106px;
+  margin-bottom: 51px;
+  background: #e6e6e6;
+  height: 1px;
+  min-width: 768px;
+  @media (max-width: 768px) {
+    //모바일
+    min-width: 0;
+    margin-top: 56px;
+    margin-bottom: 55px;
   }
 `;
 const SignOutBtn = styled.div`
   margin-left: 184px; // (116+84)
-  margin-top: 51px;
+
   display: flex;
   width: 558px;
   height: 46px;
@@ -91,8 +109,18 @@ const SignOutBtn = styled.div`
   @media (max-width: 768px) {
     //모바일
     margin: 0 auto; // (116+84)
-    margin-top: 51px;
     width: 95%;
     margin-bottom: 100px;
+    height: 34px;
   }
+`;
+const BtnWrapper = styled.div`
+  width: 70%;
+  @media (max-width: 768px) {
+    //모바일
+    width: 85%;
+  }
+
+  display: flex;
+  margin: 0px auto;
 `;

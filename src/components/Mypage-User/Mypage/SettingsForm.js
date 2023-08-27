@@ -9,6 +9,7 @@ const SettingsForm = () => {
           <img src="" alt="" />
           <div className="btn">사진 변경</div>
         </ProfileImg>
+        <div className="line" />
         <TextInputs>
           <div className="item">
             <div className="subject">닉네임</div>
@@ -33,7 +34,7 @@ const SettingsForm = () => {
 export default SettingsForm;
 
 const Wrapper = styled.div`
-  margin-top: 64px;
+  margin-top: 32px;
   .container {
     display: flex;
     width: 100%;
@@ -42,10 +43,25 @@ const Wrapper = styled.div`
       flex-direction: column;
     }
   }
+
+  .line {
+    @media (max-width: 768px) {
+      //모바일
+      background: #dbdbdb;
+      width: 100%;
+      height: 1px;
+      margin-top: 16px;
+      margin-bottom: 32px;
+    }
+  }
 `;
 const ProfileImg = styled.div`
   display: flex;
   flex-direction: column;
+  @media (max-width: 768px) {
+    //모바일
+    flex-direction: row;
+  }
   justify-content: start;
   align-items: center;
   img {
@@ -57,8 +73,8 @@ const ProfileImg = styled.div`
 
     @media (max-width: 768px) {
       //모바일
-      width: 70px;
-      height: 70px;
+      width: 35px;
+      height: 35px;
     }
   }
   .btn {
@@ -69,8 +85,8 @@ const ProfileImg = styled.div`
     line-height: 68.5%; /* 12.33px */
     @media (max-width: 768px) {
       //모바일
-      margin-bottom: 20px;
-      margin-top: 10px;
+      margin-left: 20px;
+      margin-top: 0px;
     }
   }
 `;
@@ -108,10 +124,11 @@ const TextInputs = styled.div`
     @media (max-width: 768px) {
       //모바일
       width: 100%;
+      height: 34px;
+      margin-bottom: 16px;
     }
   }
   .btn {
-    margin-top: 100px;
     display: flex;
     width: 558px;
     height: 46px;
@@ -119,6 +136,7 @@ const TextInputs = styled.div`
     padding: 6px 15px;
     justify-content: center;
     align-items: center;
+    margin-top: 74px;
     gap: 10px;
     flex-shrink: 0;
     border-radius: 30px;
@@ -130,6 +148,8 @@ const TextInputs = styled.div`
     @media (max-width: 768px) {
       //모바일
       width: 95%;
+      margin-top: 49px;
+      height: 34px;
     }
   }
 `;
