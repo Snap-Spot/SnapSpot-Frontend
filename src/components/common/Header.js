@@ -54,6 +54,10 @@ const Header = () => {
     navigate(`/photographer/mypage`);
   };
 
+  const onClickSearchBtn = () => {
+    navigate(`/search`);
+  };
+
   return (
     <Wrapper>
       <HeaderDiv>
@@ -68,7 +72,7 @@ const Header = () => {
           {isMobile ? null : ( //모바일이 아닐 경우 Search Box
             <Search>
               <input placeholder="찾고 싶은 스팟이나 사진작가를 검색하세요."></input>
-              <img src={search} alt="검색하기" />
+              <img onClick={onClickSearchBtn} src={search} alt="검색하기" />
             </Search>
           )}
           <Menu>
@@ -91,7 +95,7 @@ const Header = () => {
           <SearchDiv>
             <Search>
               <input placeholder="찾고 싶은 스팟이나 사진작가를 검색하세요."></input>
-              <img src={search} alt="검색하기" />
+              <img nClick={onClickSearchBtn} src={search} alt="검색하기" />
             </Search>
           </SearchDiv>
         ) : null}
