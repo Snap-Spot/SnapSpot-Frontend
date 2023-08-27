@@ -42,6 +42,18 @@ const Header = () => {
     navigate(`/`);
   };
 
+  const onClickPhotogreapher = () => {
+    navigate(`/photographer`);
+  };
+
+  const onClickFeed = () => {
+    navigate(`/`);
+  };
+
+  const onClickMyPage = () => {
+    navigate(`/photographer/mypage`);
+  };
+
   return (
     <Wrapper>
       <HeaderDiv>
@@ -60,9 +72,18 @@ const Header = () => {
             </Search>
           )}
           <Menu>
-            <div className="subMenu">사진작가</div>
-            <div className="subMenu">피드</div>
-            <img className="mypage" src={profile} alt="마이페이지" />
+            <div className="subMenu" onClick={onClickPhotogreapher}>
+              사진작가
+            </div>
+            <div className="subMenu" onClick={onClickFeed}>
+              피드
+            </div>
+            <img
+              className="mypage"
+              onClick={onClickMyPage}
+              src={profile}
+              alt="마이페이지"
+            />
             <img className="menu" onClick={openModal} src={menu} alt="메뉴" />
           </Menu>{" "}
         </Main>

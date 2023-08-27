@@ -220,6 +220,8 @@ const Photographerlist = () => {
         itemsCountPerPage={itemsPerPage}
         totalItemsCount={items.length}
         pageRangeDisplayed={5}
+        prevPageText={"<"}
+        nextPageText={">"}
         onChange={handlePageChange}
       />
     </>
