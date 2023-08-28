@@ -52,7 +52,7 @@ function App() {
 
         <Route path="/search" element={<SearchPage />} />
         <Route path="/photographer" element={<Photographerlist />} />
-        <Route path="/spotlist" element={<SpotListPage />} />
+        <Route path="/spot-list" element={<SpotListPage />} />
       </Routes>
       <Footer />
     </>

@@ -47,7 +47,7 @@ const Header = () => {
   };
 
   const onClickFeed = () => {
-    navigate(`/`);
+    navigate(`/spot-list`);
   };
 
   const onClickMyPage = () => {

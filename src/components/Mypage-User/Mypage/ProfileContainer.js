@@ -1,7 +1,9 @@
 import React from "react";
 import { styled } from "styled-components";
 import settings from "../../../assets/mypage/userMypage/settings.png";
+import { useNavigate } from "react-router-dom";
 const ProfileContainer = () => {
+  const navigate = useNavigate();
   return (
     <Wrapper>
       <div className="leftContent">
@@ -11,7 +13,11 @@ const ProfileContainer = () => {
         <Infos>
           <div className="nickname">
             닉네임
-            <img src={settings} alt="" />
+            <img
+              src={settings}
+              alt=""
+              onClick={() => navigate("../mypage/settings")}
+            />
           </div>
           <div className="email">hello@snapspot.com</div>
         </Infos>
