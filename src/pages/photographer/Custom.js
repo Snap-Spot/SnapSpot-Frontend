@@ -3,12 +3,13 @@ import profile from "../../assets/photograph/ex_profile.png";
 import plus from "../../assets/photograph/plus.png";
 import imgPlus from "../../assets/photograph/imgPlus.png";
 import Dropdown from "../../components/Photographer/Custom/Dropdown";
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const Custom = () => {
   const [imgfile, setImgFile] = useState([]); // 가격표 이미지
   const [profileImg, setProfileImg] = useState(""); // 프로필 이미지
   const [featuredImgfiles, setFeaturedImgFiles] = useState([]); // 대표 이미지
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const imgRef = useRef([]);
   const imgRef2 = useRef();
@@ -56,6 +57,17 @@ const Custom = () => {
     const updatedFiles = featuredImgfiles.filter((_, i) => i !== index);
     setFeaturedImgFiles(updatedFiles);
   };
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <Center>
@@ -77,6 +89,7 @@ const Custom = () => {
               <Change>작가 사진 변경</Change>
             </PhotoContainer>
           </label>
+          {isMobile && <Line2 />}
           <InputContainer>
             <SubTitle>작가명</SubTitle>
             <Input />
@@ -110,10 +123,7 @@ const Custom = () => {
             <SubTitle>활동 지역 설정</SubTitle>
             <Input />
             <SubTitle>SNS 등록</SubTitle>
-            <Row2>
-              <Input3 />
-              <Plus src={plus} />
-            </Row2>
+            <Input3 />
             <SubTitle>한 줄 소개글 등록 (최대 500자)</SubTitle>
             <Input2 />
             <SubTitle>전문 분야 등록</SubTitle>
@@ -166,18 +176,33 @@ const PreImgs = styled.img`
   margin-right: 0.5rem;
   border-radius: 22px;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 90px;
+    height: 88px;
+  }
 `;
 
 const ImgContainer = styled.div`
   position: relative;
   display: ${(props) => (props.imgfile ? "inline" : "none")};
   height: ${(props) => (props.imgfile ? "100%" : "0px")};
+
+  @media (max-width: 768px) {
+    display: flex;
+  }
 `;
 
 const Plus = styled.img`
   width: 38px;
   height: 50.091px;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 28px;
+    height: 39px;
+    margin-left: 1rem;
+  }
 `;
 
 const ChangeBtn = styled.button`
@@ -196,6 +221,13 @@ const ChangeBtn = styled.button`
   border: none;
   margin-bottom: 10rem;
   margin-left: 11rem;
+
+  @media (max-width: 768px) {
+    width: 333px;
+    height: 39px;
+    margin: 0;
+    margin-top: 4rem;
+  }
 `;
 
 const PhotoContainer = styled.div`
@@ -203,22 +235,42 @@ const PhotoContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-right: 4rem;
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    margin-right: 0;
+  }
 `;
 
 const Change = styled.h3`
   font-size: 18px;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
 `;
 
 const Row = styled.div`
   display: flex;
   margin-top: 2rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    margin-top: 1rem;
+    width: 100%;
+  }
 `;
 
 const Row2 = styled(Row)`
   align-items: center;
   margin-top: 1rem;
   flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: row;
+  }
 `;
 
 const Center = styled.div`
@@ -230,6 +282,11 @@ const Center = styled.div`
 const Center2 = styled(Center)`
   margin-left: 17rem;
   width: 37rem;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    width: 100%;
+  }
 `;
 
 const Container = styled.div`
@@ -239,12 +296,22 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 `;
 
 const Title = styled.h2`
   font-size: 18px;
   align-self: flex-start;
   margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const Line = styled.div`
@@ -258,6 +325,10 @@ const Line2 = styled(Line)`
   width: 777px;
   margin-top: 1.3rem;
   margin-bottom: 3rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 2rem;
+  }
 `;
 
 const Profile = styled.img`
@@ -265,6 +336,12 @@ const Profile = styled.img`
   height: 116px;
   border-radius: 100%;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 35px;
+    height: 35px;
+    margin-right: 1rem;
+  }
 `;
 
 const Input = styled.input`
@@ -277,17 +354,33 @@ const Input = styled.input`
   outline: none;
   font-size: 16px;
   margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    width: 323px;
+    height: 34px;
+    font-size: 14px;
+  }
 `;
 
 const Input3 = styled(Input)`
   width: 510px;
   margin-right: 1rem;
+
+  @media (max-width: 768px) {
+    width: 323px;
+    height: 34px;
+  }
 `;
 
 const TagInput = styled(Input)`
   width: 8rem;
   margin-right: 1rem;
   margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    width: 5.2rem;
+    margin-right: 0.5rem;
+  }
 `;
 
 const Input2 = styled.textarea`
@@ -300,6 +393,12 @@ const Input2 = styled.textarea`
   outline: none;
   font-size: 16px;
   margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    width: 323px;
+    height: 85px;
+    font-size: 14px;
+  }
 `;
 
 const InputImg = styled(Input)`
@@ -311,17 +410,30 @@ const InputImg2 = styled.img`
   height: 115px;
   margin-right: 0.5rem;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 79px;
+    height: 79px;
+  }
 `;
 
 const SubTitle = styled.h3`
   font-size: 1rem;
   margin-top: 0;
   margin-bottom: 0.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
 `;
 
 const InputContainer = styled.div`
   width: 100%;
   max-width: 37rem;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export default Custom;
