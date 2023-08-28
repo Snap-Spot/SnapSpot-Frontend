@@ -19,6 +19,7 @@ import SettingsPage from "./pages/MyPage/SettingsPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import MyHeartsPage from "./pages/MyPage/MyHeartsPage";
 import SpotListPage from "./pages/SpotListPage/SpotListPage";
+import BestSnapPage from "./pages/MyPage/BestSnapPage";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="mypage/reservation/:id" element={<DetailReservePage />} />
         <Route path="mypage/settings" element={<SettingsPage />} />
         <Route path="mypage/hearts" element={<MyHeartsPage />} />
+        <Route path="mypage/best-snap" element={<BestSnapPage />} />
         {/* 회원가입 */}
         <Route path="/signup/member" element={<SignUpMemberPage />} />
         <Route path="/signup/:memberType/info" element={<SignUpInfoPage />} />
