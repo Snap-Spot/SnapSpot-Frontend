@@ -107,7 +107,7 @@ const Item = styled.div`
   @media (max-width: 768px) {
     //모바일
     margin: 12px auto;
-    font-size: 14px;
+    font-size: 12px;
   }
 `;
 const Line = styled.div`
