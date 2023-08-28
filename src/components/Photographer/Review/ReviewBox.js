@@ -62,13 +62,13 @@ const Star = styled.img`
 `;
 
 const ReviewContainer = styled.div`
-  height: 12rem;
+  height: 10rem;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-top: 2.5rem;
   border-bottom: 1px solid #d9d9d9;
   display: flex;
-  width: 63rem;
+  width: 60rem;
 
   @media (max-width: 768px) {
     width: 21rem;
@@ -82,7 +82,7 @@ const ReviewContainer = styled.div`
 const ProfileContainer = styled.div`
   display: flex;
   margin-right: 4rem;
-  margin-left: 2rem;
+  margin-left: 1rem;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -107,10 +107,12 @@ const Profile = styled.img`
   width: 42px;
   height: 42px;
   margin-right: 0.7rem;
+  border-radius: 100%;
 `;
 
 const NickName = styled.p`
   font-weight: 500;
+  margin-top: 0;
 
   @media (max-width: 768px) {
     font-size: 0.8rem;
@@ -121,7 +123,8 @@ const Title = styled.p`
   font-weight: 700;
   font-size: 18px;
   margin-bottom: 0.2rem;
-  margin-top: 0.8rem;
+  margin-top: 0;
+
   @media (max-width: 768px) {
     margin-top: 0.3rem;
     font-size: 14px;
@@ -149,6 +152,7 @@ const Score = styled.p`
   font-weight: 500;
   position: relative;
   top: -0.3rem;
+  margin-top: 0;
 
   @media (max-width: 768px) {
     font-size: 0.8rem;
