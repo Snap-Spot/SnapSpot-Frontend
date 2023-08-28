@@ -1,7 +1,8 @@
 import { React, useState } from "react";
 import { styled } from "styled-components";
-import kakaoLogo from "../../assets/signup/kakao.png";
+import { S } from "../common/SignUpLoginBtn.style";
 import { useNavigate } from "react-router";
+import KakaoLoginBtn from "./KakaoLoginBtn";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -17,22 +18,19 @@ const LoginForm = () => {
 
   return (
     <SignUpWrapper>
-      <InputWrapper>
+      <S.InputWrapper>
         <MainText>이메일</MainText>
-        <InputBox placeholder="example@snapspot.com" />
+        <S.InputBox placeholder="example@snapspot.com" />
         <MainText style={{ marginTop: "15px" }}>비밀번호</MainText>
-        <InputBox placeholder="password" />
-        <PasswordMatchText>
+        <S.InputBox placeholder="password" />
+        <S.PasswordMatchText>
           아이디 또는 비밀번호를 다시 확인해주세요.
-        </PasswordMatchText>
-      </InputWrapper>
+        </S.PasswordMatchText>
+      </S.InputWrapper>
 
-      <EmailLoginBtn>이메일로 로그인</EmailLoginBtn>
+      <S.EmailLoginBtn className="login">이메일로 로그인</S.EmailLoginBtn>
 
-      <KakaoLoginBtn>
-        <img src={kakaoLogo} alt="kakao" />
-        <p>카카오로 로그인</p>
-      </KakaoLoginBtn>
+      <KakaoLoginBtn formType="login" />
 
       <BottomDiv>
         <EtcText
@@ -76,16 +74,6 @@ const SignUpWrapper = styled.div`
   }
 `;
 
-const InputWrapper = styled.div`
-  width: 100%;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  margin: 60px 0;
-`;
-
 const MainText = styled.div`
   width: ${INPUT_WIDTH}%;
 
@@ -96,89 +84,6 @@ const MainText = styled.div`
   @media screen and (max-width: 768px) {
     font-weight: 400;
     text-indent: ${M_TEXT_INDENT}px;
-  }
-`;
-
-const InputBox = styled.input`
-  width: ${INPUT_WIDTH}%;
-  /* width: 556px; */
-  height: 3rem;
-  border-radius: 30px;
-  border: 1px solid #e7e7e7;
-
-  font-family: Noto Sans KR;
-  font-size: ${BASIC_FONT_SIZE}rem;
-  text-indent: ${TEXT_INDENT}px;
-
-  padding: 0;
-  margin: 9px 0;
-
-  &::placeholder {
-    color: var(--darkgrey, #777);
-  }
-
-  @media screen and (max-width: 768px) {
-    font-weight: 400;
-    height: 2.8rem;
-    text-indent: ${M_TEXT_INDENT}px;
-  }
-`;
-
-const PasswordMatchText = styled.div`
-  font-family: Noto Sans KR;
-  font-size: 14px;
-  color: var(--lessred, #ff3d3d);
-
-  width: ${INPUT_WIDTH}%;
-  text-indent: ${TEXT_INDENT}px;
-
-  @media screen and (max-width: 768px) {
-    text-indent: ${M_TEXT_INDENT}px;
-  }
-`;
-
-const LoginButton = styled.button`
-  width: ${INPUT_WIDTH}%;
-  height: 3rem;
-  border-radius: 30px;
-
-  border: 0px;
-
-  font-family: Noto Sans KR;
-  text-align: center;
-  cursor: pointer;
-
-  @media screen and (max-width: 768px) {
-    height: 2.8rem;
-  }
-`;
-
-const EmailLoginBtn = styled(LoginButton)`
-  background-color: var(--main-font-color, #3c3aac);
-  font-size: ${BASIC_FONT_SIZE}rem;
-  font-weight: 500;
-  color: var(--white, #fff);
-
-  margin-bottom: 15px;
-`;
-
-const KakaoLoginBtn = styled(LoginButton)`
-  background-color: #fee500;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-
-  margin-bottom: 15px;
-
-  img {
-    width: 23px;
-  }
-
-  p {
-    color: rgba(#000000, 0.8);
-    font-size: ${BASIC_FONT_SIZE}rem;
-    font-weight: 500;
   }
 `;
 
