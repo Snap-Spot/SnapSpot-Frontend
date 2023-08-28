@@ -1,6 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
 import MySnapBox from "./MySnapBox";
+
 const MySnaps = () => {
   return (
     <Wrapper>

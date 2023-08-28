@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../../components/common/Header";
 import { styled } from "styled-components";
 import ProfileContainer from "../../components/Mypage-User/Mypage/ProfileContainer";
 import MyMenu from "../../components/Mypage-User/Mypage/MyMenu";
-const UserMypage = () => {
+const UserMypage = ({ isPhographer = false }) => {
   return (
     <>
       <Header />
@@ -12,9 +12,16 @@ const UserMypage = () => {
         <div className="container">
           <ProfileContainer />
           <Line />
-          <MyMenu id="0" />
-          <SeperateLine />
-          <MyMenu id="1" />
+
+          {!isPhographer ? (
+            <>
+              <MyMenu id="0" />
+              <SeperateLine />
+              <MyMenu id="1" />
+            </>
+          ) : (
+            <MyMenu id="2" />
+          )}
         </div>
       </Wrapper>
     </>

@@ -26,8 +26,11 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="mypage" element={<UserMypage />} />
-        <Route path="/photographer/mypage" element={<MyPage />} />
+        <Route path="mypage" element={<UserMypage isPhographer={false} />} />
+        <Route
+          path="/photographer/mypage"
+          element={<UserMypage isPhographer={true} />}
+        />
         <Route path="/photographer/reserve" element={<Reservation />} />
         <Route
           path="/photographer/reserve/:id"
