@@ -242,10 +242,7 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   /* 페이지 이동으로 Pagination이 이동하는지에 따라 변경하기 */
-  /* height: 140rem; */
-  @media (max-width: 768px) {
-    /* height: 115vh; */
-  }
+  height: 140rem;
 `;
 
 const Box = styled.div`
@@ -354,11 +351,11 @@ const GridBox = styled.div`
     column-gap: 44px;
     row-gap: 100px;
 
-    margin: 4rem 0rem;
+    margin-top: 4rem;
 
     @media (max-width: 768px) {
       grid-template-columns: 112px 112px 112px;
-      grid-template-rows: repeat(4, minmax(20px, auto));
+      grid-template-rows: repeat(3, minmax(20px, auto));
       column-gap: 15px;
       row-gap: 20px;
 
@@ -392,6 +389,14 @@ const StyledPagination = styled(Pagination)`
     line-height: normal;
   }
 
+  /* ul.pagination li:first-child {
+  border-radius: 5px 0 0 5px;
+}
+
+ul.pagination li:last-child {
+  border-radius: 0 5px 5px 0;
+} */
+
   ul.pagination li a {
     display: none;
     text-decoration: none;
@@ -411,6 +416,15 @@ const StyledPagination = styled(Pagination)`
   ul.pagination li.active a {
     color: #000;
   }
+  /* 
+ul.pagination li.active {
+
+} */
+
+  /* ul.pagination li a:hover,
+ul.pagination li a.active {
+  color: blue;
+} */
 
   .page-selection {
     width: 48px;
