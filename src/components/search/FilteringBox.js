@@ -140,8 +140,6 @@ const Wrapper = styled.div`
   background: #fff;
   box-shadow: 0rem 1rem 3.188rem 0rem rgba(0, 0, 0, 0.1);
 
-  border-top: 0.1rem solid #a6b9ff;
-
   @media (max-width: 768px) {
     height: 81vh;
     justify-content: space-between;
