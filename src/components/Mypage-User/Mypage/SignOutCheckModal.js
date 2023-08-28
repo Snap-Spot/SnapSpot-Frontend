@@ -97,7 +97,6 @@ const Modal = styled.div`
     font-size: 1rem;
   }
   .subtitle {
-    width: 100%;
     margin-top: -30px;
     color: var(--darkgrey, #777);
     font-size: 1rem;
@@ -116,6 +115,8 @@ const Modal = styled.div`
   .btns {
     display: flex;
     width: 100%;
+    align-items: center;
+    justify-content: center;
 
     .no {
       cursor: pointer;
