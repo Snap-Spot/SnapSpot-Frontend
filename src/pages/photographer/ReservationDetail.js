@@ -39,6 +39,7 @@ const Container = styled.div`
 
   @media (max-width: 768px) {
     margin-top: 1rem;
+    margin-left: 2rem;
   }
 `;
 
@@ -50,6 +51,7 @@ const Title = styled.h2`
   @media (max-width: 768px) {
     margin-left: 1.2rem;
     margin-bottom: 1.7rem;
+    font-size: 18px;
   }
 `;
 
