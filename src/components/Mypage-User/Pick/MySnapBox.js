@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "styled-components";
-
+import filledHeart from "../../../assets/mypage/pick/filledHeart.png";
 const MySnapBox = () => {
   return (
     <>
@@ -29,6 +29,7 @@ const MySnapBox = () => {
 
       <ContainerMb>
         <img className="photo" src="" alt="" />
+        <img className="heart" src={filledHeart} alt="" />
       </ContainerMb>
     </>
   );
@@ -135,8 +136,9 @@ const ContainerMb = styled.div`
     justify-content: center;
     align-items: center;
     background: lightgray 50%;
+    position: relative;
 
-    img {
+    .photo {
       display: flex;
       width: 100%;
       height: 112px;
@@ -148,6 +150,14 @@ const ContainerMb = styled.div`
           rgba(0, 0, 0, 0.1) 100%
         ),
         lightgray 50% / cover no-repeat;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: 6.5px;
+      right: 5%;
+      width: 20px;
+      height: 17.5px;
     }
   }
 `;

@@ -31,6 +31,12 @@ const GridBox = styled.div`
 
   row-gap: 64px;
   column-gap: 132px;
+  @media (max-width: 1300px) {
+    //모바일
+    row-gap: 64px;
+    column-gap: 50px;
+  }
+
   @media (max-width: 768px) {
     //모바일
     row-gap: 23px;
