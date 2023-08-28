@@ -124,7 +124,12 @@ const Review = () => {
             <div>리뷰가 없습니다.</div>
           )}
         </ReviewContainer>
-        <Paging page={currentPage} count={count} setPage={setPage} />
+        <Paging
+          page={currentPage}
+          count={count}
+          setPage={setPage}
+          itemsCountPerPage={6}
+        />
       </Container>
     </Center>
   );
