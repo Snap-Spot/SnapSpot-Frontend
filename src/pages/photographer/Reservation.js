@@ -146,7 +146,7 @@ const Highlight = styled.span`
 
 const Container = styled.div`
   width: 100%;
-  max-width: 63rem;
+  max-width: 1052px;
   margin-left: 6%;
   margin-right: 6%;
   margin-top: 3rem;
@@ -162,7 +162,7 @@ const Container = styled.div`
 
 const Title = styled.h2`
   font-size: 24px;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2.3rem;
   align-self: flex-start;
 
   @media (max-width: 768px) {
@@ -183,7 +183,7 @@ const ScheduleContainer = styled.div`
   border-radius: 32px;
   background: var(--lesswhite, #f6f6f6);
   padding-top: 1rem;
-  width: 45%;
+  width: 50%;
 
   @media (max-width: 768px) {
     width: 93%;
@@ -204,7 +204,7 @@ const SelectedDate = styled.h2`
 
 const ReservationContainer = styled.div`
   display: flex;
-  margin-bottom: 7rem;
+  margin-bottom: 5rem;
   justify-content: space-around;
   width: 100%;
 

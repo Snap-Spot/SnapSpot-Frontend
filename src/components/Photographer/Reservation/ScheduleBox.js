@@ -140,9 +140,9 @@ const Btn = styled.button`
   border-radius: 6px;
   background: #5170de;
   color: var(--lesswhite, #f6f6f6);
-  font-size: 0.8rem;
-  width: 3.7rem;
-  height: 1.8rem;
+  font-size: 0.9rem;
+  width: 4.2rem;
+  height: 2.2rem;
   border: none;
 
   @media (max-width: 768px) {

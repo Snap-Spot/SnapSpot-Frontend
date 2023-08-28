@@ -234,7 +234,7 @@ const Center2 = styled(Center)`
 
 const Container = styled.div`
   width: 100%;
-  max-width: 64rem;
+  max-width: 1052px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -256,8 +256,8 @@ const Line = styled.div`
 const Line2 = styled(Line)`
   background: #e6e6e6;
   width: 777px;
-  margin-top: 3rem;
-  margin-bottom: 2rem;
+  margin-top: 1.3rem;
+  margin-bottom: 3rem;
 `;
 
 const Profile = styled.img`
@@ -314,7 +314,9 @@ const InputImg2 = styled.img`
 `;
 
 const SubTitle = styled.h3`
-  font-size: 1.2rem;
+  font-size: 1rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
 `;
 
 const InputContainer = styled.div`

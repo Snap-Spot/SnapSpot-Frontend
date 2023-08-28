@@ -58,7 +58,7 @@ const RejectBtn = styled.button`
   border-radius: 18px;
   background: var(--lessred, #ff9e9e);
   display: inline-flex;
-  padding: 17px;
+  padding: 18px;
   justify-content: center;
   align-items: center;
   border: none;
@@ -80,10 +80,9 @@ const AlertBtn = styled(RequestBtn)`
 `;
 
 const MessageBox = styled.textarea`
-  width: 1048px;
   padding: 20px;
   border-radius: 32px;
-  margin-top: 2rem;
+  margin-top: 0rem;
   background: var(--lightgrey-1, #e6e6e6);
   border: none;
   outline: none;
@@ -116,7 +115,7 @@ const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: -4rem;
-  height: 20rem;
+  height: 17.5rem;
 
   @media (max-width: 768px) {
     margin-right: 1rem;
@@ -126,7 +125,7 @@ const TitleContainer = styled.div`
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 20rem;
+  height: 17.5rem;
 `;
 
 const Container = styled.div`
@@ -174,17 +173,17 @@ const NickName = styled.p`
 `;
 
 const Btn = styled.button`
-  border-radius: 6px;
+  border-radius: 8px;
   background: #5170de;
   color: var(--lesswhite, #f6f6f6);
-  font-size: 16px;
+  font-size: 18px;
   width: 5rem;
-  height: 2.6rem;
+  height: 2.5rem;
   border: none;
 `;
 
 const Headcount = styled.p`
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: var(--darkgrey, #777);
   margin: 0;
   margin-top: 0.8rem;
@@ -198,6 +197,7 @@ const Headcount = styled.p`
 const SubTitle = styled.h3`
   font-size: 18px;
   margin-bottom: 0;
+  margin-top: 0.6rem;
 
   @media (max-width: 768px) {
     font-size: 15px;
@@ -206,12 +206,14 @@ const SubTitle = styled.h3`
 `;
 
 const SubTitle2 = styled(SubTitle)`
-  margin-bottom: 1.8rem;
+  margin-bottom: 1.3rem;
+  margin-top: 0.9rem;
 `;
 
 const Content = styled.p`
   margin-bottom: 0;
   font-size: 18px;
+  margin-top: 0.6rem;
 
   @media (max-width: 768px) {
     font-size: 13px;

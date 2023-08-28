@@ -28,10 +28,10 @@ const Center = styled.div`
 
 const Container = styled.div`
   width: 100%;
-  max-width: 66rem;
+  max-width: 1052px;
   margin-left: 6%;
   margin-right: 6%;
-  margin-top: 4rem;
+  margin-top: 3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;

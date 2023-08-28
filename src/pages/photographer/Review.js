@@ -143,7 +143,7 @@ const Center = styled.div`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 63rem;
+  max-width: 1052px;
   width: 70rem;
   margin-top: 2rem;
 
@@ -156,7 +156,7 @@ const Container = styled.div`
 const Title = styled.h2`
   font-size: 24px;
   align-self: flex-start;
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
 
   @media (max-width: 768px) {
     margin-top: 1rem;

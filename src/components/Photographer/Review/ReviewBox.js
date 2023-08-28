@@ -63,12 +63,10 @@ const Star = styled.img`
 
 const ReviewContainer = styled.div`
   height: 10rem;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
   padding-top: 2.5rem;
   border-bottom: 1px solid #d9d9d9;
   display: flex;
-  width: 60rem;
+  width: 100%;
 
   @media (max-width: 768px) {
     width: 21rem;
@@ -82,7 +80,7 @@ const ReviewContainer = styled.div`
 const ProfileContainer = styled.div`
   display: flex;
   margin-right: 4rem;
-  margin-left: 1rem;
+  margin-left: 2.5rem;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -94,8 +92,8 @@ const ProfileContainer = styled.div`
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 40rem;
-  margin-right: 3rem;
+  width: 30rem;
+  margin-right: 1rem;
 
   @media (max-width: 768px) {
     width: 65rem;
@@ -150,6 +148,7 @@ const Date = styled.p`
 
 const Score = styled.p`
   font-weight: 500;
+  font-size: 0.8rem;
   position: relative;
   top: -0.3rem;
   margin-top: 0;

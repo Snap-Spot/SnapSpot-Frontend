@@ -168,14 +168,15 @@ const Center = styled.div`
 `;
 
 const Container = styled.div`
-  width: 27rem;
+  width: 459px;
   display: flex;
   flex-direction: column;
+  margin-right: 2.8rem;
 
   @media (max-width: 768px) {
     width: 85%;
-
     margin-bottom: 2.5rem;
+    margin-right: 0;
   }
 `;
 
@@ -183,7 +184,7 @@ const CalendarHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 `;
 
 const PrevBtn = styled.img`
@@ -205,7 +206,7 @@ const WeekContainer = styled(CalendarHeader)`
 
 const DateContainer = styled(WeekContainer)`
   padding-top: 1rem;
-  padding-bottom: 2em;
+  padding-bottom: 1.4rem;
 
   @media (max-width: 768px) {
     padding-top: 0.9rem;
