@@ -42,6 +42,22 @@ const Header = () => {
     navigate(`/`);
   };
 
+  const onClickPhotogreapher = () => {
+    navigate(`/photographer`);
+  };
+
+  const onClickFeed = () => {
+    navigate(`/`);
+  };
+
+  const onClickMyPage = () => {
+    navigate(`/photographer/mypage`);
+  };
+
+  const onClickSearchBtn = () => {
+    navigate(`/search`);
+  };
+
   return (
     <Wrapper>
       <HeaderDiv>
@@ -56,13 +72,22 @@ const Header = () => {
           {isMobile ? null : ( //모바일이 아닐 경우 Search Box
             <Search>
               <input placeholder="찾고 싶은 스팟이나 사진작가를 검색하세요."></input>
-              <img src={search} alt="검색하기" />
+              <img onClick={onClickSearchBtn} src={search} alt="검색하기" />
             </Search>
           )}
           <Menu>
-            <div className="subMenu">사진작가</div>
-            <div className="subMenu">피드</div>
-            <img className="mypage" src={profile} alt="마이페이지" />
+            <div className="subMenu" onClick={onClickPhotogreapher}>
+              사진작가
+            </div>
+            <div className="subMenu" onClick={onClickFeed}>
+              피드
+            </div>
+            <img
+              className="mypage"
+              onClick={onClickMyPage}
+              src={profile}
+              alt="마이페이지"
+            />
             <img className="menu" onClick={openModal} src={menu} alt="메뉴" />
           </Menu>{" "}
         </Main>
@@ -70,7 +95,7 @@ const Header = () => {
           <SearchDiv>
             <Search>
               <input placeholder="찾고 싶은 스팟이나 사진작가를 검색하세요."></input>
-              <img src={search} alt="검색하기" />
+              <img nClick={onClickSearchBtn} src={search} alt="검색하기" />
             </Search>
           </SearchDiv>
         ) : null}

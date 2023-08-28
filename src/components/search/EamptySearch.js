@@ -1,8 +1,41 @@
+import { React } from "react";
+import AliceCarousel from "react-alice-carousel";
+import "react-alice-carousel/lib/alice-carousel.css";
 import styled from "styled-components";
-import glass from "../../assets/search/glass.png";
+
 import RecommendBox from "./RecommendBox";
 
+import glass from "../../assets/search/glass.png";
+import right from "../../assets/search/ic_right.png";
+import left from "../../assets/search/ic_left.png";
+
+const responsive = {
+  0: {
+    items: 3,
+  },
+  600: {
+    items: 3,
+  },
+  1024: {
+    items: 3,
+  },
+};
+
 const EamptySearch = () => {
+  const renderPrevButton = ({ isDisabled }) => {
+    if (isDisabled) {
+      return null;
+    }
+    return <img src={left} className="prev-button" />;
+  };
+
+  const renderNextButton = ({ isDisabled }) => {
+    if (isDisabled) {
+      return null;
+    }
+    return <img src={right} className="next-button" />;
+  };
+
   return (
     <Wrapper>
       <EmptySection>
@@ -11,27 +44,61 @@ const EamptySearch = () => {
       <div>
         <Title>이 사진작가는 어떠세요?</Title>
         <RecommendList>
-          <RecommendBox
-            tag="#커플스냅 #유채꽃 #화사함"
-            photographer="한빛나라"
-            star="4.7"
-            price="130,000"
-            review="238"
-          />
-          <RecommendBox
-            tag="#커플스냅 #유채꽃 #화사함"
-            photographer="한빛나라"
-            star="4.7"
-            price="130,000"
-            review="238"
-          />
-          <RecommendBox
-            tag="#커플스냅 #유채꽃 #화사함"
-            photographer="한빛나라"
-            star="4.7"
-            price="130,000"
-            review="238"
-          />
+          <AliceCarousel
+            mouseTracking
+            disableDotsControls
+            dotsDisabled={true}
+            responsive={responsive}
+            duration={400}
+            startIndex={1}
+            mouseDragEnabled={true}
+            className="custom-carousel"
+            renderPrevButton={renderPrevButton}
+            renderNextButton={renderNextButton}
+          >
+            <RecommendBox
+              tag="#커플스냅 #유채꽃 #화사함"
+              photographer="한빛나라"
+              star="4.7"
+              price="130,000"
+              review="238"
+            />
+            <RecommendBox
+              tag="#커플스냅 #유채꽃 #화사함"
+              photographer="한빛나라"
+              star="4.7"
+              price="130,000"
+              review="238"
+            />
+            <RecommendBox
+              tag="#커플스냅 #유채꽃 #화사함"
+              photographer="한빛나라"
+              star="4.7"
+              price="130,000"
+              review="238"
+            />
+            <RecommendBox
+              tag="#커플스냅 #유채꽃 #화사함"
+              photographer="한빛나라"
+              star="4.7"
+              price="130,000"
+              review="238"
+            />
+            <RecommendBox
+              tag="#커플스냅 #유채꽃 #화사함"
+              photographer="한빛나라"
+              star="4.7"
+              price="130,000"
+              review="238"
+            />
+            <RecommendBox
+              tag="#커플스냅 #유채꽃 #화사함"
+              photographer="한빛나라"
+              star="4.7"
+              price="130,000"
+              review="238"
+            />
+          </AliceCarousel>
         </RecommendList>
       </div>
     </Wrapper>
@@ -42,7 +109,6 @@ export default EamptySearch;
 
 const Wrapper = styled.div`
   width: 1050px;
-
   @media (max-width: 768px) {
     width: 95%;
   }
@@ -108,12 +174,45 @@ const Title = styled.div`
 `;
 
 const RecommendList = styled.div`
-  display: flex;
-  flex-direciton: row;
-  align-items: center;
-  justify-content: center;
-  gap: 2.5rem;
+  .alice-carousel__dots {
+    display: none !important;
+  }
+
+  .jwAHne {
+    display: flex;
+    align-items: center;
+  }
+
+  .prev-button {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 170px;
+    left: -20px;
+  }
+
+  .next-button {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 170px;
+    right: 10px;
+  }
+
+  /* 모바일에서의 스타일 */
   @media (max-width: 768px) {
-    gap: 1rem;
+    .prev-button {
+      width: 20px;
+      height: 20px;
+      left: 0px;
+      top: 55px;
+    }
+
+    .next-button {
+      width: 20px;
+      height: 20px;
+      right: 0px;
+      top: 55px;
+    }
   }
 `;

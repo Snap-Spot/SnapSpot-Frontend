@@ -20,6 +20,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import MyHeartsPage from "./pages/MyPage/MyHeartsPage";
 import SpotListPage from "./pages/SpotListPage/SpotListPage";
 import BestSnapPage from "./pages/MyPage/BestSnapPage";
+import KakaoLoginPage from "./pages/LoginPage/KakaoLoginPage";
 
 function App() {
   return (
@@ -44,6 +45,8 @@ function App() {
         <Route path="/signup/member" element={<SignUpMemberPage />} />
         <Route path="/signup/:memberType/info" element={<SignUpInfoPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/auth/kakao-login" element={<KakaoLoginPage />} />
+
         <Route path="/search" element={<SearchPage />} />
         <Route path="/photographer" element={<Photographerlist />} />
         <Route path="/spotlist" element={<SpotListPage />} />
