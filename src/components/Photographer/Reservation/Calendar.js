@@ -1,21 +1,18 @@
 import { styled } from "styled-components";
 import prev from "../../../assets/photograph/prev_btn.png";
 import next from "../../../assets/photograph/next_btn.png";
-import { useState } from "react";
 
-const Calendar = ({ setSelect, select }) => {
+const Calendar = ({ setSelect, select, setMonth, month }) => {
   const date = new Date();
-  const current_year = date.getFullYear();
-  const current_month = date.getMonth();
+  const currentYear = date.getFullYear();
   const week = ["일", "월", "화", "수", "목", "금", "토"];
-  const [month, setMonth] = useState(current_month);
 
   // 현재 월의 첫 날짜를 가져옴
-  const firstDayOfMonth = new Date(current_year, month, 1);
+  const firstDayOfMonth = new Date(currentYear, month, 1);
   const firstDayOfWeek = firstDayOfMonth.getDay();
 
   // 현재 월의 마지막 날짜를 가져옴
-  const lastDayOfMonth = new Date(current_year, month + 1, 0);
+  const lastDayOfMonth = new Date(currentYear, month + 1, 0);
 
   const daysInMonth = [];
 
@@ -33,7 +30,7 @@ const Calendar = ({ setSelect, select }) => {
   let currentWeek = [];
 
   // 이전 달의 마지막 날짜를 가져옴
-  const lastDayOfPrevMonth = new Date(current_year, month, 0);
+  const lastDayOfPrevMonth = new Date(currentYear, month, 0);
   const lastDayPrevMonth = lastDayOfPrevMonth.getDate();
 
   // 빈 날짜 칸 채우기 (첫 주)
@@ -73,30 +70,30 @@ const Calendar = ({ setSelect, select }) => {
   return (
     <Center>
       <Container>
-        <Row>
+        <CalendarHeader>
           <PrevBtn src={prev} onClick={() => setMonth(month - 1)} />
           <CurrentDate>
-            {current_year}년 {month + 1}월
+            {currentYear}년 {month + 1}월
           </CurrentDate>
           <NextBtn src={next} onClick={() => setMonth(month + 1)} />
-        </Row>
-        <Row2>
+        </CalendarHeader>
+        <WeekContainer>
           {week.map((el, i) => (
             <Week key={i}>{el}</Week>
           ))}
-        </Row2>
+        </WeekContainer>
         <Line />
         {daysInMonthGrid.map((week, weekIndex) => (
-          <Row3 key={weekIndex}>
+          <DateContainer key={weekIndex}>
             {week.map((day, dayIndex) => {
               if (
                 (weekIndex === 0 && IsPrevMonth(day)) ||
                 (weekIndex === daysInMonthGrid.length - 1 && IsNextMonth(day))
               ) {
                 return (
-                  <Day2 key={dayIndex} cur="true">
+                  <RemainDate key={dayIndex} cur="true">
                     {day}
-                  </Day2>
+                  </RemainDate>
                 );
               } else {
                 return (
@@ -110,7 +107,7 @@ const Calendar = ({ setSelect, select }) => {
                 );
               }
             })}
-          </Row3>
+          </DateContainer>
         ))}
       </Container>
     </Center>
@@ -138,7 +135,7 @@ const Day = styled.div`
   }
 `;
 
-const Day2 = styled(Day)`
+const RemainDate = styled(Day)`
   color: ${(props) =>
     props.cur === "true" ? "rgba(129, 129, 129, 0.40)" : "#000"};
 `;
@@ -171,21 +168,23 @@ const Center = styled.div`
 `;
 
 const Container = styled.div`
-  width: 28rem;
+  width: 459px;
   display: flex;
   flex-direction: column;
+  margin-right: 2.8rem;
 
   @media (max-width: 768px) {
-    width: 90%;
+    width: 85%;
     margin-bottom: 2.5rem;
+    margin-right: 0;
   }
 `;
 
-const Row = styled.div`
+const CalendarHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 `;
 
 const PrevBtn = styled.img`
@@ -200,14 +199,14 @@ const PrevBtn = styled.img`
   }
 `;
 
-const Row2 = styled(Row)`
+const WeekContainer = styled(CalendarHeader)`
   justify-content: space-around;
   margin-bottom: 0;
 `;
 
-const Row3 = styled(Row2)`
+const DateContainer = styled(WeekContainer)`
   padding-top: 1rem;
-  padding-bottom: 2em;
+  padding-bottom: 1.4rem;
 
   @media (max-width: 768px) {
     padding-top: 0.9rem;

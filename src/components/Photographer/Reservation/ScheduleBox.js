@@ -18,25 +18,24 @@ const ScheduleBox = ({
 
   return (
     <>
-      {/* 나중에 idx 받아서 0일 때만 안보이게끔 설정 */}
-      {idx !== "0" && <BottomLine />}
+      {idx !== 0 && <BottomLine />}
       <Container>
-        <Row2>
-          <Row>
+        <Header>
+          <RowContainer>
             <Profile src={profile} />
             <NickName>{nickname}</NickName>
             <Btn>예약완료</Btn>
-          </Row>
+          </RowContainer>
           <Detail onClick={() => navigate(`/photographer/reserve/${id}`)}>
             상세보기 <Arrow src={arrow} />
           </Detail>
-        </Row2>
-        <Row>
+        </Header>
+        <RowContainer>
           <SnapType>{snapType}</SnapType>
           <Line src={line} />
           <Headcount>{headCount}인</Headcount>
-        </Row>
-        <Row>
+        </RowContainer>
+        <RowContainer>
           <TitleContainer>
             <SubTitle>시간</SubTitle>
             <SubTitle>장소</SubTitle>
@@ -47,7 +46,7 @@ const ScheduleBox = ({
             <Content>{place}</Content>
             <Content>{requirement}</Content>
           </ContentContainer>
-        </Row>
+        </RowContainer>
       </Container>
     </>
   );
@@ -66,6 +65,11 @@ const Line = styled.img`
   margin-left: 1rem;
   margin-right: 1rem;
   margin-top: 0.4rem;
+
+  @media (max-width: 768px) {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
 `;
 
 const TitleContainer = styled.div`
@@ -75,6 +79,7 @@ const TitleContainer = styled.div`
 
   @media (max-width: 768px) {
     margin-right: 1rem;
+    margin-top: 0.5rem;
   }
 `;
 
@@ -97,22 +102,26 @@ const Container = styled.div`
 
   @media (max-width: 768px) {
     padding-right: 0.7rem;
+    padding-left: 1rem;
   }
 `;
 
 const Profile = styled.img`
   width: 1.5rem;
   height: 1.5rem;
+
+  @media (max-width: 768px) {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
 `;
 
-const Date = styled.h2``;
-
-const Row = styled.div`
+const RowContainer = styled.div`
   display: flex;
   align-items: center;
 `;
 
-const Row2 = styled(Row)`
+const Header = styled(RowContainer)`
   justify-content: space-between;
 `;
 
@@ -123,6 +132,7 @@ const NickName = styled.p`
 
   @media (max-width: 768px) {
     margin-right: 1rem;
+    font-size: 0.8rem;
   }
 `;
 
@@ -130,10 +140,16 @@ const Btn = styled.button`
   border-radius: 6px;
   background: #5170de;
   color: var(--lesswhite, #f6f6f6);
-  font-size: 0.8rem;
-  width: 3.7rem;
-  height: 1.8rem;
+  font-size: 0.9rem;
+  width: 4.2rem;
+  height: 2.2rem;
   border: none;
+
+  @media (max-width: 768px) {
+    width: 4.5rem;
+    height: 2rem;
+    font-size: 0.9rem;
+  }
 `;
 
 const Detail = styled.p`
@@ -168,7 +184,7 @@ const SubTitle = styled.h3`
 
   @media (max-width: 768px) {
     font-size: 15px;
-    margin-top: 0.6rem;
+    margin-top: 0.3rem;
   }
 `;
 
@@ -178,6 +194,7 @@ const Content = styled.p`
 
   @media (max-width: 768px) {
     font-size: 13px;
+    margin-top: 0.5rem;
   }
 `;
 

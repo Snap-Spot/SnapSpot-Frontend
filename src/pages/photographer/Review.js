@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import ReviewBox from "../../components/Photographer/MyPage/ReviewBox";
-import profile from "../../assets/photograph/profile.png";
-import Paging from "../../components/Photographer/MyPage/Paging/Paging";
+import ReviewBox from "../../components/Photographer/Review/ReviewBox";
+import Paging from "../../components/Photographer/Review/Paging/Paging";
 import { useEffect, useState } from "react";
 
 const Review = () => {
@@ -95,7 +94,6 @@ const Review = () => {
     setIndexOfFirstPost(indexOfLastPost - postPerPage);
     setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
   }, [currentPage, postPerPage, indexOfLastPost, indexOfFirstPost]);
-  // 나중에 deps에 products 추가
 
   const setPage = (error) => {
     setCurrentPage(error);
@@ -106,7 +104,6 @@ const Review = () => {
       <Container>
         <Title>리뷰 리스트</Title>
         <Length>총 {products.length}개</Length>
-        <Filter></Filter>
         <Line />
         <ReviewContainer>
           {currentPosts && products.length > 0 ? (
@@ -125,7 +122,12 @@ const Review = () => {
             <div>리뷰가 없습니다.</div>
           )}
         </ReviewContainer>
-        <Paging page={currentPage} count={count} setPage={setPage} />
+        <Paging
+          page={currentPage}
+          count={count}
+          setPage={setPage}
+          itemsCountPerPage={6}
+        />
       </Container>
     </Center>
   );
@@ -141,7 +143,7 @@ const Center = styled.div`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 66rem;
+  max-width: 1052px;
   width: 70rem;
   margin-top: 2rem;
 
@@ -154,7 +156,7 @@ const Container = styled.div`
 const Title = styled.h2`
   font-size: 24px;
   align-self: flex-start;
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
 
   @media (max-width: 768px) {
     margin-top: 1rem;
@@ -164,15 +166,13 @@ const Title = styled.h2`
 `;
 
 const Length = styled.p`
-  font-weight: 600;
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 20px;
 
   @media (max-width: 768px) {
     font-size: 16px;
   }
 `;
-
-const Filter = styled.div``;
 
 const Line = styled.div`
   width: 100%;

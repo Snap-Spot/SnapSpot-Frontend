@@ -69,6 +69,10 @@ const P = styled.p`
   &:hover {
     color: ${(props) => (props.color === "#A5A5A5" ? props.color : "#3c3aac")};
   }
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
 `;
 
 const Container = styled.div`
@@ -88,7 +92,11 @@ const Status = styled.div`
   padding-left: 1.5rem;
   padding-bottom: 0.9rem;
   padding-right: 1rem;
-  padding-top: 0.4rem;
+  padding-top: 0.2rem;
+
+  @media (max-width: 768px) {
+    margin-right: 0rem;
+  }
 `;
 
 export default Dropdown;
