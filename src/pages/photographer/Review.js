@@ -94,7 +94,6 @@ const Review = () => {
     setIndexOfFirstPost(indexOfLastPost - postPerPage);
     setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
   }, [currentPage, postPerPage, indexOfLastPost, indexOfFirstPost]);
-  // 나중에 deps에 products 추가
 
   const setPage = (error) => {
     setCurrentPage(error);
@@ -105,7 +104,6 @@ const Review = () => {
       <Container>
         <Title>리뷰 리스트</Title>
         <Length>총 {products.length}개</Length>
-        <Filter></Filter>
         <Line />
         <ReviewContainer>
           {currentPosts && products.length > 0 ? (
@@ -175,8 +173,6 @@ const Length = styled.p`
     font-size: 16px;
   }
 `;
-
-const Filter = styled.div``;
 
 const Line = styled.div`
   width: 100%;
