@@ -15,6 +15,7 @@ import SignUpInfoPage from "./pages/SignUpPage/SignUpInfoPage";
 import SignUpMemberPage from "./pages/SignUpPage/SignUpMemberPage";
 import Photographerlist from "./pages/serach/Photographerlist";
 import LoginPage from "./pages/LoginPage/LoginPage";
+import KakaoLoginPage from "./pages/LoginPage/KakaoLoginPage";
 
 function App() {
   return (
@@ -36,6 +37,8 @@ function App() {
         <Route path="/signup/member" element={<SignUpMemberPage />} />
         <Route path="/signup/:memberType/info" element={<SignUpInfoPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/auth/kakao-login" element={<KakaoLoginPage />} />
+
         <Route path="/search" element={<SearchPage />} />
         <Route path="/photographer" element={<Photographerlist />} />
       </Routes>
