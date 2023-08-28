@@ -1,15 +1,29 @@
 import React from "react";
 import { styled } from "styled-components";
+import { useState } from "react";
 import Header from "../../components/common/Header";
 import MySnaps from "../../components/Mypage-User/Pick/MySnaps";
+import AddSnapModal from "../../components/Mypage-User/Modals/AddSnapModal";
+import ModalTemplate from "../../components/Mypage-User/Modals/ModalTemplate";
 const BestSnapPage = () => {
+  const [showModal, setShowModal] = useState(false);
   return (
     <>
+      {showModal && (
+        <ModalTemplate
+          isOverflow={1}
+          title={"베스트 스냅사진 등록하기"}
+          content={<AddSnapModal />}
+          setShowModal={setShowModal}
+        />
+      )}
       <Header />
       <Wrapper>
         <div className="top">
           <div className="title">베스트 스냅사진 모아보기</div>
-          <div className="btn">등록하기</div>
+          <div className="btn" onClick={() => setShowModal(true)}>
+            등록하기
+          </div>
         </div>
 
         <MySnaps />
