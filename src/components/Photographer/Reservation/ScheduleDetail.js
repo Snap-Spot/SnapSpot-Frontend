@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import profile from "../../../assets/photograph/profile.png";
 
@@ -9,18 +10,33 @@ const ScheduleDetail = ({
   requirement,
   date,
 }) => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
       <Container>
         <Row2>
           <Profile src={profile} />
           <NickName>{nickname}</NickName>
-          <Btn>예약신청</Btn>
+          {!isMobile && <Btn>예약신청</Btn>}
           <BtnContainer>
             <RejectBtn>예약 거절하기</RejectBtn>
             <RequestBtn>입금 요청하기</RequestBtn>
           </BtnContainer>
         </Row2>
+        {isMobile && <Btn>예약신청</Btn>}
         <Headcount>스냅 예약번호 {reservationNum}</Headcount>
         <Row>
           <TitleContainer>
@@ -30,7 +46,11 @@ const ScheduleDetail = ({
             <SubTitle>요청사항</SubTitle>
             <SubTitle2>가격</SubTitle2>
             <SubTitle2>여기서 만나요</SubTitle2>
-            <SubTitle>메세지에 전달사항을 입력해주세요</SubTitle>
+            {isMobile ? (
+              <SubTitle>메세지</SubTitle>
+            ) : (
+              <SubTitle>메세지에 전달사항을 입력해주세요</SubTitle>
+            )}
           </TitleContainer>
           <ContentContainer>
             <Content>{date}</Content>
@@ -58,7 +78,7 @@ const RejectBtn = styled.button`
   border-radius: 18px;
   background: var(--lessred, #ff9e9e);
   display: inline-flex;
-  padding: 17px;
+  padding: 18px;
   justify-content: center;
   align-items: center;
   border: none;
@@ -66,10 +86,20 @@ const RejectBtn = styled.button`
   font-size: 18px;
   margin-right: 0.8rem;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+    border-radius: 12px;
+    padding: 12px;
+  }
 `;
 
 const RequestBtn = styled(RejectBtn)`
   background-color: #a6b9ff;
+
+  @media (max-width: 768px) {
+    margin-right: 0rem;
+  }
 `;
 
 const AlertBtn = styled(RequestBtn)`
@@ -80,21 +110,26 @@ const AlertBtn = styled(RequestBtn)`
 `;
 
 const MessageBox = styled.textarea`
-  width: 1048px;
   padding: 20px;
   border-radius: 32px;
-  margin-top: 2rem;
+  margin-top: 0rem;
   background: var(--lightgrey-1, #e6e6e6);
   border: none;
   outline: none;
   font-size: 15px;
   height: 80px;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+    border-radius: 20px;
+    height: 70px;
+  }
 `;
 
 const Input = styled.input`
   outline: none;
   display: flex;
-  width: 424px;
+  width: 350px;
   padding: 8px 16px;
   justify-content: center;
   align-items: center;
@@ -105,18 +140,29 @@ const Input = styled.input`
   margin-bottom: 0.5rem;
   margin-top: 1rem;
   text-align: center;
+
+  @media (max-width: 768px) {
+    width: 170px;
+    font-size: 14px;
+    margin-top: 0.9rem;
+  }
 `;
 
 const PriceInput = styled(Input)`
   width: 150px;
   font-size: 16px;
+
+  @media (max-width: 768px) {
+    width: 85px;
+    font-size: 14px;
+  }
 `;
 
 const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: -4rem;
-  height: 20rem;
+  height: 17.5rem;
 
   @media (max-width: 768px) {
     margin-right: 1rem;
@@ -126,7 +172,7 @@ const TitleContainer = styled.div`
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 20rem;
+  height: 17.5rem;
 `;
 
 const Container = styled.div`
@@ -138,13 +184,18 @@ const Container = styled.div`
   width: 100%;
 
   @media (max-width: 768px) {
-    padding-right: 0.7rem;
+    width: 85%;
   }
 `;
 
 const Profile = styled.img`
   width: 60px;
   height: 60px;
+
+  @media (max-width: 768px) {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 const Row = styled.div`
@@ -170,21 +221,29 @@ const NickName = styled.p`
 
   @media (max-width: 768px) {
     margin-right: 1rem;
+    font-size: 14px;
+    margin-left: 0.5rem;
   }
 `;
 
 const Btn = styled.button`
-  border-radius: 6px;
+  border-radius: 8px;
   background: #5170de;
   color: var(--lesswhite, #f6f6f6);
-  font-size: 16px;
+  font-size: 18px;
   width: 5rem;
-  height: 2.6rem;
+  height: 2.5rem;
   border: none;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    width: 4rem;
+    height: 2rem;
+  }
 `;
 
 const Headcount = styled.p`
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: var(--darkgrey, #777);
   margin: 0;
   margin-top: 0.8rem;
@@ -192,26 +251,31 @@ const Headcount = styled.p`
 
   @media (max-width: 768px) {
     font-size: 13px;
+    margin-bottom: 1rem;
   }
 `;
 
 const SubTitle = styled.h3`
   font-size: 18px;
   margin-bottom: 0;
+  margin-top: 0.6rem;
 
   @media (max-width: 768px) {
-    font-size: 15px;
+    font-size: 14px;
     margin-top: 0.6rem;
+    width: 6rem;
   }
 `;
 
 const SubTitle2 = styled(SubTitle)`
-  margin-bottom: 1.8rem;
+  margin-bottom: 1.3rem;
+  margin-top: 0.9rem;
 `;
 
 const Content = styled.p`
   margin-bottom: 0;
   font-size: 18px;
+  margin-top: 0.6rem;
 
   @media (max-width: 768px) {
     font-size: 13px;

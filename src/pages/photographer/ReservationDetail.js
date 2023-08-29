@@ -28,10 +28,10 @@ const Center = styled.div`
 
 const Container = styled.div`
   width: 100%;
-  max-width: 66rem;
+  max-width: 1052px;
   margin-left: 6%;
   margin-right: 6%;
-  margin-top: 4rem;
+  margin-top: 3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -39,6 +39,7 @@ const Container = styled.div`
 
   @media (max-width: 768px) {
     margin-top: 1rem;
+    margin-left: 2rem;
   }
 `;
 
@@ -50,6 +51,7 @@ const Title = styled.h2`
   @media (max-width: 768px) {
     margin-left: 1.2rem;
     margin-bottom: 1.7rem;
+    font-size: 18px;
   }
 `;
 

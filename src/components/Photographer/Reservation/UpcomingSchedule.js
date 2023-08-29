@@ -20,12 +20,12 @@ const UpcomingSchedule = ({
   return (
     <Container>
       <Padding>
-        <Row2>
+        <DateContainer>
           <Date>{date}</Date>
           <Detail onClick={() => navigate(`/photographer/reserve/${id}`)}>
             상세보기 <Arrow src={arrow} />
           </Detail>
-        </Row2>
+        </DateContainer>
         <ReservationNum>스냅 예약번호 {num}</ReservationNum>
       </Padding>
       <BottomLine />
@@ -83,6 +83,11 @@ const Container = styled.div`
   border-radius: 32px;
   border: 1px solid var(--lightgrey-2, #dbdbdb);
   margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    width: 93%;
+    padding-top: 1rem;
+  }
 `;
 
 const BottomLine = styled.div`
@@ -97,12 +102,22 @@ const Line = styled.img`
   margin-left: 1rem;
   margin-right: 1rem;
   margin-top: 0.4rem;
+
+  @media (max-width: 768px) {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
 `;
 
 const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: 3rem;
+
+  @media (max-width: 768px) {
+    margin-right: 1rem;
+    margin-top: 0.5rem;
+  }
 `;
 
 const ContentContainer = styled.div`
@@ -118,6 +133,11 @@ const Arrow = styled.img`
 const Profile = styled.img`
   width: 1.5rem;
   height: 1.5rem;
+
+  @media (max-width: 768px) {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
 `;
 
 const Date = styled.h2`
@@ -131,7 +151,7 @@ const Row = styled.div`
   align-items: center;
 `;
 
-const Row2 = styled(Row)`
+const DateContainer = styled(Row)`
   justify-content: space-between;
 `;
 
@@ -142,6 +162,7 @@ const NickName = styled.p`
 
   @media (max-width: 768px) {
     margin-right: 1rem;
+    font-size: 0.8rem;
   }
 `;
 
@@ -189,7 +210,7 @@ const SubTitle = styled.h3`
 
   @media (max-width: 768px) {
     font-size: 15px;
-    margin-top: 0.6rem;
+    margin-top: 0.3rem;
   }
 `;
 
@@ -199,6 +220,7 @@ const Content = styled.p`
 
   @media (max-width: 768px) {
     font-size: 13px;
+    margin-top: 0.5rem;
   }
 `;
 
