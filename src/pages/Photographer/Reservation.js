@@ -108,7 +108,7 @@ const Reservation = () => {
             id={item.id}
           />
         ))}
-        <Title2>
+        <Title2 onClick={() => navigate("/photographer/reservationlist")}>
           곧 돌아오는 <Highlight>촬영 일정</Highlight>이 있어요
           <Arrow src={arrow} />
         </Title2>

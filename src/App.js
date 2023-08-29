@@ -17,6 +17,7 @@ import Photographerlist from "./pages/serach/Photographerlist";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import KakaoLoginPage from "./pages/LoginPage/KakaoLoginPage";
 import RequestList from "./pages/Photographer/RequestList";
+import ReservationList from "./pages/Photographer/ReservationList";
 
 function App() {
   return (
@@ -33,6 +34,10 @@ function App() {
         <Route path="/photographer/custom" element={<Custom />} />
         <Route path="/photographer/review" element={<Review />} />
         <Route path="/photographer/request" element={<RequestList />} />
+        <Route
+          path="/photographer/reservationlist"
+          element={<ReservationList />}
+        />
         <Route path="mypage/reservation" element={<MyReservePage />} />
         <Route path="mypage/reservation/:id" element={<DetailReservePage />} />
         {/* 회원가입 */}
