@@ -68,7 +68,7 @@ const Wrapper = styled.div`
     width: ${(props) => props.$mb_width};
   }
   max-height: 212px;
-  overflow: scroll;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -84,6 +84,8 @@ const Wrapper = styled.div`
   border: 1px solid var(--darkgrey, #777);
 `;
 const Open = styled.div`
+  overflow-y: scroll;
+
   width: 100%;
   padding: 8px 0;
   @media (max-width: 768px) {

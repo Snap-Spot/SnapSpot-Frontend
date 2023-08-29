@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/common/Header";
 import { styled } from "styled-components";
 import ProfileContainer from "../../components/Mypage-User/Mypage/ProfileContainer";
 import MyMenu from "../../components/Mypage-User/Mypage/MyMenu";
-const UserMypage = ({ isPhographer = false }) => {
+const UserMypage = () => {
+  const [isPhotographer, setIsPhotographer] = useState(false);
+  useEffect(() => {
+    //접속시 작가인지 일반 고객인지 결정
+    setIsPhotographer(false);
+  }, []);
   return (
     <>
       <Header />
@@ -13,7 +18,7 @@ const UserMypage = ({ isPhographer = false }) => {
           <ProfileContainer />
           <Line />
 
-          {!isPhographer ? (
+          {!isPhotographer ? (
             <>
               <MyMenu id="0" />
               <SeperateLine />

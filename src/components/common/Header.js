@@ -51,7 +51,7 @@ const Header = () => {
   };
 
   const onClickMyPage = () => {
-    navigate(`/photographer/mypage`);
+    navigate(`/mypage`);
   };
 
   const onClickSearchBtn = () => {
