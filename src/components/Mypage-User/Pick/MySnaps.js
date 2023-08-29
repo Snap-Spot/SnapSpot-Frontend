@@ -164,6 +164,9 @@ const MySnaps = () => {
   };
 
   useEffect(() => {
+    if (window.innerWidth <= 768) {
+      setItemsPerPage(18);
+    }
     window.addEventListener("resize", resizingHandler);
     return () => {
       // 메모리 누수를 줄이기 위한 removeEvent
