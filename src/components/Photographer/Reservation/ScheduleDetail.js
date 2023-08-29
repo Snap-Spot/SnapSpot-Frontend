@@ -3,6 +3,7 @@ import styled from "styled-components";
 import profile from "../../../assets/photograph/profile.png";
 import RejectModal from "./RejectModal";
 import MinInputModal from "./MinInputModal";
+import ChatBox from "./ChatBox";
 
 const ScheduleDetail = ({
   nickname,
@@ -141,7 +142,7 @@ const ScheduleDetail = ({
           <>
             <AlertBtn>{btn_list[status]}</AlertBtn>
             <SubTitle>지금까지 보낸 메세지 확인하기</SubTitle>
-            <CustomerProfile src={profile} />
+            <ChatBox text="가나다라마바사" time="2023.06.28 오전 06:32" />
           </>
         )}
       </Container>
@@ -271,10 +272,6 @@ const Profile = styled.img`
     width: 20px;
     height: 20px;
   }
-`;
-
-const CustomerProfile = styled(Profile)`
-  margin-top: 2.5rem;
 `;
 
 const Row = styled.div`
