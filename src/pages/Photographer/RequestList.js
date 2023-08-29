@@ -41,7 +41,7 @@ const RequestList = () => {
   return (
     <Center>
       <RequestContainer>
-        <Title>스냅 사진 촬영 목록</Title>
+        <Title>스냅 사진 촬영 요청 목록</Title>
         {mockData2.map((item, idx) => (
           <UpcomingSchedule
             key={idx}
