@@ -18,6 +18,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import KakaoLoginPage from "./pages/LoginPage/KakaoLoginPage";
 import RequestList from "./pages/Photographer/RequestList";
 import ReservationList from "./pages/Photographer/ReservationList";
+import Introduction from "./components/Photographer/Introduction";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           path="/photographer/reservationlist"
           element={<ReservationList />}
         />
+        <Route path="photographer/introduction" element={<Introduction />} />
         <Route path="mypage/reservation" element={<MyReservePage />} />
         <Route path="mypage/reservation/:id" element={<DetailReservePage />} />
         {/* 회원가입 */}
