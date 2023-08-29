@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import profile from "../../../assets/photograph/profile.png";
+import RejectModal from "./RejectModal";
 
 const ScheduleDetail = ({
   nickname,
@@ -11,6 +12,7 @@ const ScheduleDetail = ({
   date,
 }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isReject, setIsReject] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -26,13 +28,16 @@ const ScheduleDetail = ({
 
   return (
     <>
+      {isReject && <RejectModal setIsReject={setIsReject} />}
       <Container>
         <Row2>
           <Profile src={profile} />
           <NickName>{nickname}</NickName>
           {!isMobile && <Btn>예약신청</Btn>}
           <BtnContainer>
-            <RejectBtn>예약 거절하기</RejectBtn>
+            <RejectBtn onClick={() => setIsReject(!isReject)}>
+              예약 거절하기
+            </RejectBtn>
             <RequestBtn>입금 요청하기</RequestBtn>
           </BtnContainer>
         </Row2>
