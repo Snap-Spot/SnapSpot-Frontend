@@ -1,20 +1,38 @@
 import styled from "styled-components";
 import warn from "../../../assets/photograph/warn.png";
+import { useNavigate } from "react-router-dom";
 
-const RejectModal = ({ setIsReject }) => {
+const RejectModal = ({
+  setIsOpen,
+  isOpen,
+  title,
+  content,
+  status,
+  setStatus,
+}) => {
+  const navigate = useNavigate();
+
   return (
     <>
       <Conatiner>
         <WarnIcon src={warn} />
-        <Warning>정말 거절하시겠어요?</Warning>
-        <Content>
-          만약 비슷한 시간대에 촬영이 가능하신 경우, 메세지에 변경 가능한 촬영
-          시간대를 적어주세요. 100자 이상으로 전달사항을 작성해주셔야 거절이
-          가능해요.
-        </Content>
+        <Warning>{title}</Warning>
+        <Content>{content}</Content>
         <BtnContainer>
-          <CancelBtn onClick={() => setIsReject(false)}>아직이에요</CancelBtn>
-          <ConfirmBtn>확인했어요</ConfirmBtn>
+          <CancelBtn onClick={() => setIsOpen(!isOpen)}>아직이에요</CancelBtn>
+          {/* 확인 버튼 클릭시 해당 예약 내역 delete 요청보내기 */}
+          <ConfirmBtn
+            onClick={() => {
+              if (status === 0) {
+                navigate("/photographer/reserve");
+              } else {
+                setStatus(status + 1);
+                setIsOpen(!isOpen);
+              }
+            }}
+          >
+            확인했어요
+          </ConfirmBtn>
         </BtnContainer>
       </Conatiner>
       <BG></BG>
@@ -75,7 +93,7 @@ const Conatiner = styled.div`
   top: 18rem;
   display: flex;
   width: 40rem;
-  padding: 40px 54px;
+  padding: 50px 40px;
   flex-direction: column;
   align-items: center;
   border-radius: 32px;

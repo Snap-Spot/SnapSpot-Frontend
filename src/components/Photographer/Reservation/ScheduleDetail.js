@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import profile from "../../../assets/photograph/profile.png";
 import RejectModal from "./RejectModal";
+import MinInputModal from "./MinInputModal";
 
 const ScheduleDetail = ({
   nickname,
@@ -12,15 +13,34 @@ const ScheduleDetail = ({
   date,
 }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [isReject, setIsReject] = useState(false);
+  const [isReject, setIsReject] = useState(false); // 예약 거절 모달
+  const [isMinInput, setIsMinInput] = useState(true); // 최소 입력 미달시 띄울 모달
+  const [isConfirmDeposit, setIsConfirmDeposit] = useState(false); // 입금 확인 모달
+  const [message, setMessage] = useState(""); // 전달할 메세지
+  const [status, setStatus] = useState(0); // 예약 상태
+  const status_list = [
+    "예약신청",
+    "입금요청",
+    "예약완료",
+    "촬영진행",
+    "사진전달",
+  ];
+  const btn_list = [
+    "입금 요청하기",
+    "입금 확인 완료",
+    "공지사항 보내기",
+    "사진 전송하기",
+  ];
+
+  const handleMessageChange = (e) => {
+    setMessage(e.target.value);
+  };
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-
     window.addEventListener("resize", handleResize);
-
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -28,17 +48,59 @@ const ScheduleDetail = ({
 
   return (
     <>
-      {isReject && <RejectModal setIsReject={setIsReject} />}
+      {isReject && (
+        <RejectModal
+          setIsOpen={setIsReject}
+          isOpen={isReject}
+          title="정말 거절하시겠어요?"
+          content="만약 비슷한 시간대에 촬영이 가능하신 경우, 메세지에 변경 가능한 촬영
+          시간대를 적어주세요. 100자 이상으로 전달사항을 작성해주셔야 거절이
+          가능해요."
+          status={status}
+        />
+      )}
+      {!isMinInput && (
+        <MinInputModal setIsMinInput={setIsMinInput} isMinInput={isMinInput} />
+      )}
+      {isConfirmDeposit && (
+        <RejectModal
+          setIsOpen={setIsConfirmDeposit}
+          isOpen={isConfirmDeposit}
+          title="계좌 입금을 확인하셨나요?"
+          content="아래 확인 버튼을 누르시면, 작가분께서는 요청하신 계좌로 입금이 완료되었음을 확인하였으며, 고객분과의 예약이 확정됨을 의미합니다."
+          status={status}
+          setStatus={setStatus}
+        />
+      )}
       <Container>
         <Row2>
           <Profile src={profile} />
           <NickName>{nickname}</NickName>
-          {!isMobile && <Btn>예약신청</Btn>}
+          {!isMobile && <Btn>{status_list[status]}</Btn>}
           <BtnContainer>
-            <RejectBtn onClick={() => setIsReject(!isReject)}>
-              예약 거절하기
-            </RejectBtn>
-            <RequestBtn>입금 요청하기</RequestBtn>
+            {status === 0 && (
+              <RejectBtn onClick={() => setIsReject(!isReject)}>
+                예약 거절하기
+              </RejectBtn>
+            )}
+            {status !== 2 && (
+              <RequestBtn
+                onClick={() => {
+                  if (status === 1) {
+                    setIsConfirmDeposit(!isConfirmDeposit);
+                  } else {
+                    if (message.length < 100) {
+                      setIsMinInput(false);
+                    } else if (status === 0) {
+                      setStatus(status + 1);
+                      setMessage("");
+                    }
+                  }
+                }}
+              >
+                {btn_list[status]}
+              </RequestBtn>
+            )}
           </BtnContainer>
         </Row2>
         {isMobile && <Btn>예약신청</Btn>}
@@ -70,10 +132,18 @@ const ScheduleDetail = ({
             <Input placeholder="처음 만나는 장소를 적어주세요!" />
           </ContentContainer>
         </Row>
-        <MessageBox placeholder="입금 요청 시, 추가적인 공지사항과 입금받으실 계좌번호를 작성해주세요. (예약 거절시에는 거절 사유를 적어주세요.)" />
-        {/* 아래는 예약 완료시 보이게 */}
-        {/* <AlertBtn>공지사항 보내기</AlertBtn>
-        <SubTitle>지금까지 보낸 메세지 확인하기</SubTitle> */}
+        <MessageBox
+          placeholder="입금 요청 시, 추가적인 공지사항과 입금받으실 계좌번호를 작성해주세요. (예약 거절시에는 거절 사유를 적어주세요.)"
+          onChange={handleMessageChange}
+          value={message}
+        />
+        {status === 2 && (
+          <>
+            <AlertBtn>{btn_list[status]}</AlertBtn>
+            <SubTitle>지금까지 보낸 메세지 확인하기</SubTitle>
+            <CustomerProfile src={profile} />
+          </>
+        )}
       </Container>
     </>
   );
@@ -108,10 +178,10 @@ const RequestBtn = styled(RejectBtn)`
 `;
 
 const AlertBtn = styled(RequestBtn)`
-  width: 10rem;
+  width: 8rem;
   margin-top: 2rem;
   margin-left: auto;
-  margin-right: -1.5rem;
+  margin-right: -0.1rem;
 `;
 
 const MessageBox = styled.textarea`
@@ -201,6 +271,10 @@ const Profile = styled.img`
     width: 20px;
     height: 20px;
   }
+`;
+
+const CustomerProfile = styled(Profile)`
+  margin-top: 2.5rem;
 `;
 
 const Row = styled.div`
