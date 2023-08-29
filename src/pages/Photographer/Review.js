@@ -110,6 +110,7 @@ const Review = () => {
             currentPosts.map((productData, idx) => (
               <ReviewBox
                 key={idx}
+                type="list"
                 profile={productData.profile}
                 nickname={productData.nickname}
                 title={productData.title}

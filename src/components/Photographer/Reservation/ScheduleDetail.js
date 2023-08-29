@@ -4,6 +4,7 @@ import profile from "../../../assets/photograph/profile.png";
 import RejectModal from "./RejectModal";
 import MinInputModal from "./MinInputModal";
 import ChatBox from "./ChatBox";
+import ReviewBox from "../Review/ReviewBox";
 
 const ScheduleDetail = ({
   nickname,
@@ -141,6 +142,18 @@ const ScheduleDetail = ({
         {status === 2 && (
           <>
             <AlertBtn>{btn_list[status]}</AlertBtn>
+            {/* 리뷰 확인 */}
+            <SubTitle>이런 리뷰를 남겨주셨어요!</SubTitle>
+            <ReviewBox
+              type="detail"
+              profile=""
+              nickname="est0908"
+              title="너무 잘 담아주셔서 감사합니다"
+              content="친절한 답변과 깔끔한 일정 소개부터 인생사진까지..!! 너무 좋은 추억 남겨주셔서 감사해요 다른 작가분들과 다르게 소품이나 의상도 준비해주시고 사진 컨셉도 너무 좋았어요.."
+              date="2023.5.8"
+              score="5.0"
+            />
+            {/* 메세지 확인 */}
             <SubTitle>지금까지 보낸 메세지 확인하기</SubTitle>
             <ChatBox text="가나다라마바사" time="2023.06.28 오전 06:32" />
           </>
