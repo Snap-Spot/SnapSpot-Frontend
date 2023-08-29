@@ -144,7 +144,7 @@ const Main = styled.div`
   }
 
   .logo {
-    margin-right: 4.625rem;
+    margin-right: 2.5rem;
 
     img {
       display: flex;
@@ -170,7 +170,7 @@ const Menu = styled.div`
   align-items: center;
   justify-content: center;
 
-  margin-left: 2rem;
+  margin-left: 0rem;
 
   .subMenu {
     padding: 0.5rem;
