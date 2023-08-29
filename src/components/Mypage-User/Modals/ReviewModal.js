@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import nullstar from "../../../assets/mypage/modals/nullstar.png";
 import filledstar from "../../../assets/mypage/modals/filledstar.png";
 import photo from "../../../assets/mypage/modals/photo.png";
-import { hasPointerEvents } from "@testing-library/user-event/dist/utils";
 
 const ReviewModal = () => {
   const [starCount, setStarCount] = useState();

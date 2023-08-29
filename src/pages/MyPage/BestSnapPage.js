@@ -7,6 +7,7 @@ import AddSnapModal from "../../components/Mypage-User/Modals/AddSnapModal";
 import ModalTemplate from "../../components/Mypage-User/Modals/ModalTemplate";
 const BestSnapPage = () => {
   const [showModal, setShowModal] = useState(false);
+
   return (
     <>
       {showModal && (
