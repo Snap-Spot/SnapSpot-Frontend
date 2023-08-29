@@ -1,29 +1,30 @@
 import React from "react";
 import { styled } from "styled-components";
 import filledHeart from "../../../assets/mypage/pick/filledHeart.png";
-const MySnapBox = () => {
+const MySnapBox = ({ photo, photographer, region, date, tags }) => {
   return (
     <>
       <Container>
         <Photo>
-          <img className="photo" src="" alt="" />
+          <img className="photo" src={photo} alt="" />
         </Photo>
         <Info>
-          <div className="date">2023.07.23(일)</div>
+          <div className="date">{date}</div>
           <div className="name">
-            <div className="blue">뮴먕묭</div>&nbsp;작가
+            <div className="blue">{photographer}</div>&nbsp;작가
           </div>
           <div className="place">
             <div className="blue">
-              <div className="left">
-                제주특별자치도 어디시 어디로 18길 제주특별자치도 어디시 어디로
-                18길
-              </div>
+              <div className="left">{region}</div>
             </div>
             <div className="right">에서 촬영</div>
           </div>
 
-          <div className="tags">#커플스냅 #유채꽃 #상큼</div>
+          <div className="tags">
+            {tags.map((tag) => {
+              return `#${tag} \u00A0\u00A0`;
+            })}
+          </div>
         </Info>
       </Container>
 

@@ -1,9 +1,91 @@
-import { React } from "react";
+import { React, useState, useEffect } from "react";
 import styled from "styled-components";
 import Header from "../../components/common/Header";
 import PhotoBox from "../../components/Mypage-User/Pick/PhotoBox";
-
+import Paging from "../../components/photographer/Review/Paging/Paging";
 const MyHeartsPage = () => {
+  const [list, setList] = useState([
+    {
+      photo: "",
+      photographer: "에밀리",
+      region: "제주도 서귀포",
+    },
+    {
+      photo: "",
+      photographer: "에밀리",
+      region: "제주도 서귀포",
+    },
+    {
+      photo: "",
+      photographer: "에밀리",
+      region: "제주도 서귀포",
+    },
+    {
+      photo: "",
+      photographer: "에밀리",
+      region: "제주도 서귀포",
+    },
+
+    {
+      photo: "",
+      photographer: "에밀리",
+      region: "제주도 서귀포",
+    },
+    {
+      photo: "",
+      photographer: "에밀리",
+      region: "제주도 서귀포",
+    },
+    {
+      photo: "",
+      photographer: "에밀리",
+      region: "제주도 서귀포",
+    },
+    {
+      photo: "",
+      photographer: "에밀리",
+      region: "제주도 서귀포",
+    },
+    {
+      photo: "",
+      photographer: "에밀리",
+      region: "제주도 서귀포",
+    },
+
+    {
+      photo: "",
+      photographer: "에밀리",
+      region: "제주도 서귀포",
+    },
+    {
+      photo: "",
+      photographer: "에밀리",
+      region: "제주도 서귀포",
+    },
+    {
+      photo: "",
+      photographer: "에밀리",
+      region: "제주도 서귀포",
+    },
+    {
+      photo: "",
+      photographer: "에밀리",
+      region: "제주도 서귀포",
+    },
+  ]); // 리스트에 나타낼 아이템들
+
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+  const itemsPerPage = 12; // 페이지당 아이템 개수
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // 데이터 배열을 페이지에 맞게 자르기
+  const indexOfLastPost = currentPage * itemsPerPage;
+  const indexOfFirstPost = indexOfLastPost - itemsPerPage;
+  const currentPosts = list.slice(indexOfFirstPost, indexOfLastPost);
+
   return (
     <>
       <Header />
@@ -12,25 +94,28 @@ const MyHeartsPage = () => {
         <div className="title">좋아요 모아보기</div>
         <GridBox>
           <div class="grid">
-            <div>
-              <PhotoBox
-                photo={""}
-                photographer="에밀리"
-                region="제주도 서귀포"
-              />
-            </div>
-            <div>
-              <PhotoBox photographer="에밀리" region="제주도 서귀포" />
-            </div>
-            <div>
-              <PhotoBox photographer="에밀리" region="제주도 서귀포" />
-            </div>
-            <div>
-              <PhotoBox photographer="에밀리" region="제주도 서귀포" />
-            </div>
+            {currentPosts.map((el) => {
+              return (
+                <div>
+                  <PhotoBox
+                    photo={el.photo}
+                    photographer={el.photographer}
+                    region={el.region}
+                  />
+                </div>
+              );
+            })}
           </div>
         </GridBox>
       </Wrapper>
+      <PagingContainer>
+        <Paging
+          page={currentPage}
+          count={list.length}
+          setPage={handlePageChange}
+          itemsCountPerPage={itemsPerPage}
+        />
+      </PagingContainer>
     </>
   );
 };
@@ -82,5 +167,11 @@ const GridBox = styled.div`
 
       margin-top: 1.25rem;
     }
+  }
+`;
+const PagingContainer = styled.div`
+  margin-top: 322px;
+  @media (max-width: 768px) {
+    margin-top: 178px;
   }
 `;
