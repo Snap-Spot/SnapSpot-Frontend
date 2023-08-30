@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import ScheduleDetail from "../../components/Photographer/ReservationDetail/ScheduleDetail";
-import FileInputModal from "../../components/Photographer/ReservationDetail/FileInputModal";
 
 const ReservationDetail = () => {
   return (
@@ -15,7 +14,6 @@ const ReservationDetail = () => {
           requirement="편안한 분위기에서 촬영하고 싶어요!"
           date="2023.05.16.화"
         />
-        <FileInputModal />
       </Container>
     </Center>
   );

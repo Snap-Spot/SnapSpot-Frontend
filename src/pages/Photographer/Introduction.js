@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import photo from "../../../assets/photograph/photo.png";
-import heart from "../../../assets/photograph/heart_.png";
-import ReviewBox from "../Review/ReviewBox";
-import Paging from "../Review/Paging/Paging";
+import photo from "../../assets/photograph/photo.png";
+import heart from "../../assets/photograph/heart_.png";
+import ReviewBox from "../../components/Photographer/Review/ReviewBox";
+import Paging from "../../components/Photographer/Review/Paging/Paging";
+import Filtering from "../../components/Photographer/Introduction/Filtering";
 import { useEffect, useState } from "react";
 
 const Introduction = () => {
@@ -139,7 +140,11 @@ const Introduction = () => {
         <ReservationBtn>예약하기</ReservationBtn>
         {/* 후기 */}
         <Review>후기</Review>
-        <Length>총 {products.length}개</Length>
+        <Row>
+          <Length>총 {products.length}개</Length>
+          <Filtering />
+        </Row>
+
         <Line />
         <ReviewContainer>
           {currentPosts && products.length > 0 ? (
@@ -196,6 +201,12 @@ const Review = styled.h2`
   margin-bottom: 3rem;
 `;
 
+const Row = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 const Align = styled.div`
   display: flex;
   align-items: center;
@@ -241,6 +252,7 @@ const Line = styled.div`
   width: 100%;
   height: 1px;
   background-color: #d9d9d9;
+  margin-top: 1rem;
 `;
 
 const ProfileContainer = styled.div`
