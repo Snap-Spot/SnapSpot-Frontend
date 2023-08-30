@@ -36,7 +36,7 @@ function AddressSearch() {
             </Header>
             <DaumPostcode
               style={{
-                height: "520px",
+                height: "510px",
               }}
               onComplete={handleAddress}
               autoClose
@@ -64,6 +64,11 @@ const CloseBtn = styled.button`
   margin-right: 1rem;
   margin-top: -0.3rem;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    font-size: 25px;
+    margin-right: 0.4rem;
+  }
 `;
 
 const PopupContainer = styled.div`
@@ -86,6 +91,11 @@ const PopupContent = styled.div`
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 768px) {
+    width: 300px;
+    height: 560px;
+  }
 `;
 
 const AddressInput = styled.input`
