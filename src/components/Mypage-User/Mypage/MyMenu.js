@@ -37,8 +37,8 @@ const MyMenu = ({ id }) => {
             return (
               <>
                 {menus[id].length !== 1 && index !== 0 && <Line />}
-                <Menu>
-                  <div className="subject" onClick={() => navigate(el.route)}>
+                <Menu onClick={() => navigate(el.route)}>
+                  <div className="subject">
                     <img className="icon" src={el.icon} alt="" />
                     {el.text}
                   </div>
@@ -65,8 +65,8 @@ const Wrapper = styled.div`
 
   .menus {
     margin-top: 30px;
-    width: 50%;
-    min-width: 419px;
+    width: 40%;
+    min-width: 409px;
     @media (max-width: 768px) {
       //모바일
       width: 100%;
@@ -79,7 +79,11 @@ const Menu = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 10px 0px;
+  margin: 16px 0px;
+  @media (max-width: 768px) {
+    //모바일
+    margin: 13px 0px;
+  }
 
   .icon {
     width: 24px;
