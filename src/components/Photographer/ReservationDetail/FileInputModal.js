@@ -112,11 +112,22 @@ const FileSelectBtn = styled.img`
   align-items: center;
   border-radius: 20px;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    margin-left: 5rem;
+    margin-top: -5rem;
+    width: 9.8rem;
+    height: 38px;
+  }
 `;
 
 const BtnContainer = styled.div`
   display: flex;
   margin-top: 2rem;
+
+  @media (max-width: 768px) {
+    margin-top: 1rem;
+  }
 `;
 
 const Header = styled.div`
@@ -147,6 +158,11 @@ const FileInput = styled.div`
   justify-content: center;
   align-items: center;
   background: var(--lesswhite, #f6f6f6);
+
+  @media (max-width: 768px) {
+    width: 18.5rem;
+    height: 70px;
+  }
 `;
 
 const CancelIcon = styled.img`
@@ -154,6 +170,11 @@ const CancelIcon = styled.img`
   height: 32px;
   align-self: flex-end;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 25px;
+    height: 25px;
+  }
 `;
 
 const CancelBtn = styled.button`
@@ -170,6 +191,12 @@ const CancelBtn = styled.button`
   margin-left: 1rem;
   font-weight: 500;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 130px;
+    height: 50px;
+    border-radius: 15px;
+  }
 `;
 
 const ConfirmBtn = styled(CancelBtn)`
@@ -188,17 +215,30 @@ const Conatiner = styled.div`
   border-radius: 32px;
   background: var(--lesswhite, #f6f6f6);
   z-index: 2;
+
+  @media (max-width: 768px) {
+    width: 19rem;
+    padding: 20px 20px;
+  }
 `;
 
 const Title = styled.h2`
   font-size: 24px;
   margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
 `;
 
 const Message = styled.p`
   color: #3c3aac;
   align-self: flex-start;
   margin-top: 2rem;
+
+  @media (max-width: 768px) {
+    margin-top: 1rem;
+  }
 `;
 
 export default FileInputModal;
