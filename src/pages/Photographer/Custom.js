@@ -2,7 +2,13 @@ import styled from "styled-components";
 import profile from "../../assets/photograph/ex_profile.png";
 import plus from "../../assets/photograph/plus.png";
 import imgPlus from "../../assets/photograph/imgPlus.png";
+import instagram from "../../assets/photograph/instagram.png";
+import twitter from "../../assets/photograph/x.png";
+import kakao from "../../assets/photograph/kakao.png";
+import blog from "../../assets/photograph/blog.png";
+import home from "../../assets/photograph/home.png";
 import Dropdown from "../../components/Photographer/Custom/Dropdown";
+import SNSInput from "../../components/Photographer/Custom/SNSInput";
 import { useState, useEffect, useRef } from "react";
 
 const Custom = () => {
@@ -10,6 +16,28 @@ const Custom = () => {
   const [profileImg, setProfileImg] = useState(""); // 프로필 이미지
   const [featuredImgfiles, setFeaturedImgFiles] = useState([]); // 대표 이미지
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const icon_src = [
+    {
+      src: instagram,
+      text: "@ instagram",
+    },
+    {
+      src: twitter,
+      text: "@ twitter",
+    },
+    {
+      src: kakao,
+      text: "@ kakao channel",
+    },
+    {
+      src: blog,
+      text: "@ naver blog",
+    },
+    {
+      src: home,
+      text: "@ homepage",
+    },
+  ]; // sns 아이콘 리스트
 
   const imgRef = useRef([]);
   const imgRef2 = useRef();
@@ -123,7 +151,9 @@ const Custom = () => {
             <SubTitle>활동 지역 설정</SubTitle>
             <Input />
             <SubTitle>SNS 등록</SubTitle>
-            <Input3 />
+            {icon_src.map((item, idx) => (
+              <SNSInput key={idx} iconSrc={item.src} text={item.text} />
+            ))}
             <SubTitle>한 줄 소개글 등록 (최대 500자)</SubTitle>
             <Input2 />
             <SubTitle>전문 분야 등록</SubTitle>
@@ -359,16 +389,6 @@ const Input = styled.input`
     width: 323px;
     height: 34px;
     font-size: 14px;
-  }
-`;
-
-const Input3 = styled(Input)`
-  width: 510px;
-  margin-right: 1rem;
-
-  @media (max-width: 768px) {
-    width: 323px;
-    height: 34px;
   }
 `;
 
