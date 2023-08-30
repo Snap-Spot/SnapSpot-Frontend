@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import photo from "../../assets/photograph/photo.png";
-import heart from "../../assets/photograph/heart_.png";
-import ReviewBox from "./Review/ReviewBox";
-import Paging from "../../components/Photographer/Review/Paging/Paging";
+import photo from "../../../assets/photograph/photo.png";
+import heart from "../../../assets/photograph/heart_.png";
+import ReviewBox from "../Review/ReviewBox";
+import Paging from "../Review/Paging/Paging";
 import { useEffect, useState } from "react";
 
 const Introduction = () => {

@@ -18,7 +18,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import KakaoLoginPage from "./pages/LoginPage/KakaoLoginPage";
 import RequestList from "./pages/Photographer/RequestList";
 import ReservationList from "./pages/Photographer/ReservationList";
-import Introduction from "./components/Photographer/Introduction";
+import Introduction from "./components/Photographer/Introduction/Introduction";
 
 function App() {
   return (
