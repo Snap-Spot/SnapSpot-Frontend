@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
-import { enUS } from "date-fns/locale";
 import getYear from "date-fns/getYear";
 import getMonth from "date-fns/getMonth";
-import previousarrow from "../../assets/search/previousarrow.png";
-import nextarrow from "../../assets/search/nextarrow.png";
+import previousarrow from "../../../assets/search/previousarrow.png";
+import nextarrow from "../../../assets/search/nextarrow.png";
 import styled from "styled-components";
 
 const months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
@@ -24,22 +23,35 @@ const customKoLocale = {
   },
 };
 
-function CustomCalender() {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(null);
-  const onChange = (dates) => {
-    const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
+function Calender() {
+  const [selectedDates, setSelectedDates] = useState([]); // 선택한 날짜 배열
+  const [key, setKey] = useState(0);
+
+  const toggleDateSelection = (date) => {
+    // 이미 선택된 날짜인지 확인
+    const isSelected = selectedDates.some(
+      (selectedDate) => selectedDate.toDateString() === date.toDateString()
+    );
+
+    // 선택 여부에 따라 배열에 추가 또는 제거
+    if (isSelected) {
+      setSelectedDates(
+        selectedDates.filter(
+          (selectedDate) => selectedDate.toDateString() !== date.toDateString()
+        )
+      );
+    } else {
+      setSelectedDates([...selectedDates, date]);
+    }
+
+    setKey(key + 1);
   };
 
   return (
     <StyledCalendar>
       <DatePicker
-        selected={startDate}
-        onChange={onChange}
-        startDate={startDate}
-        endDate={endDate}
+        key={key} // 키 값 변경으로 다시 렌더링
+        onSelect={toggleDateSelection} // 선택한 날짜 추가 또는 제거
         selectsRange
         inline
         locale={customKoLocale}
@@ -66,25 +78,26 @@ function CustomCalender() {
               className="btn_month btn_month-next"
               onClick={increaseMonth}
               disabled={nextMonthButtonDisabled}
-              x
             >
               <img src={nextarrow} alt="Next Month" />
             </div>
           </div>
         )}
+        highlightDates={selectedDates}
       />
     </StyledCalendar>
   );
 }
 
-export default CustomCalender;
+export default Calender;
 
 const StyledCalendar = styled.div`
   margin-top: 1rem;
+  margin-bottom: 1rem;
 
   @media (max-width: 768px) {
     font-size: 1rem;
-    margin: 0;
+    margin-bottom: 1rem;
   }
 
   .react-datepicker {
@@ -94,6 +107,10 @@ const StyledCalendar = styled.div`
   .react-datepicker__header {
     background-color: white;
     border: 0;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
   }
 
   .month-day {
@@ -124,10 +141,10 @@ const StyledCalendar = styled.div`
   }
   .react-datepicker__day-name {
     width: 1.7rem;
+    margin-right: 1rem;
     @media (max-width: 768px) {
-      width: 2.5rem;
+      width: 2.2rem;
       margin: 0.1rem 0.4rem;
-      /* font-size: 1rem; */
     }
   }
 
@@ -139,13 +156,15 @@ const StyledCalendar = styled.div`
     color: #616161;
     text-align: center;
     width: 1.7rem;
+    margin-right: 1rem;
+    margin-top: 0.4rem;
     font-family: Noto Sans KR;
     font-size: 1rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     @media (max-width: 768px) {
-      width: 2.5rem;
+      width: 2.2rem;
       margin: 0.17rem 0.4rem;
       font-size: 1rem;
     }
@@ -173,7 +192,7 @@ const StyledCalendar = styled.div`
     font-style: normal;
     font-weight: 400;
     border-radius: 4px;
-    background: var(--main-font-color, #3c3aac);
+    background: #ff0000;
     line-height: normal;
     @media (max-width: 768px) {
       font-size: 1rem;
@@ -185,6 +204,10 @@ const StyledCalendar = styled.div`
       font-size: 15px;
     }
   }
+  .react-datepicker__day--highlighted {
+    background-color: #ff0000;
+    color: white;
+  }
 
   .customHeaderContainer {
     display: flex;
@@ -193,6 +216,7 @@ const StyledCalendar = styled.div`
     height: 100%;
     margin-bottom: 1.3rem;
     background-color: white;
+
     border: none;
     @media (max-width: 768px) {
       margin-bottom: 0.3rem;

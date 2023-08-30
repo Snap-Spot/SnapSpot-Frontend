@@ -10,7 +10,7 @@ import home from "../../assets/photograph/home.png";
 import Dropdown from "../../components/Photographer/Custom/Dropdown";
 import SNSInput from "../../components/Photographer/Custom/SNSInput";
 import { useState, useEffect, useRef } from "react";
-import CustomCalender from "../../components/search/CustomCalender";
+import Calender from "../../components/Photographer/Custom/Calendar";
 
 const Custom = () => {
   const [imgfile, setImgFile] = useState([]); // 가격표 이미지
@@ -164,7 +164,7 @@ const Custom = () => {
             <TagInput />
             <TagInput />
             <SubTitle>불가능한 날짜 선택</SubTitle>
-            <CustomCalender />
+            <Calender />
             <SubTitle>대표 사진 업로드 (최대 10장)</SubTitle>
             {featuredImgfiles.map((imgfile, index) => (
               <ImgContainer key={index} imgfile={imgfile}>
@@ -241,7 +241,7 @@ const Plus = styled.img`
 const ChangeBtn = styled.button`
   border-radius: 30px;
   background: var(--main-font-color, #3c3aac);
-  margin-top: 7rem;
+  margin-top: 5rem;
   display: flex;
   width: 31rem;
   height: 46px;
@@ -398,7 +398,7 @@ const Input = styled.input`
 const TagInput = styled(Input)`
   width: 8rem;
   margin-right: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 
   @media (max-width: 768px) {
     width: 5.2rem;
