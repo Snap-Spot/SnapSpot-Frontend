@@ -16,6 +16,7 @@ export default QuestionModal;
 
 const Wrapper = styled.div`
   width: 100%;
+  margin-top: 30px;
   .subtitle {
     color: #000;
     font-size: 0.8rem;
@@ -23,6 +24,7 @@ const Wrapper = styled.div`
     margin-bottom: 20px;
   }
   .button {
+    cursor: pointer;
     margin: auto;
     display: flex;
     width: 240px;

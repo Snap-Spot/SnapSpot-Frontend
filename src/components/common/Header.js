@@ -47,11 +47,11 @@ const Header = () => {
   };
 
   const onClickFeed = () => {
-    navigate(`/`);
+    navigate(`/spot-list`);
   };
 
   const onClickMyPage = () => {
-    navigate(`/photographer/mypage`);
+    navigate(`/mypage`);
   };
 
   const onClickSearchBtn = () => {

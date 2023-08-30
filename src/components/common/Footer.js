@@ -61,6 +61,7 @@ const Wrapper = styled.div`
   //모바일
   @media (max-width: 768px) {
     height: 225px;
+    display: none;
     .wrapper {
       display: none;
     }
