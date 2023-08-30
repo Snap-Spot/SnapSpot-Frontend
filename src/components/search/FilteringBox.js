@@ -138,16 +138,20 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   background: #fff;
+  position: absolute;
+  top: 1;
   box-shadow: 0rem 1rem 3.188rem 0rem rgba(0, 0, 0, 0.1);
+  z-index: 2;
 
   @media (max-width: 768px) {
+    position: relative;
     height: 81vh;
     justify-content: space-between;
   }
 
-  @media (max-height: 680px) {
+  @media (max-width: 380px) {
     //비율 유지를 위해 height가 작은 기종일 경우 높이 별도 설정
-    height: 92vh;
+    height: 100vh;
   }
 `;
 
