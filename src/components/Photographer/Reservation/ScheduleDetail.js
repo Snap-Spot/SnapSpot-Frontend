@@ -5,6 +5,7 @@ import RejectModal from "./RejectModal";
 import MinInputModal from "./MinInputModal";
 import ChatBox from "./ChatBox";
 import ReviewBox from "../Review/ReviewBox";
+import AddressSearch from "./AddressSearch";
 
 const ScheduleDetail = ({
   nickname,
@@ -126,12 +127,13 @@ const ScheduleDetail = ({
             <Content>{time}</Content>
             <Content>{place}</Content>
             <Content>{requirement}</Content>
-            <Row>
+            {isMobile ? (
               <PriceInput placeholder="ex. 120000" />
-              <Content1>원</Content1>
-            </Row>
+            ) : (
+              <PriceInput placeholder="스냅사진 촬영 가격을 적어주세요!" />
+            )}
             {/* 카카오 맵 연결 */}
-            <Input placeholder="처음 만나는 장소를 적어주세요!" />
+            <AddressSearch />
           </ContentContainer>
         </Row>
         <MessageBox
@@ -238,11 +240,13 @@ const Input = styled.input`
 `;
 
 const PriceInput = styled(Input)`
-  width: 150px;
-  font-size: 16px;
+  width: 400px;
+  height: 25px;
+  font-size: 18px;
 
   @media (max-width: 768px) {
-    width: 85px;
+    width: 100px;
+    height: 20px;
     font-size: 14px;
   }
 `;
