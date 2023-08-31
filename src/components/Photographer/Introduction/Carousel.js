@@ -1,24 +1,20 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import carousel from "../../../assets/photograph/carousel.png";
-import carousel2 from "../../../assets/photograph/carousel2.png";
-import carousel3 from "../../../assets/photograph/carousel3.png";
 import left from "../../../assets/photograph/left.png";
 import right from "../../../assets/photograph/right.png";
 
-const Carousel = () => {
-  const list = [carousel3, carousel, carousel2];
+const Carousel = ({ carouselList }) => {
   const slideWidth = 769; // 이미지 하나의 너비
-  const totalSlides = list.length;
+  const totalSlides = carouselList.length;
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currList, setCurrList] = useState([]);
 
   useEffect(() => {
-    if (list.length !== 0) {
-      const startData = list[0];
-      const endData = list[list.length - 1];
-      const newList = [endData, ...list, startData];
+    if (carouselList.length !== 0) {
+      const startData = carouselList[0];
+      const endData = carouselList[carouselList.length - 1];
+      const newList = [endData, ...carouselList, startData];
 
       setCurrList(newList);
     }
@@ -46,7 +42,7 @@ const Carousel = () => {
         style={{
           transform: `translateX(-${(currentSlide + 1) * slideWidth}px)`,
         }}
-        listLen={list.length}
+        listLen={currList.length}
       >
         {currList.map((el, idx) => (
           <Img src={el} key={idx} />
