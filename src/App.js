@@ -21,6 +21,9 @@ import MyHeartsPage from "./pages/MyPage/MyHeartsPage";
 import SpotListPage from "./pages/SpotListPage/SpotListPage";
 import BestSnapPage from "./pages/MyPage/BestSnapPage";
 import KakaoLoginPage from "./pages/LoginPage/KakaoLoginPage";
+import RequestList from "./pages/Photographer/RequestList";
+import ReservationList from "./pages/Photographer/ReservationList";
+import Introduction from "./pages/Photographer/Introduction";
 
 function App() {
   return (
@@ -36,6 +39,12 @@ function App() {
         <Route path="/photographer/setting" element={<Setting />} />
         <Route path="/photographer/custom" element={<Custom />} />
         <Route path="/photographer/review" element={<Review />} />
+        <Route path="/photographer/request" element={<RequestList />} />
+        <Route
+          path="/photographer/reservationlist"
+          element={<ReservationList />}
+        />
+        <Route path="photographer/introduction" element={<Introduction />} />
         <Route path="mypage/reservation" element={<MyReservePage />} />
         <Route path="mypage/reservation/:id" element={<DetailReservePage />} />
         <Route path="mypage/settings" element={<SettingsPage />} />

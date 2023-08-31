@@ -4,6 +4,7 @@ import ScheduleBox from "../../components/Photographer/Reservation/ScheduleBox";
 import UpcomingSchedule from "../../components/Photographer/Reservation/UpcomingSchedule";
 import Calendar from "../../components/Photographer/Reservation/Calendar";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Reservation = () => {
   const date = new Date();
@@ -11,6 +12,7 @@ const Reservation = () => {
   const currentMonth = date.getMonth();
   const [selectDate, setSelectDate] = useState(currentDate);
   const [selectMonth, setSelectMonth] = useState(currentMonth);
+  const navigate = useNavigate();
 
   const mockData = [
     {
@@ -88,7 +90,7 @@ const Reservation = () => {
             ))}
           </ScheduleContainer>
         </ReservationContainer>
-        <Title>
+        <Title onClick={() => navigate("/photographer/request")}>
           새로 들어온 <Highlight>촬영 요청</Highlight>이 있어요
           <Arrow src={arrow} />
         </Title>
@@ -106,7 +108,7 @@ const Reservation = () => {
             id={item.id}
           />
         ))}
-        <Title2>
+        <Title2 onClick={() => navigate("/photographer/reservationlist")}>
           곧 돌아오는 <Highlight>촬영 일정</Highlight>이 있어요
           <Arrow src={arrow} />
         </Title2>
@@ -164,6 +166,7 @@ const Title = styled.h2`
   font-size: 24px;
   margin-bottom: 2.3rem;
   align-self: flex-start;
+  cursor: pointer;
 
   @media (max-width: 768px) {
     margin-left: 2rem;

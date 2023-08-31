@@ -1,9 +1,12 @@
 import styled from "styled-components";
+import photo from "../../assets/photograph/photo.png";
+import heart from "../../assets/photograph/heart_.png";
 import ReviewBox from "../../components/Photographer/Review/ReviewBox";
 import Paging from "../../components/Photographer/Review/Paging/Paging";
+import Filtering from "../../components/Photographer/Introduction/Filtering";
 import { useEffect, useState } from "react";
 
-const Review = () => {
+const Introduction = () => {
   const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
   const [count, setCount] = useState(0); // 아이템 총 개수
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지. default 값으로 1
@@ -11,6 +14,18 @@ const Review = () => {
   const [indexOfLastPost, setIndexOfLastPost] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
   const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
   const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
+
+  useEffect(() => {
+    setProducts(mockData);
+    setCount(products.length);
+    setIndexOfLastPost(currentPage * postPerPage);
+    setIndexOfFirstPost(indexOfLastPost - postPerPage);
+    setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
+  }, [currentPage, postPerPage, indexOfLastPost, indexOfFirstPost]);
+
+  const setPage = (error) => {
+    setCurrentPage(error);
+  };
 
   const mockData = [
     {
@@ -87,23 +102,49 @@ const Review = () => {
     },
   ];
 
-  useEffect(() => {
-    setProducts(mockData);
-    setCount(products.length);
-    setIndexOfLastPost(currentPage * postPerPage);
-    setIndexOfFirstPost(indexOfLastPost - postPerPage);
-    setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
-  }, [currentPage, postPerPage, indexOfLastPost, indexOfFirstPost]);
-
-  const setPage = (error) => {
-    setCurrentPage(error);
-  };
-
   return (
     <Center>
       <Container>
-        <Title>리뷰 리스트</Title>
-        <Length>총 {products.length}개</Length>
+        <Title>작가님을 소개합니다!</Title>
+        <ProfileContainer>
+          <Profile src={photo} />
+          <Contents>
+            <ProfileContainer>
+              <TitleContainer>
+                <SubTitle>작가명</SubTitle>
+                <SubTitle>가격표</SubTitle>
+              </TitleContainer>
+              <ContentContainer>
+                <Align>
+                  <HighLight>이명한 작가</HighLight>
+                  <Heart src={heart} />
+                </Align>
+                <Price>120,000원 ~</Price>
+              </ContentContainer>
+            </ProfileContainer>
+            <Line />
+            <ProfileContainer>
+              <TitleContainer>
+                <SubTitle>활동 지역</SubTitle>
+                <SubTitle>SNS</SubTitle>
+                <SubTitle>한 줄 소개</SubTitle>
+              </TitleContainer>
+              <ContentContainer>
+                <Content>제주도 전역 </Content>
+                <Content>인스타그램 @myonghans </Content>
+                <Content>빛과 그림자를 이용한 극적인 연출</Content>
+              </ContentContainer>
+            </ProfileContainer>
+          </Contents>
+        </ProfileContainer>
+        <ReservationBtn>예약하기</ReservationBtn>
+        {/* 후기 */}
+        <Review>후기</Review>
+        <Row>
+          <Length>총 {products.length}개</Length>
+          <Filtering />
+        </Row>
+
         <Line />
         <ReviewContainer>
           {currentPosts && products.length > 0 ? (
@@ -134,17 +175,100 @@ const Review = () => {
   );
 };
 
+const Length = styled.p`
+  font-weight: 500;
+  font-size: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+`;
+
+const ReviewContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 7rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 3rem;
+  }
+`;
+
+const Review = styled.h2`
+  margin: auto;
+  margin-top: 5rem;
+  margin-bottom: 3rem;
+`;
+
+const Row = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const Align = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Heart = styled.img`
+  width: 46px;
+  height: 44px;
+  margin-left: 5rem;
+`;
+
+const HighLight = styled.h3`
+  margin: 0.3rem;
+  margin-left: 0;
+  font-size: 30px;
+`;
+
+const Price = styled(HighLight)`
+  color: #3c3aac;
+`;
+
+const ReservationBtn = styled.button`
+  display: flex;
+  width: 504px;
+  height: 72px;
+  padding: 28px 92px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background: var(--sub-color, #5170de);
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+  margin-left: auto;
+`;
+
+const Contents = styled.div`
+  margin-left: auto;
+`;
+
+const Line = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: #d9d9d9;
+  margin-top: 1rem;
+`;
+
+const ProfileContainer = styled.div`
+  display: flex;
+`;
+
 const Center = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 6rem;
 `;
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 1052px;
+  max-width: 890px;
   width: 70rem;
   margin-top: 2rem;
 
@@ -166,30 +290,26 @@ const Title = styled.h2`
   }
 `;
 
-const Length = styled.p`
-  font-weight: 500;
+const TitleContainer = styled.div`
+  width: 8rem;
+`;
+
+const ContentContainer = styled.div`
+  width: 17rem;
+`;
+
+const SubTitle = styled.p`
+  color: var(--darkgrey, #777);
   font-size: 20px;
-
-  @media (max-width: 768px) {
-    font-size: 16px;
-  }
 `;
 
-const Line = styled.div`
-  width: 100%;
-  height: 1px;
-  background-color: #d9d9d9;
+const Content = styled.p``;
+
+const Profile = styled.img`
+  width: 272px;
+  height: 410px;
+  border-radius: 39px;
+  filter: drop-shadow(14px 5px 50px rgba(0, 0, 0, 0.23));
 `;
 
-const ReviewContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 7rem;
-
-  @media (max-width: 768px) {
-    margin-bottom: 3rem;
-  }
-`;
-
-export default Review;
+export default Introduction;
