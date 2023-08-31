@@ -4,6 +4,8 @@ import heart from "../../assets/photograph/heart_.png";
 import ReviewBox from "../../components/Photographer/Review/ReviewBox";
 import Paging from "../../components/Photographer/Review/Paging/Paging";
 import Filtering from "../../components/Photographer/Introduction/Filtering";
+import Carousel from "../../components/Photographer/Introduction/Carousel";
+import ReviewPhoto from "../../components/Photographer/Introduction/ReviewPhoto";
 import { useEffect, useState } from "react";
 
 const Introduction = () => {
@@ -138,13 +140,17 @@ const Introduction = () => {
           </Contents>
         </ProfileContainer>
         <ReservationBtn>예약하기</ReservationBtn>
+      </Container>
+      {/* 캐러셀 */}
+      <Carousel />
+      <Container2>
         {/* 후기 */}
         <Review>후기</Review>
+        <ReviewPhoto />
         <Row>
           <Length>총 {products.length}개</Length>
           <Filtering />
         </Row>
-
         <Line />
         <ReviewContainer>
           {currentPosts && products.length > 0 ? (
@@ -170,7 +176,7 @@ const Introduction = () => {
           setPage={setPage}
           itemsCountPerPage={6}
         />
-      </Container>
+      </Container2>
     </Center>
   );
 };
@@ -199,6 +205,7 @@ const Review = styled.h2`
   margin: auto;
   margin-top: 5rem;
   margin-bottom: 3rem;
+  font-size: 40px;
 `;
 
 const Row = styled.div`
@@ -276,6 +283,10 @@ const Container = styled.div`
     width: 21rem;
     margin-top: 1rem;
   }
+`;
+
+const Container2 = styled(Container)`
+  max-width: 1068px;
 `;
 
 const Title = styled.h2`
