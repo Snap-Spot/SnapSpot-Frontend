@@ -1,37 +1,58 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
 import carousel from "../../../assets/photograph/carousel.png";
+import carousel2 from "../../../assets/photograph/carousel2.png";
+import carousel3 from "../../../assets/photograph/carousel3.png";
 import left from "../../../assets/photograph/left.png";
 import right from "../../../assets/photograph/right.png";
 
-const DemoCarousel = () => {
-  const list = [carousel, carousel, carousel, carousel, carousel, carousel];
-  const [moveLeft, setMoveLeft] = useState(0);
-  const [moveRight, setMoveRight] = useState(0);
+const Carousel = () => {
+  const list = [carousel3, carousel, carousel2];
+  const slideWidth = 769; // 이미지 하나의 너비
+  const totalSlides = list.length;
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currList, setCurrList] = useState([]);
+
+  useEffect(() => {
+    if (list.length !== 0) {
+      const startData = list[0];
+      const endData = list[list.length - 1];
+      const newList = [endData, ...list, startData];
+
+      setCurrList(newList);
+    }
+  }, []);
 
   const handleLeftBtnClick = () => {
-    setMoveLeft((prevMarginLeft) => prevMarginLeft + 1536);
+    if (currentSlide !== 0) {
+      setCurrentSlide(
+        (prevSlide) => (prevSlide - 1 + totalSlides + 1) % (totalSlides + 1)
+      );
+    }
   };
 
   const handleRightBtnClick = () => {
-    setMoveRight((prevMarginRight) => prevMarginRight - 1536);
+    setCurrentSlide((prevSlide) => (prevSlide + 1) % totalSlides);
   };
 
   return (
-    <Container
-      style={{
-        marginLeft: `${moveLeft}px`,
-        marginRight: `${moveRight + 768}px`,
-      }}
-    >
-      <LeftBtn src={left} onClick={handleLeftBtnClick} />
-      <RightBtn src={right} onClick={handleRightBtnClick} />
-      {list.map((el, idx) => (
-        <Img src={el} key={idx} />
-      ))}
-    </Container>
+    <>
+      <BtnContainer>
+        <LeftBtn src={left} onClick={handleLeftBtnClick} />
+        <RightBtn src={right} onClick={handleRightBtnClick} />
+      </BtnContainer>
+      <Container
+        style={{
+          transform: `translateX(-${(currentSlide + 1) * slideWidth}px)`,
+        }}
+        listLen={list.length}
+      >
+        {currList.map((el, idx) => (
+          <Img src={el} key={idx} />
+        ))}
+      </Container>
+    </>
   );
 };
 
@@ -39,24 +60,31 @@ const Container = styled.div`
   display: flex;
   overflow: hidden;
   margin-top: 6rem;
-  transition: margin-left 0.3s ease-in-out;
+  margin-right: ${(props) => (props.listLen - 1) * -768}px;
+  transition: transform 0.3s ease-in-out;
+`;
+
+const BtnContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  top: 54rem;
+  z-index: 2;
 `;
 
 const LeftBtn = styled.img`
-  position: absolute;
-  left: 15.5rem;
   width: 50px;
   height: 50px;
-  margin-top: 10rem;
+  margin-right: 36rem;
   cursor: pointer;
 `;
 
 const RightBtn = styled.img`
-  position: absolute;
-  right: 15.5rem;
   width: 50px;
   height: 50px;
-  margin-top: 10rem;
+
   cursor: pointer;
 `;
 
@@ -65,4 +93,4 @@ const Img = styled.img`
   height: 436px;
 `;
 
-export default DemoCarousel;
+export default Carousel;

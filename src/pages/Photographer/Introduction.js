@@ -8,6 +8,10 @@ import Carousel from "../../components/Photographer/Introduction/Carousel";
 import ReviewPhoto from "../../components/Photographer/Introduction/ReviewPhoto";
 import { useEffect, useState } from "react";
 
+import carousel from "../../assets/photograph/carousel.png";
+import carousel2 from "../../assets/photograph/carousel2.png";
+import carousel3 from "../../assets/photograph/carousel3.png";
+
 const Introduction = () => {
   const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
   const [count, setCount] = useState(0); // 아이템 총 개수
@@ -16,6 +20,8 @@ const Introduction = () => {
   const [indexOfLastPost, setIndexOfLastPost] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
   const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
   const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
+
+  const list = [carousel3, carousel, carousel2]; // 캐러셀 이미지
 
   useEffect(() => {
     setProducts(mockData);
@@ -142,7 +148,7 @@ const Introduction = () => {
         <ReservationBtn>예약하기</ReservationBtn>
       </Container>
       {/* 캐러셀 */}
-      <Carousel />
+      <Carousel carouselList={list} />
       <Container2>
         {/* 후기 */}
         <Review>후기</Review>
