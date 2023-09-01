@@ -195,7 +195,7 @@ const StyledCalendar = styled.div`
     background-color: white;
     border: none;
     @media (max-width: 768px) {
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.7rem;
     }
   }
   img {
