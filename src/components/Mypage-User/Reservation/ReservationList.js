@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import ReservationItem from "./ReservationItem";
 import { styled } from "styled-components";
-import Dropdown from "./Dropdown";
+import DropdownFilter from "./DropdownFilter";
 const ReservationList = () => {
   const [list, setList] = useState([1, 2, 3]);
-  const [isOpen, setIsOpen] = useState(false);
+  const filterList = ["최근 3개월", "최근 6개월", "최근 1년", "최근 2년"];
 
   return (
     <Wrapper>
       <div className="titleNdropdown">
         <div className="title">스냅 예약 내역</div>
         <div className="dropdown">
-          <Dropdown isOpen={isOpen} />
+          <DropdownFilter filterList={filterList} />
         </div>
       </div>
 
@@ -60,5 +60,9 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .dropdown {
+    height: 44px;
   }
 `;

@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import styled from "styled-components";
 import Pagination from "react-js-pagination";
-import "./Pagination.css";
+import "../../components/Photographer/Review/Paging/Paging.css";
 import search from "../../assets/header/search.png";
 import FilteringBox from "../../components/search/FilteringBox";
 import SearchBox from "../../components/search/SearchBox";
@@ -215,7 +215,7 @@ const Photographerlist = () => {
           </GridBox>
         </Content>
       </Wrapper>
-      <StyledPagination
+      <Pagination
         activePage={currentPage}
         itemsCountPerPage={itemsPerPage}
         totalItemsCount={items.length}
@@ -231,6 +231,7 @@ const Photographerlist = () => {
 export default Photographerlist;
 
 const Wrapper = styled.div`
+  margin-bottom: 3rem;
   @media (max-width: 768px) {
     .wrapper {
       display: none;
@@ -241,8 +242,6 @@ const Wrapper = styled.div`
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  /* 페이지 이동으로 Pagination이 이동하는지에 따라 변경하기 */
-  height: 140rem;
 `;
 
 const Box = styled.div`
@@ -335,6 +334,7 @@ const SearchTag = styled.div`
 `;
 
 const GridBox = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -342,7 +342,7 @@ const GridBox = styled.div`
 
   .grid {
     position: relative;
-    z-index: -1;
+    /* z-index: -1; */
     display: grid;
     align-items: center;
     justify-content: center;
@@ -361,74 +361,5 @@ const GridBox = styled.div`
 
       margin-top: 1.25rem;
     }
-  }
-`;
-
-const StyledPagination = styled(Pagination)`
-  display: flex;
-  justify-content: center;
-
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  ul.pagination li {
-    display: inline-block;
-    width: 4rem;
-    height: 4rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-    color: var(--lightgrey-2, #dbdbdb);
-    /* text-align: right; */
-    font-family: Noto Sans KR;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-  }
-
-  /* ul.pagination li:first-child {
-  border-radius: 5px 0 0 5px;
-}
-
-ul.pagination li:last-child {
-  border-radius: 0 5px 5px 0;
-} */
-
-  ul.pagination li a {
-    display: none;
-    text-decoration: none;
-    color: var(--lightgrey-2, #dbdbdb);
-    font-family: Noto Sans KR;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-
-    height: 0.2rem;
-  }
-
-  ul.pagination li.active a {
-    color: #000;
-  }
-  /* 
-ul.pagination li.active {
-
-} */
-
-  /* ul.pagination li a:hover,
-ul.pagination li a.active {
-  color: blue;
-} */
-
-  .page-selection {
-    width: 48px;
-    height: 30px;
-    color: #337ab7;
   }
 `;

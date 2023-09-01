@@ -14,7 +14,12 @@ import Footer from "./components/common/Footer";
 import SignUpInfoPage from "./pages/SignUpPage/SignUpInfoPage";
 import SignUpMemberPage from "./pages/SignUpPage/SignUpMemberPage";
 import Photographerlist from "./pages/serach/Photographerlist";
+import UserMypage from "./pages/MyPage/UserMypage";
+import SettingsPage from "./pages/MyPage/SettingsPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
+import MyHeartsPage from "./pages/MyPage/MyHeartsPage";
+import SpotListPage from "./pages/SpotListPage/SpotListPage";
+import BestSnapPage from "./pages/MyPage/BestSnapPage";
 import KakaoLoginPage from "./pages/LoginPage/KakaoLoginPage";
 import RequestList from "./pages/Photographer/RequestList";
 import ReservationList from "./pages/Photographer/ReservationList";
@@ -23,9 +28,9 @@ import Introduction from "./pages/Photographer/Introduction";
 function App() {
   return (
     <>
-      <Header />
       <Routes>
-        <Route path="/photographer/mypage" element={<MyPage />} />
+        <Route path="mypage" element={<UserMypage />} />
+
         <Route path="/photographer/reserve" element={<Reservation />} />
         <Route
           path="/photographer/reserve/:id"
@@ -42,6 +47,9 @@ function App() {
         <Route path="photographer/introduction" element={<Introduction />} />
         <Route path="mypage/reservation" element={<MyReservePage />} />
         <Route path="mypage/reservation/:id" element={<DetailReservePage />} />
+        <Route path="mypage/settings" element={<SettingsPage />} />
+        <Route path="mypage/hearts" element={<MyHeartsPage />} />
+        <Route path="mypage/best-snap" element={<BestSnapPage />} />
         {/* 회원가입 */}
         <Route path="/signup/member" element={<SignUpMemberPage />} />
         <Route path="/signup/:memberType/info" element={<SignUpInfoPage />} />
@@ -50,6 +58,7 @@ function App() {
 
         <Route path="/search" element={<SearchPage />} />
         <Route path="/photographer" element={<Photographerlist />} />
+        <Route path="/spot-list" element={<SpotListPage />} />
       </Routes>
       <Footer />
     </>

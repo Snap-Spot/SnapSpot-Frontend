@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import close from "../../../assets/mypage/modals/close.png";
 import { useEffect } from "react";
 
-const ModalTemplate = ({ title, content, setShowModal }) => {
+const ModalTemplate = ({ isOverflow = 0, title, content, setShowModal }) => {
   useEffect(() => {
     //모달 뒤 배경 스크롤 막기
     document.body.style.cssText = `
@@ -23,7 +23,7 @@ const ModalTemplate = ({ title, content, setShowModal }) => {
   };
   return (
     <Wrapper onClick={closeModal}>
-      <Modal onClick={(e) => e.stopPropagation()}>
+      <Modal $isOverflow={isOverflow} onClick={(e) => e.stopPropagation()}>
         <div className="title">
           {title}
           <img src={close} alt="" onClick={closeModal} />
@@ -55,6 +55,11 @@ const Wrapper = styled.div`
 `;
 
 const Modal = styled.div`
+  margin-top: ${(props) => (props.$isOverflow === 1 ? "400px" : "0px")};
+  @media (max-width: 768px) {
+    //모바일
+    margin-top: ${(props) => (props.$isOverflow === 1 ? "200px" : "0px")};
+  }
   width: 880px;
   display: flex;
   flex-direction: column;
@@ -78,6 +83,7 @@ const Modal = styled.div`
     font-size: 24px;
     font-weight: 700;
     img {
+      cursor: pointer;
       height: 32px;
       width: 32px;
     }

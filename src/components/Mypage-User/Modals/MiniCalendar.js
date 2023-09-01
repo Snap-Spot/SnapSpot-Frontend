@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 import { enUS } from "date-fns/locale";
 import getYear from "date-fns/getYear";
 import getMonth from "date-fns/getMonth";
-import previousarrow from "../../assets/search/previousarrow.png";
-import nextarrow from "../../assets/search/nextarrow.png";
+import previousarrow from "../../../assets/search/previousarrow.png";
+import nextarrow from "../../../assets/search/nextarrow.png";
 import styled from "styled-components";
 
 const months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
@@ -24,22 +24,43 @@ const customKoLocale = {
   },
 };
 
-function CustomCalender() {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(null);
-  const onChange = (dates) => {
-    const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
+function MiniCalendar({
+  setIsOpenCalendar,
+  setStringdate,
+  setPrevDate,
+  prevDate,
+}) {
+  const [selectedDate, setSelectedDate] = useState(prevDate);
+
+  const onChange = (date) => {
+    setSelectedDate(date[0]);
+    setPrevDate(date[0]);
+
+    setTimeout(() => {
+      formatDate(date[0]);
+      setIsOpenCalendar(false);
+    }, 400);
+  };
+
+  const formatDate = (date) => {
+    const week = ["일", "월", "화", "수", "목", "금", "토"];
+
+    const strDate = JSON.stringify(date);
+    const year = strDate.substring(1, 5);
+    const month = strDate.substring(6, 8);
+    const day = parseInt(strDate.substring(9, 11));
+    const dayOfWeek = week[new Date(strDate.substring(1, 11)).getDay() % 7];
+
+    setStringdate(
+      year + "년 " + month + "월 " + day + "일 " + dayOfWeek + "요일"
+    );
   };
 
   return (
     <StyledCalendar>
       <DatePicker
-        selected={startDate}
+        selected={prevDate}
         onChange={onChange}
-        startDate={startDate}
-        endDate={endDate}
         selectsRange
         inline
         locale={customKoLocale}
@@ -77,10 +98,12 @@ function CustomCalender() {
   );
 }
 
-export default CustomCalender;
+export default MiniCalendar;
 
 const StyledCalendar = styled.div`
   margin-top: 1rem;
+  z-index: 1;
+  position: absolute;
 
   @media (max-width: 768px) {
     font-size: 1rem;
@@ -88,12 +111,16 @@ const StyledCalendar = styled.div`
   }
 
   .react-datepicker {
-    border: none;
+    border: 1px solid var(--darkgrey, #777);
+    border-radius: 20px;
+    background: var(--lesswhite, #f6f6f6);
   }
 
   .react-datepicker__header {
     background-color: white;
     border: 0;
+    border-radius: 20px;
+    background: var(--lesswhite, #f6f6f6);
   }
 
   .month-day {
@@ -125,7 +152,7 @@ const StyledCalendar = styled.div`
   .react-datepicker__day-name {
     width: 1.7rem;
     @media (max-width: 768px) {
-      width: 2.5rem;
+      width: 1.3rem;
       margin: 0.1rem 0.4rem;
       /* font-size: 1rem; */
     }
@@ -145,7 +172,7 @@ const StyledCalendar = styled.div`
     font-weight: 400;
     line-height: normal;
     @media (max-width: 768px) {
-      width: 2.5rem;
+      width: 1.3rem;
       margin: 0.17rem 0.4rem;
       font-size: 1rem;
     }
@@ -163,8 +190,7 @@ const StyledCalendar = styled.div`
       font-size: 1rem;
     }
   }
-  .react-datepicker__day--selected,
-  .react-datepicker__day--in-range {
+  .react-datepicker__day--selected {
     color: var(--lesswhite, #f6f6f6);
     text-align: center;
 
@@ -179,23 +205,19 @@ const StyledCalendar = styled.div`
       font-size: 1rem;
     }
   }
-  .react-datepicker__day--in-selecting-range {
-    background: #b1b0ef;
-    @media (max-width: 768px) {
-      font-size: 15px;
-    }
-  }
 
   .customHeaderContainer {
+    width: 95%;
+    margin: 0 auto;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     height: 100%;
     margin-bottom: 1.3rem;
-    background-color: white;
+    background: var(--lesswhite, #f6f6f6);
     border: none;
     @media (max-width: 768px) {
-      margin-bottom: 0.7rem;
+      margin-bottom: 0.3rem;
     }
   }
   img {
