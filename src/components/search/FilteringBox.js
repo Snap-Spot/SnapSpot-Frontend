@@ -278,15 +278,14 @@ const Region = styled.div`
 
   `}
 
-  
-@media (max-width: 768px) {
+  @media (max-width: 768px) {
     width: 100%;
     display: flex;
     flex-direction: row;
     white-space: nowrap;
     justify-content: center;
     align-items: center;
-    
+
     color: #000;
     text-align: center;
 
@@ -301,9 +300,8 @@ const Region = styled.div`
       props.isSelected &&
       `
       font-weight: 700;
-      color: #3C3AAC;
-;
-`}
+      color: #3C3AAC;`}
+  }
 `;
 
 const SubregionList = styled.div`
