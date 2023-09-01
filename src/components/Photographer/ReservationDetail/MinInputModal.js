@@ -45,7 +45,7 @@ const WarnIcon = styled.img`
 
 const Conatiner = styled.div`
   position: absolute;
-  top: 18rem;
+  top: 14rem;
   display: flex;
   width: 40rem;
   padding: 50px 40px;

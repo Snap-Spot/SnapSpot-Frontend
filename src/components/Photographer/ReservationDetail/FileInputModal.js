@@ -206,7 +206,7 @@ const ConfirmBtn = styled(CancelBtn)`
 
 const Conatiner = styled.div`
   position: absolute;
-  top: 18rem;
+  top: 14rem;
   display: flex;
   width: 40rem;
   padding: 40px 40px;
