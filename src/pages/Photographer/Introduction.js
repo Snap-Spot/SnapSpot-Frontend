@@ -3,11 +3,12 @@ import photo from "../../assets/photograph/photo.png";
 import heart from "../../assets/photograph/heart_.png";
 import ReviewBox from "../../components/Photographer/Review/ReviewBox";
 import Paging from "../../components/Photographer/Review/Paging/Paging";
-import Filtering from "../../components/Photographer/Introduction/Filtering";
+import Filtering from "../../components/Photographer/Introduction/ReviewFiltering";
 import Carousel from "../../components/Photographer/Introduction/Carousel";
 import ReviewPhoto from "../../components/Photographer/Introduction/ReviewPhoto";
 import { useEffect, useState } from "react";
 import Header from "../../components/common/Header";
+import ReservationModal from "../../components/Photographer/Introduction/ReservationModal";
 import carousel from "../../assets/photograph/carousel.png";
 import carousel2 from "../../assets/photograph/carousel2.png";
 import carousel3 from "../../assets/photograph/carousel3.png";
@@ -20,6 +21,7 @@ const Introduction = () => {
   const [indexOfLastPost, setIndexOfLastPost] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
   const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
   const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
+  const [modalOpen, setModalOpen] = useState(false);
 
   const list = [carousel3, carousel, carousel2]; // 캐러셀 이미지
 
@@ -113,6 +115,7 @@ const Introduction = () => {
   return (
     <Center>
       <Header />
+      {modalOpen && <ReservationModal setModalOpen={setModalOpen} />}
       <Container>
         <Title>작가님을 소개합니다!</Title>
         <ProfileContainer>
@@ -146,7 +149,9 @@ const Introduction = () => {
             </ProfileContainer>
           </Contents>
         </ProfileContainer>
-        <ReservationBtn>예약하기</ReservationBtn>
+        <ReservationBtn onClick={() => setModalOpen(true)}>
+          예약하기
+        </ReservationBtn>
       </Container>
       {/* 캐러셀 */}
       <Carousel carouselList={list} />

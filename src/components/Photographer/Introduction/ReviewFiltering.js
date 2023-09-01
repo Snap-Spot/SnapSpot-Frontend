@@ -2,12 +2,13 @@ import styled from "styled-components";
 import btn from "../../../assets/photograph/filterbtn.png";
 import { useState } from "react";
 
-const Filtering = ({ option, short }) => {
+const ReviewFiltering = () => {
   const [toggle, setToggle] = useState(false);
   const [select, setSelect] = useState("");
+  const option = ["별점 높은 순", "최신 순"];
 
   return (
-    <FilterContainer open={toggle} select={select} short={short}>
+    <FilterContainer open={toggle}>
       <BaseLine>
         <OptionContainer>
           {toggle ? (
@@ -39,17 +40,14 @@ const Filtering = ({ option, short }) => {
 
 const FilterContainer = styled.div`
   display: flex;
+  width: 140px;
+  height: 30px;
+  padding: 9px 32px;
+  padding-right: 9px;
   align-items: center;
-  width: ${(props) => (props.short ? "90px" : "140px")};
-  height: 44px;
-  border-radius: 22px;
-  border: 1px solid black;
-  background-color: #f6f6f6;
-  padding-left: 0.9rem;
-  font-size: 20px;
-  padding-top: 0.3rem;
-  padding-bottom: 0.2rem;
-  height: ${(props) => (props.open ? "200px" : "37px")};
+  border-radius: 32px;
+  background: var(--transparent-grey, rgba(129, 129, 129, 0.4));
+  height: ${(props) => (props.open ? "80px" : "37px")};
 `;
 
 const BaseLine = styled.div`
@@ -62,8 +60,7 @@ const P = styled.p`
   cursor: pointer;
   margin-bottom: ${(props) => (props.toggle ? "0.9rem" : "1.2rem")};
   margin-top: 0.5rem;
-  margin-right: ${(props) => (props.select === "기타" ? "1.6rem" : "")};
-  font-size: 20px;
+  margin-right: ${(props) => (props.select === "최신 순" ? "1.6rem" : "")};
 
   @media (max-width: 768px) {
     font-size: 14px;
@@ -85,4 +82,4 @@ const Btn = styled.img`
   transform: ${(props) => (props.open ? "rotate(180deg)" : "rotate(0deg)")};
 `;
 
-export default Filtering;
+export default ReviewFiltering;
