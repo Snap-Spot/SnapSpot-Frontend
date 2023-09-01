@@ -3,6 +3,7 @@ import arrow from "../../assets/photograph/arrow.png";
 import ScheduleBox from "../../components/Photographer/Reservation/ScheduleBox";
 import UpcomingSchedule from "../../components/Photographer/Reservation/UpcomingSchedule";
 import Calendar from "../../components/Photographer/Reservation/Calendar";
+import Header from "../../components/common/Header";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -62,6 +63,7 @@ const Reservation = () => {
 
   return (
     <Center>
+      <Header />
       <Container>
         <Title>스냅사진 예약 내역</Title>
         <ReservationContainer>
