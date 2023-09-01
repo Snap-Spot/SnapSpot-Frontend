@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import UpcomingSchedule from "../../components/Photographer/Reservation/UpcomingSchedule";
+import Header from "../../components/common/Header";
 
 const RequestList = () => {
   const mockData2 = [
@@ -40,6 +41,7 @@ const RequestList = () => {
 
   return (
     <Center>
+      <Header />
       <RequestContainer>
         <Title>스냅 사진 촬영 요청 목록</Title>
         {mockData2.map((item, idx) => (

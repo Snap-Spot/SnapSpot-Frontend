@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import ScheduleDetail from "../../components/Photographer/ReservationDetail/ScheduleDetail";
+import Header from "../../components/common/Header";
 
 const ReservationDetail = () => {
   return (
     <Center>
+      <Header />
       <Container>
         <Title>스냅사진 예약 상세내역</Title>
         <ScheduleDetail

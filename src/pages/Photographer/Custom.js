@@ -11,6 +11,7 @@ import Dropdown from "../../components/Photographer/Custom/Dropdown";
 import SNSInput from "../../components/Photographer/Custom/SNSInput";
 import { useState, useEffect, useRef } from "react";
 import Calender from "../../components/Photographer/Custom/Calendar";
+import Header from "../../components/common/Header";
 
 const Custom = () => {
   const [imgfile, setImgFile] = useState([]); // 가격표 이미지
@@ -100,6 +101,7 @@ const Custom = () => {
 
   return (
     <Center>
+      <Header />
       <Container>
         <Title>작가 페이지 커스텀</Title>
         <Line />

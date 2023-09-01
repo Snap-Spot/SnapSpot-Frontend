@@ -7,7 +7,7 @@ import Filtering from "../../components/Photographer/Introduction/Filtering";
 import Carousel from "../../components/Photographer/Introduction/Carousel";
 import ReviewPhoto from "../../components/Photographer/Introduction/ReviewPhoto";
 import { useEffect, useState } from "react";
-
+import Header from "../../components/common/Header";
 import carousel from "../../assets/photograph/carousel.png";
 import carousel2 from "../../assets/photograph/carousel2.png";
 import carousel3 from "../../assets/photograph/carousel3.png";
@@ -112,6 +112,7 @@ const Introduction = () => {
 
   return (
     <Center>
+      <Header />
       <Container>
         <Title>작가님을 소개합니다!</Title>
         <ProfileContainer>

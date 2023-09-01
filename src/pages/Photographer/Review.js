@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import ReviewBox from "../../components/Photographer/Review/ReviewBox";
 import Paging from "../../components/Photographer/Review/Paging/Paging";
+import Header from "../../components/common/Header";
 import { useEffect, useState } from "react";
 
 const Review = () => {
@@ -101,6 +102,7 @@ const Review = () => {
 
   return (
     <Center>
+      <Header />
       <Container>
         <Title>리뷰 리스트</Title>
         <Length>총 {products.length}개</Length>
