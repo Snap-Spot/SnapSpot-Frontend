@@ -14,7 +14,7 @@ import Calender from "../../components/Photographer/Custom/Calendar";
 import Header from "../../components/common/Header";
 
 const Custom = () => {
-  const [imgfile, setImgFile] = useState([]); // 가격표 이미지
+  const [imgfile, setImgFile] = useState(""); // 가격표 이미지
   const [profileImg, setProfileImg] = useState(""); // 프로필 이미지
   const [featuredImgfiles, setFeaturedImgFiles] = useState([]); // 대표 이미지
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -41,7 +41,7 @@ const Custom = () => {
     },
   ]; // sns 아이콘 리스트
 
-  const imgRef = useRef([]);
+  const imgRef = useRef();
   const imgRef2 = useRef();
   const featuredImgRef = useRef([]);
 
@@ -57,19 +57,17 @@ const Custom = () => {
 
   // 가격표 이미지 프리뷰
   const saveImgFile = () => {
-    const file = imgRef.current[imgfile.length].files[0];
+    const file = imgRef.current.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setImgFile((prevImgFiles) => [...prevImgFiles, reader.result]);
+      setImgFile(reader.result);
     };
   };
 
   // 가격표 이미지 프리뷰 삭제
-  const deleteFileImg = (index) => {
-    const updatedFiles = [...imgfile];
-    updatedFiles[index] = null;
-    setImgFile(updatedFiles);
+  const deleteFileImg = () => {
+    setImgFile("");
   };
 
   // 대표 이미지 프리뷰
@@ -87,6 +85,8 @@ const Custom = () => {
     const updatedFiles = featuredImgfiles.filter((_, i) => i !== index);
     setFeaturedImgFiles(updatedFiles);
   };
+
+  // 뷰포트 변화 감지
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -126,21 +126,19 @@ const Custom = () => {
             <Input />
             <SubTitle>가격표 사진 업로드</SubTitle>
             <Row2>
-              {imgfile.map((imgFile, index) => (
-                <ImgContainer key={index} imgfile={imgFile}>
-                  <PreImgs
-                    src={imgFile ? imgFile : ``}
-                    onClick={() => deleteFileImg(index)}
-                  />
-                </ImgContainer>
-              ))}
+              <ImgContainer imgfile={imgfile}>
+                <PreImgs
+                  src={imgfile ? imgfile : ``}
+                  onClick={() => deleteFileImg()}
+                />
+              </ImgContainer>
               <InputImg
                 type="file"
                 name="file"
                 id={`file-${imgfile.length}-price`}
                 accept="image/*"
                 onChange={saveImgFile}
-                ref={(el) => (imgRef.current[imgfile.length] = el)}
+                ref={imgRef}
               />
               <label htmlFor={`file-${imgfile.length}-price`}>
                 <Plus src={plus} />
