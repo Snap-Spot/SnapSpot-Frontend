@@ -34,6 +34,11 @@ const BG = styled.div`
 const Content = styled.p`
   color: var(--darkgrey, #777);
   margin-top: 0.4rem;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    margin-top: 0;
+  }
 `;
 
 const WarnIcon = styled.img`
@@ -55,6 +60,11 @@ const Conatiner = styled.div`
   background: var(--lesswhite, #f6f6f6);
   z-index: 2;
   padding-top: 1.5rem;
+
+  @media (max-width: 768px) {
+    width: 19rem;
+    padding: 20px 20px;
+  }
 `;
 
 const CancelBtn = styled.img`
