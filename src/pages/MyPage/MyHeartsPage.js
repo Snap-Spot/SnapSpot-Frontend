@@ -123,13 +123,14 @@ const MyHeartsPage = () => {
 export default MyHeartsPage;
 
 const Wrapper = styled.div`
-  width: 1048px;
+  width: 75%;
+
   margin: 0px auto;
   margin-top: 94px;
   @media (max-width: 768px) {
     margin: 0 auto;
     margin-top: 17px;
-    width: 366px;
+    width: 90%;
   }
 
   .title {
@@ -148,20 +149,22 @@ const GridBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 1048px;
+  margin: 0 auto;
+
   .grid {
+    width: 100%;
+
     display: grid;
-    align-items: center;
-    justify-content: center;
-    grid-template-columns: 320px 320px 320px;
-    grid-template-rows: repeat(3, minmax(100px, auto));
+    justify-content: space-between;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+
     column-gap: 44px;
     row-gap: 100px;
 
     margin-top: 56px;
-
     @media (max-width: 768px) {
-      grid-template-columns: 112px 112px 112px;
-      grid-template-rows: repeat(3, minmax(20px, auto));
       column-gap: 15px;
       row-gap: 20px;
 

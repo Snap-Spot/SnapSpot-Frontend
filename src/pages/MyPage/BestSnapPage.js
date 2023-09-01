@@ -36,7 +36,7 @@ const BestSnapPage = () => {
 export default BestSnapPage;
 
 const Wrapper = styled.div`
-  width: 70%;
+  width: 75%;
   @media (max-width: 768px) {
     //모바일
     width: 90%;
