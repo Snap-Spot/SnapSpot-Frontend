@@ -134,7 +134,7 @@ const Main = styled.div`
       height: 1.5rem;
       justify-content: center;
       align-items: flex-end;
-      gap: 1.695rem;1225
+      gap: 1.695rem;
       flex-shrink: 0;
 
       @media (min-width: 769px) and (max-width: 1225px) {
