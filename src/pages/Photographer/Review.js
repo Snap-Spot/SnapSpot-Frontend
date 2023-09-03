@@ -101,38 +101,40 @@ const Review = () => {
   };
 
   return (
-    <Center>
+    <>
       <Header />
-      <Container>
-        <Title>리뷰 리스트</Title>
-        <Length>총 {products.length}개</Length>
-        <Line />
-        <ReviewContainer>
-          {currentPosts && products.length > 0 ? (
-            currentPosts.map((productData, idx) => (
-              <ReviewBox
-                key={idx}
-                type="list"
-                profile={productData.profile}
-                nickname={productData.nickname}
-                title={productData.title}
-                content={productData.content}
-                date={productData.date}
-                score={productData.score}
-              />
-            ))
-          ) : (
-            <div>리뷰가 없습니다.</div>
-          )}
-        </ReviewContainer>
-        <Paging
-          page={currentPage}
-          count={count}
-          setPage={setPage}
-          itemsCountPerPage={6}
-        />
-      </Container>
-    </Center>
+      <Center>
+        <Container>
+          <Title>리뷰 리스트</Title>
+          <Length>총 {products.length}개</Length>
+          <Line />
+          <ReviewContainer>
+            {currentPosts && products.length > 0 ? (
+              currentPosts.map((productData, idx) => (
+                <ReviewBox
+                  key={idx}
+                  type="list"
+                  profile={productData.profile}
+                  nickname={productData.nickname}
+                  title={productData.title}
+                  content={productData.content}
+                  date={productData.date}
+                  score={productData.score}
+                />
+              ))
+            ) : (
+              <div>리뷰가 없습니다.</div>
+            )}
+          </ReviewContainer>
+          <Paging
+            page={currentPage}
+            count={count}
+            setPage={setPage}
+            itemsCountPerPage={6}
+          />
+        </Container>
+      </Center>
+    </>
   );
 };
 

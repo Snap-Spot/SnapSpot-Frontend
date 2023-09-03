@@ -40,26 +40,28 @@ const RequestList = () => {
   ];
 
   return (
-    <Center>
+    <>
       <Header />
-      <RequestContainer>
-        <Title>스냅 사진 촬영 요청 목록</Title>
-        {mockData2.map((item, idx) => (
-          <UpcomingSchedule
-            key={idx}
-            nickname={item.nickname}
-            snapType={item.snapType}
-            headCount={item.headCount}
-            time={item.time}
-            place={item.place}
-            requirement={item.requirement}
-            date={item.date}
-            num={item.num}
-            id={item.id}
-          />
-        ))}
-      </RequestContainer>
-    </Center>
+      <Center>
+        <RequestContainer>
+          <Title>스냅 사진 촬영 요청 목록</Title>
+          {mockData2.map((item, idx) => (
+            <UpcomingSchedule
+              key={idx}
+              nickname={item.nickname}
+              snapType={item.snapType}
+              headCount={item.headCount}
+              time={item.time}
+              place={item.place}
+              requirement={item.requirement}
+              date={item.date}
+              num={item.num}
+              id={item.id}
+            />
+          ))}
+        </RequestContainer>
+      </Center>
+    </>
   );
 };
 

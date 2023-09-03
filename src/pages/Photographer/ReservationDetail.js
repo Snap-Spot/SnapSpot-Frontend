@@ -4,20 +4,22 @@ import Header from "../../components/common/Header";
 
 const ReservationDetail = () => {
   return (
-    <Center>
+    <>
       <Header />
-      <Container>
-        <Title>스냅사진 예약 상세내역</Title>
-        <ScheduleDetail
-          nickname="kui01"
-          reservationNum="01234567812423"
-          time="12:30 ~ 14:30"
-          place="뚝섬유원지"
-          requirement="편안한 분위기에서 촬영하고 싶어요!"
-          date="2023.05.16.화"
-        />
-      </Container>
-    </Center>
+      <Center>
+        <Container>
+          <Title>스냅사진 예약 상세내역</Title>
+          <ScheduleDetail
+            nickname="kui01"
+            reservationNum="01234567812423"
+            time="12:30 ~ 14:30"
+            place="뚝섬유원지"
+            requirement="편안한 분위기에서 촬영하고 싶어요!"
+            date="2023.05.16.화"
+          />
+        </Container>
+      </Center>
+    </>
   );
 };
 

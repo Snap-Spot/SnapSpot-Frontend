@@ -40,26 +40,28 @@ const ReservationList = () => {
   ];
 
   return (
-    <Center>
+    <>
       <Header />
-      <ReservationContainer>
-        <Title>스냅 사진 예약 목록</Title>
-        {mockData2.map((item, idx) => (
-          <UpcomingSchedule
-            key={idx}
-            nickname={item.nickname}
-            snapType={item.snapType}
-            headCount={item.headCount}
-            time={item.time}
-            place={item.place}
-            requirement={item.requirement}
-            date={item.date}
-            num={item.num}
-            id={item.id}
-          />
-        ))}
-      </ReservationContainer>
-    </Center>
+      <Center>
+        <ReservationContainer>
+          <Title>스냅 사진 예약 목록</Title>
+          {mockData2.map((item, idx) => (
+            <UpcomingSchedule
+              key={idx}
+              nickname={item.nickname}
+              snapType={item.snapType}
+              headCount={item.headCount}
+              time={item.time}
+              place={item.place}
+              requirement={item.requirement}
+              date={item.date}
+              num={item.num}
+              id={item.id}
+            />
+          ))}
+        </ReservationContainer>
+      </Center>
+    </>
   );
 };
 

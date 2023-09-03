@@ -100,106 +100,110 @@ const Custom = () => {
   }, []);
 
   return (
-    <Center>
+    <>
       <Header />
-      <Container>
-        <Title>작가 페이지 커스텀</Title>
-        <Line />
-        <Row>
-          <label htmlFor="file">
-            <PhotoContainer>
-              <Profile src={profileImg ? profileImg : profile} />
-              <InputImg
-                type="file"
-                name="file"
-                id="file"
-                accept="image/*"
-                onChange={saveProfileImgFile}
-                ref={imgRef2}
-              ></InputImg>
-              <Change>작가 사진 변경</Change>
-            </PhotoContainer>
-          </label>
-          {isMobile && <Line2 />}
-          <InputContainer>
-            <SubTitle>작가명</SubTitle>
-            <Input />
-            <SubTitle>가격표 사진 업로드</SubTitle>
-            <Row2>
-              <ImgContainer imgfile={imgfile}>
-                <PreImgs
-                  src={imgfile ? imgfile : ``}
-                  onClick={() => deleteFileImg()}
-                />
-              </ImgContainer>
-              <InputImg
-                type="file"
-                name="file"
-                id={`file-${imgfile.length}-price`}
-                accept="image/*"
-                onChange={saveImgFile}
-                ref={imgRef}
-              />
-              <label htmlFor={`file-${imgfile.length}-price`}>
-                <Plus src={plus} />
-              </label>
-            </Row2>
-          </InputContainer>
-        </Row>
-        <Line2 />
-        <Center2>
-          <InputContainer>
-            <SubTitle>활동 지역 설정</SubTitle>
-            <Input />
-            <SubTitle>SNS 등록</SubTitle>
-            {icon_src.map((item, idx) => (
-              <SNSInput key={idx} iconSrc={item.src} text={item.text} />
-            ))}
-            <SubTitle>한 줄 소개글 등록 (최대 500자)</SubTitle>
-            <Input2 />
-            <SubTitle>전문 분야 등록</SubTitle>
-            <Dropdown />
-            <SubTitle>태그 입력</SubTitle>
-            <TagInput />
-            <TagInput />
-            <TagInput />
-            <SubTitle>불가능한 날짜 선택</SubTitle>
-            <Calender />
-            <SubTitle>대표 사진 업로드 (최대 10장)</SubTitle>
-            {featuredImgfiles.map((imgfile, index) => (
-              <ImgContainer key={index} imgfile={imgfile}>
-                {imgfile && (
-                  <PreImgs
-                    src={imgfile}
-                    onClick={() => deleteFileImgs(index)}
-                  />
-                )}
-              </ImgContainer>
-            ))}
-            <InputImg
-              type="file"
-              name="file"
-              id={`file-${featuredImgfiles.length}`}
-              accept="image/*"
-              onChange={saveImgFiles}
-              ref={(el) =>
-                (featuredImgRef.current[featuredImgfiles.length] = el)
-              }
-            />
-            <label htmlFor={`file-${featuredImgfiles.length}`}>
-              {featuredImgfiles.length < 10 && (
-                <>
-                  {[...Array(10 - featuredImgfiles.length)].map((_, index) => (
-                    <InputImg2 key={index} src={imgPlus} />
-                  ))}
-                </>
-              )}
+      <Center>
+        <Container>
+          <Title>작가 페이지 커스텀</Title>
+          <Line />
+          <Row>
+            <label htmlFor="file">
+              <PhotoContainer>
+                <Profile src={profileImg ? profileImg : profile} />
+                <InputImg
+                  type="file"
+                  name="file"
+                  id="file"
+                  accept="image/*"
+                  onChange={saveProfileImgFile}
+                  ref={imgRef2}
+                ></InputImg>
+                <Change>작가 사진 변경</Change>
+              </PhotoContainer>
             </label>
-          </InputContainer>
-        </Center2>
-        <ChangeBtn>변경하기</ChangeBtn>
-      </Container>
-    </Center>
+            {isMobile && <Line2 />}
+            <InputContainer>
+              <SubTitle>작가명</SubTitle>
+              <Input />
+              <SubTitle>가격표 사진 업로드</SubTitle>
+              <Row2>
+                <ImgContainer imgfile={imgfile}>
+                  <PreImgs
+                    src={imgfile ? imgfile : ``}
+                    onClick={() => deleteFileImg()}
+                  />
+                </ImgContainer>
+                <InputImg
+                  type="file"
+                  name="file"
+                  id={`file-${imgfile.length}-price`}
+                  accept="image/*"
+                  onChange={saveImgFile}
+                  ref={imgRef}
+                />
+                <label htmlFor={`file-${imgfile.length}-price`}>
+                  <Plus src={plus} />
+                </label>
+              </Row2>
+            </InputContainer>
+          </Row>
+          <Line2 />
+          <Center2>
+            <InputContainer>
+              <SubTitle>활동 지역 설정</SubTitle>
+              <Input />
+              <SubTitle>SNS 등록</SubTitle>
+              {icon_src.map((item, idx) => (
+                <SNSInput key={idx} iconSrc={item.src} text={item.text} />
+              ))}
+              <SubTitle>한 줄 소개글 등록 (최대 500자)</SubTitle>
+              <Input2 />
+              <SubTitle>전문 분야 등록</SubTitle>
+              <Dropdown />
+              <SubTitle>태그 입력</SubTitle>
+              <TagInput />
+              <TagInput />
+              <TagInput />
+              <SubTitle>불가능한 날짜 선택</SubTitle>
+              <Calender />
+              <SubTitle>대표 사진 업로드 (최대 10장)</SubTitle>
+              {featuredImgfiles.map((imgfile, index) => (
+                <ImgContainer key={index} imgfile={imgfile}>
+                  {imgfile && (
+                    <PreImgs
+                      src={imgfile}
+                      onClick={() => deleteFileImgs(index)}
+                    />
+                  )}
+                </ImgContainer>
+              ))}
+              <InputImg
+                type="file"
+                name="file"
+                id={`file-${featuredImgfiles.length}`}
+                accept="image/*"
+                onChange={saveImgFiles}
+                ref={(el) =>
+                  (featuredImgRef.current[featuredImgfiles.length] = el)
+                }
+              />
+              <label htmlFor={`file-${featuredImgfiles.length}`}>
+                {featuredImgfiles.length < 10 && (
+                  <>
+                    {[...Array(10 - featuredImgfiles.length)].map(
+                      (_, index) => (
+                        <InputImg2 key={index} src={imgPlus} />
+                      )
+                    )}
+                  </>
+                )}
+              </label>
+            </InputContainer>
+          </Center2>
+          <ChangeBtn>변경하기</ChangeBtn>
+        </Container>
+      </Center>
+    </>
   );
 };
 

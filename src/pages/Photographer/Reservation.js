@@ -62,74 +62,76 @@ const Reservation = () => {
   ];
 
   return (
-    <Center>
+    <>
       <Header />
-      <Container>
-        <Title>스냅사진 예약 내역</Title>
-        <ReservationContainer>
-          <Calendar
-            setSelect={setSelectDate}
-            select={selectDate}
-            setMonth={setSelectMonth}
-            month={selectMonth}
-          />
-          <ScheduleContainer>
-            <SelectedDate>
-              {selectMonth + 1}월 {selectDate}일 화요일
-            </SelectedDate>
-            {mockData.map((item, idx) => (
-              <ScheduleBox
-                key={idx}
-                nickname={item.nickname}
-                snapType={item.snapType}
-                headCount={item.headCount}
-                time={item.time}
-                place={item.place}
-                requirement={item.requirement}
-                idx={idx}
-                id={item.id}
-              />
-            ))}
-          </ScheduleContainer>
-        </ReservationContainer>
-        <Title onClick={() => navigate("/photographer/request")}>
-          새로 들어온 <Highlight>촬영 요청</Highlight>이 있어요
-          <Arrow src={arrow} />
-        </Title>
-        {mockData2.map((item, idx) => (
-          <UpcomingSchedule
-            key={idx}
-            nickname={item.nickname}
-            snapType={item.snapType}
-            headCount={item.headCount}
-            time={item.time}
-            place={item.place}
-            requirement={item.requirement}
-            date={item.date}
-            num={item.num}
-            id={item.id}
-          />
-        ))}
-        <Title2 onClick={() => navigate("/photographer/reservationlist")}>
-          곧 돌아오는 <Highlight>촬영 일정</Highlight>이 있어요
-          <Arrow src={arrow} />
-        </Title2>
-        {mockData2.map((item, idx) => (
-          <UpcomingSchedule
-            key={idx}
-            nickname={item.nickname}
-            snapType={item.snapType}
-            headCount={item.headCount}
-            time={item.time}
-            place={item.place}
-            requirement={item.requirement}
-            date={item.date}
-            num={item.num}
-            id={item.id}
-          />
-        ))}
-      </Container>
-    </Center>
+      <Center>
+        <Container>
+          <Title>스냅사진 예약 내역</Title>
+          <ReservationContainer>
+            <Calendar
+              setSelect={setSelectDate}
+              select={selectDate}
+              setMonth={setSelectMonth}
+              month={selectMonth}
+            />
+            <ScheduleContainer>
+              <SelectedDate>
+                {selectMonth + 1}월 {selectDate}일 화요일
+              </SelectedDate>
+              {mockData.map((item, idx) => (
+                <ScheduleBox
+                  key={idx}
+                  nickname={item.nickname}
+                  snapType={item.snapType}
+                  headCount={item.headCount}
+                  time={item.time}
+                  place={item.place}
+                  requirement={item.requirement}
+                  idx={idx}
+                  id={item.id}
+                />
+              ))}
+            </ScheduleContainer>
+          </ReservationContainer>
+          <Title onClick={() => navigate("/photographer/request")}>
+            새로 들어온 <Highlight>촬영 요청</Highlight>이 있어요
+            <Arrow src={arrow} />
+          </Title>
+          {mockData2.map((item, idx) => (
+            <UpcomingSchedule
+              key={idx}
+              nickname={item.nickname}
+              snapType={item.snapType}
+              headCount={item.headCount}
+              time={item.time}
+              place={item.place}
+              requirement={item.requirement}
+              date={item.date}
+              num={item.num}
+              id={item.id}
+            />
+          ))}
+          <Title2 onClick={() => navigate("/photographer/reservationlist")}>
+            곧 돌아오는 <Highlight>촬영 일정</Highlight>이 있어요
+            <Arrow src={arrow} />
+          </Title2>
+          {mockData2.map((item, idx) => (
+            <UpcomingSchedule
+              key={idx}
+              nickname={item.nickname}
+              snapType={item.snapType}
+              headCount={item.headCount}
+              time={item.time}
+              place={item.place}
+              requirement={item.requirement}
+              date={item.date}
+              num={item.num}
+              id={item.id}
+            />
+          ))}
+        </Container>
+      </Center>
+    </>
   );
 };
 
@@ -180,6 +182,10 @@ const Title = styled.h2`
 
 const Title2 = styled(Title)`
   margin-top: 5rem;
+
+  @media (max-width: 768px) {
+    margin-top: 3rem;
+  }
 `;
 
 const ScheduleContainer = styled.div`

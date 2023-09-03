@@ -113,83 +113,85 @@ const Introduction = () => {
   ];
 
   return (
-    <Center>
+    <>
       <Header />
-      {modalOpen && <ReservationModal setModalOpen={setModalOpen} />}
-      <Container>
-        <Title>작가님을 소개합니다!</Title>
-        <ProfileContainer>
-          <Profile src={photo} />
-          <Contents>
-            <ProfileContainer>
-              <TitleContainer>
-                <SubTitle>작가명</SubTitle>
-                <SubTitle>가격표</SubTitle>
-              </TitleContainer>
-              <ContentContainer>
-                <Align>
-                  <HighLight>이명한 작가</HighLight>
-                  <Heart src={heart} />
-                </Align>
-                <Price>120,000원 ~</Price>
-              </ContentContainer>
-            </ProfileContainer>
-            <Line />
-            <ProfileContainer>
-              <TitleContainer>
-                <SubTitle>활동 지역</SubTitle>
-                <SubTitle>SNS</SubTitle>
-                <SubTitle>한 줄 소개</SubTitle>
-              </TitleContainer>
-              <ContentContainer>
-                <Content>제주도 전역 </Content>
-                <Content>인스타그램 @myonghans </Content>
-                <Content>빛과 그림자를 이용한 극적인 연출</Content>
-              </ContentContainer>
-            </ProfileContainer>
-          </Contents>
-        </ProfileContainer>
-        <ReservationBtn onClick={() => setModalOpen(true)}>
-          예약하기
-        </ReservationBtn>
-      </Container>
-      {/* 캐러셀 */}
-      <Carousel carouselList={list} />
-      <Container2>
-        {/* 후기 */}
-        <Review>후기</Review>
-        <ReviewPhoto />
-        <Row>
-          <Length>총 {products.length}개</Length>
-          <Filtering />
-        </Row>
-        <Line />
-        <ReviewContainer>
-          {currentPosts && products.length > 0 ? (
-            currentPosts.map((productData, idx) => (
-              <ReviewBox
-                key={idx}
-                type="list"
-                profile={productData.profile}
-                nickname={productData.nickname}
-                title={productData.title}
-                content={productData.content}
-                date={productData.date}
-                score={productData.score}
-              />
-            ))
-          ) : (
-            <div>리뷰가 없습니다.</div>
-          )}
-        </ReviewContainer>
-        <Paging
-          page={currentPage}
-          count={count}
-          setPage={setPage}
-          itemsCountPerPage={6}
-        />
-      </Container2>
-    </Center>
+      <Center>
+        {modalOpen && <ReservationModal setModalOpen={setModalOpen} />}
+        <Container>
+          <Title>작가님을 소개합니다!</Title>
+          <ProfileContainer>
+            <Profile src={photo} />
+            <Contents>
+              <ProfileContainer>
+                <TitleContainer>
+                  <SubTitle>작가명</SubTitle>
+                  <SubTitle>가격표</SubTitle>
+                </TitleContainer>
+                <ContentContainer>
+                  <Align>
+                    <HighLight>이명한 작가</HighLight>
+                    <Heart src={heart} />
+                  </Align>
+                  <Price>120,000원 ~</Price>
+                </ContentContainer>
+              </ProfileContainer>
+              <Line />
+              <ProfileContainer>
+                <TitleContainer>
+                  <SubTitle>활동 지역</SubTitle>
+                  <SubTitle>SNS</SubTitle>
+                  <SubTitle>한 줄 소개</SubTitle>
+                </TitleContainer>
+                <ContentContainer>
+                  <Content>제주도 전역 </Content>
+                  <Content>인스타그램 @myonghans </Content>
+                  <Content>빛과 그림자를 이용한 극적인 연출</Content>
+                </ContentContainer>
+              </ProfileContainer>
+            </Contents>
+          </ProfileContainer>
+          <ReservationBtn onClick={() => setModalOpen(true)}>
+            예약하기
+          </ReservationBtn>
+        </Container>
+        {/* 캐러셀 */}
+        <Carousel carouselList={list} />
+        <Container2>
+          {/* 후기 */}
+          <Review>후기</Review>
+          <ReviewPhoto />
+          <Row>
+            <Length>총 {products.length}개</Length>
+            <Filtering />
+          </Row>
+          <Line />
+          <ReviewContainer>
+            {currentPosts && products.length > 0 ? (
+              currentPosts.map((productData, idx) => (
+                <ReviewBox
+                  key={idx}
+                  type="list"
+                  profile={productData.profile}
+                  nickname={productData.nickname}
+                  title={productData.title}
+                  content={productData.content}
+                  date={productData.date}
+                  score={productData.score}
+                />
+              ))
+            ) : (
+              <div>리뷰가 없습니다.</div>
+            )}
+          </ReviewContainer>
+          <Paging
+            page={currentPage}
+            count={count}
+            setPage={setPage}
+            itemsCountPerPage={6}
+          />
+        </Container2>
+      </Center>
+    </>
   );
 };
 
