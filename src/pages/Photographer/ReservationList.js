@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import UpcomingSchedule from "../../components/Photographer/Reservation/UpcomingSchedule";
+import Header from "../../components/common/Header";
 
 const ReservationList = () => {
   const mockData2 = [
@@ -39,25 +40,28 @@ const ReservationList = () => {
   ];
 
   return (
-    <Center>
-      <ReservationContainer>
-        <Title>스냅 사진 예약 목록</Title>
-        {mockData2.map((item, idx) => (
-          <UpcomingSchedule
-            key={idx}
-            nickname={item.nickname}
-            snapType={item.snapType}
-            headCount={item.headCount}
-            time={item.time}
-            place={item.place}
-            requirement={item.requirement}
-            date={item.date}
-            num={item.num}
-            id={item.id}
-          />
-        ))}
-      </ReservationContainer>
-    </Center>
+    <>
+      <Header />
+      <Center>
+        <ReservationContainer>
+          <Title>스냅 사진 예약 목록</Title>
+          {mockData2.map((item, idx) => (
+            <UpcomingSchedule
+              key={idx}
+              nickname={item.nickname}
+              snapType={item.snapType}
+              headCount={item.headCount}
+              time={item.time}
+              place={item.place}
+              requirement={item.requirement}
+              date={item.date}
+              num={item.num}
+              id={item.id}
+            />
+          ))}
+        </ReservationContainer>
+      </Center>
+    </>
   );
 };
 

@@ -145,7 +145,7 @@ const ScheduleDetail = ({
           <>
             <AlertBtn>{btn_list[status]}</AlertBtn>
             {/* 리뷰 확인 */}
-            <SubTitle>이런 리뷰를 남겨주셨어요!</SubTitle>
+            <ReviewTitle>이런 리뷰를 남겨주셨어요!</ReviewTitle>
             <ReviewBox
               type="detail"
               profile=""
@@ -156,7 +156,7 @@ const ScheduleDetail = ({
               score="5.0"
             />
             {/* 메세지 확인 */}
-            <SubTitle>지금까지 보낸 메세지 확인하기</SubTitle>
+            <MessageTitle>지금까지 보낸 메세지 확인하기</MessageTitle>
             <ChatBox text="가나다라마바사" time="2023.06.28 오전 06:32" />
           </>
         )}
@@ -357,6 +357,20 @@ const SubTitle = styled.h3`
     font-size: 14px;
     margin-top: 0.6rem;
     width: 6rem;
+  }
+`;
+
+const ReviewTitle = styled(SubTitle)`
+  @media (max-width: 768px) {
+    width: 10rem;
+    margin-top: 5rem;
+  }
+`;
+
+const MessageTitle = styled(SubTitle)`
+  @media (max-width: 768px) {
+    width: 13rem;
+    margin-top: 5rem;
   }
 `;
 
