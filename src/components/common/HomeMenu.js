@@ -17,10 +17,6 @@ const HomeMenu = ({ isHomeMenuOpen, setIsHomeMenuOpen }) => {
     navigate(`/spot-list`);
   };
 
-  const onClickMyPage = () => {
-    navigate(`/mypage`);
-  };
-
   return (
     <Wrapper>
       <MenuDiv>

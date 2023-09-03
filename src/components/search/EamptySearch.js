@@ -110,10 +110,6 @@ export default EamptySearch;
 const Wrapper = styled.div`
   width: 100%;
   max-width: 1048px;
-
-  @media (max-width: 768px) {
-    width: 90%;
-  }
 `;
 
 const EmptySection = styled.div`
