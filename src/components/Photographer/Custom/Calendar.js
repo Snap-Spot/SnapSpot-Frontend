@@ -94,6 +94,10 @@ export default Calender;
 const StyledCalendar = styled.div`
   margin-top: 1rem;
   margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 30.5rem;
 
   @media (max-width: 768px) {
     font-size: 1rem;
