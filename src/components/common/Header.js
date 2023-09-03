@@ -95,7 +95,7 @@ const Header = () => {
           <SearchDiv>
             <Search>
               <input placeholder="찾고 싶은 스팟이나 사진작가를 검색하세요."></input>
-              <img nClick={onClickSearchBtn} src={search} alt="검색하기" />
+              <img onClick={onClickSearchBtn} src={search} alt="검색하기" />
             </Search>
           </SearchDiv>
         ) : null}

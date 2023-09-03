@@ -352,7 +352,6 @@ const GridBox = styled.div`
   .grid {
     position: relative;
     width: 95%;
-    /* z-index: -1; */
     display: grid;
     align-items: center;
     justify-content: center;

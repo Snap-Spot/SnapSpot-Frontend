@@ -108,15 +108,18 @@ const EamptySearch = () => {
 export default EamptySearch;
 
 const Wrapper = styled.div`
-  width: 1050px;
+  width: 100%;
+  max-width: 1048px;
+
   @media (max-width: 768px) {
-    width: 95%;
+    width: 90%;
   }
 `;
 
 const EmptySection = styled.div`
   display: flex;
   height: 17rem;
+  width: 100%;
 
   flex-direction: column;
   justify-content: center;
@@ -150,8 +153,7 @@ const EmptySection = styled.div`
 
 const Title = styled.div`
   display: flex;
-  width: 1050px;
-  /* margin-left: 14%; */
+  width: 100%;
   color: var(--black, #060606);
   font-family: Noto Sans KR;
   font-size: 1.1rem;
