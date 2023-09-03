@@ -128,9 +128,11 @@ const Introduction = () => {
 
   return (
     <>
-      <Header />
       <Center>
         {modalOpen && <ReservationModal setModalOpen={setModalOpen} />}
+      </Center>
+      <Header />
+      <Center>
         <Container>
           <Title>작가님을 소개합니다!</Title>
           <ProfileContainer>
