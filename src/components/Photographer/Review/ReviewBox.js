@@ -2,15 +2,7 @@ import styled from "styled-components";
 import star from "../../../assets/photograph/star.png";
 import { useState, useEffect } from "react";
 
-const ReviewBox = ({
-  type,
-  profile,
-  nickname,
-  title,
-  content,
-  date,
-  score,
-}) => {
+const ReviewBox = ({ profile, nickname, title, content, date, score }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   // 모바일 너비에서는 리뷰 상세내용 50자로 잘라서 보여주기
@@ -25,8 +17,8 @@ const ReviewBox = ({
   }, []);
 
   return (
-    <ReviewContainer border={type === "list" ? true : false}>
-      <ProfileContainer margin={type === "list" ? true : false}>
+    <ReviewContainer>
+      <ProfileContainer>
         <Profile src={profile} />
         <NickName>{nickname}</NickName>
       </ProfileContainer>
@@ -72,7 +64,7 @@ const Star = styled.img`
 const ReviewContainer = styled.div`
   height: 10rem;
   padding-top: 2.5rem;
-  border-bottom: ${(props) => (props.border ? "1px solid #d9d9d9" : "none")};
+  border-bottom: 1px solid #d9d9d9;
   display: flex;
   width: 100%;
 
@@ -88,7 +80,7 @@ const ReviewContainer = styled.div`
 const ProfileContainer = styled.div`
   display: flex;
   margin-right: 4rem;
-  margin-left: ${(props) => (props.margin ? "2.5rem" : "0.5rem")};
+  margin-left: 2.5rem;
 
   @media (max-width: 768px) {
     flex-direction: column;
