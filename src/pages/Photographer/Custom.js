@@ -226,7 +226,7 @@ const ImgContainer = styled.div`
   height: ${(props) => (props.imgfile ? "100%" : "0px")};
 
   @media (max-width: 768px) {
-    display: flex;
+    display: ${(props) => (props.imgfile ? "inline" : "none")};
   }
 `;
 
@@ -336,6 +336,7 @@ const Container = styled.div`
 
   @media (max-width: 768px) {
     width: 90%;
+    margin-bottom: 5rem;
   }
 `;
 
