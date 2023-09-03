@@ -234,8 +234,15 @@ const Wrapper = styled.div`
 `;
 
 const Content = styled.div`
+  width: 75%;
+  margin: 0px auto;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 `;
 
 const Box = styled.div`
@@ -339,26 +346,28 @@ const GridBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  max-width: 1048px;
 
   .grid {
     position: relative;
+    width: 95%;
     /* z-index: -1; */
     display: grid;
     align-items: center;
     justify-content: center;
-    grid-template-columns: 320px 320px 320px;
-    grid-template-rows: repeat(3, minmax(140px, auto));
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     column-gap: 44px;
     row-gap: 100px;
-
     margin-top: 4rem;
 
     @media (max-width: 768px) {
-      grid-template-columns: 112px 112px 112px;
-      grid-template-rows: repeat(3, minmax(20px, auto));
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
       column-gap: 15px;
       row-gap: 20px;
-
+      width: 100%;
       margin-top: 1.25rem;
     }
   }

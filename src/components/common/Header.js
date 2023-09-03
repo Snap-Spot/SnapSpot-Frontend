@@ -163,8 +163,6 @@ const Main = styled.div`
         width: 1.84rem;
         height: 1.5rem;
       }
-
-
     }
   }
 `;

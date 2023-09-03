@@ -28,7 +28,7 @@ export default SearchBox;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 320px;
+  max-width: 320px;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -38,25 +38,27 @@ const Wrapper = styled.div`
 
 const Photo = styled.div`
   display: flex;
-  width: 320px;
+  /* width: 100%; */
   height: 320px;
-  /* padding: 28px 20px 12px 20px; */
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
   gap: 8px;
   border-radius: 32px;
-  @media (max-width: 768px) {
-    width: 112px;
-    height: 112px;
-    border-radius: 8px;
-  }
+
   background: linear-gradient(
       180deg,
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 0.1) 100%
     ),
     url(${photo}) center/cover no-repeat, lightgray 50%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 112px;
+    border-radius: 8px;
+    background-size: cover;
+  }
 `;
 
 const Tag = styled.p`
@@ -76,11 +78,13 @@ const Tag = styled.p`
 const Info = styled.div`
   display: flex;
   flex-direction: column;
-  
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
+
 const Photographer = styled.div`
   color: #000;
-  /* web_b24 */
   font-family: Noto Sans KR;
   font-size: 24px;
   font-style: normal;
@@ -88,7 +92,6 @@ const Photographer = styled.div`
   line-height: normal;
 
   height: 35px;
-  /* margin-top: 20px; */
   @media (max-width: 768px) {
     font-size: 10px;
     height: 15px;
@@ -97,17 +100,15 @@ const Photographer = styled.div`
 const Region = styled.div`
   color: #777;
 
-  /* web_m18 */
   font-family: Noto Sans KR;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
 
-  width: 320px;
   @media (max-width: 768px) {
     font-size: 2px;
-    width: 108px;
+    /* width: 108px; */
   }
 `;
 const Price = styled.div`
@@ -120,12 +121,11 @@ const Price = styled.div`
   font-weight: 700;
   line-height: normal;
 
-  width: 320px;
   height: 35px;
   margin-top: 6px;
   @media (max-width: 768px) {
     font-size: 5px;
-    width: 108px;
+    /* width: 108px; */
     height: 10px;
   }
 `;
@@ -141,6 +141,7 @@ const TopInfo = styled.div`
     margin-top: 10px;
   }
 `;
+
 const Star = styled.div`
   color: #000;
   /* web_m20 */
@@ -155,7 +156,6 @@ const Star = styled.div`
   justify-content: center;
   img {
     margin-right: 0.4rem;
-    /* padding-top: 0.5rem; */
     width: 24px;
     height: 24px;
     @media (max-width: 768px) {
