@@ -5,6 +5,7 @@ import "../../components/Photographer/Review/Paging/Paging.css";
 import search from "../../assets/header/search.png";
 import FilteringBox from "../../components/search/FilteringBox";
 import SearchBox from "../../components/search/SearchBox";
+import Header from "../../components/common/Header";
 
 const Photographerlist = () => {
   const [info, setInfo] = useState(true);
@@ -176,6 +177,7 @@ const Photographerlist = () => {
 
   return (
     <>
+      <Header />
       <Wrapper>
         <Box>
           <TabBox>

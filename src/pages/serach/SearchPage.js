@@ -11,63 +11,66 @@ const SearchPage = () => {
   const [info, setInfo] = useState(false);
 
   return (
-    <Wrapper>
-      <SearchTitle>
-        <div class="subject">'에밀리’</div>에 대한 검색결과
-      </SearchTitle>
-      {info ? (
-        <div>
-          <RegionTitle>
-            <div class="subject">'제주도’</div>에서 활동하는 작가
-            <img src={more} />
-          </RegionTitle>
-          <div class="grid">
-            <div>
-              <SearchBox
-                tag="#커플스냅 #유채꽃 #화사함"
-                photographer="에밀리"
-                star="4.7"
-                region="제주도 서귀포"
-                price="130,000"
-                review="238"
-              />
-            </div>
-            <div>
-              <SearchBox
-                tag="#커플스냅 #유채꽃 #화사함"
-                photographer="에밀리"
-                star="4.7"
-                region="제주도 서귀포"
-                price="130,000"
-                review="238"
-              />
-            </div>
-            <div>
-              <SearchBox
-                tag="#커플스냅 #유채꽃 #화사함"
-                photographer="에밀리"
-                star="4.7"
-                region="제주도 서귀포"
-                price="130,000"
-                review="238"
-              />
-            </div>
-            <div>
-              <SearchBox
-                tag="#커플스냅 #유채꽃 #화사함"
-                photographer="에밀리"
-                star="4.7"
-                region="제주도 서귀포"
-                price="130,000"
-                review="238"
-              />
+    <>
+      <Header></Header>
+      <Wrapper>
+        <SearchTitle>
+          <div class="subject">'에밀리’</div>에 대한 검색결과
+        </SearchTitle>
+        {info ? (
+          <div>
+            <RegionTitle>
+              <div class="subject">'제주도’</div>에서 활동하는 작가
+              <img src={more} />
+            </RegionTitle>
+            <div class="grid">
+              <div>
+                <SearchBox
+                  tag="#커플스냅 #유채꽃 #화사함"
+                  photographer="에밀리"
+                  star="4.7"
+                  region="제주도 서귀포"
+                  price="130,000"
+                  review="238"
+                />
+              </div>
+              <div>
+                <SearchBox
+                  tag="#커플스냅 #유채꽃 #화사함"
+                  photographer="에밀리"
+                  star="4.7"
+                  region="제주도 서귀포"
+                  price="130,000"
+                  review="238"
+                />
+              </div>
+              <div>
+                <SearchBox
+                  tag="#커플스냅 #유채꽃 #화사함"
+                  photographer="에밀리"
+                  star="4.7"
+                  region="제주도 서귀포"
+                  price="130,000"
+                  review="238"
+                />
+              </div>
+              <div>
+                <SearchBox
+                  tag="#커플스냅 #유채꽃 #화사함"
+                  photographer="에밀리"
+                  star="4.7"
+                  region="제주도 서귀포"
+                  price="130,000"
+                  review="238"
+                />
+              </div>
             </div>
           </div>
-        </div>
-      ) : (
-        <EamptySearch />
-      )}
-    </Wrapper>
+        ) : (
+          <EamptySearch />
+        )}
+      </Wrapper>
+    </>
   );
 };
 
