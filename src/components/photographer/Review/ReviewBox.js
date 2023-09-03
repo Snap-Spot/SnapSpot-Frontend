@@ -71,9 +71,7 @@ const ReviewContainer = styled.div`
   @media (max-width: 768px) {
     width: 21rem;
     padding-top: 1.5rem;
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
-    height: 9.5rem;
+    height: 9rem;
   }
 `;
 
@@ -84,6 +82,7 @@ const ProfileContainer = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
+    align-items: center;
     margin-right: 1rem;
     margin-left: 0;
   }
@@ -106,6 +105,12 @@ const Profile = styled.img`
   height: 42px;
   margin-right: 0.7rem;
   border-radius: 100%;
+
+  @media (max-width: 768px) {
+    width: 30px;
+    height: 30px;
+    margin-right: 0;
+  }
 `;
 
 const NickName = styled.p`
@@ -113,7 +118,7 @@ const NickName = styled.p`
   margin-top: 0;
 
   @media (max-width: 768px) {
-    font-size: 0.8rem;
+    font-size: 0.6rem;
   }
 `;
 
@@ -125,7 +130,7 @@ const Title = styled.p`
 
   @media (max-width: 768px) {
     margin-top: 0.3rem;
-    font-size: 14px;
+    font-size: 13px;
   }
 `;
 
@@ -134,7 +139,7 @@ const Content = styled.p`
   font-size: 16px;
 
   @media (max-width: 768px) {
-    font-size: 13px;
+    font-size: 12px;
   }
 `;
 
@@ -143,6 +148,8 @@ const Date = styled.p`
 
   @media (max-width: 768px) {
     margin: 0;
+    font-size: 0.6rem;
+    color: #777777;
   }
 `;
 
