@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import cancel from "../../../assets/photograph/cancel.png";
-import btn from "../../../assets/photograph/filterbtn.png";
 import Filtering from "./Filtering";
 
 const ReservationModal = ({ setModalOpen }) => {
@@ -36,16 +35,6 @@ const ReservationModal = ({ setModalOpen }) => {
   );
 };
 
-const Btn = styled.img`
-  width: 46px;
-  height: 41px;
-  cursor: pointer;
-  position: relative;
-  top: 0.8rem;
-
-  transform: ${(props) => (props.open ? "rotate(180deg)" : "rotate(0deg)")};
-`;
-
 const BtnContainer = styled.div`
   display: flex;
   align-items: center;
@@ -53,7 +42,7 @@ const BtnContainer = styled.div`
   margin-top: 3rem;
 
   @media (max-width: 768px) {
-    margin-top: 1rem;
+    margin-top: 2.5rem;
   }
 `;
 
@@ -73,9 +62,12 @@ const CancelBtn = styled.button`
   cursor: pointer;
 
   @media (max-width: 768px) {
-    width: 130px;
-    height: 50px;
+    width: 120px;
+    height: 45px;
     border-radius: 15px;
+    font-size: 14px;
+    margin-right: 0.7rem;
+    margin-left: 0.7rem;
   }
 `;
 
@@ -94,6 +86,10 @@ const Header = styled.div`
 
 const Title = styled.h2`
   margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const CalendarInput = styled.input`
@@ -106,6 +102,12 @@ const CalendarInput = styled.input`
   padding-right: 0.6rem;
   font-size: 20px;
   outline: none;
+
+  @media (max-width: 768px) {
+    height: 38px;
+    width: 170px;
+    font-size: 16px;
+  }
 `;
 
 const TimeInput = styled.input`
@@ -118,20 +120,13 @@ const TimeInput = styled.input`
   padding-right: 0.6rem;
   font-size: 20px;
   outline: none;
-`;
 
-const TypeInput = styled.div`
-  width: 160px;
-  height: 44px;
-  border-radius: 20px;
-  border: 1px solid black;
-  background-color: #f6f6f6;
-  padding-left: 0.6rem;
-  padding-right: 0.6rem;
-  font-size: 20px;
+  @media (max-width: 768px) {
+    height: 38px;
+    width: 130px;
+    font-size: 16px;
+  }
 `;
-
-const PeopleInput = styled(TypeInput)``;
 
 const LocationInput = styled.textarea`
   width: 96%;
@@ -144,12 +139,25 @@ const LocationInput = styled.textarea`
   padding-top: 1rem;
   font-size: 20px;
   outline: none;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    height: 50px;
+    padding-top: 0.8rem;
+    padding-left: 0.7rem;
+    width: 93%;
+  }
 `;
 
 const RequestInput = styled(LocationInput)``;
 
 const SubTitle = styled.h3`
   margin-top: 2.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    margin-top: 1rem;
+  }
 `;
 
 const BG = styled.div`
@@ -161,7 +169,7 @@ const BG = styled.div`
   align-items: center;
   background: black;
   opacity: 30%;
-  z-index: 2;
+  z-index: 3;
 `;
 
 const Conatiner = styled.div`
@@ -173,12 +181,14 @@ const Conatiner = styled.div`
   flex-direction: column;
   border-radius: 32px;
   background: var(--lesswhite, #f6f6f6);
-  z-index: 3;
+  z-index: 4;
   padding-top: 1.5rem;
 
   @media (max-width: 768px) {
-    width: 19rem;
-    padding: 20px 20px;
+    width: 21rem;
+    padding: 10px 15px;
+    padding-bottom: 25px;
+    top: 7rem;
   }
 `;
 
@@ -186,6 +196,11 @@ const CancelIcon = styled.img`
   width: 32px;
   height: 32px;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 25px;
+    height: 25px;
+  }
 `;
 
 export default ReservationModal;

@@ -48,6 +48,14 @@ const FilterContainer = styled.div`
   border-radius: 32px;
   background: var(--transparent-grey, rgba(129, 129, 129, 0.4));
   height: ${(props) => (props.open ? "80px" : "37px")};
+
+  @media (max-width: 768px) {
+    width: 115px;
+    height: ${(props) => (props.open ? "60px" : "20px")};
+    padding: 9px 16px;
+    padding-right: 5px;
+    border-radius: 20px;
+  }
 `;
 
 const BaseLine = styled.div`
@@ -64,6 +72,7 @@ const P = styled.p`
 
   @media (max-width: 768px) {
     font-size: 14px;
+    margin-top: 0.9rem;
   }
 `;
 
@@ -78,8 +87,12 @@ const Btn = styled.img`
   cursor: pointer;
   position: relative;
   top: 0.8rem;
-
   transform: ${(props) => (props.open ? "rotate(180deg)" : "rotate(0deg)")};
+
+  @media (max-width: 768px) {
+    width: 33px;
+    height: 30px;
+  }
 `;
 
 export default ReviewFiltering;

@@ -50,6 +50,12 @@ const FilterContainer = styled.div`
   padding-top: 0.3rem;
   padding-bottom: 0.2rem;
   height: ${(props) => (props.open ? "200px" : "37px")};
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    width: ${(props) => (props.short ? "72px" : "100px")};
+    height: ${(props) => (props.open ? "140px" : "30px")};
+  }
 `;
 
 const BaseLine = styled.div`
@@ -81,8 +87,12 @@ const Btn = styled.img`
   cursor: pointer;
   position: relative;
   top: 0.8rem;
-
   transform: ${(props) => (props.open ? "rotate(180deg)" : "rotate(0deg)")};
+
+  @media (max-width: 768px) {
+    width: 35px;
+    height: 31px;
+  }
 `;
 
 export default Filtering;
