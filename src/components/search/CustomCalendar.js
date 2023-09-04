@@ -113,7 +113,7 @@ const StyledCalendar = styled.div`
   }
   .react-datepicker__day-name {
     width: 1.7rem;
-    @media (max-width: 1165px) {
+    @media (max-width: 1160px) {
       width: 1.2rem;
     }
     @media (max-width: 768px) {
@@ -138,7 +138,7 @@ const StyledCalendar = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    @media (max-width: 1165px) {
+    @media (max-width: 1160px) {
       width: 1.2rem;
     }
     @media (max-width: 768px) {

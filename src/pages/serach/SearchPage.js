@@ -9,7 +9,7 @@ import EamptySearch from "../../components/search/EamptySearch";
 
 const SearchPage = () => {
   const navigate = useNavigate();
-  const [info, setInfo] = useState(true);
+  const [info, setInfo] = useState(false);
 
   const handleMoreClick = () => {
     navigate(`/photographer`);
