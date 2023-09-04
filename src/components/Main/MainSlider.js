@@ -105,32 +105,35 @@ const Wrapper = styled.div`
     filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.25));
 
     @media screen and (max-width: 768px) {
-    width: 3vw;
-  }
+      width: 3vw;
+    }
   }
 
   .alice-carousel__prev-btn,
   .alice-carousel__next-btn {
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateY(-50%);
 
     /* width: 65%; */
-    width: 60%;
+    width: 21%;
     padding: 0;
 
+    cursor: pointer;
+
     @media screen and (max-width: 768px) {
-      width: 90%;
+      width: 8%;
     }
   }
 
   .alice-carousel__prev-btn {
-    text-align: left;
+    text-align: right;
+    left: 0;
   }
 
   .alice-carousel__next-btn {
-    text-align: right;
+    text-align: left;
+    right: 0;
   }
 
   .alice-carousel__slide-info {
