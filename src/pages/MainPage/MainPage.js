@@ -7,16 +7,18 @@ import Header from "../../components/common/Header";
 
 const MainPage = () => {
   return (
-    <Wrapper>
+    <>
       <Header />
-      <MainSlider />
-      <MainDiv>
-        <MainLogo src={Main_Logo} alt="snap-spot" />
-      </MainDiv>
-      <RecommendSection />
-      <RecommendSection />
-      <RecommendSection />
-    </Wrapper>
+      <Wrapper>
+        <MainSlider />
+        <MainDiv>
+          <MainLogo src={Main_Logo} alt="snap-spot" />
+        </MainDiv>
+        <RecommendSection />
+        <RecommendSection />
+        <RecommendSection />
+      </Wrapper>
+    </>
   );
 };
 
