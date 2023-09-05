@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
-import { enUS } from "date-fns/locale";
 import getYear from "date-fns/getYear";
 import getMonth from "date-fns/getMonth";
 import previousarrow from "../../assets/search/previousarrow.png";
@@ -24,23 +23,14 @@ const customKoLocale = {
   },
 };
 
-function CustomCalender() {
+function CustomCalendar() {
   const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(null);
-  const onChange = (dates) => {
-    const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
-  };
 
   return (
     <StyledCalendar>
       <DatePicker
         selected={startDate}
-        onChange={onChange}
-        startDate={startDate}
-        endDate={endDate}
-        selectsRange
+        onChange={(date) => setStartDate(date)}
         inline
         locale={customKoLocale}
         renderCustomHeader={({
@@ -66,7 +56,6 @@ function CustomCalender() {
               className="btn_month btn_month-next"
               onClick={increaseMonth}
               disabled={nextMonthButtonDisabled}
-              x
             >
               <img src={nextarrow} alt="Next Month" />
             </div>
@@ -77,7 +66,7 @@ function CustomCalender() {
   );
 }
 
-export default CustomCalender;
+export default CustomCalendar;
 
 const StyledCalendar = styled.div`
   margin-top: 1rem;
@@ -124,10 +113,15 @@ const StyledCalendar = styled.div`
   }
   .react-datepicker__day-name {
     width: 1.7rem;
+    @media (max-width: 1160px) {
+      width: 1.2rem;
+    }
     @media (max-width: 768px) {
       width: 2.5rem;
       margin: 0.1rem 0.4rem;
-      /* font-size: 1rem; */
+    }
+    @media (max-width: 380px) {
+      width: 2rem;
     }
   }
 
@@ -144,10 +138,16 @@ const StyledCalendar = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    @media (max-width: 1160px) {
+      width: 1.2rem;
+    }
     @media (max-width: 768px) {
       width: 2.5rem;
       margin: 0.17rem 0.4rem;
       font-size: 1rem;
+    }
+    @media (max-width: 380px) {
+      width: 2rem;
     }
   }
   .react-datepicker__day--outside-month {

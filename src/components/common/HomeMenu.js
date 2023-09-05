@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import profile from "../../assets/header/profile.png";
 import logo from "../../assets/header/logo.png";
@@ -6,14 +7,24 @@ import search from "../../assets/header/search.png";
 import menu from "../../assets/header/menu.png";
 
 const HomeMenu = ({ isHomeMenuOpen, setIsHomeMenuOpen }) => {
+  const navigate = useNavigate();
+
+  const onClickPhotogreapher = () => {
+    navigate(`/photographer`);
+  };
+
+  const onClickFeed = () => {
+    navigate(`/spot-list`);
+  };
+
   return (
     <Wrapper>
       <MenuDiv>
-        <Menu isFirst>
+        <Menu isFirst onClick={onClickFeed}>
           <p>스팟 리스트</p>
         </Menu>
         <Line />
-        <Menu>
+        <Menu onClick={onClickPhotogreapher}>
           <p>작가 리스트</p>
         </Menu>
         <Line />
@@ -28,6 +39,7 @@ const HomeMenu = ({ isHomeMenuOpen, setIsHomeMenuOpen }) => {
 export default HomeMenu;
 
 const Wrapper = styled.div`
+  z-index: 1;
   position: fixed;
   top: 3.438rem;
   right: 1rem;
