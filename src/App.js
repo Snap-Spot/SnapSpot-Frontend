@@ -20,12 +20,15 @@ import KakaoLoginPage from "./pages/LoginPage/KakaoLoginPage";
 import RequestList from "./pages/Photographer/RequestList";
 import ReservationList from "./pages/Photographer/ReservationList";
 import Introduction from "./pages/Photographer/Introduction";
+import MainPage from "./pages/MainPage/MainPage";
+
 import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <>
       <Routes>
+        <Route path="/" element={<MainPage />} />
         <Route path="mypage" element={<UserMypage />} />
         <Route path="/photographer/reserve" element={<Reservation />} />
         <Route

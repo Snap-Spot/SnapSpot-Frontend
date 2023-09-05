@@ -34,7 +34,7 @@ const KakaoLoginPage = () => {
 
         alert("로그인 성공");
         navigate("/");
-        
+
         // window.location.reload();
       })
       .catch((err) => {
@@ -61,10 +61,10 @@ const Div = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media screen and (max-width: 768px) {
-    height: 100vh;
-  }
+  /* PC, 모바일 모두 가운데 정렬 */
+  height: 100vh;
 `;
+
 const spinner_animation = keyframes`
     from {
         transform: rotate(0deg);
@@ -74,7 +74,7 @@ const spinner_animation = keyframes`
 `;
 
 const LoadingImage = styled.img`
-  width: 20%;
+  width: 15%;
   animation: ${spinner_animation} 1s linear infinite;
 
   @media screen and (max-width: 768px) {
