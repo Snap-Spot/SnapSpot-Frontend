@@ -9,7 +9,7 @@ import EamptySearch from "../../components/search/EamptySearch";
 
 const SearchPage = () => {
   const navigate = useNavigate();
-  const [info, setInfo] = useState(true);
+  const [info, setInfo] = useState(false);
 
   const handleMoreClick = () => {
     navigate(`/photographer`);
@@ -20,12 +20,12 @@ const SearchPage = () => {
       <Header></Header>
       <Wrapper>
         <SearchTitle>
-          <div class="subject">'에밀리’</div>에 대한 검색결과
+          <div class="subject">'에밀리'</div>에 대한 검색결과
         </SearchTitle>
         {info ? (
           <Content>
             <SubTitle>
-              <div class="subject">'제주도’</div>에서 활동하는 작가
+              <div class="subject">'제주도'</div>에서 활동하는 작가
               <img src={more} onClick={handleMoreClick} />
             </SubTitle>
             <Box>
