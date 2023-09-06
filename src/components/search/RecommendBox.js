@@ -84,8 +84,9 @@ const Info = styled.div`
   height: 125px;
   border-radius: 12px;
   background: #f6f6f6;
-  /* left: 10px; */
   top: -15px;
+  max-width: 316px;
+  //width: 100%;
   @media (max-width: 768px) {
     width: 6.625rem;
     height: 3.225rem;
