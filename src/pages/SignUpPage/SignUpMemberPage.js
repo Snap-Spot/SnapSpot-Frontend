@@ -6,6 +6,7 @@ import M_Customer from "../../assets/signup/customer_mobile.png";
 import M_Photographer from "../../assets/signup/photographer_mobile.png";
 import Arrow from "../../assets/signup/arrow_left.png";
 import { useNavigate } from "react-router";
+import useMobileDetection from "../../components/common/mobileDetection";
 
 const SignUpMemberPage = () => {
   const navigate = useNavigate();
@@ -15,6 +16,9 @@ const SignUpMemberPage = () => {
     navigate(`/signup/${memberType}/info`);
   };
 
+  // 실시간 모바일 크기 알아오기
+  const isMobile = useMobileDetection();
+
   return (
     <Wrapper>
       <div className="container">
@@ -23,7 +27,7 @@ const SignUpMemberPage = () => {
         <MainDiv>
           <MemberDiv>
             <MemberImage
-              src={window.innerWidth < 768 ? M_Customer : Customer}
+              src={isMobile ? M_Customer : Customer}
               alt="고객"
               onClick={() => {
                 navigateToInfoPage("customer");
@@ -33,7 +37,7 @@ const SignUpMemberPage = () => {
           </MemberDiv>
           <MemberDiv>
             <MemberImage
-              src={window.innerWidth < 768 ? M_Photographer : Photographer}
+              src={isMobile ? M_Photographer : Photographer}
               alt="작가"
               onClick={() => {
                 navigateToInfoPage("photographer");
