@@ -51,7 +51,7 @@ const DetailedItem = () => {
 
 export default DetailedItem;
 const Title = styled.div`
-  width: 70%;
+  width: 75%;
   margin: auto;
   font-size: 24px;
   font-weight: 700;
@@ -63,7 +63,7 @@ const Title = styled.div`
   }
 `;
 const Wrapper = styled.div`
-  width: 70%;
+  width: 75%;
   margin: auto;
 
   .infos {
