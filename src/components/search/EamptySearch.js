@@ -197,6 +197,10 @@ const RecommendList = styled.div`
     right: 10px;
   }
 
+  .alice-carousel__stage-item {
+    padding: 0 0.3rem;
+  }
+
   /* 모바일에서의 스타일 */
   @media (max-width: 768px) {
     .prev-button {

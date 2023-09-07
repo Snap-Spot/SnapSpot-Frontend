@@ -20,15 +20,15 @@ const SearchPage = () => {
       <Header></Header>
       <Wrapper>
         <SearchTitle>
-          <div class="subject">'에밀리’</div>에 대한 검색결과
+          <div class="subject">'에밀리'</div>에 대한 검색결과
         </SearchTitle>
         {info ? (
           <Content>
-            <RegionTitle>
-              <div class="subject">'제주도’</div>에서 활동하는 작가
+            <SubTitle>
+              <div class="subject">'제주도'</div>에서 활동하는 작가
               <img src={more} onClick={handleMoreClick} />
-            </RegionTitle>
-            <GridBox>
+            </SubTitle>
+            <Box>
               <div class="grid">
                 <div>
                   <SearchBox
@@ -60,6 +60,34 @@ const SearchPage = () => {
                     review="238"
                   />
                 </div>
+              </div>
+            </Box>
+            <SubTitle>
+              <div class="subject">'제주도' </div> 작가
+              <img src={more} onClick={handleMoreClick} />
+            </SubTitle>
+            <Box>
+              <div class="grid">
+                <div>
+                  <SearchBox
+                    tag="#커플스냅 #유채꽃 #화사함"
+                    photographer="에밀리"
+                    star="4.7"
+                    region="제주도 서귀포"
+                    price="130,000"
+                    review="238"
+                  />
+                </div>
+                <div>
+                  <SearchBox
+                    tag="#커플스냅 #유채꽃 #화사함"
+                    photographer="에밀리"
+                    star="4.7"
+                    region="제주도 서귀포"
+                    price="130,000"
+                    review="238"
+                  />
+                </div>
                 <div>
                   <SearchBox
                     tag="#커플스냅 #유채꽃 #화사함"
@@ -71,7 +99,7 @@ const SearchPage = () => {
                   />
                 </div>
               </div>
-            </GridBox>
+            </Box>
           </Content>
         ) : (
           <EamptySearch />
@@ -105,7 +133,10 @@ const Wrapper = styled.div`
     margin-top: 3.5rem;
     position: relative;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+
+    &:first-child {
+      margin-bottom: 10rem;
+    }
 
     @media (max-width: 768px) {
       column-gap: 15px;
@@ -121,7 +152,7 @@ const Content = styled.div`
   max-width: 1048px;
 `;
 
-const GridBox = styled.div`
+const Box = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -156,7 +187,7 @@ const SearchTitle = styled.div`
   }
 `;
 
-const RegionTitle = styled.div`
+const SubTitle = styled.div`
   display: flex;
   width: 100%;
   max-width: 1048px;
