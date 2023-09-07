@@ -5,6 +5,7 @@ import "../../components/Photographer/Review/Paging/Paging.css";
 import search from "../../assets/header/search.png";
 import FilteringBox from "../../components/search/FilteringBox";
 import SearchBox from "../../components/search/SearchBox";
+import Header from "../../components/common/Header";
 
 const Photographerlist = () => {
   const [info, setInfo] = useState(true);
@@ -154,14 +155,6 @@ const Photographerlist = () => {
 
   const tabs = ["지역", "날짜", "전문분야", "순서"];
 
-  const [count, setCount] = useState(0); //아이템 총 개수
-  const [currentpage, setCurrentpage] = useState(1); //현재페이지
-  const [postPerPage] = useState(15); //페이지당 아이템 개수
-
-  const setPage = (e) => {
-    setCurrentpage(e);
-  };
-
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const itemsPerPage = 15; // 페이지당 아이템 개수
 
@@ -176,6 +169,7 @@ const Photographerlist = () => {
 
   return (
     <>
+      <Header />
       <Wrapper>
         <Box>
           <TabBox>
@@ -185,10 +179,10 @@ const Photographerlist = () => {
               </Tab>
             ))}
           </TabBox>
-          <SearchTag>
+          {/* <SearchTag>
             <input placeholder="태그 검색"></input>
             <img src={search} alt="검색하기" />
-          </SearchTag>
+          </SearchTag> */}
         </Box>
         {isFilteringOpen && (
           <FilteringBox
@@ -240,8 +234,15 @@ const Wrapper = styled.div`
 `;
 
 const Content = styled.div`
+  width: 75%;
+  margin: 0px auto;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 `;
 
 const Box = styled.div`
@@ -255,8 +256,25 @@ const Box = styled.div`
   @media (max-width: 768px) {
     height: 2.5rem;
     margin-top: 0.563rem;
+    justify-content: flex-start;
   }
 `;
+
+const TabBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 70%;
+  padding-right: 5%;
+
+  @media (max-width: 768px) {
+    width: 65%;
+    padding: 0;
+    justify-content: flex-start;
+  }
+`;
+
 const Tab = styled.div`
   color: #000;
   font-family: Noto Sans KR;
@@ -273,65 +291,54 @@ const Tab = styled.div`
   }
 `;
 
-const TabBox = styled.div`
-  display: flex;
-  width: 57%;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  @media (max-width: 768px) {
-    width: 62%;
-  }
-`;
+// const SearchTag = styled.div`
+//   width: 23%;
+//   height: 2.125rem;
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-evenly;
+//   align-items: center;
+//   border-width: 0 0.063rem 0 0.063rem;
+//   border-color: rgba(129, 129, 129, 0.4);
+//   border-style: solid;
+//   @media (max-width: 768px) {
+//     width: 35%;
+//     border-right: none;
+//   }
+//   input {
+//     width: 100%;
+//     border: none;
+//     font-size: 1rem;
+//     font-style: normal;
+//     font-weight: 500;
+//     line-height: normal;
+//     text-align: left;
+//     margin: 1rem;
+//     font-family: Noto Sans KR;
 
-const SearchTag = styled.div`
-  width: 23%;
-  height: 2.125rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  border-width: 0 0.063rem 0 0.063rem;
-  border-color: rgba(129, 129, 129, 0.4);
-  border-style: solid;
-  @media (max-width: 768px) {
-    width: 35%;
-    border-right: none;
-  }
-  input {
-    width: 100%;
-    border: none;
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    text-align: left;
-    margin: 1rem;
-    font-family: Noto Sans KR;
+//     @media (max-width: 768px) {
+//       font-size: 0.875rem;
+//     }
+//   }
 
-    @media (max-width: 768px) {
-      font-size: 0.875rem;
-    }
-  }
+//   input:focus {
+//     outline: none;
+//   }
 
-  input:focus {
-    outline: none;
-  }
+//   input::placeholder {
+//     color: #777;
+//   }
 
-  input::placeholder {
-    color: #777;
-  }
-
-  img {
-    width: 1.6rem;
-    margin: 1rem;
-    @media (max-width: 768px) {
-      width: 1rem;
-      height: 1rem;
-      margin-right: 0.2rem;
-    }
-  }
-`;
+//   img {
+//     width: 1.6rem;
+//     margin: 1rem;
+//     @media (max-width: 768px) {
+//       width: 1rem;
+//       height: 1rem;
+//       margin-right: 0.2rem;
+//     }
+//   }
+// `;
 
 const GridBox = styled.div`
   position: relative;
@@ -339,26 +346,27 @@ const GridBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  max-width: 1048px;
 
   .grid {
     position: relative;
-    /* z-index: -1; */
+    width: 95%;
     display: grid;
     align-items: center;
     justify-content: center;
-    grid-template-columns: 320px 320px 320px;
-    grid-template-rows: repeat(3, minmax(140px, auto));
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     column-gap: 44px;
     row-gap: 100px;
-
     margin-top: 4rem;
 
     @media (max-width: 768px) {
-      grid-template-columns: 112px 112px 112px;
-      grid-template-rows: repeat(3, minmax(20px, auto));
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
       column-gap: 15px;
       row-gap: 20px;
-
+      width: 100%;
       margin-top: 1.25rem;
     }
   }

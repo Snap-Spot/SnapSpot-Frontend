@@ -11,9 +11,10 @@ import Dropdown from "../../components/Photographer/Custom/Dropdown";
 import SNSInput from "../../components/Photographer/Custom/SNSInput";
 import { useState, useEffect, useRef } from "react";
 import Calender from "../../components/Photographer/Custom/Calendar";
+import Header from "../../components/common/Header";
 
 const Custom = () => {
-  const [imgfile, setImgFile] = useState([]); // 가격표 이미지
+  const [imgfile, setImgFile] = useState(""); // 가격표 이미지
   const [profileImg, setProfileImg] = useState(""); // 프로필 이미지
   const [featuredImgfiles, setFeaturedImgFiles] = useState([]); // 대표 이미지
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -40,7 +41,7 @@ const Custom = () => {
     },
   ]; // sns 아이콘 리스트
 
-  const imgRef = useRef([]);
+  const imgRef = useRef();
   const imgRef2 = useRef();
   const featuredImgRef = useRef([]);
 
@@ -56,19 +57,17 @@ const Custom = () => {
 
   // 가격표 이미지 프리뷰
   const saveImgFile = () => {
-    const file = imgRef.current[imgfile.length].files[0];
+    const file = imgRef.current.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setImgFile((prevImgFiles) => [...prevImgFiles, reader.result]);
+      setImgFile(reader.result);
     };
   };
 
   // 가격표 이미지 프리뷰 삭제
-  const deleteFileImg = (index) => {
-    const updatedFiles = [...imgfile];
-    updatedFiles[index] = null;
-    setImgFile(updatedFiles);
+  const deleteFileImg = () => {
+    setImgFile("");
   };
 
   // 대표 이미지 프리뷰
@@ -86,6 +85,8 @@ const Custom = () => {
     const updatedFiles = featuredImgfiles.filter((_, i) => i !== index);
     setFeaturedImgFiles(updatedFiles);
   };
+
+  // 뷰포트 변화 감지
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -99,107 +100,110 @@ const Custom = () => {
   }, []);
 
   return (
-    <Center>
-      <Container>
-        <Title>작가 페이지 커스텀</Title>
-        <Line />
-        <Row>
-          <label htmlFor="file">
-            <PhotoContainer>
-              <Profile src={profileImg ? profileImg : profile} />
-              <InputImg
-                type="file"
-                name="file"
-                id="file"
-                accept="image/*"
-                onChange={saveProfileImgFile}
-                ref={imgRef2}
-              ></InputImg>
-              <Change>작가 사진 변경</Change>
-            </PhotoContainer>
-          </label>
-          {isMobile && <Line2 />}
-          <InputContainer>
-            <SubTitle>작가명</SubTitle>
-            <Input />
-            <SubTitle>가격표 사진 업로드</SubTitle>
-            <Row2>
-              {imgfile.map((imgFile, index) => (
-                <ImgContainer key={index} imgfile={imgFile}>
+    <>
+      <Header />
+      <Center>
+        <Container>
+          <Title>작가 페이지 커스텀</Title>
+          <Line />
+          <Row>
+            <label htmlFor="file">
+              <PhotoContainer>
+                <Profile src={profileImg ? profileImg : profile} />
+                <InputImg
+                  type="file"
+                  name="file"
+                  id="file"
+                  accept="image/*"
+                  onChange={saveProfileImgFile}
+                  ref={imgRef2}
+                ></InputImg>
+                <Change>작가 사진 변경</Change>
+              </PhotoContainer>
+            </label>
+            {isMobile && <Line2 />}
+            <InputContainer>
+              <SubTitle>작가명</SubTitle>
+              <Input />
+              <SubTitle>가격표 사진 업로드</SubTitle>
+              <Row2>
+                <ImgContainer imgfile={imgfile}>
                   <PreImgs
-                    src={imgFile ? imgFile : ``}
-                    onClick={() => deleteFileImg(index)}
+                    src={imgfile ? imgfile : ``}
+                    onClick={() => deleteFileImg()}
                   />
+                </ImgContainer>
+                <InputImg
+                  type="file"
+                  name="file"
+                  id={`file-${imgfile.length}-price`}
+                  accept="image/*"
+                  onChange={saveImgFile}
+                  ref={imgRef}
+                />
+                <label htmlFor={`file-${imgfile.length}-price`}>
+                  <Plus src={plus} />
+                </label>
+              </Row2>
+            </InputContainer>
+          </Row>
+          <Line2 />
+          <Center2>
+            <InputContainer>
+              <SubTitle>활동 지역 설정</SubTitle>
+              <Input />
+              <SubTitle>SNS 등록</SubTitle>
+              {icon_src.map((item, idx) => (
+                <SNSInput key={idx} iconSrc={item.src} text={item.text} />
+              ))}
+              <SubTitle>한 줄 소개글 등록 (최대 500자)</SubTitle>
+              <Input2 />
+              <SubTitle>전문 분야 등록</SubTitle>
+              <Dropdown />
+              <SubTitle>태그 입력</SubTitle>
+              <TagInput />
+              <TagInput />
+              <TagInput />
+              <SubTitle>불가능한 날짜 선택</SubTitle>
+              <Calender />
+              <SubTitle>대표 사진 업로드 (최대 10장)</SubTitle>
+              {featuredImgfiles.map((imgfile, index) => (
+                <ImgContainer key={index} imgfile={imgfile}>
+                  {imgfile && (
+                    <PreImgs
+                      src={imgfile}
+                      onClick={() => deleteFileImgs(index)}
+                    />
+                  )}
                 </ImgContainer>
               ))}
               <InputImg
                 type="file"
                 name="file"
-                id={`file-${imgfile.length}-price`}
+                id={`file-${featuredImgfiles.length}`}
                 accept="image/*"
-                onChange={saveImgFile}
-                ref={(el) => (imgRef.current[imgfile.length] = el)}
+                onChange={saveImgFiles}
+                ref={(el) =>
+                  (featuredImgRef.current[featuredImgfiles.length] = el)
+                }
               />
-              <label htmlFor={`file-${imgfile.length}-price`}>
-                <Plus src={plus} />
-              </label>
-            </Row2>
-          </InputContainer>
-        </Row>
-        <Line2 />
-        <Center2>
-          <InputContainer>
-            <SubTitle>활동 지역 설정</SubTitle>
-            <Input />
-            <SubTitle>SNS 등록</SubTitle>
-            {icon_src.map((item, idx) => (
-              <SNSInput key={idx} iconSrc={item.src} text={item.text} />
-            ))}
-            <SubTitle>한 줄 소개글 등록 (최대 500자)</SubTitle>
-            <Input2 />
-            <SubTitle>전문 분야 등록</SubTitle>
-            <Dropdown />
-            <SubTitle>태그 입력</SubTitle>
-            <TagInput />
-            <TagInput />
-            <TagInput />
-            <SubTitle>불가능한 날짜 선택</SubTitle>
-            <Calender />
-            <SubTitle>대표 사진 업로드 (최대 10장)</SubTitle>
-            {featuredImgfiles.map((imgfile, index) => (
-              <ImgContainer key={index} imgfile={imgfile}>
-                {imgfile && (
-                  <PreImgs
-                    src={imgfile}
-                    onClick={() => deleteFileImgs(index)}
-                  />
+              <label htmlFor={`file-${featuredImgfiles.length}`}>
+                {featuredImgfiles.length < 10 && (
+                  <>
+                    {[...Array(10 - featuredImgfiles.length)].map(
+                      (_, index) => (
+                        <InputImg2 key={index} src={imgPlus} />
+                      )
+                    )}
+                  </>
                 )}
-              </ImgContainer>
-            ))}
-            <InputImg
-              type="file"
-              name="file"
-              id={`file-${featuredImgfiles.length}`}
-              accept="image/*"
-              onChange={saveImgFiles}
-              ref={(el) =>
-                (featuredImgRef.current[featuredImgfiles.length] = el)
-              }
-            />
-            <label htmlFor={`file-${featuredImgfiles.length}`}>
-              {featuredImgfiles.length < 10 && (
-                <>
-                  {[...Array(10 - featuredImgfiles.length)].map((_, index) => (
-                    <InputImg2 key={index} src={imgPlus} />
-                  ))}
-                </>
-              )}
-            </label>
-          </InputContainer>
-        </Center2>
-        <ChangeBtn>변경하기</ChangeBtn>
-      </Container>
-    </Center>
+              </label>
+            </InputContainer>
+          </Center2>
+          <ChangeBtn>변경하기</ChangeBtn>
+        </Container>
+      </Center>
+    </>
   );
 };
 
@@ -222,7 +226,7 @@ const ImgContainer = styled.div`
   height: ${(props) => (props.imgfile ? "100%" : "0px")};
 
   @media (max-width: 768px) {
-    display: flex;
+    display: ${(props) => (props.imgfile ? "inline" : "none")};
   }
 `;
 
@@ -332,6 +336,7 @@ const Container = styled.div`
 
   @media (max-width: 768px) {
     width: 90%;
+    margin-bottom: 5rem;
   }
 `;
 

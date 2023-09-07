@@ -17,18 +17,32 @@ const ChatBoxContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 68%;
+
+  @media (max-width: 768px) {
+    width: 86%;
+  }
 `;
 
 const ChatContainer = styled.div`
   display: flex;
   align-items: flex-start;
   margin-top: 2.5rem;
+
+  @media (max-width: 768px) {
+    margin-top: 1.5rem;
+  }
 `;
 
 const Profile = styled.img`
   width: 60px;
   height: 60px;
   margin-right: 1rem;
+
+  @media (max-width: 768px) {
+    width: 24px;
+    height: 24px;
+    margin-right: 0.8rem;
+  }
 `;
 
 const Chat = styled.div`
@@ -43,11 +57,25 @@ const Chat = styled.div`
   font-size: 16px;
   padding-left: 24px;
   padding-top: 16px;
+
+  @media (max-width: 768px) {
+    width: 235px;
+    height: 50px;
+    border-radius: 20px;
+    font-size: 12px;
+    padding-left: 14px;
+    padding-top: 10px;
+  }
 `;
 
 const Time = styled.p`
   font-size: 15px;
   margin-left: auto;
+
+  @media (max-width: 768px) {
+    font-size: 8px;
+    color: #777777;
+  }
 `;
 
 export default ChatBox;

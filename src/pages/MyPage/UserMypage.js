@@ -7,7 +7,7 @@ const UserMypage = () => {
   const [isPhotographer, setIsPhotographer] = useState(false);
   useEffect(() => {
     //접속시 작가인지 일반 고객인지 결정
-    setIsPhotographer(false);
+    setIsPhotographer(true);
   }, []);
   return (
     <>
