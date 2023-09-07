@@ -27,10 +27,10 @@ const ReservationList = () => {
 export default ReservationList;
 const Wrapper = styled.div`
   .titleNdropdown {
-    width: 70%;
+    width: 75%;
     @media (max-width: 768px) {
       //모바일
-      width: 85%;
+      width: 90%;
     }
     display: flex;
     justify-content: space-between;
