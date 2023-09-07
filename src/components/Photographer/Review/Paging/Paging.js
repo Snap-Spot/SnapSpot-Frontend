@@ -1,6 +1,7 @@
 import Pagination from "react-js-pagination";
 import "./Paging.css";
 
+//복구
 const Paging = ({ page, count, setPage, itemsCountPerPage }) => {
   return (
     <div>
