@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import arrow from "../../../assets/photograph/arrow.png";
 import { useNavigate } from "react-router-dom";
-
+//복구
 const MenuList = ({ icon, text, address }) => {
   const navigate = useNavigate();
 

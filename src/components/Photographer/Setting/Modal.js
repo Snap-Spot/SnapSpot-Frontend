@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import warn from "../../../assets/photograph/warn.png";
-
+//복구
 const Modal = ({ setIsOpen }) => {
   return (
     <>
