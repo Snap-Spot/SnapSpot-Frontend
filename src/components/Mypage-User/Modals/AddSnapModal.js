@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import photo from "../../../assets/mypage/modals/photo.png";
 import photographer from "../../../assets/mypage/modals/photographer.png";
 import close from "../../../assets/mypage/modals/close.png";
+import SearchList from "./SearchList";
 const AddSnapModal = () => {
   return (
     <Wrapper>
@@ -23,7 +24,7 @@ const AddSnapModal = () => {
           사진 작가 검색하기 &nbsp;&nbsp;&nbsp;
           <img src={photographer} alt="" />
         </div>
-        <input></input>
+        <SearchList />
       </Photographer>
 
       <Location>
@@ -159,20 +160,6 @@ const Photographer = styled.div`
       //모바일
       width: 18px;
       height: 15px;
-    }
-  }
-
-  input {
-    width: 575px;
-    height: 45px;
-    flex-shrink: 0;
-    border-radius: 22.5px;
-    background: #d9d9d9;
-
-    @media (max-width: 768px) {
-      //모바일
-      width: 100%;
-      height: 25px;
     }
   }
 `;
