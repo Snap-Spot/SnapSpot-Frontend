@@ -44,7 +44,8 @@ export default ReservationItem;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 75%;
+  max-width: 1048px;
   padding: 40px 0px;
   height: 226px;
   margin-bottom: 40px;
