@@ -37,7 +37,11 @@ const SearchList = () => {
   return (
     <>
       <InputContainer>
-        <input onChange={handleChange} value={keyword}></input>
+        <input
+          className="inputfield"
+          onChange={handleChange}
+          value={keyword}
+        ></input>
         <img src={search} alt="" />
       </InputContainer>
       {showList && (
@@ -96,7 +100,7 @@ const InputContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 18px;
+  padding: 0 16px;
   box-sizing: border-box;
 
   @media (max-width: 768px) {
@@ -105,12 +109,12 @@ const InputContainer = styled.div`
     height: 25px;
   }
 
-  input {
+  .inputfield {
     margin-top: 0px;
     width: 90%;
     border-radius: 22.5px;
     height: 100%;
     background: #d9d9d9;
-    padding: 0;
+    padding: 2px;
   }
 `;
