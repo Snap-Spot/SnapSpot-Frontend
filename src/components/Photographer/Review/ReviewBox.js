@@ -2,15 +2,7 @@ import styled from "styled-components";
 import star from "../../../assets/photograph/star.png";
 import { useState, useEffect } from "react";
 
-const ReviewBox = ({
-  type,
-  profile,
-  nickname,
-  title,
-  content,
-  date,
-  score,
-}) => {
+const ReviewBox = ({ profile, nickname, title, content, date, score }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   // 모바일 너비에서는 리뷰 상세내용 50자로 잘라서 보여주기
@@ -25,8 +17,8 @@ const ReviewBox = ({
   }, []);
 
   return (
-    <ReviewContainer border={type === "list" ? true : false}>
-      <ProfileContainer margin={type === "list" ? true : false}>
+    <ReviewContainer>
+      <ProfileContainer>
         <Profile src={profile} />
         <NickName>{nickname}</NickName>
       </ProfileContainer>
@@ -72,26 +64,25 @@ const Star = styled.img`
 const ReviewContainer = styled.div`
   height: 10rem;
   padding-top: 2.5rem;
-  border-bottom: ${(props) => (props.border ? "1px solid #d9d9d9" : "none")};
+  border-bottom: 1px solid #d9d9d9;
   display: flex;
   width: 100%;
 
   @media (max-width: 768px) {
     width: 21rem;
     padding-top: 1.5rem;
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
-    height: 9.5rem;
+    height: 9rem;
   }
 `;
 
 const ProfileContainer = styled.div`
   display: flex;
   margin-right: 4rem;
-  margin-left: ${(props) => (props.margin ? "2.5rem" : "0.5rem")};
+  margin-left: 2.5rem;
 
   @media (max-width: 768px) {
     flex-direction: column;
+    align-items: center;
     margin-right: 1rem;
     margin-left: 0;
   }
@@ -114,6 +105,12 @@ const Profile = styled.img`
   height: 42px;
   margin-right: 0.7rem;
   border-radius: 100%;
+
+  @media (max-width: 768px) {
+    width: 30px;
+    height: 30px;
+    margin-right: 0;
+  }
 `;
 
 const NickName = styled.p`
@@ -121,7 +118,7 @@ const NickName = styled.p`
   margin-top: 0;
 
   @media (max-width: 768px) {
-    font-size: 0.8rem;
+    font-size: 0.6rem;
   }
 `;
 
@@ -133,7 +130,7 @@ const Title = styled.p`
 
   @media (max-width: 768px) {
     margin-top: 0.3rem;
-    font-size: 14px;
+    font-size: 13px;
   }
 `;
 
@@ -142,7 +139,7 @@ const Content = styled.p`
   font-size: 16px;
 
   @media (max-width: 768px) {
-    font-size: 13px;
+    font-size: 12px;
   }
 `;
 
@@ -151,6 +148,8 @@ const Date = styled.p`
 
   @media (max-width: 768px) {
     margin: 0;
+    font-size: 0.6rem;
+    color: #777777;
   }
 `;
 

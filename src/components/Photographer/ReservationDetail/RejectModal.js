@@ -54,11 +54,20 @@ const BG = styled.div`
 const BtnContainer = styled.div`
   display: flex;
   margin-top: 2rem;
+
+  @media (max-width: 768px) {
+    margin-top: 1rem;
+  }
 `;
 
 const Content = styled.p`
   color: var(--darkgrey, #777);
   margin-top: 0.4rem;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    margin-top: 0;
+  }
 `;
 
 const CancelBtn = styled.button`
@@ -75,6 +84,13 @@ const CancelBtn = styled.button`
   margin-left: 1rem;
   font-weight: 500;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 120px;
+    height: 50px;
+    border-radius: 15px;
+    font-size: 14px;
+  }
 `;
 
 const ConfirmBtn = styled(CancelBtn)`
@@ -86,11 +102,15 @@ const WarnIcon = styled.img`
   width: 35px;
   height: 35px;
   margin-bottom: 0.7rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 0.4rem;
+  }
 `;
 
 const Conatiner = styled.div`
   position: absolute;
-  top: 18rem;
+  top: 14rem;
   display: flex;
   width: 40rem;
   padding: 50px 40px;
@@ -99,10 +119,19 @@ const Conatiner = styled.div`
   border-radius: 32px;
   background: var(--lesswhite, #f6f6f6);
   z-index: 2;
+
+  @media (max-width: 768px) {
+    width: 19rem;
+    padding: 20px 20px;
+  }
 `;
 
 const Warning = styled.h2`
   font-size: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 export default RejectModal;

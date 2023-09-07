@@ -21,9 +21,17 @@ const MyMenu = ({ id }) => {
     ],
     [{ icon: booking, text: "스냅사진 예약 내역", route: "./reservation" }],
     [
-      { icon: schedule, text: "스냅사진 예약/일정 관리", route: "./" },
-      { icon: review, text: "상세 리뷰 보기", route: "./" },
-      { icon: custom, text: "작가 페이지 커스텀", route: "./" },
+      {
+        icon: schedule,
+        text: "스냅사진 예약/일정 관리",
+        route: "/photographer/reserve",
+      },
+      { icon: review, text: "상세 리뷰 보기", route: "/photographer/review" },
+      {
+        icon: custom,
+        text: "작가 페이지 커스텀",
+        route: "/photographer/custom",
+      },
     ],
   ];
 

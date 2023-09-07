@@ -77,7 +77,7 @@ const P = styled.p`
 
 const Container = styled.div`
   display: flex;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 `;
 
 const Status = styled.div`

@@ -1,15 +1,11 @@
 import MyReservePage from "./pages/MyPage/MyReservePage";
 import DetailReservePage from "./pages/MyPage/DetailReservePage";
 import "./styles/Font.css";
-import Header from "./components/common/Header";
 import ReservationDetail from "./pages/Photographer/ReservationDetail";
 import Reservation from "./pages/Photographer/Reservation";
-import MyPage from "./pages/Photographer/MyPage";
-import Setting from "./pages/Photographer/Setting";
 import Custom from "./pages/Photographer/Custom";
 import Review from "./pages/Photographer/Review";
 import SearchPage from "./pages/serach/SearchPage";
-import { Routes, Route } from "react-router-dom";
 import Footer from "./components/common/Footer";
 import SignUpInfoPage from "./pages/SignUpPage/SignUpInfoPage";
 import SignUpMemberPage from "./pages/SignUpPage/SignUpMemberPage";
@@ -24,19 +20,21 @@ import KakaoLoginPage from "./pages/LoginPage/KakaoLoginPage";
 import RequestList from "./pages/Photographer/RequestList";
 import ReservationList from "./pages/Photographer/ReservationList";
 import Introduction from "./pages/Photographer/Introduction";
+import MainPage from "./pages/MainPage/MainPage";
+
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <>
       <Routes>
+        <Route path="/" element={<MainPage />} />
         <Route path="mypage" element={<UserMypage />} />
-
         <Route path="/photographer/reserve" element={<Reservation />} />
         <Route
           path="/photographer/reserve/:id"
           element={<ReservationDetail />}
         />
-        <Route path="/photographer/setting" element={<Setting />} />
         <Route path="/photographer/custom" element={<Custom />} />
         <Route path="/photographer/review" element={<Review />} />
         <Route path="/photographer/request" element={<RequestList />} />
@@ -50,7 +48,6 @@ function App() {
         <Route path="mypage/settings" element={<SettingsPage />} />
         <Route path="mypage/hearts" element={<MyHeartsPage />} />
         <Route path="mypage/best-snap" element={<BestSnapPage />} />
-        {/* 회원가입 */}
         <Route path="/signup/member" element={<SignUpMemberPage />} />
         <Route path="/signup/:memberType/info" element={<SignUpInfoPage />} />
         <Route path="/login" element={<LoginPage />} />

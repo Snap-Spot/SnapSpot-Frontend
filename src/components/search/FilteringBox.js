@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { React, useState, useEffect } from "react";
-import CustomCalender from "./CustomCalender";
+import CustomCalendar from "./CustomCalendar";
 import { regions, sections, orders } from "./FilteringList.js";
 
 const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
@@ -72,7 +72,7 @@ const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
         <DateTab>
           <Title>날짜</Title>
           <CalendarBox>
-            <CustomCalender />
+            <CustomCalendar />
           </CalendarBox>
         </DateTab>
         {/* 전문분야 필터링 */}
@@ -163,6 +163,7 @@ const FilterTab = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
   @media (max-width: 768px) {
     flex-direction: column;
     height: 100%;
@@ -222,6 +223,7 @@ const Title = styled.div`
   font-style: normal;
   font-weight: 700;
 
+  width: 6rem;
   margin-bottom: 1rem;
 
   @media (max-width: 768px) {

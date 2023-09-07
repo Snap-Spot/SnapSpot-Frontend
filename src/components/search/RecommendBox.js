@@ -26,7 +26,7 @@ export default RecommendBox;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 320px;
+  width: 100%;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -37,7 +37,8 @@ const Wrapper = styled.div`
 const Photo = styled.div`
   position: relative;
   display: flex;
-  width: 316px;
+  max-width: 316px;
+  width: 100%;
   height: 316px;
   /* padding-top:244px; */
   /* padding: 28px 20px 12px 20px; */
