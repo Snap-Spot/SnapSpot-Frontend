@@ -44,7 +44,6 @@ const ScoreContainer = styled.div`
   align-items: baseline;
 
   @media (max-width: 768px) {
-    width: 21rem;
     justify-content: flex-end;
   }
 `;
@@ -69,7 +68,7 @@ const ReviewContainer = styled.div`
   width: 100%;
 
   @media (max-width: 768px) {
-    width: 21rem;
+    width: 100%;
     padding-top: 1.5rem;
     height: 9rem;
   }
@@ -95,7 +94,7 @@ const ContentContainer = styled.div`
   margin-right: 1rem;
 
   @media (max-width: 768px) {
-    width: 65rem;
+    /* width: 65rem; */
     margin-right: 0;
   }
 `;

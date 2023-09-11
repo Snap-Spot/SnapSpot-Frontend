@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import ReviewBox from "../../components/Photographers/Review/ReviewBox";
 import Paging from "../../components/Photographers/Review/Paging/Paging";
-import Header from "../../components/common/Header";
+import { ReviewData } from "./MockData/ReviewData";
 import { useEffect, useState } from "react";
+import LayOut from "../../components/common/LayOut";
 
 const Review = () => {
   const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
@@ -13,83 +14,8 @@ const Review = () => {
   const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
   const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
 
-  const mockData = [
-    {
-      profile: "",
-      nickname: "est0908",
-      title: "너무 잘 담아주셔서 감사합니다",
-      content:
-        "친절한 답변과 깔끔한 일정 소개부터 인생사진까지..!! 너무 좋은 추억 남겨주셔서 감사해요 다른 작가분들과 다르게 소품이나 의상도 준비해주시고 사진 컨셉도 너무 좋았어요..",
-      date: "2023.5.8",
-      score: "5.0",
-    },
-    {
-      profile: "",
-      nickname: "est0908",
-      title: "너무 잘 담아주셔서 감사합니다",
-      content:
-        "친절한 답변과 깔끔한 일정 소개부터 인생사진까지..!! 너무 좋은 추억 남겨주셔서 감사해요 다른 작가분들과 다르게 소품이나 의상도 준비해주시고 사진 컨셉도 너무 좋았어요..",
-      date: "2023.5.8",
-      score: "5.0",
-    },
-    {
-      profile: "",
-      nickname: "est0908",
-      title: "너무 잘 담아주셔서 감사합니다",
-      content:
-        "친절한 답변과 깔끔한 일정 소개부터 인생사진까지..!! 너무 좋은 추억 남겨주셔서 감사해요 다른 작가분들과 다르게 소품이나 의상도 준비해주시고 사진 컨셉도 너무 좋았어요..",
-      date: "2023.5.8",
-      score: "5.0",
-    },
-    {
-      profile: "",
-      nickname: "est0908",
-      title: "너무 잘 담아주셔서 감사합니다",
-      content:
-        "친절한 답변과 깔끔한 일정 소개부터 인생사진까지..!! 너무 좋은 추억 남겨주셔서 감사해요 다른 작가분들과 다르게 소품이나 의상도 준비해주시고 사진 컨셉도 너무 좋았어요..",
-      date: "2023.5.8",
-      score: "5.0",
-    },
-    {
-      profile: "",
-      nickname: "est0908",
-      title: "너무 잘 담아주셔서 감사합니다",
-      content:
-        "친절한 답변과 깔끔한 일정 소개부터 인생사진까지..!! 너무 좋은 추억 남겨주셔서 감사해요 다른 작가분들과 다르게 소품이나 의상도 준비해주시고 사진 컨셉도 너무 좋았어요..",
-      date: "2023.5.8",
-      score: "5.0",
-    },
-    {
-      profile: "",
-      nickname: "est0908",
-      title: "너무 잘 담아주셔서 감사합니다",
-      content:
-        "친절한 답변과 깔끔한 일정 소개부터 인생사진까지..!! 너무 좋은 추억 남겨주셔서 감사해요 다른 작가분들과 다르게 소품이나 의상도 준비해주시고 사진 컨셉도 너무 좋았어요..",
-      date: "2023.5.8",
-      score: "5.0",
-    },
-    {
-      profile: "",
-      nickname: "est0908",
-      title: "너무 잘 담아주셔서 감사합니다",
-      content:
-        "친절한 답변과 깔끔한 일정 소개부터 인생사진까지..!! 너무 좋은 추억 남겨주셔서 감사해요 다른 작가분들과 다르게 소품이나 의상도 준비해주시고 사진 컨셉도 너무 좋았어요..",
-      date: "2023.5.8",
-      score: "5.0",
-    },
-    {
-      profile: "",
-      nickname: "est0908",
-      title: "너무 잘 담아주셔서 감사합니다",
-      content:
-        "친절한 답변과 깔끔한 일정 소개부터 인생사진까지..!! 너무 좋은 추억 남겨주셔서 감사해요 다른 작가분들과 다르게 소품이나 의상도 준비해주시고 사진 컨셉도 너무 좋았어요..",
-      date: "2023.5.8",
-      score: "5.0",
-    },
-  ];
-
   useEffect(() => {
-    setProducts(mockData);
+    setProducts(ReviewData);
     setCount(products.length);
     setIndexOfLastPost(currentPage * postPerPage);
     setIndexOfFirstPost(indexOfLastPost - postPerPage);
@@ -101,60 +27,51 @@ const Review = () => {
   };
 
   return (
-    <>
-      <Header />
-      <Center>
-        <Container>
-          <Title>리뷰 리스트</Title>
-          <Length>총 {products.length}개</Length>
-          <Line />
-          <ReviewContainer>
-            {currentPosts && products.length > 0 ? (
-              currentPosts.map((productData, idx) => (
-                <ReviewBox
-                  key={idx}
-                  type="list"
-                  profile={productData.profile}
-                  nickname={productData.nickname}
-                  title={productData.title}
-                  content={productData.content}
-                  date={productData.date}
-                  score={productData.score}
-                />
-              ))
-            ) : (
-              <div>리뷰가 없습니다.</div>
-            )}
-          </ReviewContainer>
-          <Paging
-            page={currentPage}
-            count={count}
-            setPage={setPage}
-            itemsCountPerPage={6}
-          />
-        </Container>
-      </Center>
-    </>
+    <LayOut>
+      <Container>
+        <Title>리뷰 리스트</Title>
+        <Length>총 {products.length}개</Length>
+        <Line />
+        <ReviewContainer>
+          {currentPosts && products.length > 0 ? (
+            currentPosts.map((productData, idx) => (
+              <ReviewBox
+                key={idx}
+                type="list"
+                profile={productData.profile}
+                nickname={productData.nickname}
+                title={productData.title}
+                content={productData.content}
+                date={productData.date}
+                score={productData.score}
+              />
+            ))
+          ) : (
+            <div>리뷰가 없습니다.</div>
+          )}
+        </ReviewContainer>
+        <Paging
+          page={currentPage}
+          count={count}
+          setPage={setPage}
+          itemsCountPerPage={6}
+        />
+      </Container>
+    </LayOut>
   );
 };
-
-const Center = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 6rem;
-`;
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 1052px;
-  width: 70rem;
   margin-top: 2rem;
+  width: 75%;
 
   @media (max-width: 768px) {
-    width: 21rem;
+    width: 90%;
     margin-top: 1rem;
+    margin-bottom: 5rem;
   }
 `;
 
