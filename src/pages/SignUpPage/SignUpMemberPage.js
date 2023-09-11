@@ -11,8 +11,9 @@ import useMobileDetection from "../../components/common/mobileDetection";
 const SignUpMemberPage = () => {
   const navigate = useNavigate();
 
-  // 정보 입력 페이지로 이동
+  // localStorage에 role 저장 후 정보 입력 페이지로 이동
   const navigateToInfoPage = (memberType) => {
+    localStorage.setItem("role", "ROLE_"+memberType.toUpperCase());
     navigate(`/signup/${memberType}/info`);
   };
 
@@ -58,22 +59,16 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media screen and (max-width: 768px) {
-    height: 100vh;
-  }
+  // PC, 모바일 모두 통일
+  height: 100vh;
 `;
+
 const MainText = styled.div`
   font-family: Noto Sans KR;
   font-size: 1.065rem;
   font-weight: 600;
 
   margin-bottom: 60px;
-
-  margin-top: 40px;
-
-  @media screen and (max-width: 768px) {
-    margin-top: 0;
-  }
 `;
 
 const MainDiv = styled.div`
