@@ -13,7 +13,7 @@ const SignUpMemberPage = () => {
 
   // localStorage에 role 저장 후 정보 입력 페이지로 이동
   const navigateToInfoPage = (memberType) => {
-    localStorage.setItem("role", "ROLE_"+memberType.toUpperCase());
+    localStorage.setItem("role", "ROLE_" + memberType.toUpperCase());
     navigate(`/signup/${memberType}/info`);
   };
 
@@ -31,7 +31,8 @@ const SignUpMemberPage = () => {
               src={isMobile ? M_Customer : Customer}
               alt="고객"
               onClick={() => {
-                navigateToInfoPage("customer");
+                // 고객 - customer에서 member로 변경 (이미지 이름은 customer로 유지)
+                navigateToInfoPage("member");
               }}
             />
             <MemberText color="#008EDE">인생사진을 찍고 싶어요!</MemberText>
