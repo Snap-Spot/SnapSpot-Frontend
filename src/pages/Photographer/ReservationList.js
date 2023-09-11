@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import UpcomingSchedule from "../../components/Photographer/Reservation/UpcomingSchedule";
+import UpcomingSchedule from "../../components/Photographers/Reservation/UpcomingSchedule";
 import Header from "../../components/common/Header";
 
 const ReservationList = () => {

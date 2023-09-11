@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import ReviewBox from "../../components/Photographer/Review/ReviewBox";
-import Paging from "../../components/Photographer/Review/Paging/Paging";
+import ReviewBox from "../../components/Photographers/Review/ReviewBox";
+import Paging from "../../components/Photographers/Review/Paging/Paging";
 import Header from "../../components/common/Header";
 import { useEffect, useState } from "react";
 

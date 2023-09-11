@@ -2,7 +2,7 @@ import { React, useState, useEffect } from "react";
 import styled from "styled-components";
 import Header from "../../components/common/Header";
 import PhotoBox from "../../components/Mypage-User/Pick/PhotoBox";
-import Paging from "../../components/Photographer/Review/Paging/Paging";
+import Paging from "../../components/Photographers/Review/Paging/Paging";
 const MyHeartsPage = () => {
   const [list, setList] = useState([
     {

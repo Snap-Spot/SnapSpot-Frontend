@@ -7,10 +7,10 @@ import twitter from "../../assets/photograph/x.png";
 import kakao from "../../assets/photograph/kakao.png";
 import blog from "../../assets/photograph/blog.png";
 import home from "../../assets/photograph/home.png";
-import Dropdown from "../../components/Photographer/Custom/Dropdown";
-import SNSInput from "../../components/Photographer/Custom/SNSInput";
+import Dropdown from "../../components/Photographers/Custom/Dropdown";
+import SNSInput from "../../components/Photographers/Custom/SNSInput";
 import { useState, useEffect, useRef } from "react";
-import Calender from "../../components/Photographer/Custom/Calendar";
+import Calender from "../../components/Photographers/Custom/Calendar";
 import Header from "../../components/common/Header";
 
 const Custom = () => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import MySnapBox from "./MySnapBox";
-import Paging from "../../Photographer/Review/Paging/Paging";
+import Paging from "../../Photographers/Review/Paging/Paging";
 const MySnaps = () => {
   const [list, setList] = useState([
     {

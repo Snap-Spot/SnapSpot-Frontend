@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import ScheduleDetail from "../../components/Photographer/ReservationDetail/ScheduleDetail";
+import ScheduleDetail from "../../components/Photographers/ReservationDetail/ScheduleDetail";
 import Header from "../../components/common/Header";
 
 const ReservationDetail = () => {
