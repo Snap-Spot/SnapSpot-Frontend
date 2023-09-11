@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import Loading from "../../assets/signup/loading.png";
 import axios from "axios";
+import { KakaoSignInAPI } from "../../api/auth";
 
 const KakaoLoginPage = () => {
   const location = useLocation();
@@ -24,18 +25,17 @@ const KakaoLoginPage = () => {
           "Content-Type": "application/x-www-form-urlencoded",
         },
       })
-      .then((res) => {
-        console.log("요청 결과", res);
+      .then(async (res) => {
+        // 카카오 token 요청 result
+        console.log("카카오 요청 결과", res);
 
-        const accessToken = res.data.access_token;
+        const k_accessToken = res.data.access_token;
+        const k_refreshToken = res.data.k_refresh_token;
 
-        console.log(accessToken);
-        localStorage.setItem("accessToken", accessToken);
+        // snapspot 로그인 result
+        KakaoSignInAPI(k_accessToken, k_refreshToken);
 
-        alert("로그인 성공");
-        navigate("/");
-
-        // window.location.reload();
+        // 성공할 경우 localStorage 저장, alert 창 띄우기, navigate, reload
       })
       .catch((err) => {
         console.log("카카오 로그인 에러.", err);
