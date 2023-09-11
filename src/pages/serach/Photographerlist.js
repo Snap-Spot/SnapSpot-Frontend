@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import styled from "styled-components";
 import Pagination from "react-js-pagination";
-import "../../components/Photographer/Review/Paging/Paging.css";
+import "../../components/Photographers/Review/Paging/Paging.css";
 import search from "../../assets/header/search.png";
 import FilteringBox from "../../components/search/FilteringBox";
 import SearchBox from "../../components/search/SearchBox";

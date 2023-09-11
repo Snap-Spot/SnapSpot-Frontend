@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import arrow from "../../assets/photograph/arrow.png";
-import ScheduleBox from "../../components/Photographer/Reservation/ScheduleBox";
-import UpcomingSchedule from "../../components/Photographer/Reservation/UpcomingSchedule";
-import Calendar from "../../components/Photographer/Reservation/Calendar";
+import ScheduleBox from "../../components/Photographers/Reservation/ScheduleBox";
+import UpcomingSchedule from "../../components/Photographers/Reservation/UpcomingSchedule";
+import Calendar from "../../components/Photographers/Reservation/Calendar";
 import Header from "../../components/common/Header";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
