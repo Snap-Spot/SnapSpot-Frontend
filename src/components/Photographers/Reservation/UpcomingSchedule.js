@@ -85,7 +85,7 @@ const Container = styled.div`
   margin-bottom: 2rem;
 
   @media (max-width: 768px) {
-    width: 93%;
+    width: 100%;
     padding-top: 1rem;
   }
 `;
