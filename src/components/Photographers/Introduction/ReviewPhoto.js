@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import reviewPhoto from "../../../assets/photograph/review.png";
-import { useState, useEffect } from "react";
+import useMobileDetection from "../../common/mobileDetection";
 
 const ReviewPhoto = () => {
   const img_list = [
@@ -12,21 +12,8 @@ const ReviewPhoto = () => {
     reviewPhoto,
     reviewPhoto,
   ];
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const isMobile = useMobileDetection();
   const slice_list = isMobile ? img_list.slice(0, 4) : img_list.slice(0, 5); // 4개까지만 잘라서 보여주기
-
-  // 뷰포트 변화 감지
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   return (
     <Container>
@@ -54,6 +41,7 @@ const Container = styled.div`
   height: 213px;
   margin-bottom: 5rem;
   display: flex;
+  justify-content: center;
 
   @media (max-width: 768px) {
     height: 100px;
