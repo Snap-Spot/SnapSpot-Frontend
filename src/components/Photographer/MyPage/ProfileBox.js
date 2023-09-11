@@ -2,7 +2,7 @@ import styled from "styled-components";
 import profile from "../../../assets/photograph/ex_profile.png";
 import setting from "../../../assets/photograph/setting.png";
 import { useNavigate } from "react-router-dom";
-
+//복구
 const ProfileBox = () => {
   const navigate = useNavigate();
 

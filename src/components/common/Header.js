@@ -45,12 +45,13 @@ const Header = () => {
       <HeaderDiv>
         <Main>
           <div className="logo">
-            {isMobile ? (
-              <img src={mobilelogo} alt="로고" onClick={onClickLogo} />
-            ) : (
-              <img src={logo} alt="로고" onClick={onClickLogo} />
-            )}
+            <img
+              src={isMobile ? mobilelogo : logo}
+              alt="로고"
+              onClick={onClickLogo}
+            />
           </div>
+          <MobileLogo src={mobilelogo} alt="로고" onClick={onClickLogo} />
           {isMobile ? null : ( //모바일이 아닐 경우 Search Box
             <Search>
               <input placeholder="찾고 싶은 스팟이나 사진작가를 검색하세요."></input>
@@ -71,7 +72,7 @@ const Header = () => {
               alt="마이페이지"
             />
             <img className="menu" onClick={openModal} src={menu} alt="메뉴" />
-          </Menu>{" "}
+          </Menu>
         </Main>
         {isMobile ? ( //모바일일 때 Search Box
           <SearchDiv>
@@ -271,5 +272,16 @@ const Search = styled.div`
 
       margin-right: 1rem;
     }
+  }
+`;
+
+const MobileLogo = styled.img`
+  display: none;
+
+  @media (min-width: 769px) and (max-width: 1225px) {
+    display: flex;
+    width: 1.84rem;
+    height: 1.5rem;
+    margin-right: 2rem;
   }
 `;

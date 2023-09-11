@@ -20,12 +20,12 @@ const HomeMenu = ({ isHomeMenuOpen, setIsHomeMenuOpen }) => {
   return (
     <Wrapper>
       <MenuDiv>
-        <Menu isFirst onClick={onClickFeed}>
-          <p>스팟 리스트</p>
+        <Menu onClick={onClickPhotogreapher}>
+          <p>사진 작가</p>
         </Menu>
         <Line />
-        <Menu onClick={onClickPhotogreapher}>
-          <p>작가 리스트</p>
+        <Menu isFirst onClick={onClickFeed}>
+          <p>피드</p>
         </Menu>
         <Line />
         <Menu isLast>

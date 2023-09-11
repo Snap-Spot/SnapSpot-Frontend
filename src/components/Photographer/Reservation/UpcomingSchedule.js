@@ -3,7 +3,7 @@ import profile from "../../../assets/photograph/profile.png";
 import arrow from "../../../assets/photograph/arrow.png";
 import line from "../../../assets/photograph/line.png";
 import { useNavigate } from "react-router-dom";
-
+//복구
 const UpcomingSchedule = ({
   nickname,
   snapType,

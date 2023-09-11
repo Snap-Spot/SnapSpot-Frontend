@@ -80,12 +80,14 @@ const Tag = styled.p`
 const Info = styled.div`
   position: relative;
   z-index: 1;
-  width: 316px;
+  /* width: 316px; */
   height: 125px;
   border-radius: 12px;
   background: #f6f6f6;
-  /* left: 10px; */
   top: -15px;
+  max-width: 316px;
+  /* width: 100%; */
+
   @media (max-width: 768px) {
     width: 6.625rem;
     height: 3.225rem;

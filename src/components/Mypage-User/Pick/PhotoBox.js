@@ -34,7 +34,7 @@ export default PhotoBox;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 320px;
+  width: 100%;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -45,28 +45,34 @@ const Wrapper = styled.div`
 const Photo = styled.div`
   cursor: pointer;
   display: flex;
-  width: 320px;
+  width: 100%;
   height: 320px;
   /* padding: 28px 20px 12px 20px; */
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   gap: 8px;
   border-radius: 32px;
+
   @media (max-width: 768px) {
-    width: 112px;
     height: 112px;
     border-radius: 8px;
   }
-  background: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0.1) 100%
-    ),
-    lightgray 50%;
+
+  img {
+    border-radius: 32px;
+    width: 100%;
+    height: 100%;
+    background: lightgray 50% / cover no-repeat;
+    @media (max-width: 768px) {
+      //모바일
+      border-radius: 8px;
+    }
+  }
 `;
 
 const Info = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
 `;
@@ -96,10 +102,9 @@ const Region = styled.div`
   font-weight: 500;
   line-height: normal;
 
-  width: 320px;
+  width: 100%;
   @media (max-width: 768px) {
     font-size: 2px;
-    width: 108px;
   }
 `;
 

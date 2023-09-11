@@ -37,29 +37,34 @@ const ModalTemplate = ({ isOverflow = 0, title, content, setShowModal }) => {
 export default ModalTemplate;
 
 const Wrapper = styled.div`
-  display: block;
   z-index: 1;
   background: black;
   background-color: rgba(0, 0, 0, 0.3);
+
   width: 100vw;
   height: 100vh;
+
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   overflow-y: auto; //수정
 `;
 
 const Modal = styled.div`
-  margin-top: ${(props) => (props.$isOverflow === 1 ? "400px" : "0px")};
+  position: absolute;
+  top: 14rem;
+
+  /* margin-top: ${(props) => (props.$isOverflow === 1 ? "400px" : "0px")};
   @media (max-width: 768px) {
     //모바일
     margin-top: ${(props) => (props.$isOverflow === 1 ? "200px" : "0px")};
-  }
+  } */
   width: 880px;
   display: flex;
   flex-direction: column;
