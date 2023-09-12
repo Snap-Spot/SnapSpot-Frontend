@@ -29,9 +29,8 @@ const ReservationList = () => {
 };
 
 const ReservationContainer = styled.div`
-  width: 100%;
-  max-width: 1052px;
   width: 75%;
+  max-width: 1052px;
   margin-top: 3rem;
   display: flex;
   flex-direction: column;
