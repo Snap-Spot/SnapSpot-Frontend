@@ -3,6 +3,7 @@ import SignUpForm from "../../components/SignUp/SignUpForm";
 import { styled } from "styled-components";
 import Logo from "../../assets/header/logo.png";
 import { useParams } from "react-router";
+import useMobileDetection from "../../components/common/mobileDetection";
 
 const SignUpInfoPage = () => {
   const params = useParams();
@@ -10,10 +11,13 @@ const SignUpInfoPage = () => {
   // 이전 페이지에서 받아온 멤버 유형(customer, photographer)
   const memberType = params.memberType;
 
+  // 실시간 모바일 크기 알아오기
+  const isMobile = useMobileDetection();
+
   return (
     <Wrapper>
       <div className="container">
-        {window.innerWidth < 768 ? (
+        {isMobile ? (
           <LogoImage src={Logo} alt="snapspot" />
         ) : (
           <MainText>회원가입</MainText>

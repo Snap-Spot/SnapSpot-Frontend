@@ -2,12 +2,15 @@ import React from "react";
 import { styled } from "styled-components";
 import Logo from "../../assets/header/logo.png";
 import LoginForm from "../../components/Login/LoginForm";
+import useMobileDetection from "../../components/common/mobileDetection";
 
 const LoginPage = () => {
+  // 실시간 모바일 크기 알아오기
+  const isMobile = useMobileDetection();
   return (
     <Wrapper>
       <div className="container">
-        {window.innerWidth < 768 ? (
+        {isMobile ? (
           <LogoImage src={Logo} alt="snapspot" />
         ) : (
           <MainText>로그인</MainText>

@@ -29,11 +29,10 @@ const Input = styled.input`
   padding-left: 1.4rem;
   outline: none;
   font-size: 16px;
-
   width: 510px;
 
   @media (max-width: 768px) {
-    width: 323px;
+    width: 90%;
     height: 34px;
     font-size: 14px;
   }

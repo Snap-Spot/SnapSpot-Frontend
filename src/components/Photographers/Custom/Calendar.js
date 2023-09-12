@@ -48,44 +48,48 @@ function Calender() {
   };
 
   return (
-    <StyledCalendar>
-      <DatePicker
-        key={key} // 키 값 변경으로 다시 렌더링
-        onSelect={toggleDateSelection} // 선택한 날짜 추가 또는 제거
-        selectsRange
-        inline
-        locale={customKoLocale}
-        renderCustomHeader={({
-          date,
-          prevMonthButtonDisabled,
-          nextMonthButtonDisabled,
-          decreaseMonth,
-          increaseMonth,
-        }) => (
-          <div className="customHeaderContainer">
-            <div
-              className="btn_month btn_month-prev"
-              onClick={decreaseMonth}
-              disabled={prevMonthButtonDisabled}
-            >
-              <img src={previousarrow} alt="Previous Month" />
-            </div>
-            <div className="month-day">
-              {getYear(date)}.{months[getMonth(date)]}
-            </div>
+    <>
+      <SubTitle>불가능한 날짜 선택</SubTitle>
 
-            <div
-              className="btn_month btn_month-next"
-              onClick={increaseMonth}
-              disabled={nextMonthButtonDisabled}
-            >
-              <img src={nextarrow} alt="Next Month" />
+      <StyledCalendar>
+        <DatePicker
+          key={key} // 키 값 변경으로 다시 렌더링
+          onSelect={toggleDateSelection} // 선택한 날짜 추가 또는 제거
+          selectsRange
+          inline
+          locale={customKoLocale}
+          renderCustomHeader={({
+            date,
+            prevMonthButtonDisabled,
+            nextMonthButtonDisabled,
+            decreaseMonth,
+            increaseMonth,
+          }) => (
+            <div className="customHeaderContainer">
+              <div
+                className="btn_month btn_month-prev"
+                onClick={decreaseMonth}
+                disabled={prevMonthButtonDisabled}
+              >
+                <img src={previousarrow} alt="Previous Month" />
+              </div>
+              <div className="month-day">
+                {getYear(date)}.{months[getMonth(date)]}
+              </div>
+
+              <div
+                className="btn_month btn_month-next"
+                onClick={increaseMonth}
+                disabled={nextMonthButtonDisabled}
+              >
+                <img src={nextarrow} alt="Next Month" />
+              </div>
             </div>
-          </div>
-        )}
-        highlightDates={selectedDates}
-      />
-    </StyledCalendar>
+          )}
+          highlightDates={selectedDates}
+        />
+      </StyledCalendar>
+    </>
   );
 }
 
@@ -229,5 +233,15 @@ const StyledCalendar = styled.div`
   img {
     width: 13px;
     height: 13px;
+  }
+`;
+
+const SubTitle = styled.h3`
+  font-size: 1rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
   }
 `;
