@@ -271,14 +271,8 @@ const ContentContainer = styled.div`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding-left: 1.7rem;
-  padding-right: 1.7rem;
   margin-bottom: 1.7rem;
   width: 100%;
-
-  @media (max-width: 768px) {
-    width: 85%;
-  }
 `;
 
 const Profile = styled.img`
