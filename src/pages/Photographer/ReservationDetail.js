@@ -21,7 +21,7 @@ const ReservationDetail = () => {
 };
 
 const Container = styled.div`
-  width: 100%;
+  width: 75%;
   max-width: 1052px;
   margin-left: 6%;
   margin-right: 6%;
@@ -32,6 +32,7 @@ const Container = styled.div`
   align-items: center;
 
   @media (max-width: 768px) {
+    width: 90%;
     margin-top: 1rem;
     margin-left: 2rem;
   }
@@ -43,7 +44,6 @@ const Title = styled.h2`
   align-self: flex-start;
 
   @media (max-width: 768px) {
-    margin-left: 1.2rem;
     margin-bottom: 1.7rem;
     font-size: 18px;
   }

@@ -19,7 +19,7 @@ const ChatBoxContainer = styled.div`
   width: 68%;
 
   @media (max-width: 768px) {
-    width: 86%;
+    width: 80%;
   }
 `;
 
@@ -49,7 +49,7 @@ const Chat = styled.div`
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 611.364px;
+  width: 100%;
   height: 100px;
   border-radius: 32px;
   background: #fff;
@@ -59,7 +59,7 @@ const Chat = styled.div`
   padding-top: 16px;
 
   @media (max-width: 768px) {
-    width: 235px;
+    width: 100%;
     height: 50px;
     border-radius: 20px;
     font-size: 12px;
