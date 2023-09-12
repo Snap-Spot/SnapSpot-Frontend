@@ -10,7 +10,7 @@ const SpotListPage = () => {
       <Wrapper>
         <div className="title">다른 사람들은 어떤 사진을 찍었을까요?</div>
         <div className="subtitle">베스트 스냅사진들을 모았어요</div>
-        <div className="mb-title">베스트 스냅사진 리스트</div>
+        <div className="mb-title">베스트 스냅사진들을 모았어요</div>
         <SpotList />
       </Wrapper>
     </>
@@ -58,7 +58,7 @@ const Wrapper = styled.div`
 
   .mb-title {
     width: 100%;
-    color: var(--black, #060606);
+    color: #3c3aac;
     font-size: 16px;
     font-weight: 700;
     @media (min-width: 768px) {
