@@ -6,14 +6,19 @@ import M_Customer from "../../assets/signup/customer_mobile.png";
 import M_Photographer from "../../assets/signup/photographer_mobile.png";
 import Arrow from "../../assets/signup/arrow_left.png";
 import { useNavigate } from "react-router";
+import useMobileDetection from "../../components/common/mobileDetection";
 
 const SignUpMemberPage = () => {
   const navigate = useNavigate();
 
-  // 정보 입력 페이지로 이동
+  // localStorage에 role 저장 후 정보 입력 페이지로 이동
   const navigateToInfoPage = (memberType) => {
+    localStorage.setItem("role", "ROLE_" + memberType.toUpperCase());
     navigate(`/signup/${memberType}/info`);
   };
+
+  // 실시간 모바일 크기 알아오기
+  const isMobile = useMobileDetection();
 
   return (
     <Wrapper>
@@ -23,17 +28,18 @@ const SignUpMemberPage = () => {
         <MainDiv>
           <MemberDiv>
             <MemberImage
-              src={window.innerWidth < 768 ? M_Customer : Customer}
+              src={isMobile ? M_Customer : Customer}
               alt="고객"
               onClick={() => {
-                navigateToInfoPage("customer");
+                // 고객 - customer에서 member로 변경 (이미지 이름은 customer로 유지)
+                navigateToInfoPage("member");
               }}
             />
             <MemberText color="#008EDE">인생사진을 찍고 싶어요!</MemberText>
           </MemberDiv>
           <MemberDiv>
             <MemberImage
-              src={window.innerWidth < 768 ? M_Photographer : Photographer}
+              src={isMobile ? M_Photographer : Photographer}
               alt="작가"
               onClick={() => {
                 navigateToInfoPage("photographer");
@@ -54,22 +60,16 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media screen and (max-width: 768px) {
-    height: 100vh;
-  }
+  // PC, 모바일 모두 통일
+  height: 100vh;
 `;
+
 const MainText = styled.div`
   font-family: Noto Sans KR;
   font-size: 1.065rem;
   font-weight: 600;
 
   margin-bottom: 60px;
-
-  margin-top: 40px;
-
-  @media screen and (max-width: 768px) {
-    margin-top: 0;
-  }
 `;
 
 const MainDiv = styled.div`

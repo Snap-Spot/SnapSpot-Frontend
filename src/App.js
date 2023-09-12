@@ -23,6 +23,7 @@ import Introduction from "./pages/Photographer/Introduction";
 import MainPage from "./pages/MainPage/MainPage";
 
 import { Routes, Route } from "react-router-dom";
+import KakaoSignUpPage from "./pages/SignUpPage/KakaoSignUpPage";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
         <Route path="/signup/:memberType/info" element={<SignUpInfoPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/auth/kakao-login" element={<KakaoLoginPage />} />
+        <Route path="/auth/kakao-signup" element={<KakaoSignUpPage />} />
 
         <Route path="/search" element={<SearchPage />} />
         <Route path="/photographer" element={<Photographerlist />} />
