@@ -1,8 +1,7 @@
 import axios from "axios";
-import { API_URL } from "./url";
 
 const client = axios.create();
-client.defaults.baseURL = API_URL;
+client.defaults.baseURL = process.env.REACT_APP_SERVER_URL;
 client.defaults.withCredentials = true;
 
 const token = localStorage.getItem("accessToken");
@@ -16,3 +15,4 @@ console.log(
 );
 
 export default client;
+
