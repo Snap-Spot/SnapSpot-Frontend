@@ -3,9 +3,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import Loading from "../../assets/signup/loading.png";
 import axios from "axios";
-import { KakaoSignInAPI } from "../../api/auth";
+import { KakaoSignUpAPI } from "../../api/auth";
 
-const KakaoLoginPage = () => {
+const KakaoSignUpPage = () => {
   const location = useLocation();
 
   const KAKAO_A_CODE = location.search.split("=")[1]; // 인가코드
@@ -13,7 +13,7 @@ const KakaoLoginPage = () => {
   const GRANT_TYPE = "authorization_code";
   const CLIENT_MAIN_URL = process.env.REACT_APP_REACT_URL;
   const REST_API_KEY = process.env.REACT_APP_REST_API_KEY;
-  const REDIRECT_URI = encodeURI(`${CLIENT_MAIN_URL}/auth/kakao-login`);
+  const REDIRECT_URI = encodeURI(`${CLIENT_MAIN_URL}/auth/kakao-signup`);
   const TOKEN_ADDRESS = `https://kauth.kakao.com/oauth/token?grant_type=${GRANT_TYPE}&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${KAKAO_A_CODE}`; // 토큰 요청
 
   const navigate = useNavigate();
@@ -30,27 +30,27 @@ const KakaoLoginPage = () => {
         console.log("카카오 요청 결과", res);
 
         const k_accessToken = res.data.access_token;
-        const k_refreshToken = res.data.k_refresh_token;
+        const k_refreshToken = res.data.refresh_token;
+        const role = localStorage.getItem("role");
 
-        // snapspot 로그인 result
-        KakaoSignInAPI(k_accessToken, k_refreshToken);
+        // snapspot 회원가입 result
+        KakaoSignUpAPI(k_accessToken, k_refreshToken, role);
 
-        // 성공할 경우 localStorage 저장, alert 창 띄우기, navigate, reload
       })
       .catch((err) => {
-        console.log("카카오 로그인 에러.", err);
+        console.log("카카오 회원가입 에러.", err);
       });
   }, []);
 
   return (
     <Div>
       <LoadingImage src={Loading} alt="로딩 스피너" />
-      <div style={{ marginTop: "20px" }}>카카오 로그인 중이에요!</div>
+      <div style={{ marginTop: "20px" }}>카카오 회원가입 중이에요!</div>
     </Div>
   );
 };
 
-export default KakaoLoginPage;
+export default KakaoSignUpPage;
 
 const Div = styled.div`
   width: 100%;
