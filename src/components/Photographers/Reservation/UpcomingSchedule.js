@@ -14,6 +14,7 @@ const UpcomingSchedule = ({
   date,
   num,
   id,
+  btn_text,
 }) => {
   const navigate = useNavigate();
 
@@ -33,7 +34,7 @@ const UpcomingSchedule = ({
         <Row>
           <Profile src={profile} />
           <NickName>{nickname}</NickName>
-          <Btn>예약신청</Btn>
+          <Btn>{btn_text}</Btn>
         </Row>
         <Row>
           <SnapType>{snapType}</SnapType>

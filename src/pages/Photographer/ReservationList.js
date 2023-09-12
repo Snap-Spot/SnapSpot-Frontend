@@ -20,6 +20,7 @@ const ReservationList = () => {
             date={item.date}
             num={item.num}
             id={item.id}
+            btn_text="예약완료"
           />
         ))}
       </ReservationContainer>

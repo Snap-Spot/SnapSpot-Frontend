@@ -20,6 +20,7 @@ const RequestList = () => {
             date={item.date}
             num={item.num}
             id={item.id}
+            btn_text="예약신청"
           />
         ))}
       </RequestContainer>
