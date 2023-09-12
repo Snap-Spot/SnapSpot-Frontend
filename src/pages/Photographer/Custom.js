@@ -1,49 +1,17 @@
 import styled from "styled-components";
-import Dropdown from "../../components/Photographers/Custom/SpecialtyDropdown";
-import SNSInput from "../../components/Photographers/Custom/SNSInput";
-import Calender from "../../components/Photographers/Custom/Calendar";
 import LayOut from "../../components/common/LayOut";
-import Profile from "../../components/Photographers/Custom/Profile";
-import PriceListInput from "../../components/Photographers/Custom/PriceListInput";
-import FeaturedImgInput from "../../components/Photographers/Custom/FeaturedImgInput";
-import { icon_src } from "../../components/Photographers/Custom/Data/IconList";
-import TagInput from "../../components/Photographers/Custom/TagInput";
-import IntroductionInput from "../../components/Photographers/Custom/IntroductionInput";
-import LocationInput from "../../components/Photographers/Custom/LocationInput";
-import NameInput from "../../components/Photographers/Custom/NameInput";
-import useMobileDetection from "../../components/common/mobileDetection";
+import BasicInput from "../../components/Photographers/Custom/BasicInput";
+import OtherInputs from "../../components/Photographers/Custom/OtherInputs";
 
 const Custom = () => {
-  const isMobile = useMobileDetection();
-
   return (
     <LayOut>
       <Container>
         <Title>작가 페이지 커스텀</Title>
         <Line />
-        <Row>
-          <Profile />
-          {isMobile && <Line2 />}
-          <InputContainer>
-            <NameInput />
-            <PriceListInput />
-          </InputContainer>
-        </Row>
+        <BasicInput />
         <Line2 />
-        <Center>
-          <InputContainer>
-            <LocationInput />
-            <SubTitle>SNS 등록</SubTitle>
-            {icon_src.map((item, idx) => (
-              <SNSInput key={idx} iconSrc={item.src} text={item.text} />
-            ))}
-            <IntroductionInput />
-            <Dropdown />
-            <TagInput />
-            <Calender />
-            <FeaturedImgInput />
-          </InputContainer>
-        </Center>
+        <OtherInputs />
         <ChangeBtn>변경하기</ChangeBtn>
       </Container>
     </LayOut>
@@ -72,30 +40,6 @@ const ChangeBtn = styled.button`
     height: 39px;
     margin: 0;
     margin-top: 4rem;
-  }
-`;
-
-const Row = styled.div`
-  display: flex;
-  margin-top: 2rem;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    margin-top: 1rem;
-    width: 100%;
-  }
-`;
-
-const Center = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-left: 17rem;
-  width: 37rem;
-
-  @media (max-width: 768px) {
-    margin-left: 0;
-    width: 100%;
   }
 `;
 
@@ -139,25 +83,6 @@ const Line2 = styled(Line)`
 
   @media (max-width: 768px) {
     margin-bottom: 2rem;
-  }
-`;
-
-const SubTitle = styled.h3`
-  font-size: 1rem;
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-
-  @media (max-width: 768px) {
-    font-size: 14px;
-  }
-`;
-
-const InputContainer = styled.div`
-  width: 100%;
-  max-width: 37rem;
-
-  @media (max-width: 768px) {
-    width: 100%;
   }
 `;
 

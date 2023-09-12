@@ -51,7 +51,6 @@ const Title = styled.h2`
   cursor: pointer;
 
   @media (max-width: 768px) {
-    margin-left: 2rem;
     margin-bottom: 1.7rem;
     font-size: 18px;
     margin-top: 1rem;
@@ -64,12 +63,11 @@ const ScheduleContainer = styled.div`
   border-radius: 32px;
   background: var(--lesswhite, #f6f6f6);
   padding-top: 1rem;
-  width: 50%;
+  width: 100%;
 
   @media (max-width: 768px) {
-    width: 93%;
+    width: 100%;
     padding-top: 0.5rem;
-    margin-left: 1rem;
     margin-right: 1rem;
   }
 `;
@@ -84,9 +82,15 @@ const SelectedDate = styled.h2`
 `;
 
 const Container = styled.div`
-  display: flex;
+  /* display: flex;
   margin-bottom: 5rem;
   justify-content: space-around;
+  width: 100%; */
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-around;
+  margin-bottom: 5rem;
   width: 100%;
 
   @media (max-width: 768px) {

@@ -44,7 +44,6 @@ const Title = styled.h2`
   cursor: pointer;
 
   @media (max-width: 768px) {
-    margin-left: 2rem;
     margin-bottom: 1.7rem;
     font-size: 18px;
     margin-top: 1rem;

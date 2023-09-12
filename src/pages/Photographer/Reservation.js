@@ -17,10 +17,8 @@ const Reservation = () => {
 };
 
 const Container = styled.div`
-  width: 100%;
+  width: 75%;
   max-width: 1052px;
-  margin-left: 6%;
-  margin-right: 6%;
   margin-top: 3rem;
   display: flex;
   flex-direction: column;
@@ -29,6 +27,7 @@ const Container = styled.div`
 
   @media (max-width: 768px) {
     margin-top: 1rem;
+    width: 90%;
   }
 `;
 
