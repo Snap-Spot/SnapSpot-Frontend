@@ -2,10 +2,17 @@ import styled from "styled-components";
 import photo from "../../assets/search/photo.jpeg";
 import reviewIcon from "../../assets/search/reviewIcon.png";
 import starIcon from "../../assets/search/starIcon.png";
+import { useNavigate } from "react-router-dom";
 
 const SearchBox = ({ tag, photographer, star, region, price, review }) => {
+  const navigate = useNavigate();
+
+  const onClickPage = () => {
+    navigate(`/photographer/introduction`);
+  };
+
   return (
-    <Wrapper>
+    <Wrapper onClick={onClickPage}>
       <Photo>
         <Tag>{tag}</Tag>
       </Photo>

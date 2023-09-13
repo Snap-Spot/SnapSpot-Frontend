@@ -1,14 +1,15 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import Pagination from "react-js-pagination";
 import "../../components/Photographers/Review/Paging/Paging.css";
 import search from "../../assets/header/search.png";
+import { useNavigate } from "react-router-dom";
+
 import FilteringBox from "../../components/search/FilteringBox";
 import SearchBox from "../../components/search/SearchBox";
 import Header from "../../components/common/Header";
 
 const Photographerlist = () => {
-  const [info, setInfo] = useState(true);
   const [items, setItems] = useState([
     {
       tag: "#커플스냅 #유채꽃 #화사함",
@@ -147,7 +148,10 @@ const Photographerlist = () => {
       review: "238",
     },
   ]);
+  const filteringBoxRef = useRef(null);
+  const [info, setInfo] = useState(true);
   const [isFilteringOpen, setIsFilteringOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleTabClick = () => {
     setIsFilteringOpen(!isFilteringOpen);
@@ -167,8 +171,33 @@ const Photographerlist = () => {
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
   const currentPosts = items.slice(indexOfFirstPost, indexOfLastPost);
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        filteringBoxRef.current &&
+        !filteringBoxRef.current.contains(event.target)
+      ) {
+        setIsFilteringOpen(false);
+      }
+    }
+
+    if (isFilteringOpen) {
+      window.addEventListener("click", handleClickOutside);
+    }
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, [isFilteringOpen, setIsFilteringOpen]);
+
+  const handleContentClick = () => {
+    if (isFilteringOpen) {
+      setIsFilteringOpen(false);
+      console.log("Df");
+    }
+  };
+
   return (
-    <>
+    <div ref={filteringBoxRef}>
       <Header />
       <Wrapper>
         <Box>
@@ -179,18 +208,15 @@ const Photographerlist = () => {
               </Tab>
             ))}
           </TabBox>
-          {/* <SearchTag>
-            <input placeholder="태그 검색"></input>
-            <img src={search} alt="검색하기" />
-          </SearchTag> */}
         </Box>
         {isFilteringOpen && (
           <FilteringBox
             isFilteringOpen={isFilteringOpen}
             setIsFilteringOpen={setIsFilteringOpen}
+            ref={filteringBoxRef}
           />
         )}
-        <Content>
+        <Content isFilteringOpen={isFilteringOpen} onClick={handleContentClick}>
           <GridBox>
             <div className="grid">
               {currentPosts.map((item, index) => (
@@ -218,7 +244,7 @@ const Photographerlist = () => {
         nextPageText={">"}
         onChange={handlePageChange}
       />
-    </>
+    </div>
   );
 };
 
@@ -240,6 +266,8 @@ const Content = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: ${(props) => (props.isFilteringOpen ? "pointer" : "auto")};
+  pointer-events: ${(props) => (props.isFilteringOpen ? "auto" : "none")};
   @media (max-width: 768px) {
     width: 90%;
   }
@@ -290,55 +318,6 @@ const Tab = styled.div`
     font-size: 0.75rem;
   }
 `;
-
-// const SearchTag = styled.div`
-//   width: 23%;
-//   height: 2.125rem;
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-evenly;
-//   align-items: center;
-//   border-width: 0 0.063rem 0 0.063rem;
-//   border-color: rgba(129, 129, 129, 0.4);
-//   border-style: solid;
-//   @media (max-width: 768px) {
-//     width: 35%;
-//     border-right: none;
-//   }
-//   input {
-//     width: 100%;
-//     border: none;
-//     font-size: 1rem;
-//     font-style: normal;
-//     font-weight: 500;
-//     line-height: normal;
-//     text-align: left;
-//     margin: 1rem;
-//     font-family: Noto Sans KR;
-
-//     @media (max-width: 768px) {
-//       font-size: 0.875rem;
-//     }
-//   }
-
-//   input:focus {
-//     outline: none;
-//   }
-
-//   input::placeholder {
-//     color: #777;
-//   }
-
-//   img {
-//     width: 1.6rem;
-//     margin: 1rem;
-//     @media (max-width: 768px) {
-//       width: 1rem;
-//       height: 1rem;
-//       margin-right: 0.2rem;
-//     }
-//   }
-// `;
 
 const GridBox = styled.div`
   position: relative;
