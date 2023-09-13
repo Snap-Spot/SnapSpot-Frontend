@@ -29,8 +29,10 @@ const Wrapper = styled.div`
   width: 100%;
 
   @media (max-width: 768px) {
+    /* min-width: 3rem; */
     width: 100%;
     align-items: center;
+    /* padding: 0 1rem; */
   }
 `;
 
@@ -40,13 +42,12 @@ const Photo = styled.div`
   max-width: 316px;
   width: 100%;
   height: 316px;
-  /* padding-top:244px; */
-  /* padding: 28px 20px 12px 20px; */
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
   gap: 8px;
   border-radius: 12px;
+
   @media (max-width: 768px) {
     width: 6.625rem;
     height: 6.625rem;
@@ -63,7 +64,6 @@ const Photo = styled.div`
 const Tag = styled.p`
   color: #060606;
 
-  /* web_m18 */
   font-family: Noto Sans KR;
   font-size: 16px;
   font-style: normal;
@@ -80,13 +80,11 @@ const Tag = styled.p`
 const Info = styled.div`
   position: relative;
   z-index: 1;
-  /* width: 316px; */
   height: 125px;
   border-radius: 12px;
   background: #f6f6f6;
   top: -15px;
   max-width: 316px;
-  /* width: 100%; */
 
   @media (max-width: 768px) {
     width: 6.625rem;
@@ -97,7 +95,6 @@ const Info = styled.div`
 `;
 const Photographer = styled.div`
   color: #000;
-  /* web_b24 */
   font-family: Noto Sans KR;
   font-size: 20px;
   font-style: normal;
@@ -105,7 +102,6 @@ const Photographer = styled.div`
   line-height: normal;
 
   height: 35px;
-  /* margin-top: 20px; */
   @media (max-width: 768px) {
     margin: 0.4rem 0.5rem 0rem 0.5rem;
     font-size: 10px;
@@ -117,7 +113,6 @@ const Photographer = styled.div`
 const Price = styled.div`
   color: #3c3aac;
 
-  /* web_b24 */
   font-family: Noto Sans KR;
   font-size: 20px;
   font-style: normal;
@@ -142,15 +137,14 @@ const TopInfo = styled.div`
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
-
   margin: 0.875rem 1.25rem 0 1.25rem;
+
   @media (max-width: 768px) {
     margin: 0;
   }
 `;
 const Star = styled.div`
   color: #000;
-  /* web_m20 */
   font-family: Noto Sans KR;
   font-size: 18px;
   font-style: normal;
@@ -163,12 +157,13 @@ const Star = styled.div`
   @media (max-width: 768px) {
     display: none;
   }
+
   img {
     margin-right: 0.4rem;
-    /* padding-top: 0.5rem; */
     width: 24px;
     height: 24px;
   }
+
   @media (max-width: 768px) {
     font-size: 5px;
   }
