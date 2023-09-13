@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 import settings from "../../../assets/mypage/userMypage/settings.png";
 import { useNavigate } from "react-router-dom";
-const ProfileContainer = () => {
+const ProfileContainer = ({ profileData }) => {
   const navigate = useNavigate();
   return (
     <Wrapper>
@@ -12,10 +12,10 @@ const ProfileContainer = () => {
         </Profile>
         <Infos>
           <div className="nickname">
-            닉네임
+            {profileData.nickname}
             <img src={settings} alt="" onClick={() => navigate("./settings")} />
           </div>
-          <div className="email">hello@snapspot.com</div>
+          <div className="email">{profileData.email}</div>
         </Infos>
       </div>
       <Logout>로그아웃</Logout>
