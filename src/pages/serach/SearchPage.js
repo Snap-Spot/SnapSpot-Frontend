@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../../components/common/Header";
 import footer from "../../assets/photograph/Footer.png";
@@ -7,9 +7,27 @@ import more from "../../assets/search/more.png";
 import SearchBox from "../../components/search/SearchBox";
 import EamptySearch from "../../components/search/EamptySearch";
 
+//dummyData
+import { SearchData } from "../../components/search/data/SearchData";
+
 const SearchPage = () => {
+  const nicknameData = SearchData[0].nicknameResult;
+  const areaData = SearchData[0].areaResult;
+  console.log("areaData", areaData);
+
   const navigate = useNavigate();
-  const [info, setInfo] = useState(false);
+  const location = useLocation();
+
+  const [info, setInfo] = useState(true);
+  const [keyword, setKeyword] = useState("");
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const keywordParam = searchParams.get("keyword");
+    if (keywordParam) {
+      setKeyword(keywordParam);
+    }
+  }, [location.search]);
 
   const handleMoreClick = () => {
     navigate(`/photographer`);
@@ -20,86 +38,71 @@ const SearchPage = () => {
       <Header></Header>
       <Wrapper>
         <SearchTitle>
-          <div class="subject">'에밀리'</div>에 대한 검색결과
+          <div class="subject">'{keyword}'</div>에 대한 검색결과
         </SearchTitle>
         {info ? (
           <Content>
-            <SubTitle>
-              <div class="subject">'제주도'</div>에서 활동하는 작가
-              <img src={more} onClick={handleMoreClick} />
-            </SubTitle>
-            <Box>
-              <div class="grid">
-                <div>
-                  <SearchBox
-                    tag="#커플스냅 #유채꽃 #화사함"
-                    photographer="에밀리"
-                    star="4.7"
-                    region="제주도 서귀포"
-                    price="130,000"
-                    review="238"
-                  />
-                </div>
-                <div>
-                  <SearchBox
-                    tag="#커플스냅 #유채꽃 #화사함"
-                    photographer="에밀리"
-                    star="4.7"
-                    region="제주도 서귀포"
-                    price="130,000"
-                    review="238"
-                  />
-                </div>
-                <div>
-                  <SearchBox
-                    tag="#커플스냅 #유채꽃 #화사함"
-                    photographer="에밀리"
-                    star="4.7"
-                    region="제주도 서귀포"
-                    price="130,000"
-                    review="238"
-                  />
-                </div>
-              </div>
-            </Box>
-            <SubTitle>
-              <div class="subject">'제주도' </div> 작가
-              <img src={more} onClick={handleMoreClick} />
-            </SubTitle>
-            <Box>
-              <div class="grid">
-                <div>
-                  <SearchBox
-                    tag="#커플스냅 #유채꽃 #화사함"
-                    photographer="에밀리"
-                    star="4.7"
-                    region="제주도 서귀포"
-                    price="130,000"
-                    review="238"
-                  />
-                </div>
-                <div>
-                  <SearchBox
-                    tag="#커플스냅 #유채꽃 #화사함"
-                    photographer="에밀리"
-                    star="4.7"
-                    region="제주도 서귀포"
-                    price="130,000"
-                    review="238"
-                  />
-                </div>
-                <div>
-                  <SearchBox
-                    tag="#커플스냅 #유채꽃 #화사함"
-                    photographer="에밀리"
-                    star="4.7"
-                    region="제주도 서귀포"
-                    price="130,000"
-                    review="238"
-                  />
-                </div>
-              </div>
-            </Box>
+            {nicknameData.length > 0 ? (
+              <>
+                <SubTitle>
+                  <div class="subject">'{keyword}'</div>에서 활동하는 작가
+                  <img src={more} onClick={handleMoreClick} />
+                </SubTitle>
+                <Box>
+                  <div class="grid">
+                    {nicknameData.slice(0, 3).map(
+                      //상단 3개까지만 표시
+                      (data) => (
+                        <div key={data.photographerId}>
+                          <SearchBox
+                            tag={data.tags.tags
+                              .map((tag) => `#${tag}`)
+                              .join(" ")}
+                            photographer={data.member.nickname}
+                            star="4.7"
+                            region={data.areas[0].metropolitan}
+                            price={data.lowestPay}
+                            review="238"
+                          />
+                        </div>
+                      )
+                    )}
+                  </div>
+                </Box>
+              </>
+            ) : (
+              <></>
+            )}
+            {areaData.length > 0 ? (
+              <>
+                <SubTitle>
+                  <div class="subject">'{keyword}' </div> 작가
+                  <img src={more} onClick={handleMoreClick} />
+                </SubTitle>
+                <Box>
+                  <div class="grid">
+                    {areaData.slice(0, 3).map(
+                      (
+                        data //상단 3개까지만 표시
+                      ) => (
+                        <div key={data.photographerId}>
+                          <SearchBox
+                            tag={data.tags.tags}
+                            photographer={data.member.nickname}
+                            star="4.7"
+                            region={data.areas[0].metropolitan}
+                            price={data.lowestPay}
+                            review="238"
+                          />
+                        </div>
+                      )
+                    )}
+                  </div>
+                </Box>
+              </>
+            ) : (
+              <></>
+            )}
           </Content>
         ) : (
           <EamptySearch />

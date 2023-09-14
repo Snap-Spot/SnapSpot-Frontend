@@ -13,11 +13,16 @@ import HomeMenu from "./HomeMenu";
 const Header = () => {
   const navigate = useNavigate();
   const isMobile = useMobileDetection();
+  const [searchValue, setSearchValue] = useState("");
 
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false);
 
   const openModal = () => {
     setIsHomeMenuOpen(!isHomeMenuOpen);
+  };
+
+  const onInputChange = (e) => {
+    setSearchValue(e.target.value);
   };
 
   const onClickLogo = () => {
@@ -37,7 +42,7 @@ const Header = () => {
   };
 
   const onClickSearchBtn = () => {
-    navigate(`/search`);
+    navigate(`/search?keyword=${searchValue}`);
   };
 
   return (
@@ -54,7 +59,11 @@ const Header = () => {
           <MobileLogo src={mobilelogo} alt="로고" onClick={onClickLogo} />
           {isMobile ? null : ( //모바일이 아닐 경우 Search Box
             <Search>
-              <input placeholder="찾고 싶은 스팟이나 사진작가를 검색하세요."></input>
+              <input
+                placeholder="찾고 싶은 스팟이나 사진작가를 검색하세요."
+                value={searchValue}
+                onChange={onInputChange}
+              ></input>
               <img onClick={onClickSearchBtn} src={search} alt="검색하기" />
             </Search>
           )}
