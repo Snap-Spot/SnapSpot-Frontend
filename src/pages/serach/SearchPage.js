@@ -13,7 +13,6 @@ import { SearchData } from "../../components/search/data/SearchData";
 const SearchPage = () => {
   const nicknameData = SearchData[0].nicknameResult;
   const areaData = SearchData[0].areaResult;
-  console.log("areaData", areaData);
 
   const navigate = useNavigate();
   const location = useLocation();

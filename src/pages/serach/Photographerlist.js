@@ -9,145 +9,12 @@ import FilteringBox from "../../components/search/FilteringBox";
 import SearchBox from "../../components/search/SearchBox";
 import Header from "../../components/common/Header";
 
+//dummyData
+import { PhotographerListData } from "../../components/search/data/PhotographerListData";
+
 const Photographerlist = () => {
-  const [items, setItems] = useState([
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리1",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리2",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리3",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리4",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리5",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리6",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리7",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리8",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리9",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리10",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리11",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리12",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리13",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리14",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리15",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리16",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리17",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-  ]);
+  const items = PhotographerListData[0];
+
   const filteringBoxRef = useRef(null);
   const [info, setInfo] = useState(true);
   const [isFilteringOpen, setIsFilteringOpen] = useState(false);
@@ -192,7 +59,6 @@ const Photographerlist = () => {
   const handleContentClick = () => {
     if (isFilteringOpen) {
       setIsFilteringOpen(false);
-      console.log("Df");
     }
   };
 
@@ -217,17 +83,18 @@ const Photographerlist = () => {
           />
         )}
         <Content isFilteringOpen={isFilteringOpen} onClick={handleContentClick}>
+          
           <GridBox>
             <div className="grid">
-              {currentPosts.map((item, index) => (
-                <div key={index}>
+              {currentPosts.map((data) => (
+                <div key={data.photographerId}>
                   <SearchBox
-                    tag={item.tag}
-                    photographer={item.photographer}
-                    star={item.star}
-                    region={item.region}
-                    price={item.price}
-                    review={item.review}
+                    tag={data.tags.tags}
+                    photographer={data.member.nickname}
+                    star="4.7"
+                    // region={data.areas[0].metropolitan}
+                    price={data.lowestPay}
+                    review="238"
                   />
                 </div>
               ))}
