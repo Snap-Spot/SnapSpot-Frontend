@@ -507,9 +507,7 @@ const Btn = styled.div`
   font-weight: 500;
   line-height: normal;
 
-  @media (max-width: 768px) {
-    /* margin-top: 1rem; */
-  }
+  cursor: pointer;
 `;
 
 const BtnTab = styled.div`

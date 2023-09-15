@@ -178,6 +178,8 @@ const Tab = styled.div`
   width: 6.5rem;
   text-align: center;
 
+  cursor: pointer;
+
   @media (max-width: 768px) {
     font-size: 0.75rem;
   }
