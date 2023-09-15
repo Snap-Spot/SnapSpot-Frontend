@@ -14,14 +14,17 @@ import { PhotographerListData } from "../../components/search/data/PhotographerL
 
 const Photographerlist = () => {
   const items = PhotographerListData[0];
-
-  const filteringBoxRef = useRef(null);
+  const outSection = useRef();
   const [info, setInfo] = useState(true);
   const [isFilteringOpen, setIsFilteringOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleTabClick = () => {
-    setIsFilteringOpen(!isFilteringOpen);
+    if (!isFilteringOpen) {
+      setIsFilteringOpen(true);
+    } else {
+      setIsFilteringOpen(false);
+    }
   };
 
   const tabs = ["지역", "날짜", "전문분야", "순서"];
@@ -38,51 +41,46 @@ const Photographerlist = () => {
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
   const currentPosts = items.slice(indexOfFirstPost, indexOfLastPost);
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (
-        filteringBoxRef.current &&
-        !filteringBoxRef.current.contains(event.target)
-      ) {
+  const handleOutsideClick = (e) => {
+    e.stopPropagation();
+    if (outSection.current && !outSection.current.contains(e.target)) {
+      setTimeout(() => {
         setIsFilteringOpen(false);
-      }
-    }
-
-    if (isFilteringOpen) {
-      window.addEventListener("click", handleClickOutside);
-    }
-    return () => {
-      window.removeEventListener("click", handleClickOutside);
-    };
-  }, [isFilteringOpen, setIsFilteringOpen]);
-
-  const handleContentClick = () => {
-    if (isFilteringOpen) {
-      setIsFilteringOpen(false);
+      }, 200);
     }
   };
 
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
+
   return (
-    <div ref={filteringBoxRef}>
+    <div>
       <Header />
       <Wrapper>
-        <Box>
-          <TabBox>
-            {tabs.map((tab, index) => (
-              <Tab key={index} onClick={handleTabClick}>
-                {tab}
-              </Tab>
-            ))}
-          </TabBox>
-        </Box>
-        {isFilteringOpen && (
-          <FilteringBox
-            isFilteringOpen={isFilteringOpen}
-            setIsFilteringOpen={setIsFilteringOpen}
-            ref={filteringBoxRef}
-          />
-        )}
-        <Content isFilteringOpen={isFilteringOpen} onClick={handleContentClick}>
+        <div>
+          <Box>
+            <TabBox>
+              {tabs.map((tab, index) => (
+                <Tab key={index} onClick={handleTabClick}>
+                  {tab}
+                </Tab>
+              ))}
+            </TabBox>
+          </Box>
+          {isFilteringOpen && (
+            <div ref={outSection}>
+              <FilteringBox
+                isFilteringOpen={isFilteringOpen}
+                setIsFilteringOpen={setIsFilteringOpen}
+              />
+            </div>
+          )}
+        </div>
+        <Content isFilteringOpen={isFilteringOpen}>
           <GridBox>
             <div className="grid">
               {currentPosts.map((data) => (
