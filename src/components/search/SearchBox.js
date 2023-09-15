@@ -4,7 +4,17 @@ import reviewIcon from "../../assets/search/reviewIcon.png";
 import starIcon from "../../assets/search/starIcon.png";
 import { useNavigate } from "react-router-dom";
 
-const SearchBox = ({ tag, photographer, star, region, price, review }) => {
+const SearchBox = ({
+  image,
+  tag,
+  photographer,
+  star,
+  region,
+  subregion,
+  regionCount,
+  price,
+  review,
+}) => {
   const navigate = useNavigate();
 
   const onClickPage = () => {
@@ -13,7 +23,7 @@ const SearchBox = ({ tag, photographer, star, region, price, review }) => {
 
   return (
     <Wrapper onClick={onClickPage}>
-      <Photo>
+      <Photo image={image}>
         <Tag>{tag}</Tag>
       </Photo>
       <Info>
@@ -24,7 +34,15 @@ const SearchBox = ({ tag, photographer, star, region, price, review }) => {
             {star} ({review})
           </Star>
         </TopInfo>
-        <Region>{region}에서 활동중</Region>
+        {regionCount > 1 ? (
+          <Region>
+            {region} {subregion} 외 {regionCount - 1}곳 에서 활동중
+          </Region>
+        ) : (
+          <Region>
+            {region} {subregion}에서 활동중
+          </Region>
+        )}
         <Price>{price}원 ~</Price>
       </Info>
     </Wrapper>
@@ -45,7 +63,6 @@ const Wrapper = styled.div`
 
 const Photo = styled.div`
   display: flex;
-  /* width: 100%; */
   height: 320px;
   flex-direction: column;
   justify-content: flex-end;
@@ -53,12 +70,13 @@ const Photo = styled.div`
   gap: 8px;
   border-radius: 32px;
 
+  /* 배경 이미지 설정 */
   background: linear-gradient(
       180deg,
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 0.1) 100%
     ),
-    url(${photo}) center/cover no-repeat, lightgray 50%;
+    url(${(props) => props.image}) center/cover no-repeat, lightgray 50%;
 
   @media (max-width: 768px) {
     width: 100%;

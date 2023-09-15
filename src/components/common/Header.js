@@ -90,7 +90,11 @@ const Header = () => {
         {isMobile ? ( //모바일일 때 Search Box
           <SearchDiv>
             <Search>
-              <input placeholder="찾고 싶은 스팟이나 사진작가를 검색하세요."></input>
+              <input
+                placeholder="찾고 싶은 스팟이나 사진작가를 검색하세요."
+                value={searchValue}
+                onChange={onInputChange}
+              ></input>
               <img onClick={onClickSearchBtn} src={search} alt="검색하기" />
             </Search>
           </SearchDiv>

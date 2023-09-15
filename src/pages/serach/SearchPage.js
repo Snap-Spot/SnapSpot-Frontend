@@ -54,12 +54,15 @@ const SearchPage = () => {
                       (data) => (
                         <div key={data.photographerId}>
                           <SearchBox
+                            image={data.images.urls[0]}
                             tag={data.tags.tags
                               .map((tag) => `#${tag}`)
                               .join(" ")}
                             photographer={data.member.nickname}
                             star="4.7"
                             region={data.areas[0].metropolitan}
+                            subregion={data.areas[0].city}
+                            regionCount={data.areas.length}
                             price={data.lowestPay}
                             review="238"
                           />
