@@ -41,7 +41,7 @@ const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
                 {regions.map((region, index) => (
                   <Box key={index}>
                     <Region
-                      onClick={() => handleRegionClick(region)}
+                      onClick={() => handleRegionClick(region.name)}
                       isSelected={selectedRegion === region.name}
                     >
                       {region.name}
@@ -51,11 +51,11 @@ const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
               </RegionList>
             )}
             <SubregionList>
-              <Box>
-                {selectedRegion &&
-                  regions
+              {selectedRegion && (
+                <Box>
+                  {regions
                     .find((region) => region.name === selectedRegion)
-                    ?.subregions.map((subregion, index) => (
+                    .subregions.map((subregion, index) => (
                       <SubregionBox key={index}>
                         <Subregion
                           onClick={() => handleSubRegionClick(subregion)}
@@ -65,7 +65,8 @@ const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
                         </Subregion>
                       </SubregionBox>
                     ))}
-              </Box>
+                </Box>
+              )}
             </SubregionList>
           </List>
         </RegionTab>

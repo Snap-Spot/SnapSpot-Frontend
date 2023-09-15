@@ -83,7 +83,6 @@ const Photographerlist = () => {
           />
         )}
         <Content isFilteringOpen={isFilteringOpen} onClick={handleContentClick}>
-          
           <GridBox>
             <div className="grid">
               {currentPosts.map((data) => (

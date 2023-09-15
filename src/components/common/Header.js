@@ -42,7 +42,11 @@ const Header = () => {
   };
 
   const onClickSearchBtn = () => {
-    navigate(`/search?keyword=${searchValue}`);
+    if (searchValue.length > 0) {
+      navigate(`/search?keyword=${searchValue}`);
+    } else {
+      window.alert("검색어를 1자 이상 입력해 주세요.");
+    }
   };
 
   return (

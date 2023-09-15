@@ -86,7 +86,9 @@ const SearchPage = () => {
                       ) => (
                         <div key={data.photographerId}>
                           <SearchBox
-                            tag={data.tags.tags}
+                            tag={data.tags.tags
+                              .map((tag) => `#${tag}`)
+                              .join(" ")}
                             photographer={data.member.nickname}
                             star="4.7"
                             region={data.areas[0].metropolitan}
