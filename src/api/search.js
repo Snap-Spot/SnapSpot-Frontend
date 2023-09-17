@@ -34,7 +34,9 @@ export const getPhotographerList = async (areaId, special, ableDate) => {
     if (ableDate) {
       endpoint += `${areaId || special ? "&" : "?"}ableDate=${ableDate}`;
     }
+    console.log("endpoint", endpoint);
     const res = await client.get(endpoint);
+    console.log("res.data", res.data);
     return res.data;
   } catch (err) {
     console.error("에러 발생", err);

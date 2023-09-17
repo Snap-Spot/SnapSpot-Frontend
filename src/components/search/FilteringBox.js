@@ -10,9 +10,8 @@ const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
   const [selectedSubRegion, setSelectedSubRegion] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
   const [selectedOrder, setSelectedOrder] = useState(null);
-  const [special, setSpecial] = useState(null);
-  const [ableDate, setAbleDate] = useState(null);
-  const [date, setData] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [data, setData] = useState([]);
 
   const handleRegionClick = (region) => {
     setSelectedRegion(region);
@@ -32,12 +31,25 @@ const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
   };
 
   const handleSearchBtnClick = (isFilteringOpen) => {
-    fetchData();
+    fetchData(selectedSubRegion, selectedSection, selectedDate);
     setIsFilteringOpen(!isFilteringOpen);
   };
 
-  const fetchData = async (areaId, special, ableDate) => {
+  const fetchData = async (
+    selectedSubRegion,
+    selectedSection,
+    selectedDate
+  ) => {
     try {
+      console.log(
+        "selectedSubRegion, selectedSection, selectedDate",
+        selectedSubRegion,
+        selectedSection,
+        selectedDate
+      );
+      const areaId = selectedSubRegion;
+      const special = selectedSection;
+      const ableDate = selectedDate;
       const getData = await getPhotographerList(areaId, special, ableDate);
       setData(getData);
     } catch (err) {
@@ -90,7 +102,7 @@ const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
         <DateTab>
           <Title>날짜</Title>
           <CalendarBox>
-            <CustomCalendar />
+            <CustomCalendar setSelectedDate={setSelectedDate} />
           </CalendarBox>
         </DateTab>
         {/* 전문분야 필터링 */}
