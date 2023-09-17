@@ -4,7 +4,7 @@ import CustomCalendar from "./CustomCalendar";
 import { regions, sections, orders } from "./FilteringList.js";
 
 const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
-  const [selectedRegion, setSelectedRegion] = useState(null);
+  const [selectedRegion, setSelectedRegion] = useState("서울");
   const [selectedSubRegion, setSelectedSubRegion] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
   const [selectedOrder, setSelectedOrder] = useState(null);
@@ -36,33 +36,35 @@ const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
         <RegionTab>
           <Title>지역</Title>
           <List>
-            <RegionList>
-              {regions.map((region, index) => (
-                <Box>
-                  <Region
-                    key={index}
-                    onClick={() => handleRegionClick(region)}
-                    isSelected={selectedRegion === region}
-                  >
-                    {region.name}
-                  </Region>
-                </Box>
-              ))}
-            </RegionList>
+            {regions && regions.length > 0 && (
+              <RegionList>
+                {regions.map((region, index) => (
+                  <Box key={index}>
+                    <Region
+                      onClick={() => handleRegionClick(region.name)}
+                      isSelected={selectedRegion === region.name}
+                    >
+                      {region.name}
+                    </Region>
+                  </Box>
+                ))}
+              </RegionList>
+            )}
             <SubregionList>
               {selectedRegion && (
                 <Box>
-                  {selectedRegion.subregions.map((subregion, index) => (
-                    <SubregionBox>
-                      <Subregion
-                        key={index}
-                        onClick={() => handleSubRegionClick(subregion)}
-                        isSelected={selectedSubRegion === subregion}
-                      >
-                        {subregion}
-                      </Subregion>
-                    </SubregionBox>
-                  ))}
+                  {regions
+                    .find((region) => region.name === selectedRegion)
+                    .subregions.map((subregion, index) => (
+                      <SubregionBox key={index}>
+                        <Subregion
+                          onClick={() => handleSubRegionClick(subregion)}
+                          isSelected={selectedSubRegion === subregion}
+                        >
+                          {subregion}
+                        </Subregion>
+                      </SubregionBox>
+                    ))}
                 </Box>
               )}
             </SubregionList>
@@ -99,7 +101,7 @@ const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
         </SectionTab>
         {/* 순서 필터링 */}
         <OrderTab>
-          <Title>순서</Title>{" "}
+          <Title>순서</Title>
           <SectionList>
             {orders && (
               <Box>
@@ -505,9 +507,7 @@ const Btn = styled.div`
   font-weight: 500;
   line-height: normal;
 
-  @media (max-width: 768px) {
-    /* margin-top: 1rem; */
-  }
+  cursor: pointer;
 `;
 
 const BtnTab = styled.div`

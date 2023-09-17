@@ -20,11 +20,11 @@ const HomeMenu = ({ isHomeMenuOpen, setIsHomeMenuOpen }) => {
   return (
     <Wrapper>
       <MenuDiv>
-        <Menu onClick={onClickPhotogreapher}>
+        <Menu isFirst onClick={onClickPhotogreapher}>
           <p>사진 작가</p>
         </Menu>
         <Line />
-        <Menu isFirst onClick={onClickFeed}>
+        <Menu onClick={onClickFeed}>
           <p>피드</p>
         </Menu>
         <Line />
