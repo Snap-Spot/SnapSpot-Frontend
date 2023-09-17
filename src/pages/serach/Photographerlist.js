@@ -10,12 +10,12 @@ import SearchBox from "../../components/search/SearchBox";
 import Header from "../../components/common/Header";
 
 //dummyData
-import { PhotographerListData } from "../../components/search/data/PhotographerListData";
+import { getAllPhotographerList } from "../../api/search";
 
 const Photographerlist = () => {
-  const items = PhotographerListData;
   const outSection = useRef();
   const [info, setInfo] = useState(true);
+  const [list, setList] = useState([]);
   const [isFilteringOpen, setIsFilteringOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -29,6 +29,19 @@ const Photographerlist = () => {
 
   const tabs = ["지역", "날짜", "전문분야", "순서"];
 
+  useEffect(() => {
+    getPhotoList();
+  }, []);
+
+  const getPhotoList = async () => {
+    try {
+      const data = await getAllPhotographerList();
+      setList(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const itemsPerPage = 15; // 페이지당 아이템 개수
 
@@ -39,7 +52,7 @@ const Photographerlist = () => {
   // 데이터 배열을 페이지에 맞게 자르기
   const indexOfLastPost = currentPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
-  const currentPosts = items.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = list.slice(indexOfFirstPost, indexOfLastPost);
 
   const handleOutsideClick = (e) => {
     e.stopPropagation();
@@ -86,11 +99,13 @@ const Photographerlist = () => {
               {currentPosts.map((data) => (
                 <div key={data.photographerId}>
                   <SearchBox
-                    // tag={data.tags.tags.map((tag) => `#${tag}`).join(" ")}
+                    tags={data.tags}
                     photographer={data.member.nickname}
                     star="4.7"
-                    region={data.areas[0].metropolitan}
-                    subregion={data.areas[0].city}
+                    region={
+                      data.areas.length > 0 ? data.areas[0].metropolitan : ""
+                    }
+                    subregion={data.areas.length > 0 ? data.areas[0].city : ""}
                     regionCount={data.areas.length}
                     price={data.lowestPay}
                     review="238"
@@ -104,7 +119,7 @@ const Photographerlist = () => {
       <Pagination
         activePage={currentPage}
         itemsCountPerPage={itemsPerPage}
-        totalItemsCount={items.length}
+        totalItemsCount={list.length}
         pageRangeDisplayed={5}
         prevPageText={"<"}
         nextPageText={">"}

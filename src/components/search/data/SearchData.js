@@ -49,7 +49,9 @@ export const SearchData = [
           keywords: ["FRIEND", "COUPLE"],
         },
         tags: {
-          tags: ["자연", "벚꽃", "인생사진"],
+          tag1: "웅냥",
+          tag2: "발랄",
+          tag3: "짱귀",
         },
       },
       {
@@ -100,7 +102,9 @@ export const SearchData = [
           keywords: ["FRIEND", "COUPLE"],
         },
         tags: {
-          tags: ["자연", "벚꽃", "인생사진"],
+          tag1: "웅냥",
+          tag2: "발랄",
+          tag3: "짱귀",
         },
       },
       {
@@ -151,7 +155,9 @@ export const SearchData = [
           keywords: ["FRIEND", "COUPLE"],
         },
         tags: {
-          tags: ["자연", "벚꽃", "인생사진"],
+          tag1: "웅냥",
+          tag2: "발랄",
+          tag3: "짱귀",
         },
       },
       {
@@ -202,7 +208,9 @@ export const SearchData = [
           keywords: ["FRIEND", "COUPLE"],
         },
         tags: {
-          tags: ["자연", "벚꽃", "인생사진"],
+          tag1: "웅냥",
+          tag2: "발랄",
+          tag3: "짱귀",
         },
       },
     ],
@@ -255,7 +263,9 @@ export const SearchData = [
           keywords: ["FRIEND", "COUPLE"],
         },
         tags: {
-          tags: ["자연", "벚꽃", "인생사진"],
+          tag1: "웅냥",
+          tag2: "발랄",
+          tag3: "짱귀",
         },
       },
     ],

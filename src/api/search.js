@@ -10,6 +10,18 @@ export const getKeywordSearch = async (keyword) => {
   }
 };
 
+//사진 작가 목록 전체 조회
+export const getAllPhotographerList = async () => {
+  try {
+    const res = await client.get(`/photographers`);
+    return res.data;
+  } catch (err) {
+    console.error("에러 발생", err);
+    throw err;
+  }
+};
+
+//사진 작가 목록 조회
 export const getPhotographerList = async (areaId, special, ableDate) => {
   try {
     const res = await client.get(

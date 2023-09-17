@@ -3,11 +3,17 @@ import { React, useState, useEffect } from "react";
 import CustomCalendar from "./CustomCalendar";
 import { regions, sections, orders } from "./FilteringList.js";
 
+import { getPhotographerList } from "../../api/search";
+
 const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
   const [selectedRegion, setSelectedRegion] = useState("서울");
   const [selectedSubRegion, setSelectedSubRegion] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const [areaId, setAreaId] = useState(null);
+  const [special, setSpecial] = useState(null);
+  const [ableDate, setAbleDate] = useState(null);
+  const [date, setData] = useState(null);
 
   const handleRegionClick = (region) => {
     setSelectedRegion(region);
@@ -26,7 +32,17 @@ const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
   };
 
   const handleSearchBtnClick = (isFilteringOpen) => {
+    fetchData();
     setIsFilteringOpen(!isFilteringOpen);
+  };
+
+  const fetchData = async (areaId, special, ableDate) => {
+    try {
+      const getData = await getPhotographerList(areaId, special, ableDate);
+      setData(getData);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

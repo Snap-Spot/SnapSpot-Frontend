@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const SearchBox = ({
   image,
-  tag,
+  tags,
   photographer,
   star,
   region,
@@ -20,6 +20,12 @@ const SearchBox = ({
   const onClickPage = () => {
     navigate(`/photographer/introduction`);
   };
+
+  const tagValues = Object.values(tags).filter((tag) => tag !== null);
+  const tag = Object.values(tags)
+    .filter((tag) => tag !== null)
+    .map((tagValue) => `#${tagValue}`)
+    .join(" ");
 
   return (
     <Wrapper onClick={onClickPage}>
@@ -115,8 +121,13 @@ const Photographer = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-
   height: 35px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 175px;
+
   @media (max-width: 768px) {
     font-size: 10px;
     height: 15px;
@@ -139,7 +150,6 @@ const Region = styled.div`
 const Price = styled.div`
   color: #3c3aac;
 
-  /* web_b24 */
   font-family: Noto Sans KR;
   font-size: 24px;
   font-style: normal;
@@ -150,7 +160,6 @@ const Price = styled.div`
   margin-top: 6px;
   @media (max-width: 768px) {
     font-size: 5px;
-    /* width: 108px; */
     height: 10px;
   }
 `;
@@ -169,7 +178,6 @@ const TopInfo = styled.div`
 
 const Star = styled.div`
   color: #000;
-  /* web_m20 */
   font-family: Noto Sans KR;
   font-size: 20px;
   font-style: normal;
@@ -179,17 +187,22 @@ const Star = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 5px;
+  }
+
   img {
     margin-right: 0.4rem;
+    margin-top: 0.4rem;
     width: 24px;
     height: 24px;
+
     @media (max-width: 768px) {
       margin-right: 0.1rem;
       width: 8px;
       height: 8px;
     }
-  }
-  @media (max-width: 768px) {
-    font-size: 5px;
   }
 `;

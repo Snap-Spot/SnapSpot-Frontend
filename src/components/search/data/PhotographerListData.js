@@ -53,9 +53,9 @@ export const PhotographerListData = [
       keywords: ["FAMILY"],
     },
     tags: {
-      tag1: null,
-      tag2: null,
-      tag3: null,
+      tag1: "웅냥",
+      tag2: "발랄",
+      tag3: "짱귀",
     },
   },
   {
@@ -112,9 +112,9 @@ export const PhotographerListData = [
       keywords: ["FAMILY"],
     },
     tags: {
-      tag1: null,
-      tag2: null,
-      tag3: null,
+      tag1: "웅냥",
+      tag2: "발랄",
+      tag3: "짱귀",
     },
   },
   {
@@ -171,9 +171,9 @@ export const PhotographerListData = [
       keywords: ["FAMILY"],
     },
     tags: {
-      tag1: null,
-      tag2: null,
-      tag3: null,
+      tag1: "웅냥",
+      tag2: "발랄",
+      tag3: "짱귀",
     },
   },
   {
@@ -230,9 +230,9 @@ export const PhotographerListData = [
       keywords: ["FAMILY"],
     },
     tags: {
-      tag1: null,
-      tag2: null,
-      tag3: null,
+      tag1: "웅냥",
+      tag2: "발랄",
+      tag3: "짱귀",
     },
   },
 ];
