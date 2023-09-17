@@ -30,7 +30,7 @@ const Header = () => {
   };
 
   const onClickPhotogreapher = () => {
-    navigate(`/photographer`);
+    navigate(`/photographers`);
   };
 
   const onClickFeed = () => {

@@ -29,7 +29,7 @@ const SearchPage = () => {
   }, [location.search]);
 
   const handleMoreClick = () => {
-    navigate(`/photographer`);
+    navigate(`/photographers`);
   };
 
   return (

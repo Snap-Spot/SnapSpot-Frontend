@@ -56,7 +56,7 @@ function App() {
         <Route path="/auth/kakao-signup" element={<KakaoSignUpPage />} />
 
         <Route path="/search" element={<SearchPage />} />
-        <Route path="/photographer" element={<Photographerlist />} />
+        <Route path="/photographers" element={<Photographerlist />} />
         <Route path="/spot-list" element={<SpotListPage />} />
       </Routes>
       <Footer />
