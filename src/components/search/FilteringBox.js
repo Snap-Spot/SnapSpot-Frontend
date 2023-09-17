@@ -10,7 +10,6 @@ const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
   const [selectedSubRegion, setSelectedSubRegion] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
   const [selectedOrder, setSelectedOrder] = useState(null);
-  const [areaId, setAreaId] = useState(null);
   const [special, setSpecial] = useState(null);
   const [ableDate, setAbleDate] = useState(null);
   const [date, setData] = useState(null);
@@ -19,8 +18,8 @@ const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
     setSelectedRegion(region);
   };
 
-  const handleSubRegionClick = (subregion) => {
-    setSelectedSubRegion(subregion);
+  const handleSubRegionClick = (areaId) => {
+    setSelectedSubRegion(areaId);
   };
 
   const handleSectionClick = (section) => {
@@ -66,24 +65,24 @@ const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
                 ))}
               </RegionList>
             )}
-            <SubregionList>
-              {selectedRegion && (
+            {selectedRegion && (
+              <SubregionList>
                 <Box>
                   {regions
                     .find((region) => region.name === selectedRegion)
-                    .subregions.map((subregion, index) => (
-                      <SubregionBox key={index}>
+                    .subregions.map((data) => (
+                      <SubregionBox key={data.areaId}>
                         <Subregion
-                          onClick={() => handleSubRegionClick(subregion)}
-                          isSelected={selectedSubRegion === subregion}
+                          onClick={() => handleSubRegionClick(data.areaId)}
+                          isSelected={selectedSubRegion === data.areaId}
                         >
-                          {subregion}
+                          {data.subregion}
                         </Subregion>
                       </SubregionBox>
                     ))}
                 </Box>
-              )}
-            </SubregionList>
+              </SubregionList>
+            )}
           </List>
         </RegionTab>
         {/* 날짜 필터링 */}

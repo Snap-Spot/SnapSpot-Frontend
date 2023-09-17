@@ -24,9 +24,17 @@ export const getAllPhotographerList = async () => {
 //사진 작가 목록 조회
 export const getPhotographerList = async (areaId, special, ableDate) => {
   try {
-    const res = await client.get(
-      `/photographers?areaId=${areaId}&special=${special}&ableDate=${ableDate}`
-    );
+    let endpoint = "/photographers";
+    if (areaId) {
+      endpoint += `?areaId=${areaId}`;
+    }
+    if (special) {
+      endpoint += `${areaId ? "&" : "?"}special=${special}`;
+    }
+    if (ableDate) {
+      endpoint += `${areaId || special ? "&" : "?"}ableDate=${ableDate}`;
+    }
+    const res = await client.get(endpoint);
     return res.data;
   } catch (err) {
     console.error("에러 발생", err);

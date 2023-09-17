@@ -2,19 +2,16 @@ import { React, useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import Pagination from "react-js-pagination";
 import "../../components/Photographers/Review/Paging/Paging.css";
-import search from "../../assets/header/search.png";
 import { useNavigate } from "react-router-dom";
 
 import FilteringBox from "../../components/search/FilteringBox";
 import SearchBox from "../../components/search/SearchBox";
 import Header from "../../components/common/Header";
 
-//dummyData
 import { getAllPhotographerList } from "../../api/search";
 
 const Photographerlist = () => {
   const outSection = useRef();
-  const [info, setInfo] = useState(true);
   const [list, setList] = useState([]);
   const [isFilteringOpen, setIsFilteringOpen] = useState(false);
   const navigate = useNavigate();

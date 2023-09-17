@@ -9,6 +9,7 @@ import EamptySearch from "../../components/search/EamptySearch";
 
 //dummyData
 import { SearchData } from "../../components/search/data/SearchData";
+import { getPhotographerList } from "../../api/search";
 
 const SearchPage = () => {
   const nicknameData = SearchData[0].nicknameResult;
