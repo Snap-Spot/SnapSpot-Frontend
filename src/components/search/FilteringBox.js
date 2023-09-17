@@ -24,6 +24,7 @@ const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
 
   const handleSectionClick = (section) => {
     setSelectedSection(section);
+    console.log(section);
   };
 
   const handleOrderClick = (order) => {
@@ -102,10 +103,10 @@ const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
                   <>
                     <Section
                       key={index}
-                      onClick={() => handleSectionClick(section)}
-                      isSelected={selectedSection === section}
+                      onClick={() => handleSectionClick(section.key)}
+                      isSelected={selectedSection === section.key}
                     >
-                      {section}
+                      {section.label}
                     </Section>
                     {index !== sections.length - 1 && <Line />}
                   </>
