@@ -48,19 +48,25 @@ const SearchPage = () => {
                   <div class="subject">'{keyword}'</div>에서 활동하는 작가
                   <img src={more} onClick={handleMoreClick} />
                 </SubTitle>
-                <Box>
+                <GridBox>
                   <div class="grid">
                     {nicknameData.slice(0, 3).map(
                       //상단 3개까지만 표시
                       (data) => (
                         <div key={data.photographerId}>
                           <SearchBox
-                            image={data.images.urls[0]}
+                            image={data.images.image1}
                             tags={data.tags}
                             photographer={data.member.nickname}
                             star="4.7"
-                            region={data.areas[0].metropolitan}
-                            subregion={data.areas[0].city}
+                            region={
+                              data.areas.length > 0
+                                ? data.areas[0].metropolitan
+                                : ""
+                            }
+                            subregion={
+                              data.areas.length > 0 ? data.areas[0].city : ""
+                            }
                             regionCount={data.areas.length}
                             price={data.lowestPay}
                             review="238"
@@ -69,7 +75,7 @@ const SearchPage = () => {
                       )
                     )}
                   </div>
-                </Box>
+                </GridBox>
               </>
             ) : (
               <></>
@@ -80,7 +86,7 @@ const SearchPage = () => {
                   <div class="subject">'{keyword}' </div> 작가
                   <img src={more} onClick={handleMoreClick} />
                 </SubTitle>
-                <Box>
+                <GridBox>
                   <div class="grid">
                     {areaData.slice(0, 3).map(
                       (
@@ -102,7 +108,7 @@ const SearchPage = () => {
                       )
                     )}
                   </div>
-                </Box>
+                </GridBox>
               </>
             ) : (
               <></>
@@ -129,6 +135,21 @@ const Wrapper = styled.div`
   @media (max-width: 768px) {
     width: 90%;
   }
+`;
+
+const Content = styled.div`
+  width: 100%;
+  max-width: 1048px;
+`;
+
+const GridBox = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1048px;
 
   .grid {
     display: grid;
@@ -152,21 +173,6 @@ const Wrapper = styled.div`
       margin-top: 1.25rem;
     }
   }
-`;
-
-const Content = styled.div`
-  width: 100%;
-  max-width: 1048px;
-`;
-
-const Box = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-width: 1048px;
 `;
 
 const SearchTitle = styled.div`

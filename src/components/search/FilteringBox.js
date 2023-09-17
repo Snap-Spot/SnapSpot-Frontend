@@ -3,15 +3,12 @@ import { React, useState, useEffect } from "react";
 import CustomCalendar from "./CustomCalendar";
 import { regions, sections, orders } from "./FilteringList.js";
 
-import { getPhotographerList } from "../../api/search";
-
-const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
+const FilteringBox = ({ onSearch, setIsFilteringOpen }) => {
   const [selectedRegion, setSelectedRegion] = useState("서울");
   const [selectedSubRegion, setSelectedSubRegion] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [data, setData] = useState([]);
 
   const handleRegionClick = (region) => {
     setSelectedRegion(region);
@@ -31,30 +28,8 @@ const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
   };
 
   const handleSearchBtnClick = (isFilteringOpen) => {
-    fetchData(selectedSubRegion, selectedSection, selectedDate);
+    onSearch(selectedSubRegion, selectedSection, selectedDate);
     setIsFilteringOpen(!isFilteringOpen);
-  };
-
-  const fetchData = async (
-    selectedSubRegion,
-    selectedSection,
-    selectedDate
-  ) => {
-    try {
-      console.log(
-        "selectedSubRegion, selectedSection, selectedDate",
-        selectedSubRegion,
-        selectedSection,
-        selectedDate
-      );
-      const areaId = selectedSubRegion;
-      const special = selectedSection;
-      const ableDate = selectedDate;
-      const getData = await getPhotographerList(areaId, special, ableDate);
-      setData(getData);
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   return (

@@ -8,13 +8,13 @@ import FilteringBox from "../../components/search/FilteringBox";
 import SearchBox from "../../components/search/SearchBox";
 import Header from "../../components/common/Header";
 
-import { getAllPhotographerList } from "../../api/search";
+import { getPhotographerList } from "../../api/search";
 
 const Photographerlist = () => {
   const outSection = useRef();
-  const [list, setList] = useState([]);
-  const [isFilteringOpen, setIsFilteringOpen] = useState(false);
   const navigate = useNavigate();
+  const [isFilteringOpen, setIsFilteringOpen] = useState(false);
+  const [data, setData] = useState([]);
 
   const handleTabClick = () => {
     if (!isFilteringOpen) {
@@ -27,13 +27,16 @@ const Photographerlist = () => {
   const tabs = ["지역", "날짜", "전문분야", "순서"];
 
   useEffect(() => {
-    getPhotoList();
+    onSearch();
   }, []);
 
-  const getPhotoList = async () => {
+  const onSearch = async (selectedSubRegion, selectedSection, selectedDate) => {
     try {
-      const data = await getAllPhotographerList();
-      setList(data);
+      const areaId = selectedSubRegion;
+      const special = selectedSection;
+      const ableDate = selectedDate;
+      const getData = await getPhotographerList(areaId, special, ableDate);
+      setData(getData);
     } catch (err) {
       console.log(err);
     }
@@ -49,7 +52,7 @@ const Photographerlist = () => {
   // 데이터 배열을 페이지에 맞게 자르기
   const indexOfLastPost = currentPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
-  const currentPosts = list.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
 
   const handleOutsideClick = (e) => {
     e.stopPropagation();
@@ -84,6 +87,7 @@ const Photographerlist = () => {
           {isFilteringOpen && (
             <div ref={outSection}>
               <FilteringBox
+                onSearch={onSearch}
                 isFilteringOpen={isFilteringOpen}
                 setIsFilteringOpen={setIsFilteringOpen}
               />
@@ -96,6 +100,7 @@ const Photographerlist = () => {
               {currentPosts.map((data) => (
                 <div key={data.photographerId}>
                   <SearchBox
+                    image={data.images.image1}
                     tags={data.tags}
                     photographer={data.member.nickname}
                     star="4.7"
@@ -116,7 +121,7 @@ const Photographerlist = () => {
       <Pagination
         activePage={currentPage}
         itemsCountPerPage={itemsPerPage}
-        totalItemsCount={list.length}
+        totalItemsCount={data.length}
         pageRangeDisplayed={5}
         prevPageText={"<"}
         nextPageText={">"}
@@ -130,11 +135,6 @@ export default Photographerlist;
 
 const Wrapper = styled.div`
   margin-bottom: 3rem;
-  @media (max-width: 768px) {
-    .wrapper {
-      display: none;
-    }
-  }
 `;
 
 const Content = styled.div`
@@ -209,23 +209,21 @@ const GridBox = styled.div`
   max-width: 1048px;
 
   .grid {
-    position: relative;
-    width: 95%;
     display: grid;
+    width: 100%;
     align-items: center;
     justify-content: center;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
     column-gap: 44px;
     row-gap: 100px;
     margin-top: 4rem;
+    position: relative;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
 
     @media (max-width: 768px) {
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(3, 1fr);
       column-gap: 15px;
       row-gap: 20px;
-      width: 100%;
+
       margin-top: 1.25rem;
     }
   }

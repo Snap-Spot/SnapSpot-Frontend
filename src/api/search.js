@@ -10,17 +10,6 @@ export const getKeywordSearch = async (keyword) => {
   }
 };
 
-//사진 작가 목록 전체 조회
-export const getAllPhotographerList = async () => {
-  try {
-    const res = await client.get(`/photographers`);
-    return res.data;
-  } catch (err) {
-    console.error("에러 발생", err);
-    throw err;
-  }
-};
-
 //사진 작가 목록 조회
 export const getPhotographerList = async (areaId, special, ableDate) => {
   try {
@@ -34,9 +23,7 @@ export const getPhotographerList = async (areaId, special, ableDate) => {
     if (ableDate) {
       endpoint += `${areaId || special ? "&" : "?"}ableDate=${ableDate}`;
     }
-    console.log("endpoint", endpoint);
     const res = await client.get(endpoint);
-    console.log("res.data", res.data);
     return res.data;
   } catch (err) {
     console.error("에러 발생", err);
