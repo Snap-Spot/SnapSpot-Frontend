@@ -13,7 +13,7 @@ import Header from "../../components/common/Header";
 import { PhotographerListData } from "../../components/search/data/PhotographerListData";
 
 const Photographerlist = () => {
-  const items = PhotographerListData[0];
+  const items = PhotographerListData;
   const outSection = useRef();
   const [info, setInfo] = useState(true);
   const [isFilteringOpen, setIsFilteringOpen] = useState(false);
@@ -86,10 +86,12 @@ const Photographerlist = () => {
               {currentPosts.map((data) => (
                 <div key={data.photographerId}>
                   <SearchBox
-                    tag={data.tags.tags}
+                    // tag={data.tags.tags.map((tag) => `#${tag}`).join(" ")}
                     photographer={data.member.nickname}
                     star="4.7"
-                    // region={data.areas[0].metropolitan}
+                    region={data.areas[0].metropolitan}
+                    subregion={data.areas[0].city}
+                    regionCount={data.areas.length}
                     price={data.lowestPay}
                     review="238"
                   />
