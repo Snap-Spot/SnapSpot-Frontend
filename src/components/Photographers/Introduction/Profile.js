@@ -3,13 +3,22 @@ import photo from "../../../assets/photograph/photo.png";
 import heart from "../../../assets/photograph/heart_.png";
 import useMobileDetection from "../../common/mobileDetection";
 
-const Profile = ({ setModalOpen }) => {
+const Profile = ({
+  setModalOpen,
+  nickname,
+  profile,
+  lowestPay,
+  paymentImage,
+  areas,
+  sns,
+  bio,
+}) => {
   const isMobile = useMobileDetection(); // 모바일 여부 감지
 
   return (
     <>
       <ProfileContainer>
-        <ProfileImg src={photo} />
+        <ProfileImg src={profile} />
         <Contents>
           <ProfileContainer>
             <TitleContainer>
@@ -18,10 +27,10 @@ const Profile = ({ setModalOpen }) => {
             </TitleContainer>
             <ContentContainer>
               <Align>
-                <HighLight>이명한 작가</HighLight>
+                <HighLight>{nickname}</HighLight>
                 <Heart src={heart} />
               </Align>
-              <Price>120,000원 ~</Price>
+              <Price>{lowestPay}원 ~</Price>
             </ContentContainer>
           </ProfileContainer>
           {!isMobile && (
@@ -48,11 +57,12 @@ const Profile = ({ setModalOpen }) => {
           <Line />
           <InfoContainer>
             <SubTitle>활동 지역</SubTitle>
-            <Content>제주도 전역 </Content>
+            <Content>{areas.map((el) => el.city)} </Content>
             <SubTitle>SNS</SubTitle>
-            <Content>인스타그램 @myonghans </Content>
+            {/* sns 어떻게 보여줄지 */}
+            <Content>{sns.homepage} </Content>
             <SubTitle>한 줄 소개</SubTitle>
-            <Content>빛과 그림자를 이용한 극적인 연출</Content>
+            <Content>{bio}</Content>
           </InfoContainer>
         </>
       )}
@@ -95,6 +105,7 @@ const ReservationBtn = styled.button`
   font-size: 24px;
   font-weight: 600;
   margin-left: auto;
+  cursor: pointer;
 
   @media (max-width: 768px) {
     width: 335px;

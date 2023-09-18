@@ -3,12 +3,16 @@ import Carousel from "../../components/Photographers/Introduction/Carousel";
 import { useState } from "react";
 import ReservationModal from "../../components/Photographers/Introduction/ReservationModal";
 import LayOut from "../../components/common/LayOut";
-import { carousal_list } from "../../components/Photographers/Introduction/MockData/CarousalData";
 import Profile from "../../components/Photographers/Introduction/Profile";
 import ReviewContainer from "../../components/Photographers/Introduction/Review";
+import { getPhotographer } from "../../api/photographer";
+import { useParams } from "react-router-dom";
 
 const Introduction = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const { photographerId } = useParams();
+
+  const data = getPhotographer(photographerId);
 
   return (
     <>
@@ -18,9 +22,18 @@ const Introduction = () => {
       <LayOut>
         <ProfileContainer>
           <Title>작가님을 소개합니다!</Title>
-          <Profile setModalOpen={setModalOpen} />
+          <Profile
+            setModalOpen={setModalOpen}
+            nickname={data.member.nickname}
+            profile={data.member.profile}
+            lowestPay={data.lowestPay}
+            paymentImage={data.paymentImage}
+            areas={data.areas}
+            sns={data.sns}
+            bio={data.bio}
+          />
         </ProfileContainer>
-        <Carousel carouselList={carousal_list} />
+        <Carousel carouselList={data.images} />
         <ReviewContainer />
       </LayOut>
     </>

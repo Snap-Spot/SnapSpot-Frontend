@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import cancel from "../../../assets/photograph/cancel.png";
 import Filtering from "./Filtering";
+import { postReservation } from "../../../api/reservation";
 
 const ReservationModal = ({ setModalOpen }) => {
   const type_option = ["결혼스냅", "우정스냅", "커플스냅", "기타"];
@@ -27,7 +28,20 @@ const ReservationModal = ({ setModalOpen }) => {
         <RequestInput placeholder="요청사항을 작성해주세요." />
         <BtnContainer>
           <CancelBtn onClick={() => setModalOpen(false)}>취소</CancelBtn>
-          <ConfirmBtn>예약하기</ConfirmBtn>
+          <ConfirmBtn
+            onClick={() =>
+              postReservation(
+                photographerId,
+                planDate,
+                category,
+                people,
+                wishPlace,
+                request
+              )
+            }
+          >
+            예약하기
+          </ConfirmBtn>
         </BtnContainer>
       </Conatiner>
       <BG></BG>
