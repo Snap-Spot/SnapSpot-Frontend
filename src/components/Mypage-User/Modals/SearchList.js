@@ -2,22 +2,28 @@ import React, { useEffect } from "react";
 import { styled } from "styled-components";
 import { useState } from "react";
 import search from "../../../assets/mypage/modals/search.png";
+import { getPhotographers } from "../../../api/photographer";
 const SearchList = () => {
   //전체리스트 받아와서 filter
-  const totalData = [
-    "송지민 작가",
-    "김지민 작가",
-    "이지민 작가",
-    "이지연 작가",
-    "이지민 작가",
-    "이지연 작가",
-    "이지민 작가",
-    "이지연 작가",
-  ];
+
+  //전체 작가 데이터 get
+  const getData = async () => {
+    try {
+      const data = await getPhotographers();
+      setFullData(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   const [filteredData, setFilteredData] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [showList, setShowList] = useState(false);
-
+  const [fullData, setFullData] = useState([]);
   const handleChange = (e) => {
     setShowList(true);
     setKeyword(e.target.value);
@@ -25,12 +31,14 @@ const SearchList = () => {
       setFilteredData([]);
       setShowList(false);
     } else {
-      setFilteredData(totalData.filter((el) => el.includes(e.target.value)));
+      setFilteredData(
+        fullData.filter((el) => el.nickname.includes(e.target.value))
+      );
     }
   };
 
   const selectItem = (el) => {
-    setKeyword(el);
+    setKeyword(el.nickname);
     setShowList(false);
   };
 
@@ -49,8 +57,12 @@ const SearchList = () => {
           <div className="list">
             {filteredData.map((el) => {
               return (
-                <div className="item" onClick={() => selectItem(el)}>
-                  {el}
+                <div
+                  className="item"
+                  onClick={() => selectItem(el)}
+                  key={el.photographerId}
+                >
+                  {el.nickname}
                 </div>
               );
             })}

@@ -2,20 +2,20 @@ import React from "react";
 import { styled } from "styled-components";
 import settings from "../../../assets/mypage/userMypage/settings.png";
 import { useNavigate } from "react-router-dom";
-const ProfileContainer = () => {
+const ProfileContainer = ({ profileData }) => {
   const navigate = useNavigate();
   return (
     <Wrapper>
       <div className="leftContent">
         <Profile>
-          <img src="" alt="" />
+          <img src={profileData.profile} alt="" />
         </Profile>
         <Infos>
           <div className="nickname">
-            닉네임
+            {profileData.nickname}
             <img src={settings} alt="" onClick={() => navigate("./settings")} />
           </div>
-          <div className="email">hello@snapspot.com</div>
+          <div className="email">{profileData.email}</div>
         </Infos>
       </div>
       <Logout>로그아웃</Logout>
@@ -41,9 +41,21 @@ const Profile = styled.div`
   flex-shrink: 0;
   border-radius: 50%;
   background-color: lightgray;
+
+  img {
+    width: 88px;
+    height: 88px;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
   @media (max-width: 768px) {
     width: 50px;
     height: 50px;
+
+    img {
+      width: 50px;
+      height: 50px;
+    }
   }
 `;
 const Infos = styled.div`

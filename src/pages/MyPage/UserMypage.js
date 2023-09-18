@@ -3,19 +3,42 @@ import Header from "../../components/common/Header";
 import { styled } from "styled-components";
 import ProfileContainer from "../../components/Mypage-User/Mypage/ProfileContainer";
 import MyMenu from "../../components/Mypage-User/Mypage/MyMenu";
+import { getMyProfile } from "../../api/member";
 const UserMypage = () => {
   const [isPhotographer, setIsPhotographer] = useState(false);
+  const [profileData, setProfileData] = useState({});
+
+  const getData = async () => {
+    try {
+      const data = await getMyProfile();
+      setProfileData(data);
+
+      //접속시 작가인지 일반 고객인지 결정
+      if (data.role === "ROLE_MEMBER") {
+        setIsPhotographer(false);
+      } else if (data.role === "ROLE_PHOTOGRAPHER") {
+        setIsPhotographer(true);
+      }
+
+      console.log(data);
+    } catch (err) {
+      //프로필 정보 조회 안될때 (unauthorized: 로그인 안 했을때)
+      //로그인 화면으로 리다이렉트
+      alert("로그인 되지 않았습니다. 로그인화면으로 이동합니다.");
+      window.location.href = "/login";
+    }
+  };
   useEffect(() => {
-    //접속시 작가인지 일반 고객인지 결정
-    setIsPhotographer(true);
+    getData();
   }, []);
+
   return (
     <>
       <Header />
       <Wrapper>
         <div className="title">마이페이지</div>
         <div className="container">
-          <ProfileContainer />
+          <ProfileContainer profileData={profileData} />
           <Line />
 
           {!isPhotographer ? (

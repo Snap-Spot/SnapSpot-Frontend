@@ -40,6 +40,8 @@ export default MySnapBox;
 
 const Container = styled.div`
   width: 100%;
+  max-width: 448px;
+  margin: 0 auto;
   height: 650px;
   flex-shrink: 0;
   border-radius: 32px;

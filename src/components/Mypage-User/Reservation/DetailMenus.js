@@ -8,10 +8,12 @@ import QuestionModal from "../Modals/QuestionModal";
 import ChangeModal from "../Modals/ChangeModal";
 import CancelModal from "../Modals/CancelModal";
 const DetailMenus = ({ status }) => {
-  //status -> 0: 에약완료 / 1: 촬영진행됨 / 2: 사진전달됨
+  //status.id -> 3: 에약완료 / 4: 촬영진행 / 6: 사진전달됨
+
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState();
   const [modalTitle, setModalTitle] = useState("");
+
   const list = [
     [
       {
@@ -61,6 +63,19 @@ const DetailMenus = ({ status }) => {
       },
     ],
   ];
+  let menus = [];
+  const getMenus = (id) => {
+    if (id === 3) {
+      menus = list[0];
+    } else if (id === 4) {
+      menus = list[1];
+    } else if (id === 6) {
+      menus = list[2];
+    }
+  };
+
+  getMenus(status.id);
+
   const openModal = (title, content) => {
     setModalContent(content);
     setModalTitle(title);
@@ -76,17 +91,18 @@ const DetailMenus = ({ status }) => {
         />
       )}
       <List>
-        {list[0].map((el) => {
-          return (
-            <>
-              <Item onClick={() => openModal(el.title, el.content)}>
-                <div className="title">{el.menu}</div>
-                <img src={arrow} alt="" />
-              </Item>
-              <Line />
-            </>
-          );
-        })}
+        {menus &&
+          menus.map((el) => {
+            return (
+              <>
+                <Item onClick={() => openModal(el.title, el.content)}>
+                  <div className="title">{el.menu}</div>
+                  <img src={arrow} alt="" />
+                </Item>
+                <Line />
+              </>
+            );
+          })}
       </List>
     </>
   );

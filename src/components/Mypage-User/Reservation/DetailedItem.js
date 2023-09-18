@@ -1,9 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import DetailMenus from "./DetailMenus";
 import KakaoMap from "./KakaoMap";
+import { getPhotographer } from "../../../api/photographer";
+import { getDayOfWeek } from "./ReservationItem";
+import { useParams } from "react-router-dom";
+import { getStatusFromEng } from "../../common/TranslateStatus";
+import { getMyReservation } from "../../../api/plan";
+import { getCategoryFromEng } from "../../common/TranslateCategory";
+
 const DetailedItem = () => {
-  const status = 0;
+  //경로에서 planId 겟
+  const { id } = useParams();
+
+  const [plan, setPlan] = useState({});
+  const [photographer, setPhotographer] = useState({});
+  const [date, setDate] = useState("");
+  const [day, setDay] = useState("");
+  const [time, setTime] = useState("");
+  const [status, setStatus] = useState({});
+  const [category, setCategory] = useState({});
+
+  const getData = async () => {
+    const planData = await getMyReservation(id);
+    const photographerData = await getPhotographer(14);
+
+    setPlan(planData);
+    setPhotographer(photographerData.photographer.member);
+
+    setStatus(getStatusFromEng(planData.status));
+    setCategory(getCategoryFromEng(planData.category));
+
+    setDate(planData.planDate.substr(0, 10));
+    setDay(getDayOfWeek(planData.planDate.substr(0, 10)));
+    setTime(planData.planDate.substr(11, 5));
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <>
@@ -11,33 +46,37 @@ const DetailedItem = () => {
       <Wrapper>
         <div className="infos">
           <UpperDiv>
-            <p className="date">2023.07.23(일)</p>
-            <p className="id">스냅 예약번호&nbsp;&nbsp;0123920293848</p>
+            <p className="date">
+              {date}({day})
+            </p>
+            <p className="id">스냅 예약번호&nbsp;&nbsp;{plan.planId}</p>
           </UpperDiv>
           <Main>
-            <img src={""} alt="작가사진" />
+            <img src={photographer.profile} alt="작가사진" />
             <div className="list">
-              <p className="status-mobile">사진전달</p>
+              <p className="status-mobile">{status.kor}</p>
               <div className="top">
-                <p className="name">한빛나라 작가&nbsp;&nbsp;</p>
-                <p className="category">|&nbsp;&nbsp;졸업스냅</p>
-                <p className="status-pc">사진전달</p>
+                <p className="name">{photographer.nickname} 작가&nbsp;&nbsp;</p>
+                <p className="category">|&nbsp;&nbsp;{category.kor}</p>
+                <p className="status-pc">{status.kor}</p>
               </div>
               <div className="item">
                 <p className="subject">예약일시</p>
-                <p className="content">2023.7.23(일) 14:30</p>
+                <p className="content">
+                  {date}({day}) {time}
+                </p>
               </div>
               <div className="item">
                 <p className="subject">예약원수</p>
-                <p className="content">2인</p>
+                <p className="content">{plan.people}인</p>
               </div>
               <div className="item">
                 <p className="subject">가격</p>
-                <p className="content">1200000원</p>
+                <p className="content">{plan.price}원</p>
               </div>
               <div className="item">
                 <p className="subject">장소</p>
-                <p className="content">서울시 서대문구</p>
+                <p className="content">{plan.wishPlace}</p>
               </div>
             </div>
           </Main>
@@ -117,6 +156,7 @@ const Main = styled.div`
     .top {
       width: 100%;
       display: flex;
+      align-items: center;
       .category {
         color: var(--darkgrey, #777);
       }

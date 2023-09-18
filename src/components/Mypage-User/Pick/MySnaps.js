@@ -207,7 +207,9 @@ export default MySnaps;
 
 const GridBox = styled.div`
   display: grid;
+  width: 100%;
   grid-template-columns: repeat(2, 1fr);
+
   @media (max-width: 768px) {
     //모바일
     grid-template-columns: repeat(3, 1fr);
@@ -215,11 +217,11 @@ const GridBox = styled.div`
   grid-template-rows: repeat(3, 1fr);
 
   row-gap: 64px;
-  column-gap: 132px;
+  column-gap: 13%;
+
   @media (max-width: 1300px) {
     //모바일
     row-gap: 64px;
-    column-gap: 70px;
   }
 
   @media (max-width: 768px) {
@@ -230,14 +232,12 @@ const GridBox = styled.div`
 `;
 
 const Wrapper = styled.div`
-  max-width: 1028px;
-  width: 95%;
+  width: 100%;
   margin: 0 auto;
   margin-top: 103px;
 
   @media (max-width: 768px) {
     //모바일
-    width: 100%;
     margin-top: 42px;
   }
 `;
