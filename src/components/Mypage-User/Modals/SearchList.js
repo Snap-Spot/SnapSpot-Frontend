@@ -38,7 +38,7 @@ const SearchList = () => {
   };
 
   const selectItem = (el) => {
-    setKeyword(el);
+    setKeyword(el.nickname);
     setShowList(false);
   };
 
