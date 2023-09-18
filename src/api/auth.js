@@ -48,4 +48,22 @@ export const KakaoSignInAPI = async (accessToken, refreshToken) => {
 };
 
 // 일반 회원가입
+export const EmailSignUpAPI = async (signUpInfo) => {
+  try {
+    const res = await client.post("/auth/signup", signUpInfo);
+    console.log(res, "회원가입 성공");
+    alert("회원가입에 성공하였습니다! 로그인 페이지로 이동합니다.");
+    window.location.replace("/login");
+  } catch (err) {
+    console.log(err, "회원가입 에러");
+    if (err.response?.data.details === "이미 가입된 계정입니다.") {
+      alert("이미 가입된 계정입니다.");
+      window.location.replace("/login");
+    } else {
+      alert("회원가입 오류");
+    }
+  }
+};
+
 // 일반 로그인
+export const EmailSignInAPI = async () => {};

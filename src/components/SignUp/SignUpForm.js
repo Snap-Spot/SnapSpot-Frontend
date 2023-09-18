@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react";
 import { styled } from "styled-components";
 import { S } from "../common/SignUpLoginBtn.style";
 import KakaoLoginBtn from "../Login/KakaoLoginBtn";
+import { EmailSignUpAPI } from "../../api/auth";
 
 const SignUpForm = ({ memberType }) => {
   // 회원가입 정보
@@ -22,7 +23,6 @@ const SignUpForm = ({ memberType }) => {
       ...signUpInfo,
       [name]: value,
     });
-    console.log(signUpInfo);
   };
 
   // 비밀번호, 비밀번호 확인 일치 여부 - 일치(true)할 경우 display: none;
@@ -56,6 +56,38 @@ const SignUpForm = ({ memberType }) => {
       : setIsFilled(false);
   }, [signUpInfo, isMatched]);
 
+  // 회원가입 버튼 클릭 시 실행되는 함수
+  const handleSubmit = () => {
+    // 이메일 형식
+    const emailRegCheck = new RegExp(/[a-z0-9]+@[a-z]+.[a-z]{2,3}/);
+    // 비밀번호 형식
+    const passwordRegCheck = new RegExp(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~!@#$%^&*_-])[A-Za-z\d~!@#$%^&*_-]{8,17}$/
+    );
+
+    if (!emailRegCheck.test(signUpInfo.email)) {
+      alert("올바른 이메일 형식이 아닙니다.");
+    } else if (!passwordRegCheck.test(signUpInfo.password)) {
+      alert(
+        "비밀번호는 영문, 숫자, 특수문자의 조합으로 8자 이상 ~ 16자 이하로 입력해주세요."
+      );
+    } else {
+      // passwordCheck 부분 삭제
+      const finalSignUpInfo = { ...signUpInfo };
+      delete finalSignUpInfo.passwordCheck;
+
+      // 회원가입 API
+      EmailSignUpAPI(finalSignUpInfo);
+    }
+  };
+
+  // 엔터 키 입력 시 submit
+  const handleKeyDown = e => {
+    if (e.key === 'Enter' && isFilled) {
+        handleSubmit();
+    }
+};
+
   return (
     <SignUpWrapper>
       <S.InputWrapper>
@@ -65,6 +97,7 @@ const SignUpForm = ({ memberType }) => {
           name="nickname"
           value={signUpInfo.nickname}
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
         />
         <S.InputBox
           placeholder="이메일"
@@ -72,6 +105,7 @@ const SignUpForm = ({ memberType }) => {
           name="email"
           value={signUpInfo.email}
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
         />
         <S.InputBox
           placeholder="비밀번호 (8자 이상, 숫자/특수문자 포함)"
@@ -79,6 +113,7 @@ const SignUpForm = ({ memberType }) => {
           name="password"
           value={signUpInfo.password}
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
         />
         <S.InputBox
           placeholder="비밀번호 확인"
@@ -86,13 +121,17 @@ const SignUpForm = ({ memberType }) => {
           name="passwordCheck"
           value={signUpInfo.passwordCheck}
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
         />
         <S.PasswordMatchText className={isMatched ? "isMatched" : ""}>
           비밀번호가 일치하지 않습니다.
         </S.PasswordMatchText>
       </S.InputWrapper>
 
-      <S.EmailLoginBtn className={isFilled ? "" : "isFilled"}>
+      <S.EmailLoginBtn
+        className={isFilled ? "" : "isFilled"}
+        onClick={handleSubmit}
+      >
         이메일로 시작하기
       </S.EmailLoginBtn>
 
