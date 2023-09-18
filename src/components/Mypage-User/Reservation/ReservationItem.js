@@ -1,39 +1,73 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import arrow from "../../../assets/mypage/reservation/arrow.png";
 import { useNavigate } from "react-router-dom";
-const ReservationItem = () => {
+import { getPhotographer } from "../../../api/photographer";
+import { getStatusFromEng } from "../../common/TranslateStatus";
+import { getCategoryFromEng } from "../../common/TranslateCategory";
+
+export const getDayOfWeek = (date) => {
+  const week = ["일", "월", "화", "수", "목", "금", "토"];
+
+  const dayOfWeek = week[new Date(date).getDay()];
+
+  return dayOfWeek;
+};
+
+const ReservationItem = ({ item }) => {
+  console.log(item);
   const navigate = useNavigate();
+  const date = item.planDate.substr(0, 10);
+  const day = getDayOfWeek(date);
+  const time = item.planDate.substr(11, 5);
+
+  const status = getStatusFromEng(item.status);
+  const category = getCategoryFromEng(item.category);
+  const [photographer, setPhotographer] = useState("");
+
+  const getData = async (id) => {
+    const data = await getPhotographer(id);
+    console.log(data);
+    setPhotographer(data.member);
+  };
+
+  useEffect(() => {
+    getData(item.photographer);
+  }, []);
   return (
     <Wrapper>
       <Header>
         <div className="left-content">
-          <div className="date">2023.7.23(일)</div>
-          <div className="id">스냅 예약번호&nbsp;&nbsp;0123920293848</div>
+          <div className="date">
+            {date}({day})
+          </div>
+          <div className="id">스냅 예약번호&nbsp;&nbsp;{item.planId}</div>
         </div>
         <div
           className="right-content"
-          onClick={() => navigate("/mypage/reservation/1")}
+          onClick={() => navigate(`/mypage/reservation/${item.planId}`)}
         >
           상세보기
           <div className="arrow">
-            <img src={arrow} />
+            <img src={arrow} alt="" />
           </div>
         </div>
       </Header>
       <div className="line"></div>
       <Footer>
         <div className="img">
-          <img src={""} />
+          <img src={photographer.profile} alt="" />
         </div>
         <Infos>
-          <div className="status">예약완료</div>
+          <div className="status">{status}</div>
           <p>
-            <div className="name">한빛나라 작가</div>
-            <div className="category">&nbsp;&nbsp;|&nbsp;&nbsp;졸업스냅</div>
+            <div className="name">{photographer.nickname} 작가</div>
+            <div className="category">&nbsp;&nbsp;|&nbsp;&nbsp;{category}</div>
           </p>
-          <div className="dateNtime">2023.7.23(일) 14:30</div>
-          <div className="count">예약인원 : 2인</div>
+          <div className="dateNtime">
+            {date}({day}) {time}
+          </div>
+          <div className="count">예약인원 : {item.people}인</div>
         </Infos>
       </Footer>
     </Wrapper>

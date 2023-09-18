@@ -1,10 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReservationItem from "./ReservationItem";
 import { styled } from "styled-components";
 import DropdownFilter from "./DropdownFilter";
+import { getMyReservationList } from "../../../api/plan";
 const ReservationList = () => {
-  const [list, setList] = useState([1, 2, 3]);
+  const [list, setList] = useState([]);
   const filterList = ["최근 3개월", "최근 6개월", "최근 1년", "최근 2년"];
+  //미완료: 필터링 처리.
+  const getData = async () => {
+    try {
+      const data = await getMyReservationList();
+      setList(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <Wrapper>
@@ -16,9 +29,10 @@ const ReservationList = () => {
       </div>
 
       <div className="list">
-        {list.map((item) => {
-          return <ReservationItem item={item} />;
-        })}
+        {list &&
+          list.map((item) => {
+            return <ReservationItem item={item} />;
+          })}
       </div>
     </Wrapper>
   );
