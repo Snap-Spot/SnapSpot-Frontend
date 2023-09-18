@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../../components/common/Header";
 import footer from "../../assets/photograph/Footer.png";
@@ -7,12 +7,38 @@ import more from "../../assets/search/more.png";
 import SearchBox from "../../components/search/SearchBox";
 import EamptySearch from "../../components/search/EamptySearch";
 
+import { getKeywordSearch } from "../../api/search";
+
 const SearchPage = () => {
   const navigate = useNavigate();
-  const [info, setInfo] = useState(false);
+  const location = useLocation();
+  
+  const [searchData, setSearchData] = useState([]);
+  const nicknameData = searchData.nicknameResult || [];
+  const areaData = searchData.areaResult || [];
+  const [keyword, setKeyword] = useState("");
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const keywordParam = searchParams.get("keyword");
+    if (keywordParam) {
+      setKeyword(keywordParam);
+      getSearch(keywordParam);
+    }
+  }, [location.search]);
 
   const handleMoreClick = () => {
-    navigate(`/photographer`);
+    navigate(`/photographers`);
+  };
+
+  const getSearch = async (keyword) => {
+    try {
+      console.log("keyword", keyword);
+      const getData = await getKeywordSearch(keyword);
+      setSearchData(getData);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -20,86 +46,81 @@ const SearchPage = () => {
       <Header></Header>
       <Wrapper>
         <SearchTitle>
-          <div class="subject">'에밀리'</div>에 대한 검색결과
+          <div className="subject">'{keyword}'</div>에 대한 검색결과
         </SearchTitle>
-        {info ? (
+        {areaData.length > 0 || nicknameData.length > 0 ? (
           <Content>
-            <SubTitle>
-              <div class="subject">'제주도'</div>에서 활동하는 작가
-              <img src={more} onClick={handleMoreClick} />
-            </SubTitle>
-            <Box>
-              <div class="grid">
-                <div>
-                  <SearchBox
-                    tag="#커플스냅 #유채꽃 #화사함"
-                    photographer="에밀리"
-                    star="4.7"
-                    region="제주도 서귀포"
-                    price="130,000"
-                    review="238"
-                  />
-                </div>
-                <div>
-                  <SearchBox
-                    tag="#커플스냅 #유채꽃 #화사함"
-                    photographer="에밀리"
-                    star="4.7"
-                    region="제주도 서귀포"
-                    price="130,000"
-                    review="238"
-                  />
-                </div>
-                <div>
-                  <SearchBox
-                    tag="#커플스냅 #유채꽃 #화사함"
-                    photographer="에밀리"
-                    star="4.7"
-                    region="제주도 서귀포"
-                    price="130,000"
-                    review="238"
-                  />
-                </div>
-              </div>
-            </Box>
-            <SubTitle>
-              <div class="subject">'제주도' </div> 작가
-              <img src={more} onClick={handleMoreClick} />
-            </SubTitle>
-            <Box>
-              <div class="grid">
-                <div>
-                  <SearchBox
-                    tag="#커플스냅 #유채꽃 #화사함"
-                    photographer="에밀리"
-                    star="4.7"
-                    region="제주도 서귀포"
-                    price="130,000"
-                    review="238"
-                  />
-                </div>
-                <div>
-                  <SearchBox
-                    tag="#커플스냅 #유채꽃 #화사함"
-                    photographer="에밀리"
-                    star="4.7"
-                    region="제주도 서귀포"
-                    price="130,000"
-                    review="238"
-                  />
-                </div>
-                <div>
-                  <SearchBox
-                    tag="#커플스냅 #유채꽃 #화사함"
-                    photographer="에밀리"
-                    star="4.7"
-                    region="제주도 서귀포"
-                    price="130,000"
-                    review="238"
-                  />
-                </div>
-              </div>
-            </Box>
+            {areaData && areaData.length > 0 ? (
+              <>
+                <SubTitle>
+                  <div className="subject">'{keyword}'</div>에서 활동하는 작가
+                  <img src={more} onClick={handleMoreClick} />
+                </SubTitle>
+                <GridBox>
+                  <div className="grid">
+                    {areaData.slice(0, 3).map(
+                      //상단 3개까지만 표시
+                      (data) => (
+                        <div key={data.photographerId}>
+                          <SearchBox
+                            image={data.images.image1}
+                            tags={data.tags}
+                            photographer={data.member.nickname}
+                            star="4.7"
+                            region={
+                              data.areas.length > 0
+                                ? data.areas[0].metropolitan
+                                : ""
+                            }
+                            subregion={
+                              data.areas.length > 0 ? data.areas[0].city : ""
+                            }
+                            regionCount={data.areas.length}
+                            price={data.lowestPay}
+                            review="238"
+                          />
+                        </div>
+                      )
+                    )}
+                  </div>
+                </GridBox>
+              </>
+            ) : (
+              <></>
+            )}
+            {nicknameData && nicknameData.length > 0 ? (
+              <>
+                <SubTitle>
+                  <div className="subject">'{keyword}' </div> 작가
+                  <img src={more} onClick={handleMoreClick} />
+                </SubTitle>
+                <GridBox>
+                  <div class="grid">
+                    {nicknameData.slice(0, 3).map(
+                      (
+                        data //상단 3개까지만 표시
+                      ) => (
+                        <div key={data.photographerId}>
+                          <SearchBox
+                            image={data.images.image1}
+                            tags={data.tags}
+                            photographer={data.member.nickname}
+                            star="4.7"
+                            region={data.areas[0].metropolitan}
+                            subregion={data.areas[0].city}
+                            regionCount={data.areas.length}
+                            price={data.lowestPay}
+                            review="238"
+                          />
+                        </div>
+                      )
+                    )}
+                  </div>
+                </GridBox>
+              </>
+            ) : (
+              <></>
+            )}
           </Content>
         ) : (
           <EamptySearch />
@@ -122,6 +143,21 @@ const Wrapper = styled.div`
   @media (max-width: 768px) {
     width: 90%;
   }
+`;
+
+const Content = styled.div`
+  width: 100%;
+  max-width: 1048px;
+`;
+
+const GridBox = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1048px;
 
   .grid {
     display: grid;
@@ -145,21 +181,6 @@ const Wrapper = styled.div`
       margin-top: 1.25rem;
     }
   }
-`;
-
-const Content = styled.div`
-  width: 100%;
-  max-width: 1048px;
-`;
-
-const Box = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-width: 1048px;
 `;
 
 const SearchTitle = styled.div`

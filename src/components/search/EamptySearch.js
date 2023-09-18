@@ -11,6 +11,9 @@ import left from "../../assets/search/ic_left.png";
 
 const responsive = {
   0: {
+    items: 2,
+  },
+  374: {
     items: 3,
   },
   600: {
@@ -215,6 +218,9 @@ const RecommendList = styled.div`
       height: 20px;
       right: 0px;
       top: 55px;
+    }
+    .alice-carousel__stage-item {
+      /* min-width: 130px; */
     }
   }
 `;
