@@ -2,22 +2,19 @@ import { React, useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import Pagination from "react-js-pagination";
 import "../../components/Photographers/Review/Paging/Paging.css";
-import search from "../../assets/header/search.png";
 import { useNavigate } from "react-router-dom";
 
 import FilteringBox from "../../components/search/FilteringBox";
 import SearchBox from "../../components/search/SearchBox";
 import Header from "../../components/common/Header";
 
-//dummyData
-import { PhotographerListData } from "../../components/search/data/PhotographerListData";
+import { getPhotographerList } from "../../api/search";
 
 const Photographerlist = () => {
-  const items = PhotographerListData;
   const outSection = useRef();
-  const [info, setInfo] = useState(true);
-  const [isFilteringOpen, setIsFilteringOpen] = useState(false);
   const navigate = useNavigate();
+  const [isFilteringOpen, setIsFilteringOpen] = useState(false);
+  const [data, setData] = useState([]);
 
   const handleTabClick = () => {
     if (!isFilteringOpen) {
@@ -29,6 +26,22 @@ const Photographerlist = () => {
 
   const tabs = ["지역", "날짜", "전문분야", "순서"];
 
+  useEffect(() => {
+    onSearch();
+  }, []);
+
+  const onSearch = async (selectedSubRegion, selectedSection, selectedDate) => {
+    try {
+      const areaId = selectedSubRegion;
+      const special = selectedSection;
+      const ableDate = selectedDate;
+      const getData = await getPhotographerList(areaId, special, ableDate);
+      setData(getData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const itemsPerPage = 15; // 페이지당 아이템 개수
 
@@ -39,7 +52,7 @@ const Photographerlist = () => {
   // 데이터 배열을 페이지에 맞게 자르기
   const indexOfLastPost = currentPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
-  const currentPosts = items.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
 
   const handleOutsideClick = (e) => {
     e.stopPropagation();
@@ -58,7 +71,7 @@ const Photographerlist = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <Header />
       <Wrapper>
         <div>
@@ -74,6 +87,7 @@ const Photographerlist = () => {
           {isFilteringOpen && (
             <div ref={outSection}>
               <FilteringBox
+                onSearch={onSearch}
                 isFilteringOpen={isFilteringOpen}
                 setIsFilteringOpen={setIsFilteringOpen}
               />
@@ -86,11 +100,14 @@ const Photographerlist = () => {
               {currentPosts.map((data) => (
                 <div key={data.photographerId}>
                   <SearchBox
-                    // tag={data.tags.tags.map((tag) => `#${tag}`).join(" ")}
-                    photographer={data.member.nickname}
+                    image={data.image}
+                    tags={data.tags}
+                    photographer={data.nickname}
                     star="4.7"
-                    region={data.areas[0].metropolitan}
-                    subregion={data.areas[0].city}
+                    region={
+                      data.areas.length > 0 ? data.areas[0].metropolitan : ""
+                    }
+                    subregion={data.areas.length > 0 ? data.areas[0].city : ""}
                     regionCount={data.areas.length}
                     price={data.lowestPay}
                     review="238"
@@ -104,13 +121,13 @@ const Photographerlist = () => {
       <Pagination
         activePage={currentPage}
         itemsCountPerPage={itemsPerPage}
-        totalItemsCount={items.length}
+        totalItemsCount={data.length}
         pageRangeDisplayed={5}
         prevPageText={"<"}
         nextPageText={">"}
         onChange={handlePageChange}
       />
-    </div>
+    </>
   );
 };
 
@@ -209,11 +226,9 @@ const GridBox = styled.div`
     margin-top: 4rem;
 
     @media (max-width: 768px) {
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(3, 1fr);
       column-gap: 15px;
       row-gap: 20px;
-      width: 100%;
+
       margin-top: 1.25rem;
     }
   }

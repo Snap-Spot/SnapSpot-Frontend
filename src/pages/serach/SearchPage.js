@@ -7,17 +7,15 @@ import more from "../../assets/search/more.png";
 import SearchBox from "../../components/search/SearchBox";
 import EamptySearch from "../../components/search/EamptySearch";
 
-//dummyData
-import { SearchData } from "../../components/search/data/SearchData";
+import { getKeywordSearch } from "../../api/search";
 
 const SearchPage = () => {
-  const nicknameData = SearchData[0].nicknameResult;
-  const areaData = SearchData[0].areaResult;
-
   const navigate = useNavigate();
   const location = useLocation();
-
-  const [info, setInfo] = useState(true);
+  
+  const [searchData, setSearchData] = useState([]);
+  const nicknameData = searchData.nicknameResult || [];
+  const areaData = searchData.areaResult || [];
   const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
@@ -25,6 +23,7 @@ const SearchPage = () => {
     const keywordParam = searchParams.get("keyword");
     if (keywordParam) {
       setKeyword(keywordParam);
+      getSearch(keywordParam);
     }
   }, [location.search]);
 
@@ -32,33 +31,80 @@ const SearchPage = () => {
     navigate(`/photographers`);
   };
 
+  const getSearch = async (keyword) => {
+    try {
+      console.log("keyword", keyword);
+      const getData = await getKeywordSearch(keyword);
+      setSearchData(getData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <Header></Header>
       <Wrapper>
         <SearchTitle>
-          <div class="subject">'{keyword}'</div>에 대한 검색결과
+          <div className="subject">'{keyword}'</div>에 대한 검색결과
         </SearchTitle>
-        {info ? (
+        {areaData.length > 0 || nicknameData.length > 0 ? (
           <Content>
-            {nicknameData.length > 0 ? (
+            {areaData && areaData.length > 0 ? (
               <>
                 <SubTitle>
-                  <div class="subject">'{keyword}'</div>에서 활동하는 작가
+                  <div className="subject">'{keyword}'</div>에서 활동하는 작가
                   <img src={more} onClick={handleMoreClick} />
                 </SubTitle>
-                <Box>
-                  <div class="grid">
-                    {nicknameData.slice(0, 3).map(
+                <GridBox>
+                  <div className="grid">
+                    {areaData.slice(0, 3).map(
                       //상단 3개까지만 표시
                       (data) => (
                         <div key={data.photographerId}>
                           <SearchBox
-                            image={data.images.urls[0]}
-                            tag={data.tags.tags
-                              .map((tag) => `#${tag}`)
-                              .join(" ")}
-                            photographer={data.member.nickname}
+                            image={data.image}
+                            tags={data.tags}
+                            photographer={data.nickname}
+                            star="4.7"
+                            region={
+                              data.areas.length > 0
+                                ? data.areas[0].metropolitan
+                                : ""
+                            }
+                            subregion={
+                              data.areas.length > 0 ? data.areas[0].city : ""
+                            }
+                            regionCount={data.areas.length}
+                            price={data.lowestPay}
+                            review="238"
+                          />
+                        </div>
+                      )
+                    )}
+                  </div>
+                </GridBox>
+              </>
+            ) : (
+              <></>
+            )}
+            {nicknameData && nicknameData.length > 0 ? (
+              <>
+                <SubTitle>
+                  <div className="subject">'{keyword}' </div> 작가
+                  <img src={more} onClick={handleMoreClick} />
+                </SubTitle>
+                <GridBox>
+                  <div class="grid">
+                    {nicknameData.slice(0, 3).map(
+                      (
+                        data //상단 3개까지만 표시
+                      ) => (
+                        <div key={data.photographerId}>
+                          <SearchBox
+                            image={data.image}
+                            tags={data.tags}
+                            photographer={data.nickname}
                             star="4.7"
                             region={data.areas[0].metropolitan}
                             subregion={data.areas[0].city}
@@ -70,39 +116,7 @@ const SearchPage = () => {
                       )
                     )}
                   </div>
-                </Box>
-              </>
-            ) : (
-              <></>
-            )}
-            {areaData.length > 0 ? (
-              <>
-                <SubTitle>
-                  <div class="subject">'{keyword}' </div> 작가
-                  <img src={more} onClick={handleMoreClick} />
-                </SubTitle>
-                <Box>
-                  <div class="grid">
-                    {areaData.slice(0, 3).map(
-                      (
-                        data //상단 3개까지만 표시
-                      ) => (
-                        <div key={data.photographerId}>
-                          <SearchBox
-                            tag={data.tags.tags
-                              .map((tag) => `#${tag}`)
-                              .join(" ")}
-                            photographer={data.member.nickname}
-                            star="4.7"
-                            region={data.areas[0].metropolitan}
-                            price={data.lowestPay}
-                            review="238"
-                          />
-                        </div>
-                      )
-                    )}
-                  </div>
-                </Box>
+                </GridBox>
               </>
             ) : (
               <></>
@@ -129,6 +143,21 @@ const Wrapper = styled.div`
   @media (max-width: 768px) {
     width: 90%;
   }
+`;
+
+const Content = styled.div`
+  width: 100%;
+  max-width: 1048px;
+`;
+
+const GridBox = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1048px;
 
   .grid {
     display: grid;
@@ -152,21 +181,6 @@ const Wrapper = styled.div`
       margin-top: 1.25rem;
     }
   }
-`;
-
-const Content = styled.div`
-  width: 100%;
-  max-width: 1048px;
-`;
-
-const Box = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-width: 1048px;
 `;
 
 const SearchTitle = styled.div`

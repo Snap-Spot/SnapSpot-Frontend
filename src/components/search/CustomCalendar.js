@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 import getYear from "date-fns/getYear";
 import getMonth from "date-fns/getMonth";
+import format from "date-fns/format";
 import previousarrow from "../../assets/search/previousarrow.png";
 import nextarrow from "../../assets/search/nextarrow.png";
 import styled from "styled-components";
@@ -23,14 +24,20 @@ const customKoLocale = {
   },
 };
 
-function CustomCalendar() {
+function CustomCalendar({ setSelectedDate }) {
   const [startDate, setStartDate] = useState(new Date());
+
+  const handleDateChange = (date) => {
+    setStartDate(date);
+    const formattedDate = format(date, "yyyy-MM-dd'T'HH:mm:ss");
+    setSelectedDate(formattedDate);
+  };
 
   return (
     <StyledCalendar>
       <DatePicker
         selected={startDate}
-        onChange={(date) => setStartDate(date)}
+        onChange={handleDateChange}
         inline
         locale={customKoLocale}
         renderCustomHeader={({
