@@ -15,4 +15,3 @@ console.log(
 );
 
 export default client;
-

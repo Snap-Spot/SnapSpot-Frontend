@@ -1,16 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
-import profile from "../../assets/header/profile.png";
-import logo from "../../assets/header/logo.png";
-import search from "../../assets/header/search.png";
-import menu from "../../assets/header/menu.png";
 
 const HomeMenu = ({ isHomeMenuOpen, setIsHomeMenuOpen }) => {
   const navigate = useNavigate();
 
   const onClickPhotogreapher = () => {
-    navigate(`/photographer`);
+    navigate(`/photographers`);
   };
 
   const onClickFeed = () => {
