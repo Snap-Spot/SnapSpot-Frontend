@@ -71,7 +71,7 @@ const Photographerlist = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <Header />
       <Wrapper>
         <div>
@@ -127,7 +127,7 @@ const Photographerlist = () => {
         nextPageText={">"}
         onChange={handlePageChange}
       />
-    </div>
+    </>
   );
 };
 
@@ -135,6 +135,11 @@ export default Photographerlist;
 
 const Wrapper = styled.div`
   margin-bottom: 3rem;
+  @media (max-width: 768px) {
+    .wrapper {
+      display: none;
+    }
+  }
 `;
 
 const Content = styled.div`
@@ -209,16 +214,16 @@ const GridBox = styled.div`
   max-width: 1048px;
 
   .grid {
+    position: relative;
+    width: 95%;
     display: grid;
-    width: 100%;
     align-items: center;
     justify-content: center;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     column-gap: 44px;
     row-gap: 100px;
     margin-top: 4rem;
-    position: relative;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
 
     @media (max-width: 768px) {
       column-gap: 15px;
