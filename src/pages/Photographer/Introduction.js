@@ -1,18 +1,23 @@
 import styled from "styled-components";
 import Carousel from "../../components/Photographers/Introduction/Carousel";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ReservationModal from "../../components/Photographers/Introduction/ReservationModal";
 import LayOut from "../../components/common/LayOut";
 import Profile from "../../components/Photographers/Introduction/Profile";
 import ReviewContainer from "../../components/Photographers/Introduction/Review";
-import { getPhotographer } from "../../api/photographer";
+import { getPhotographer, getReview } from "../../api/photographer";
 import { useParams } from "react-router-dom";
 
 const Introduction = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [data, setData] = useState();
+  const [reviewData, setReviewData] = useState();
   const { photographerId } = useParams();
 
-  const data = getPhotographer(photographerId);
+  useEffect(() => {
+    setData(getPhotographer(photographerId)); // 작가 관련 데이터
+    setReviewData(getReview(photographerId)); // 리뷰 데이터
+  }, []);
 
   return (
     <>
@@ -29,17 +34,17 @@ const Introduction = () => {
           <Title>작가님을 소개합니다!</Title>
           <Profile
             setModalOpen={setModalOpen}
-            // nickname={data.member.nickname}
-            // profile={data.member.profile}
-            // lowestPay={data.lowestPay}
-            // paymentImage={data.paymentImage}
-            // areas={data.areas}
-            // sns={data.sns}
-            // bio={data.bio}
+            nickname={data.member.nickname}
+            profile={data.member.profile}
+            lowestPay={data.lowestPay}
+            paymentImage={data.paymentImage}
+            areas={data.areas}
+            sns={data.sns}
+            bio={data.bio}
           />
         </ProfileContainer>
-        {/* <Carousel carouselList={data.images} /> */}
-        <ReviewContainer />
+        <Carousel carouselList={data.images} />
+        <ReviewContainer reviewData={reviewData} />
       </LayOut>
     </>
   );
