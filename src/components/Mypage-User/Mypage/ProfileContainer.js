@@ -8,7 +8,7 @@ const ProfileContainer = ({ profileData }) => {
     <Wrapper>
       <div className="leftContent">
         <Profile>
-          <img src="" alt="" />
+          <img src={profileData.profile} alt="" />
         </Profile>
         <Infos>
           <div className="nickname">
@@ -41,9 +41,21 @@ const Profile = styled.div`
   flex-shrink: 0;
   border-radius: 50%;
   background-color: lightgray;
+
+  img {
+    width: 88px;
+    height: 88px;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
   @media (max-width: 768px) {
     width: 50px;
     height: 50px;
+
+    img {
+      width: 50px;
+      height: 50px;
+    }
   }
 `;
 const Infos = styled.div`
