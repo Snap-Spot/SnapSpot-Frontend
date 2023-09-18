@@ -41,7 +41,9 @@ const RegionInput = () => {
                 onClick={() => cancelSelect(el)}
                 open={toggle}
               >
-                {el} <DeleteIcon src={deleteIcon} />
+                <Row>
+                  {el} <DeleteIcon src={deleteIcon} />
+                </Row>
               </SelectedOption>
             ))}
           </Option>
@@ -56,7 +58,9 @@ const RegionInput = () => {
                   onClick={() => cancelSelect(el)}
                   open={toggle}
                 >
-                  {el} <DeleteIcon src={deleteIcon} />
+                  <Row>
+                    {el} <DeleteIcon src={deleteIcon} />
+                  </Row>
                 </SelectedOption>
               ))}
               <List>
@@ -102,8 +106,14 @@ const RegionInput = () => {
   );
 };
 
+const Row = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const DeleteIcon = styled.img`
   width: 0.7rem;
+  height: 0.7rem;
   margin-left: 0.5rem;
 `;
 
@@ -114,10 +124,14 @@ const Option = styled.div`
 const BaseLine = styled.div`
   display: flex;
   align-items: baseline;
+  @media (max-width: 768px) {
+    /* width: 30rem; */
+  }
 `;
 
 const Arrow = styled.img`
   width: 1.6rem;
+  height: 1.6rem;
   cursor: pointer;
   position: relative;
   transform: ${(props) => (props.open ? "rotate(180deg)" : "rotate(0deg)")};
@@ -137,23 +151,21 @@ const FilterTab = styled.div`
   padding-bottom: 0.3rem;
 
   @media (max-width: 768px) {
-    flex-direction: column;
-    height: 100%;
-    margin: 0;
+    width: 100%;
+    flex-direction: row;
   }
 `;
 
 const Box = styled.div`
   @media (max-width: 768px) {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
   }
 `;
 
 const SubregionBox = styled.div`
   @media (max-width: 768px) {
     display: flex;
-    flex-direction: row;
     width: 90%;
   }
 `;
@@ -197,9 +209,10 @@ const Subregion = styled.div`
   `}
 
   @media (max-width: 768px) {
-    width: 100%;
+    width: 90%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+
     white-space: nowrap;
     justify-content: center;
     align-items: center;
@@ -235,6 +248,10 @@ const Subregion = styled.div`
 
 const SelectedOption = styled(Subregion)`
   padding-right: 0.5rem;
+
+  @media (max-width: 768px) {
+    display: flex;
+  }
 `;
 
 const Region = styled.div`
@@ -262,7 +279,7 @@ const Region = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     white-space: nowrap;
     justify-content: center;
     align-items: center;
@@ -289,8 +306,8 @@ const RegionTab = styled.div`
   width: 24.5rem;
   height: 22rem;
   @media (max-width: 768px) {
-    height: 20%;
-    width: 90%;
+    /* width: 90%; */
+    height: 22rem;
     border-bottom: 0.063rem solid #dbdbdb;
   }
 `;
@@ -302,7 +319,8 @@ const List = styled.div`
   margin-top: 0.3rem;
 
   @media (max-width: 768px) {
-    flex-direction: column;
+    flex-direction: row;
+    height: 90%;
   }
 `;
 
@@ -312,9 +330,9 @@ const RegionList = styled.div`
   border-right: solid 0.063rem #e6e6e6;
 
   @media (max-width: 768px) {
-    width: 100%;
+    width: 35%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     overflow: auto;
     padding-bottom: 0.5rem;
     border: none;
