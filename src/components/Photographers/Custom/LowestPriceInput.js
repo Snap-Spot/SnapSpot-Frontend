@@ -1,14 +1,23 @@
-import styled from "styled-components";
-import RegionInput from "./RegionInput";
+import { styled } from "styled-components";
 
-const LocationInput = () => {
+const LowestPriceInput = () => {
   return (
     <>
-      <SubTitle>활동 지역 설정</SubTitle>
-      <RegionInput />
+      <SubTitle>최저 가격 입력</SubTitle>
+      <Input />
     </>
   );
 };
+
+const SubTitle = styled.h3`
+  font-size: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+`;
 
 const Input = styled.input`
   border-radius: 22px;
@@ -29,14 +38,4 @@ const Input = styled.input`
   }
 `;
 
-const SubTitle = styled.h3`
-  font-size: 1rem;
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-
-  @media (max-width: 768px) {
-    font-size: 14px;
-  }
-`;
-
-export default LocationInput;
+export default LowestPriceInput;
