@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { React, useState, useEffect } from "react";
 import CustomCalendar from "./CustomCalendar";
-import { regions, sections, orders } from "./FilteringList.js";
+import { regions, orders } from "./FilteringList.js";
+import { category } from "../common/category";
 
 const FilteringBox = ({ onSearch, setIsFilteringOpen }) => {
   const [selectedRegion, setSelectedRegion] = useState("서울");
@@ -84,9 +85,9 @@ const FilteringBox = ({ onSearch, setIsFilteringOpen }) => {
         <SectionTab>
           <Title>전문분야</Title>
           <SectionList>
-            {sections && (
+            {category && (
               <Box>
-                {sections.map((section, index) => (
+                {category.map((section, index) => (
                   <>
                     <Section
                       key={index}
@@ -95,7 +96,7 @@ const FilteringBox = ({ onSearch, setIsFilteringOpen }) => {
                     >
                       {section.label}
                     </Section>
-                    {index !== sections.length - 1 && <Line />}
+                    {index !== category.length - 1 && <Line />}
                   </>
                 ))}
               </Box>
