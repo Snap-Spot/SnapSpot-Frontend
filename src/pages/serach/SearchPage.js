@@ -63,9 +63,9 @@ const SearchPage = () => {
                       (data) => (
                         <div key={data.photographerId}>
                           <SearchBox
-                            image={data.images.image1}
+                            image={data.image}
                             tags={data.tags}
-                            photographer={data.member.nickname}
+                            photographer={data.nickname}
                             star="4.7"
                             region={
                               data.areas.length > 0
@@ -102,9 +102,9 @@ const SearchPage = () => {
                       ) => (
                         <div key={data.photographerId}>
                           <SearchBox
-                            image={data.images.image1}
+                            image={data.image}
                             tags={data.tags}
-                            photographer={data.member.nickname}
+                            photographer={data.nickname}
                             star="4.7"
                             region={data.areas[0].metropolitan}
                             subregion={data.areas[0].city}

@@ -100,9 +100,9 @@ const Photographerlist = () => {
               {currentPosts.map((data) => (
                 <div key={data.photographerId}>
                   <SearchBox
-                    image={data.images.image1}
+                    image={data.image}
                     tags={data.tags}
-                    photographer={data.member.nickname}
+                    photographer={data.nickname}
                     star="4.7"
                     region={
                       data.areas.length > 0 ? data.areas[0].metropolitan : ""
