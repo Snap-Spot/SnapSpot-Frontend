@@ -2,7 +2,7 @@ import styled from "styled-components";
 import btn from "../../../assets/photograph/filterbtn.png";
 import { useState } from "react";
 
-const Filtering = ({ option, short }) => {
+const Filtering = ({ option, short, setCategory, setPeople }) => {
   const [toggle, setToggle] = useState(false);
   const [select, setSelect] = useState("");
 

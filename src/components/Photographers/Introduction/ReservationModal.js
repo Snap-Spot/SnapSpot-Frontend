@@ -1,11 +1,21 @@
 import styled from "styled-components";
 import cancel from "../../../assets/photograph/cancel.png";
 import Filtering from "./Filtering";
-import { postReservation } from "../../../api/reservation";
+import { postReservation } from "../../../api/plan";
+import { useState } from "react";
 
-const ReservationModal = ({ setModalOpen }) => {
+const ReservationModal = ({ setModalOpen, photographerId }) => {
   const type_option = ["결혼스냅", "우정스냅", "커플스냅", "기타"];
   const head_count = ["1명", "2명", "3명", "4+"];
+  const [planDate, setPlanDate] = useState();
+  const [category, setCategory] = useState();
+  const [wishPlace, setWishPlace] = useState();
+  const [people, setPeople] = useState();
+  const [request, setRequest] = useState();
+
+  const handleCalendarInputChange = (e) => {
+    setPlanDate(e.target.value); // calendarInput의 값을 상태에 저장
+  };
 
   return (
     <>
@@ -15,17 +25,34 @@ const ReservationModal = ({ setModalOpen }) => {
           <CancelIcon src={cancel} onClick={() => setModalOpen(false)} />
         </Header>
         <SubTitle>예약날짜</SubTitle>
-        <CalendarInput type="date" />
+        {/* <input
+          type="datetime-local" // 날짜와 시간 입력을 위한 타입 설정
+          value={planDate}
+          onChange={(e) => setPlanDate(e.target.value)}
+        /> */}
+        <CalendarInput
+          type="date"
+          value={planDate}
+          onChange={handleCalendarInputChange}
+        />
         <SubTitle>예약시간</SubTitle>
         <TimeInput type="time" />
         <SubTitle>스냅사진 종류</SubTitle>
-        <Filtering option={type_option} />
+        <Filtering option={type_option} setCategory={setCategory} />
         <SubTitle>인원</SubTitle>
-        <Filtering option={head_count} short={true} />
+        <Filtering option={head_count} short={true} setPeople={setPeople} />
         <SubTitle>위치</SubTitle>
-        <LocationInput placeholder="스냅사진을 찍을 위치를 작성해주세요." />
+        <LocationInput
+          placeholder="스냅사진을 찍을 위치를 작성해주세요."
+          value={wishPlace}
+          onChange={(e) => setWishPlace(e.target.value)}
+        />
         <SubTitle>요청사항</SubTitle>
-        <RequestInput placeholder="요청사항을 작성해주세요." />
+        <RequestInput
+          placeholder="요청사항을 작성해주세요."
+          value={request}
+          onChange={(e) => setPeople(e.target.value)}
+        />
         <BtnContainer>
           <CancelBtn onClick={() => setModalOpen(false)}>취소</CancelBtn>
           <ConfirmBtn

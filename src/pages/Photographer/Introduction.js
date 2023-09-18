@@ -17,23 +17,28 @@ const Introduction = () => {
   return (
     <>
       <Center>
-        {modalOpen && <ReservationModal setModalOpen={setModalOpen} />}
+        {modalOpen && (
+          <ReservationModal
+            setModalOpen={setModalOpen}
+            photographerId={photographerId}
+          />
+        )}
       </Center>
       <LayOut>
         <ProfileContainer>
           <Title>작가님을 소개합니다!</Title>
           <Profile
             setModalOpen={setModalOpen}
-            nickname={data.member.nickname}
-            profile={data.member.profile}
-            lowestPay={data.lowestPay}
-            paymentImage={data.paymentImage}
-            areas={data.areas}
-            sns={data.sns}
-            bio={data.bio}
+            // nickname={data.member.nickname}
+            // profile={data.member.profile}
+            // lowestPay={data.lowestPay}
+            // paymentImage={data.paymentImage}
+            // areas={data.areas}
+            // sns={data.sns}
+            // bio={data.bio}
           />
         </ProfileContainer>
-        <Carousel carouselList={data.images} />
+        {/* <Carousel carouselList={data.images} /> */}
         <ReviewContainer />
       </LayOut>
     </>
