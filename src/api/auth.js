@@ -42,7 +42,7 @@ export const KakaoSignInAPI = async (accessToken, refreshToken) => {
       alert("가입되지 않은 이메일입니다.");
       window.location.replace("/signup/member");
     } else {
-      alert("회원가입 오류");
+      alert("로그인 오류");
     }
   }
 };
@@ -66,4 +66,19 @@ export const EmailSignUpAPI = async (signUpInfo) => {
 };
 
 // 일반 로그인
-export const EmailSignInAPI = async () => {};
+export const EmailSignInAPI = async (loginInfo) => {
+  try {
+    const res = await client.post("/auth/signin", loginInfo);
+    console.log(res, "로그인 성공");
+    // accessToken 로컬스토리지 저장
+    localStorage.setItem("accessToken", res.data.token.accessToken);
+
+    // main페이지로 이동
+    alert("로그인에 성공하였습니다!");
+    window.location.replace("/");
+    return "Login Success";
+  } catch (err) {
+    console.log(err, "로그인 에러");
+    return "Login Error";
+  }
+};
