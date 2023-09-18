@@ -1,159 +1,46 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import Pagination from "react-js-pagination";
 import "../../components/Photographers/Review/Paging/Paging.css";
-import search from "../../assets/header/search.png";
+import { useNavigate } from "react-router-dom";
+
 import FilteringBox from "../../components/search/FilteringBox";
 import SearchBox from "../../components/search/SearchBox";
 import Header from "../../components/common/Header";
 
+import { getPhotographerList } from "../../api/search";
+
 const Photographerlist = () => {
-  const [info, setInfo] = useState(true);
-  const [items, setItems] = useState([
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리1",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리2",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리3",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리4",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리5",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리6",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리7",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리8",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리9",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리10",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리11",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리12",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리13",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리14",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리15",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리16",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-    {
-      tag: "#커플스냅 #유채꽃 #화사함",
-      photographer: "에밀리17",
-      star: "4.7",
-      region: "제주도 서귀포",
-      price: "130,000",
-      review: "238",
-    },
-  ]);
+  const outSection = useRef();
+  const navigate = useNavigate();
   const [isFilteringOpen, setIsFilteringOpen] = useState(false);
+  const [data, setData] = useState([]);
 
   const handleTabClick = () => {
-    setIsFilteringOpen(!isFilteringOpen);
+    if (!isFilteringOpen) {
+      setIsFilteringOpen(true);
+    } else {
+      setIsFilteringOpen(false);
+    }
   };
 
   const tabs = ["지역", "날짜", "전문분야", "순서"];
+
+  useEffect(() => {
+    onSearch();
+  }, []);
+
+  const onSearch = async (selectedSubRegion, selectedSection, selectedDate) => {
+    try {
+      const areaId = selectedSubRegion;
+      const special = selectedSection;
+      const ableDate = selectedDate;
+      const getData = await getPhotographerList(areaId, special, ableDate);
+      setData(getData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const itemsPerPage = 15; // 페이지당 아이템 개수
@@ -165,43 +52,65 @@ const Photographerlist = () => {
   // 데이터 배열을 페이지에 맞게 자르기
   const indexOfLastPost = currentPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
-  const currentPosts = items.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
+
+  const handleOutsideClick = (e) => {
+    e.stopPropagation();
+    if (outSection.current && !outSection.current.contains(e.target)) {
+      setTimeout(() => {
+        setIsFilteringOpen(false);
+      }, 200);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
 
   return (
     <>
       <Header />
       <Wrapper>
-        <Box>
-          <TabBox>
-            {tabs.map((tab, index) => (
-              <Tab key={index} onClick={handleTabClick}>
-                {tab}
-              </Tab>
-            ))}
-          </TabBox>
-          {/* <SearchTag>
-            <input placeholder="태그 검색"></input>
-            <img src={search} alt="검색하기" />
-          </SearchTag> */}
-        </Box>
-        {isFilteringOpen && (
-          <FilteringBox
-            isFilteringOpen={isFilteringOpen}
-            setIsFilteringOpen={setIsFilteringOpen}
-          />
-        )}
-        <Content>
+        <div>
+          <Box>
+            <TabBox>
+              {tabs.map((tab, index) => (
+                <Tab key={index} onClick={handleTabClick}>
+                  {tab}
+                </Tab>
+              ))}
+            </TabBox>
+          </Box>
+          {isFilteringOpen && (
+            <div ref={outSection}>
+              <FilteringBox
+                onSearch={onSearch}
+                isFilteringOpen={isFilteringOpen}
+                setIsFilteringOpen={setIsFilteringOpen}
+              />
+            </div>
+          )}
+        </div>
+        <Content isFilteringOpen={isFilteringOpen}>
           <GridBox>
             <div className="grid">
-              {currentPosts.map((item, index) => (
-                <div key={index}>
+              {currentPosts.map((data) => (
+                <div key={data.photographerId}>
                   <SearchBox
-                    tag={item.tag}
-                    photographer={item.photographer}
-                    star={item.star}
-                    region={item.region}
-                    price={item.price}
-                    review={item.review}
+                    image={data.image}
+                    tags={data.tags}
+                    photographer={data.nickname}
+                    star="4.7"
+                    region={
+                      data.areas.length > 0 ? data.areas[0].metropolitan : ""
+                    }
+                    subregion={data.areas.length > 0 ? data.areas[0].city : ""}
+                    regionCount={data.areas.length}
+                    price={data.lowestPay}
+                    review="238"
                   />
                 </div>
               ))}
@@ -212,7 +121,7 @@ const Photographerlist = () => {
       <Pagination
         activePage={currentPage}
         itemsCountPerPage={itemsPerPage}
-        totalItemsCount={items.length}
+        totalItemsCount={data.length}
         pageRangeDisplayed={5}
         prevPageText={"<"}
         nextPageText={">"}
@@ -240,6 +149,8 @@ const Content = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: ${(props) => (props.isFilteringOpen ? "pointer" : "auto")};
+  pointer-events: ${(props) => (props.isFilteringOpen ? "auto" : "none")};
   @media (max-width: 768px) {
     width: 90%;
   }
@@ -286,59 +197,12 @@ const Tab = styled.div`
   width: 6.5rem;
   text-align: center;
 
+  cursor: pointer;
+
   @media (max-width: 768px) {
     font-size: 0.75rem;
   }
 `;
-
-// const SearchTag = styled.div`
-//   width: 23%;
-//   height: 2.125rem;
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-evenly;
-//   align-items: center;
-//   border-width: 0 0.063rem 0 0.063rem;
-//   border-color: rgba(129, 129, 129, 0.4);
-//   border-style: solid;
-//   @media (max-width: 768px) {
-//     width: 35%;
-//     border-right: none;
-//   }
-//   input {
-//     width: 100%;
-//     border: none;
-//     font-size: 1rem;
-//     font-style: normal;
-//     font-weight: 500;
-//     line-height: normal;
-//     text-align: left;
-//     margin: 1rem;
-//     font-family: Noto Sans KR;
-
-//     @media (max-width: 768px) {
-//       font-size: 0.875rem;
-//     }
-//   }
-
-//   input:focus {
-//     outline: none;
-//   }
-
-//   input::placeholder {
-//     color: #777;
-//   }
-
-//   img {
-//     width: 1.6rem;
-//     margin: 1rem;
-//     @media (max-width: 768px) {
-//       width: 1rem;
-//       height: 1rem;
-//       margin-right: 0.2rem;
-//     }
-//   }
-// `;
 
 const GridBox = styled.div`
   position: relative;
@@ -362,11 +226,9 @@ const GridBox = styled.div`
     margin-top: 4rem;
 
     @media (max-width: 768px) {
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(3, 1fr);
       column-gap: 15px;
       row-gap: 20px;
-      width: 100%;
+
       margin-top: 1.25rem;
     }
   }

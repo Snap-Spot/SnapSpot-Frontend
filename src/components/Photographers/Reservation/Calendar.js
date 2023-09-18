@@ -123,12 +123,13 @@ const Day = styled.div`
       : "#000"};
   cursor: pointer;
   background-color: ${(props) => (props.isSelect ? "#3C3AAC" : "white")};
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.4rem;
+  height: 1.3rem;
   border-radius: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 16px;
 
   @media (max-width: 768px) {
     font-size: 13px;
@@ -168,13 +169,14 @@ const Center = styled.div`
 `;
 
 const Container = styled.div`
-  width: 459px;
+  /* width: 459px; */
+  width: 90%;
   display: flex;
   flex-direction: column;
   margin-right: 2.8rem;
 
   @media (max-width: 768px) {
-    width: 85%;
+    width: 90%;
     margin-bottom: 2.5rem;
     margin-right: 0;
   }

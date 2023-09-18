@@ -1,81 +1,36 @@
 import styled from "styled-components";
 import UpcomingSchedule from "../../components/Photographers/Reservation/UpcomingSchedule";
-import Header from "../../components/common/Header";
+import { RequestData } from "../../components/Photographers/Reservation/MockData/requestData";
+import LayOut from "../../components/common/LayOut";
 
 const RequestList = () => {
-  const mockData2 = [
-    {
-      nickname: "kui01",
-      snapType: "우정스냅",
-      headCount: "4",
-      time: "12:30 ~ 14:30",
-      place: "뚝섬유원지",
-      requirement: "편안한 분위기에서 촬영하고 싶어요!",
-      date: "2023.07.23(일)",
-      num: "0123920293848",
-      id: "ex",
-    },
-    {
-      nickname: "kui01",
-      snapType: "우정스냅",
-      headCount: "4",
-      time: "12:30 ~ 14:30",
-      place: "뚝섬유원지",
-      requirement: "편안한 분위기에서 촬영하고 싶어요!",
-      date: "2023.07.23(일)",
-      num: "0123920293848",
-      id: "ex",
-    },
-    {
-      nickname: "kui01",
-      snapType: "우정스냅",
-      headCount: "4",
-      time: "12:30 ~ 14:30",
-      place: "뚝섬유원지",
-      requirement: "편안한 분위기에서 촬영하고 싶어요!",
-      date: "2023.07.23(일)",
-      num: "0123920293848",
-      id: "ex",
-    },
-  ];
-
   return (
-    <>
-      <Header />
-      <Center>
-        <RequestContainer>
-          <Title>스냅 사진 촬영 요청 목록</Title>
-          {mockData2.map((item, idx) => (
-            <UpcomingSchedule
-              key={idx}
-              nickname={item.nickname}
-              snapType={item.snapType}
-              headCount={item.headCount}
-              time={item.time}
-              place={item.place}
-              requirement={item.requirement}
-              date={item.date}
-              num={item.num}
-              id={item.id}
-            />
-          ))}
-        </RequestContainer>
-      </Center>
-    </>
+    <LayOut>
+      <RequestContainer>
+        <Title>스냅 사진 촬영 요청 목록</Title>
+        {RequestData.map((item, idx) => (
+          <UpcomingSchedule
+            key={idx}
+            nickname={item.nickname}
+            snapType={item.snapType}
+            headCount={item.headCount}
+            time={item.time}
+            place={item.place}
+            requirement={item.requirement}
+            date={item.date}
+            num={item.num}
+            id={item.id}
+            btn_text="예약신청"
+          />
+        ))}
+      </RequestContainer>
+    </LayOut>
   );
 };
 
-const Center = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
 const RequestContainer = styled.div`
-  width: 100%;
+  width: 75%;
   max-width: 1052px;
-  margin-left: 6%;
-  margin-right: 6%;
   margin-top: 3rem;
   display: flex;
   flex-direction: column;
@@ -84,6 +39,7 @@ const RequestContainer = styled.div`
 
   @media (max-width: 768px) {
     margin-top: 1rem;
+    width: 90%;
   }
 `;
 
@@ -93,7 +49,6 @@ const Title = styled.h2`
   align-self: flex-start;
 
   @media (max-width: 768px) {
-    margin-left: 2rem;
     margin-bottom: 1.7rem;
     font-size: 18px;
     margin-top: 1rem;

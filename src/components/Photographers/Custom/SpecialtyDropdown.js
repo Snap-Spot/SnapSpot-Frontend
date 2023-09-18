@@ -14,35 +14,52 @@ const Dropdown = () => {
   ];
 
   return (
-    <Container>
-      <Status open={toggle}>
-        <BaseLine>
-          <OptionContainer>
-            {toggle ? (
-              option.map((el, i) => (
-                <P
-                  key={i}
-                  onClick={() => {
-                    setSelect(el);
-                    setToggle(!toggle);
-                  }}
-                  color={i === 0 ? "#A5A5A5" : "black"}
-                >
-                  {el}
-                </P>
-              ))
-            ) : select.length > 0 ? (
-              select
-            ) : (
-              <P color={"#A5A5A5"}>{option[0]}</P>
-            )}
-          </OptionContainer>
-          <Arrow open={toggle} src={arrow} onClick={() => setToggle(!toggle)} />
-        </BaseLine>
-      </Status>
-    </Container>
+    <>
+      <SubTitle>전문 분야 등록</SubTitle>
+      <Container>
+        <Status open={toggle}>
+          <BaseLine>
+            <OptionContainer>
+              {toggle ? (
+                option.map((el, i) => (
+                  <P
+                    key={i}
+                    onClick={() => {
+                      setSelect(el);
+                      setToggle(!toggle);
+                    }}
+                    color={i === 0 ? "#A5A5A5" : "black"}
+                  >
+                    {el}
+                  </P>
+                ))
+              ) : select.length > 0 ? (
+                select
+              ) : (
+                <P color={"#A5A5A5"}>{option[0]}</P>
+              )}
+            </OptionContainer>
+            <Arrow
+              open={toggle}
+              src={arrow}
+              onClick={() => setToggle(!toggle)}
+            />
+          </BaseLine>
+        </Status>
+      </Container>
+    </>
   );
 };
+
+const SubTitle = styled.h3`
+  font-size: 1rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+`;
 
 const BaseLine = styled.div`
   display: flex;

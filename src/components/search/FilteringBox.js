@@ -1,24 +1,27 @@
 import styled from "styled-components";
 import { React, useState, useEffect } from "react";
 import CustomCalendar from "./CustomCalendar";
-import { regions, sections, orders } from "./FilteringList.js";
+import { regions, orders } from "./FilteringList.js";
+import { category } from "../common/category";
 
-const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
-  const [selectedRegion, setSelectedRegion] = useState(null);
+const FilteringBox = ({ onSearch, setIsFilteringOpen }) => {
+  const [selectedRegion, setSelectedRegion] = useState("서울");
   const [selectedSubRegion, setSelectedSubRegion] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
 
   const handleRegionClick = (region) => {
     setSelectedRegion(region);
   };
 
-  const handleSubRegionClick = (subregion) => {
-    setSelectedSubRegion(subregion);
+  const handleSubRegionClick = (areaId) => {
+    setSelectedSubRegion(areaId);
   };
 
   const handleSectionClick = (section) => {
     setSelectedSection(section);
+    console.log(section);
   };
 
   const handleOrderClick = (order) => {
@@ -26,6 +29,7 @@ const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
   };
 
   const handleSearchBtnClick = (isFilteringOpen) => {
+    onSearch(selectedSubRegion, selectedSection, selectedDate);
     setIsFilteringOpen(!isFilteringOpen);
   };
 
@@ -36,61 +40,63 @@ const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
         <RegionTab>
           <Title>지역</Title>
           <List>
-            <RegionList>
-              {regions.map((region, index) => (
+            {regions && regions.length > 0 && (
+              <RegionList>
+                {regions.map((region, index) => (
+                  <Box key={index}>
+                    <Region
+                      onClick={() => handleRegionClick(region.name)}
+                      isSelected={selectedRegion === region.name}
+                    >
+                      {region.name}
+                    </Region>
+                  </Box>
+                ))}
+              </RegionList>
+            )}
+            {selectedRegion && (
+              <SubregionList>
                 <Box>
-                  <Region
-                    key={index}
-                    onClick={() => handleRegionClick(region)}
-                    isSelected={selectedRegion === region}
-                  >
-                    {region.name}
-                  </Region>
+                  {regions
+                    .find((region) => region.name === selectedRegion)
+                    .subregions.map((data) => (
+                      <SubregionBox key={data.areaId}>
+                        <Subregion
+                          onClick={() => handleSubRegionClick(data.areaId)}
+                          isSelected={selectedSubRegion === data.areaId}
+                        >
+                          {data.subregion}
+                        </Subregion>
+                      </SubregionBox>
+                    ))}
                 </Box>
-              ))}
-            </RegionList>
-            <SubregionList>
-              {selectedRegion && (
-                <Box>
-                  {selectedRegion.subregions.map((subregion, index) => (
-                    <SubregionBox>
-                      <Subregion
-                        key={index}
-                        onClick={() => handleSubRegionClick(subregion)}
-                        isSelected={selectedSubRegion === subregion}
-                      >
-                        {subregion}
-                      </Subregion>
-                    </SubregionBox>
-                  ))}
-                </Box>
-              )}
-            </SubregionList>
+              </SubregionList>
+            )}
           </List>
         </RegionTab>
         {/* 날짜 필터링 */}
         <DateTab>
           <Title>날짜</Title>
           <CalendarBox>
-            <CustomCalendar />
+            <CustomCalendar setSelectedDate={setSelectedDate} />
           </CalendarBox>
         </DateTab>
         {/* 전문분야 필터링 */}
         <SectionTab>
           <Title>전문분야</Title>
           <SectionList>
-            {sections && (
+            {category && (
               <Box>
-                {sections.map((section, index) => (
+                {category.map((section, index) => (
                   <>
                     <Section
                       key={index}
-                      onClick={() => handleSectionClick(section)}
-                      isSelected={selectedSection === section}
+                      onClick={() => handleSectionClick(section.key)}
+                      isSelected={selectedSection === section.key}
                     >
-                      {section}
+                      {section.label}
                     </Section>
-                    {index !== sections.length - 1 && <Line />}
+                    {index !== category.length - 1 && <Line />}
                   </>
                 ))}
               </Box>
@@ -99,7 +105,7 @@ const FilteringBox = ({ isFilteringOpen, setIsFilteringOpen }) => {
         </SectionTab>
         {/* 순서 필터링 */}
         <OrderTab>
-          <Title>순서</Title>{" "}
+          <Title>순서</Title>
           <SectionList>
             {orders && (
               <Box>
@@ -505,9 +511,7 @@ const Btn = styled.div`
   font-weight: 500;
   line-height: normal;
 
-  @media (max-width: 768px) {
-    /* margin-top: 1rem; */
-  }
+  cursor: pointer;
 `;
 
 const BtnTab = styled.div`
