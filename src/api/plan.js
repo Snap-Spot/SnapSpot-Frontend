@@ -53,3 +53,38 @@ export const getAllReservation = async () => {
     console.log("예약 내역 조회 에러", err);
   }
 };
+
+// 촬영 예약 거절
+export const putRejectReservation = async (planId, message) => {
+  try {
+    const res = await client.put(`/plans/refuse`, {
+      planId: planId,
+      contents: message,
+    });
+    return res.data;
+  } catch (err) {
+    console.log("예약 거절 에러", err);
+  }
+};
+
+// 입금 요청
+export const putDeposit = async (
+  planId,
+  price,
+  placeName,
+  placeAddress,
+  message
+) => {
+  try {
+    const res = await client.put(`/plans/deposit`, {
+      planId: planId,
+      price: price,
+      placeName: placeName,
+      placeAddress: placeAddress,
+      message: message,
+    });
+    return res.data;
+  } catch (err) {
+    console.log("입금 요청 에러", err);
+  }
+};

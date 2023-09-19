@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import warn from "../../../assets/photograph/warn.png";
-import { useNavigate } from "react-router-dom";
+import { putRejectReservation } from "../../../api/plan";
 
 const RejectModal = ({
   setIsOpen,
@@ -9,9 +9,9 @@ const RejectModal = ({
   content,
   status,
   setStatus,
+  message,
+  planId,
 }) => {
-  const navigate = useNavigate();
-
   return (
     <>
       <Conatiner>
@@ -24,7 +24,9 @@ const RejectModal = ({
           <ConfirmBtn
             onClick={() => {
               if (status === 0) {
-                navigate("/photographer/reserve");
+                const res = putRejectReservation(planId, message);
+                console.log(res);
+                //navigate("/photographer/reserve");
               } else {
                 setStatus(status + 1);
                 setIsOpen(!isOpen);
