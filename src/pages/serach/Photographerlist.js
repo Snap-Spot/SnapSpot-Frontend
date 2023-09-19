@@ -55,7 +55,9 @@ const Photographerlist = () => {
   const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
 
   const handleOutsideClick = (e) => {
-    e.stopPropagation();
+    if (!isFilteringOpen) {
+      e.stopPropagation();
+    }
     if (outSection.current && !outSection.current.contains(e.target)) {
       setTimeout(() => {
         setIsFilteringOpen(false);
@@ -100,6 +102,7 @@ const Photographerlist = () => {
               {currentPosts.map((data) => (
                 <div key={data.photographerId}>
                   <SearchBox
+                    id={data.photographerId}
                     image={data.image}
                     tags={data.tags}
                     photographer={data.nickname}
@@ -150,7 +153,7 @@ const Content = styled.div`
   justify-content: center;
   align-items: center;
   cursor: ${(props) => (props.isFilteringOpen ? "pointer" : "auto")};
-  pointer-events: ${(props) => (props.isFilteringOpen ? "auto" : "none")};
+  /* pointer-events: ${(props) => (props.isFilteringOpen ? "auto" : "none")}; */
   @media (max-width: 768px) {
     width: 90%;
   }
