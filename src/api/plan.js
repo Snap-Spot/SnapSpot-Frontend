@@ -44,10 +44,10 @@ export const postReservation = async ({
   }
 };
 
-// 사진 작가 예약 내역 전부 조회
+// 사진 작가 예약 내역 & 촬영 내역 전부 조회
 export const getAllReservation = async () => {
   try {
-    const res = await client.get(`/plans/photographer`);
+    const res = await client.get(`/plans/photographer/client`);
     return res.data;
   } catch (err) {
     console.log("예약 내역 조회 에러", err);

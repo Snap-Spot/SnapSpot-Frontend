@@ -2,23 +2,31 @@ import styled from "styled-components";
 import UpcomingSchedule from "../../components/Photographers/Reservation/UpcomingSchedule";
 import { RequestData } from "../../components/Photographers/Reservation/MockData/requestData";
 import LayOut from "../../components/common/LayOut";
+import { getAllReservation } from "../../api/plan";
+import { useState, useEffect } from "react";
 
 const RequestList = () => {
+  const [requestData, setRequestData] = useState();
+
+  useEffect(() => {
+    setRequestData(getAllReservation());
+  }, []);
+
   return (
     <LayOut>
       <RequestContainer>
         <Title>스냅 사진 촬영 요청 목록</Title>
-        {RequestData.map((item, idx) => (
+        {requestData.request.map((item, idx) => (
           <UpcomingSchedule
             key={idx}
-            nickname={item.nickname}
-            snapType={item.snapType}
+            // nickname={item.nickname}
+            snapType={item.category}
             headCount={item.headCount}
-            time={item.time}
-            place={item.place}
-            requirement={item.requirement}
-            date={item.date}
-            num={item.num}
+            // time={item.time}
+            place={item.wishPlace}
+            requirement={item.request}
+            date={item.planDate}
+            // num={item.num}
             id={item.id}
             btn_text="예약신청"
           />

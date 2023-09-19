@@ -16,7 +16,7 @@ const ReservationList = () => {
     <LayOut>
       <ReservationContainer>
         <Title>스냅 사진 예약 목록</Title>
-        {reservation.map((item, idx) => (
+        {reservation.reserved.map((item, idx) => (
           <UpcomingSchedule
             key={idx}
             // nickname={item.nickname}
@@ -25,7 +25,7 @@ const ReservationList = () => {
             // time={item.time}
             place={item.wishPlace}
             requirement={item.request}
-            date={item.item.planDate}
+            date={item.planDate}
             // num={item.num}
             id={item.planId}
             btn_text="예약완료"
