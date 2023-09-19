@@ -20,16 +20,6 @@ export const getPhotographer = async (photographerId) => {
   }
 };
 
-// 작가 개인 조회
-export const getPhotographer = async (photographerId) => {
-  try {
-    const res = await client.get(`/photographers/${photographerId}`);
-    return res.data;
-  } catch (err) {
-    console.log("개인 조회 에러", err);
-  }
-};
-
 // 작가별 리뷰 조회
 export const getReview = async (photographerId) => {
   try {
