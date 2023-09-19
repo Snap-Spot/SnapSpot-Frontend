@@ -36,6 +36,10 @@ S.InputBox = styled.input`
     color: var(--darkgrey, #777);
   }
 
+  &:focus {
+    outline: none;
+  }
+
   @media screen and (max-width: 768px) {
     font-weight: 400;
     height: 2.8rem;
@@ -50,6 +54,10 @@ S.PasswordMatchText = styled.div`
 
   width: ${INPUT_WIDTH}%;
   text-indent: ${TEXT_INDENT}px;
+
+  &.isMatched {
+    display: none;
+  }
 
   @media screen and (max-width: 768px) {
     text-indent: ${M_TEXT_INDENT}px;
@@ -80,6 +88,11 @@ S.EmailLoginBtn = styled(S.LoginButton)`
 
   &.login {
     margin-bottom: 15px;
+  }
+
+  &.isFilled {
+    pointer-events: none;
+    background-color: var(--lightgrey2, #dbdbdb);
   }
 `;
 
