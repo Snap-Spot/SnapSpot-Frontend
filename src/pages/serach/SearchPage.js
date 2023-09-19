@@ -12,7 +12,7 @@ import { getKeywordSearch } from "../../api/search";
 const SearchPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   const [searchData, setSearchData] = useState([]);
   const nicknameData = searchData.nicknameResult || [];
   const areaData = searchData.areaResult || [];
@@ -63,6 +63,7 @@ const SearchPage = () => {
                       (data) => (
                         <div key={data.photographerId}>
                           <SearchBox
+                            id={data.photographerId}
                             image={data.image}
                             tags={data.tags}
                             photographer={data.nickname}
@@ -102,6 +103,7 @@ const SearchPage = () => {
                       ) => (
                         <div key={data.photographerId}>
                           <SearchBox
+                            id={data.photographerId}
                             image={data.image}
                             tags={data.tags}
                             photographer={data.nickname}

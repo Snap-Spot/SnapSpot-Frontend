@@ -5,6 +5,7 @@ import starIcon from "../../assets/search/starIcon.png";
 import { useNavigate } from "react-router-dom";
 
 const SearchBox = ({
+  id,
   image,
   tags,
   photographer,
@@ -18,7 +19,7 @@ const SearchBox = ({
   const navigate = useNavigate();
 
   const onClickPage = () => {
-    navigate(`/photographer/introduction`);
+    navigate(`/photographers/${id}`);
   };
 
   const tagValues = Object.values(tags).filter((tag) => tag !== null);
