@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import profile from "../../../assets/photograph/profile.png";
 import arrow from "../../../assets/photograph/arrow.png";
 import line from "../../../assets/photograph/line.png";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +14,7 @@ const UpcomingSchedule = ({
   num,
   id,
   btn_text,
+  profile,
 }) => {
   const navigate = useNavigate();
 
@@ -59,7 +59,7 @@ const UpcomingSchedule = ({
 };
 
 const ReservationNum = styled.p`
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: #777777;
   margin-top: 0.3rem;
   font-weight: 400;

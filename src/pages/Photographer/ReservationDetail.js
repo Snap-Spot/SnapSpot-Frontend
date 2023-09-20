@@ -6,25 +6,37 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const ReservationDetail = () => {
-  const [reservation, setReservation] = useState();
-  const { planId } = useParams();
+  const [reservation, setReservation] = useState("");
+  const { id } = useParams();
+
+  const getReservationDetail = async () => {
+    try {
+      const data = await getMyReservation(id);
+      setReservation(data);
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
-    setReservation(getMyReservation(planId));
+    getReservationDetail();
   }, []);
 
   return (
     <LayOut>
       <Container>
         <Title>스냅사진 예약 상세내역</Title>
-        <ScheduleDetail
-        // nickname={reservation.nickname}
-        // reservationNum={reservation.num}
-        // time={reservation.time}
-        place={reservation.wishPlace}
-        requirement={reservation.request}
-        date={reservation.planDate}
-        />
+        {reservation && (
+          <ScheduleDetail
+            nickname={reservation.customer.nickname}
+            reservationNum={reservation.planId}
+            time={reservation.time || 0}
+            place={reservation.wishPlace}
+            requirement={reservation.request}
+            date={reservation.planDate.slice(0, 10)}
+          />
+        )}
       </Container>
     </LayOut>
   );

@@ -11,6 +11,7 @@ const ReservationList = () => {
     try {
       const data = await getAllReservation();
       setReservation(data.reserved);
+      console.log(reservation);
     } catch (err) {
       console.log(err);
     }
@@ -37,6 +38,7 @@ const ReservationList = () => {
               date={item.planDate.slice(0, 10).split("-").join(".")}
               num={item.planId}
               id={item.id}
+              profile={item.customer.profile}
               btn_text="예약완료"
             />
           ))}

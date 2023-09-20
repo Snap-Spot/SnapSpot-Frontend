@@ -37,6 +37,7 @@ const RequestList = () => {
               date={item.planDate.slice(0, 10).split("-").join(".")}
               num={item.planId}
               id={item.id}
+              profile={item.customer.profile}
               btn_text="예약신청"
             />
           ))}

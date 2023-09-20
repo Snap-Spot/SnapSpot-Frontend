@@ -2,9 +2,8 @@ import UpcomingSchedule from "./UpcomingSchedule";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import arrow from "../../../assets/photograph/arrow.png";
-import { RequestData } from "./MockData/requestData";
 
-const RequestContainer = () => {
+const RequestContainer = ({ request }) => {
   const navigate = useNavigate();
 
   return (
@@ -13,21 +12,23 @@ const RequestContainer = () => {
         새로 들어온 <Highlight>촬영 요청</Highlight>이 있어요
         <Arrow src={arrow} />
       </Title>
-      {RequestData.map((item, idx) => (
-        <UpcomingSchedule
-          key={idx}
-          nickname={item.nickname}
-          snapType={item.snapType}
-          headCount={item.headCount}
-          time={item.time}
-          place={item.place}
-          requirement={item.requirement}
-          date={item.date}
-          num={item.num}
-          id={item.id}
-          btn_text="예약신청"
-        />
-      ))}
+      {request &&
+        request.map((item, idx) => (
+          <UpcomingSchedule
+            key={idx}
+            nickname={item.customer.nickname}
+            snapType={item.category}
+            headCount={item.people}
+            time={item.time || 0}
+            place={item.wishPlace}
+            requirement={item.request}
+            date={item.planDate.slice(0, 10).split("-").join(".")}
+            num={item.planId}
+            id={item.planId}
+            profile={item.customer.profile}
+            btn_text="예약신청"
+          />
+        ))}
     </>
   );
 };
