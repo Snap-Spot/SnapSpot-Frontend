@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import UpcomingSchedule from "../../components/Photographers/Reservation/UpcomingSchedule";
-import { RequestData } from "../../components/Photographers/Reservation/MockData/requestData";
 import LayOut from "../../components/common/LayOut";
 import { getAllReservation } from "../../api/plan";
 import { useState, useEffect } from "react";
@@ -8,29 +7,39 @@ import { useState, useEffect } from "react";
 const ReservationList = () => {
   const [reservation, setReservation] = useState();
 
+  const getReservation = async () => {
+    try {
+      const data = await getAllReservation();
+      setReservation(data.reserved);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
-    setReservation(getAllReservation());
+    getReservation();
   }, []);
 
   return (
     <LayOut>
       <ReservationContainer>
         <Title>스냅 사진 예약 목록</Title>
-        {reservation.reserved.map((item, idx) => (
-          <UpcomingSchedule
-            key={idx}
-            // nickname={item.nickname}
-            snapType={item.category}
-            headCount={item.people}
-            // time={item.time}
-            place={item.wishPlace}
-            requirement={item.request}
-            date={item.planDate}
-            // num={item.num}
-            id={item.planId}
-            btn_text="예약완료"
-          />
-        ))}
+        {reservation &&
+          reservation.map((item, idx) => (
+            <UpcomingSchedule
+              key={idx}
+              nickname={item.customer.nickname}
+              snapType={item.category}
+              headCount={item.people}
+              time={item.time || 0}
+              place={item.wishPlace}
+              requirement={item.request}
+              date={item.planDate.slice(0, 10).split("-").join(".")}
+              num={item.planId}
+              id={item.id}
+              btn_text="예약완료"
+            />
+          ))}
       </ReservationContainer>
     </LayOut>
   );

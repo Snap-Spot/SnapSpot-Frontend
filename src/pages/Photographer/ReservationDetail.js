@@ -21,9 +21,9 @@ const ReservationDetail = () => {
         // nickname={reservation.nickname}
         // reservationNum={reservation.num}
         // time={reservation.time}
-        // place={reservation.wishPlace}
-        // requirement={reservation.request}
-        // date={reservation.planDate}
+        place={reservation.wishPlace}
+        requirement={reservation.request}
+        date={reservation.planDate}
         />
       </Container>
     </LayOut>
