@@ -5,10 +5,12 @@ import photographer from "../../../assets/mypage/modals/photographer.png";
 import close from "../../../assets/mypage/modals/close.png";
 import add from "../../../assets/mypage/modals/add.png";
 import SearchList from "./SearchList";
+import getS3ImgUrl from "../../../api/s3upload";
 const AddSnapModal = () => {
   const imgRef = useRef();
   const [imgFile, setImgFile] = useState();
   const [previewImg, setPreviewImg] = useState(null);
+  const [imgUrl, setImgUrl] = useState("");
   //사진 첨부 및 미리보기
   const uploadImg = () => {
     let file = imgRef.current.files[0];
@@ -16,8 +18,11 @@ const AddSnapModal = () => {
 
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setPreviewImg(reader.result);
+    reader.onloadend = async (e) => {
+      setPreviewImg(e.target.result);
+      //s3업로드 및 url 얻기
+      const url = await getS3ImgUrl(file);
+      console.log(url);
     };
   };
   //사진 첨부 취소
