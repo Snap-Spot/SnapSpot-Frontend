@@ -2,8 +2,7 @@ import { React, useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import Pagination from "react-js-pagination";
 import "../../components/Photographers/Review/Paging/Paging.css";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, useLocation } from "react-router-dom";
 import FilteringBox from "../../components/search/FilteringBox";
 import SearchBox from "../../components/search/SearchBox";
 import Header from "../../components/common/Header";
@@ -11,10 +10,23 @@ import Header from "../../components/common/Header";
 import { getPhotographerList } from "../../api/search";
 
 const Photographerlist = () => {
-  const outSection = useRef();
+  const location = useLocation();
   const navigate = useNavigate();
-  const [isFilteringOpen, setIsFilteringOpen] = useState(false);
+  const outSection = useRef();
   const [data, setData] = useState([]);
+
+  const searchData = location.state?.searchData;
+
+  useEffect(() => {
+    if (searchData) {
+      setData(searchData);
+    } else {
+      onSearch();
+    }
+  }, [searchData]); 
+
+
+  const [isFilteringOpen, setIsFilteringOpen] = useState(false);
 
   const handleTabClick = () => {
     if (!isFilteringOpen) {
@@ -26,9 +38,9 @@ const Photographerlist = () => {
 
   const tabs = ["지역", "날짜", "전문분야", "순서"];
 
-  useEffect(() => {
-    onSearch();
-  }, []);
+  // useEffect(() => {
+  //   onSearch();
+  // }, []);
 
   const onSearch = async (selectedSubRegion, selectedSection, selectedDate) => {
     try {

@@ -15,8 +15,8 @@ const SearchPage = () => {
 
   const [searchData, setSearchData] = useState([]);
   const [recommendData, setRecommendData] = useState([]);
-  const nicknameData = searchData.nicknameResult || [];
-  const areaData = searchData.areaResult || [];
+  const nicknameData = searchData?.nicknameResult || [];
+  const areaData = searchData?.areaResult || [];
   const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
@@ -29,11 +29,13 @@ const SearchPage = () => {
   }, [location.search]);
 
   const handleMoreRegionClick = () => {
-    navigate(`/photographers`, { data: areaData });
+    navigate(`/photographers`, { state: { searchData: areaData } });
+    console.log("mordeData", areaData);
   };
 
   const handleMoreNicknameClick = () => {
-    navigate(`/photographers`, { data: nicknameData });
+    navigate(`/photographers`, { state: { searchData: nicknameData } });
+    console.log("mordeData", nicknameData);
   };
 
   const getSearch = async (keyword) => {
