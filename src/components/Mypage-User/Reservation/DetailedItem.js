@@ -17,12 +17,12 @@ const DetailedItem = () => {
   const [photographer, setPhotographer] = useState({});
   const [date, setDate] = useState("");
   const [day, setDay] = useState("");
-  const [time, setTime] = useState("");
   const [status, setStatus] = useState({});
   const [category, setCategory] = useState({});
 
   const getData = async () => {
     const planData = await getMyReservation(id);
+    console.log(planData);
     const photographerData = await getPhotographer(14);
 
     setPlan(planData);
@@ -33,7 +33,6 @@ const DetailedItem = () => {
 
     setDate(planData.planDate.substr(0, 10));
     setDay(getDayOfWeek(planData.planDate.substr(0, 10)));
-    setTime(planData.planDate.substr(11, 5));
   };
 
   useEffect(() => {
@@ -63,7 +62,7 @@ const DetailedItem = () => {
               <div className="item">
                 <p className="subject">예약일시</p>
                 <p className="content">
-                  {date}({day}) {time}
+                  {date}({day}) {plan.time}
                 </p>
               </div>
               <div className="item">
@@ -81,7 +80,14 @@ const DetailedItem = () => {
             </div>
           </Main>
         </div>
-        <DetailMenus status={status} />
+        <DetailMenus
+          status={status}
+          plan={plan}
+          photographer={photographer}
+          date={date}
+          day={day}
+          category={category}
+        />
         <KakaoMap />
       </Wrapper>
     </>

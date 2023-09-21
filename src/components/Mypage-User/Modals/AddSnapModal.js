@@ -1,21 +1,67 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { styled } from "styled-components";
 import photo from "../../../assets/mypage/modals/photo.png";
 import photographer from "../../../assets/mypage/modals/photographer.png";
 import close from "../../../assets/mypage/modals/close.png";
+import add from "../../../assets/mypage/modals/add.png";
 import SearchList from "./SearchList";
+import getS3ImgUrl from "../../../api/s3upload";
 const AddSnapModal = () => {
+  const imgRef = useRef();
+  const [imgFile, setImgFile] = useState();
+  const [previewImg, setPreviewImg] = useState(null);
+  const [imgUrl, setImgUrl] = useState("");
+  //사진 첨부 및 미리보기
+  const uploadImg = () => {
+    let file = imgRef.current.files[0];
+    setImgFile(file);
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = async (e) => {
+      setPreviewImg(e.target.result);
+      //s3업로드 및 url 얻기
+      const url = await getS3ImgUrl(file);
+      console.log(url);
+    };
+  };
+  //사진 첨부 취소
+  const deleteImg = () => {
+    imgRef.current.value = "";
+    setPreviewImg();
+    setImgFile();
+  };
   return (
     <Wrapper>
       <Photo>
+        <input
+          className="input"
+          accept=".jpg, .jpeg, .png"
+          type="file"
+          id="file"
+          multiple
+          onChange={uploadImg}
+          ref={imgRef}
+        />
         <div className="subject-subtitle">
           사진 첨부하기 &nbsp;&nbsp;&nbsp;
           <img className="icon" src={photo} alt="" />
         </div>
-        <div className="preview">
-          <img src="" alt="" />
-          <img className="close" src={close} alt="" />
-        </div>
+        {!previewImg && (
+          <label htmlFor="file">
+            <div className="addBtn">
+              <div className="img" alt="" />
+              <img className="add" src={add} alt="" />
+            </div>
+          </label>
+        )}
+
+        {previewImg && (
+          <div className="preview">
+            <img className="img" src={previewImg} alt="" />
+            <img className="close" src={close} alt="" onClick={deleteImg} />
+          </div>
+        )}
       </Photo>
 
       <Photographer>
@@ -112,6 +158,9 @@ const Photo = styled.div`
       flex-shrink: 0;
     }
   }
+  .input {
+    display: none;
+  }
 
   .preview {
     position: relative;
@@ -124,15 +173,70 @@ const Photo = styled.div`
     flex-shrink: 0;
     border-radius: 12px;
     background: lightgray 50% / cover no-repeat;
+
+    .img {
+      width: 140px;
+      height: 140px;
+      border-radius: 12px;
+    }
     @media (max-width: 768px) {
       //모바일
       width: 80px;
       height: 80px;
       margin-top: 8px;
+
+      .img {
+        width: 80px;
+        height: 80px;
+      }
     }
   }
+  .addBtn {
+    cursor: pointer;
+    position: relative;
+    margin-top: 16.68px;
+    display: flex;
+    width: 140px;
+    height: 140px;
+    justify-content: flex-end;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: lightgray 50% / cover no-repeat;
 
+    .img {
+      width: 140px;
+      height: 140px;
+      border-radius: 12px;
+    }
+    @media (max-width: 768px) {
+      //모바일
+      width: 80px;
+      height: 80px;
+      margin-top: 8px;
+
+      .img {
+        width: 80px;
+        height: 80px;
+      }
+    }
+  }
+  .add {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    transform: translate(50%, -50%);
+    @media (max-width: 768px) {
+      //모바일
+      width: 24px;
+      height: 24px;
+    }
+  }
   .close {
+    cursor: pointer;
     position: absolute;
     top: 8px;
     right: 8px;
