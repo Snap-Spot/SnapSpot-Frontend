@@ -35,6 +35,7 @@ const ReservationDetail = () => {
             place={reservation.wishPlace}
             requirement={reservation.request}
             date={reservation.planDate.slice(0, 10)}
+            profile={reservation.customer.profile}
           />
         )}
       </Container>

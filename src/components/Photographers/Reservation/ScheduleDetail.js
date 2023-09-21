@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import profile from "../../../assets/photograph/profile.png";
 
 const ScheduleDetail = ({
   nickname,
@@ -9,6 +8,7 @@ const ScheduleDetail = ({
   place,
   requirement,
   date,
+  profile,
 }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 

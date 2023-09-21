@@ -19,6 +19,8 @@ const ReservationContainer = ({ data }) => {
     );
   });
 
+  console.log(filteredData);
+
   return (
     <>
       <Title>스냅사진 예약 내역</Title>
