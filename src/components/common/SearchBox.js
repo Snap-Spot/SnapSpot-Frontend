@@ -2,12 +2,8 @@ import { React, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import useMobileDetection from "./mobileDetection";
-import profile from "../../assets/header/profile.png";
-import logo from "../../assets/header/logo.png";
-import mobilelogo from "../../assets/header/mobilelogo.png";
 import search from "../../assets/header/search.png";
-import menu from "../../assets/header/menu.png";
-import HomeMenu from "./HomeMenu";
+
 
 function SearchBox() {
   const navigate = useNavigate();

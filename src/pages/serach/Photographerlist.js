@@ -14,6 +14,8 @@ const Photographerlist = () => {
   const navigate = useNavigate();
   const outSection = useRef();
   const [data, setData] = useState([]);
+  const [isFilteringOpen, setIsFilteringOpen] = useState(false);
+  const tabs = ["지역", "날짜", "전문분야", "순서"];
 
   const searchData = location.state?.searchData;
 
@@ -26,8 +28,6 @@ const Photographerlist = () => {
   }, [searchData]); 
 
 
-  const [isFilteringOpen, setIsFilteringOpen] = useState(false);
-
   const handleTabClick = () => {
     if (!isFilteringOpen) {
       setIsFilteringOpen(true);
@@ -36,11 +36,6 @@ const Photographerlist = () => {
     }
   };
 
-  const tabs = ["지역", "날짜", "전문분야", "순서"];
-
-  // useEffect(() => {
-  //   onSearch();
-  // }, []);
 
   const onSearch = async (selectedSubRegion, selectedSection, selectedDate) => {
     try {
