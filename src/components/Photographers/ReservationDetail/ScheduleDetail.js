@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import profile from "../../../assets/photograph/profile.png";
 import RejectModal from "./RejectModal";
 import MinInputModal from "./MinInputModal";
 import ChatBox from "./ChatBox";
@@ -16,6 +15,7 @@ const ScheduleDetail = ({
   place,
   requirement,
   date,
+  profile,
 }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isReject, setIsReject] = useState(false); // 예약 거절 모달
@@ -161,7 +161,10 @@ const ScheduleDetail = ({
                 onChange={(e) => setPrice(e.target.value)}
               />
             )}
-            <AddressSearch setPlaceAddress={setPlaceAddress} placeAddress={placeAddress}/>
+            <AddressSearch
+              setPlaceAddress={setPlaceAddress}
+              placeAddress={placeAddress}
+            />
           </ContentContainer>
         </Row>
         <MessageBox

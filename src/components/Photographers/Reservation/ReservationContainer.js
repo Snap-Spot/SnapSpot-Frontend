@@ -47,6 +47,7 @@ const ReservationContainer = ({ data }) => {
                 requirement={item.request}
                 idx={idx}
                 id={item.planId}
+                profile={item.customer.profile}
               />
             ))}
         </ScheduleContainer>
