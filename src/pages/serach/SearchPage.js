@@ -28,8 +28,12 @@ const SearchPage = () => {
     }
   }, [location.search]);
 
-  const handleMoreClick = () => {
-    navigate(`/photographers`);
+  const handleMoreRegionClick = () => {
+    navigate(`/photographers`, { data: areaData });
+  };
+
+  const handleMoreNicknameClick = () => {
+    navigate(`/photographers`, { data: nicknameData });
   };
 
   const getSearch = async (keyword) => {
@@ -58,7 +62,11 @@ const SearchPage = () => {
               <>
                 <SubTitle>
                   <div className="subject">'{keyword}'</div>에서 활동하는 작가
-                  <img src={more} onClick={handleMoreClick} />
+                  {areaData.length > 3 ? (
+                    <img src={more} onClick={handleMoreRegionClick} />
+                  ) : (
+                    <></>
+                  )}
                 </SubTitle>
                 <GridBox>
                   <div className="grid">
@@ -97,7 +105,11 @@ const SearchPage = () => {
               <>
                 <SubTitle>
                   <div className="subject">'{keyword}' </div> 작가
-                  <img src={more} onClick={handleMoreClick} />
+                  {nicknameData.length > 3 ? (
+                    <img src={more} onClick={handleMoreNicknameClick} />
+                  ) : (
+                    <></>
+                  )}
                 </SubTitle>
                 <GridBox>
                   <div class="grid">
