@@ -23,7 +23,6 @@ const SearchBox = ({
   };
 
   const starValue = !isNaN(parseFloat(star)) ? parseFloat(star).toFixed(1) : "";
-  console.log("starValue", starValue);
 
   const tagValues = Object.values(tags).filter((tag) => tag !== null);
   const tag = Object.values(tags)

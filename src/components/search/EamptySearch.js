@@ -61,6 +61,7 @@ const EamptySearch = ({ data }) => {
           >
             {data.map((item) => (
               <RecommendBox
+                id={item.photographerId}
                 image={item.image}
                 tags={item.tags}
                 photographer={item.nickname}

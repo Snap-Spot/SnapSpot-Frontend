@@ -1,16 +1,38 @@
 import styled from "styled-components";
-import photo from "../../assets/search/photo.jpeg";
-import reviewIcon from "../../assets/search/reviewIcon.png";
+import { useNavigate } from "react-router-dom";
 import starIcon from "../../assets/search/starIcon.png";
 
-const RecommendBox = ({ image, tags, photographer, star, price, review }) => {
-  const tag = Object.values(tags)
-    .filter((tag) => tag !== null)
-    .map((tagValue) => `#${tagValue}`)
-    .join(" ");
+const RecommendBox = ({
+  id,
+  image,
+  tags,
+  photographer,
+  star,
+  price,
+  review,
+}) => {
+  const navigate = useNavigate();
+
+  const onClickPage = () => {
+    navigate(`/photographers/${id}`);
+  };
+
+  // const tag = Object.values(tags)
+  //   .filter((tag) => tag !== null)
+  //   .map((tagValue) => `#${tagValue}`)
+  //   .join(" ");
+
+  let tag = "";
+
+  if (tags && typeof tags === "object") {
+    tag = Object.values(tags)
+      .filter((tag) => tag !== null)
+      .map((tagValue) => `#${tagValue}`)
+      .join(" ");
+  }
 
   return (
-    <Wrapper>
+    <Wrapper onClick={onClickPage}>
       <Photo image={image} />
       <Info>
         <TopInfo>
