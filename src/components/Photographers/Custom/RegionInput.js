@@ -86,10 +86,14 @@ const RegionInput = () => {
                         .subregions.map((subregion, index) => (
                           <SubregionBox key={index}>
                             <Subregion
-                              onClick={() => handleSubRegionClick(subregion)}
-                              isSelected={selectedSubRegion.includes(subregion)}
+                              onClick={() =>
+                                handleSubRegionClick(subregion.subregion)
+                              }
+                              isSelected={selectedSubRegion.includes(
+                                subregion.subregion
+                              )}
                             >
-                              {subregion}
+                              {subregion.subregion}
                             </Subregion>
                           </SubregionBox>
                         ))}
