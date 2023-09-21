@@ -106,12 +106,19 @@ const Photographer = styled.div`
   font-weight: 700;
   line-height: normal;
 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
   height: 35px;
+
   @media (max-width: 768px) {
     margin: 0.4rem 0.5rem 0rem 0.5rem;
     font-size: 10px;
     font-weight: 400;
     height: 15px;
+
+    /* max-width: 48px; */
   }
 `;
 

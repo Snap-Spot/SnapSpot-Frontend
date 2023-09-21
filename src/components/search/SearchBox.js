@@ -135,7 +135,6 @@ const Photographer = styled.div`
   @media (max-width: 768px) {
     font-size: 10px;
     height: 15px;
-
     max-width: 48px;
   }
 `;

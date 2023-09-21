@@ -19,7 +19,7 @@ const responsive = {
   768: {
     items: 2,
   },
-  1000: {
+  1200: {
     items: 3,
   },
 };
