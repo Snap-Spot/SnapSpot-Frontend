@@ -16,15 +16,15 @@ const responsive = {
   374: {
     items: 3,
   },
-  600: {
-    items: 3,
+  768: {
+    items: 2,
   },
-  1024: {
+  1000: {
     items: 3,
   },
 };
 
-const EamptySearch = () => {
+const EamptySearch = ({ data }) => {
   const renderPrevButton = ({ isDisabled }) => {
     if (isDisabled) {
       return null;
@@ -59,48 +59,16 @@ const EamptySearch = () => {
             renderPrevButton={renderPrevButton}
             renderNextButton={renderNextButton}
           >
-            <RecommendBox
-              tag="#커플스냅 #유채꽃 #화사함"
-              photographer="한빛나라"
-              star="4.7"
-              price="130,000"
-              review="238"
-            />
-            <RecommendBox
-              tag="#커플스냅 #유채꽃 #화사함"
-              photographer="한빛나라"
-              star="4.7"
-              price="130,000"
-              review="238"
-            />
-            <RecommendBox
-              tag="#커플스냅 #유채꽃 #화사함"
-              photographer="한빛나라"
-              star="4.7"
-              price="130,000"
-              review="238"
-            />
-            <RecommendBox
-              tag="#커플스냅 #유채꽃 #화사함"
-              photographer="한빛나라"
-              star="4.7"
-              price="130,000"
-              review="238"
-            />
-            <RecommendBox
-              tag="#커플스냅 #유채꽃 #화사함"
-              photographer="한빛나라"
-              star="4.7"
-              price="130,000"
-              review="238"
-            />
-            <RecommendBox
-              tag="#커플스냅 #유채꽃 #화사함"
-              photographer="한빛나라"
-              star="4.7"
-              price="130,000"
-              review="238"
-            />
+            {data.map((item) => (
+              <RecommendBox
+                image={item.image}
+                tags={item.tags}
+                photographer={item.nickname}
+                star={item.averageScore}
+                price={item.lowestPay}
+                review={item.totalReview}
+              />
+            ))}
           </AliceCarousel>
         </RecommendList>
       </div>

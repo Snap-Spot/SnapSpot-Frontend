@@ -3,10 +3,15 @@ import photo from "../../assets/search/photo.jpeg";
 import reviewIcon from "../../assets/search/reviewIcon.png";
 import starIcon from "../../assets/search/starIcon.png";
 
-const RecommendBox = ({ tag, photographer, star, price, review }) => {
+const RecommendBox = ({ image, tags, photographer, star, price, review }) => {
+  const tag = Object.values(tags)
+    .filter((tag) => tag !== null)
+    .map((tagValue) => `#${tagValue}`)
+    .join(" ");
+
   return (
     <Wrapper>
-      <Photo />
+      <Photo image={image} />
       <Info>
         <TopInfo>
           <Photographer>{photographer} 작가</Photographer>
@@ -58,7 +63,7 @@ const Photo = styled.div`
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 0.1) 100%
     ),
-    url(${photo}) center/cover no-repeat, lightgray 50%;
+    url(${(props) => props.image}) center/cover no-repeat, lightgray 50%;
 `;
 
 const Tag = styled.p`

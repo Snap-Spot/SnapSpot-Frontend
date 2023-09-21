@@ -14,6 +14,7 @@ const SearchPage = () => {
   const location = useLocation();
 
   const [searchData, setSearchData] = useState([]);
+  const [recommendData, setRecommendData] = useState([]);
   const nicknameData = searchData.nicknameResult || [];
   const areaData = searchData.areaResult || [];
   const [keyword, setKeyword] = useState("");
@@ -36,6 +37,9 @@ const SearchPage = () => {
       console.log("keyword", keyword);
       const getData = await getKeywordSearch(keyword);
       setSearchData(getData);
+      if (areaData.length === 0 && nicknameData.length === 0) {
+        setRecommendData(getData.recommend);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -108,8 +112,14 @@ const SearchPage = () => {
                             tags={data.tags}
                             photographer={data.nickname}
                             star={data.averageScore}
-                            region={data.areas[0].metropolitan}
-                            subregion={data.areas[0].city}
+                            region={
+                              data.areas.length > 0
+                                ? data.areas[0].metropolitan
+                                : ""
+                            }
+                            subregion={
+                              data.areas.length > 0 ? data.areas[0].city : ""
+                            }
                             regionCount={data.areas.length}
                             price={data.lowestPay}
                             review={data.totalReview}
@@ -125,7 +135,7 @@ const SearchPage = () => {
             )}
           </Content>
         ) : (
-          <EamptySearch />
+          <EamptySearch data={recommendData} />
         )}
       </Wrapper>
     </>
