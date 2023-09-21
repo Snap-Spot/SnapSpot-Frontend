@@ -19,7 +19,6 @@ const ReservationItem = ({ item }) => {
   const navigate = useNavigate();
   const date = item.planDate.substr(0, 10);
   const day = getDayOfWeek(date);
-  const time = item.planDate.substr(11, 5);
 
   const status = getStatusFromEng(item.status);
   const category = getCategoryFromEng(item.category);
@@ -65,7 +64,7 @@ const ReservationItem = ({ item }) => {
             <div className="category">&nbsp;&nbsp;|&nbsp;&nbsp;{category}</div>
           </p>
           <div className="dateNtime">
-            {date}({day}) {time}
+            {date}({day}) {item.time}
           </div>
           <div className="count">예약인원 : {item.people}인</div>
         </Infos>
