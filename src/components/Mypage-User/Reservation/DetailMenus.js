@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import arrow from "../../../assets/mypage/reservation/arrow.png";
 import ReviewModal from "../Modals/ReviewModal";
@@ -7,8 +7,11 @@ import ReceiptModal from "../Modals/ReceiptModal";
 import QuestionModal from "../Modals/QuestionModal";
 import ChangeModal from "../Modals/ChangeModal";
 import CancelModal from "../Modals/CancelModal";
-const DetailMenus = ({ status }) => {
-  //status.id -> 3: 에약완료 / 4: 촬영진행 / 6: 사진전달됨
+import { useParams } from "react-router-dom";
+import { getMyReservation } from "../../../api/plan";
+import { getPhotographer } from "../../../api/photographer";
+const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
+  //status.id -> 3: 에약완료 / 4: 촬영진행 / 6: 사진 전달됨
 
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState();
@@ -29,7 +32,15 @@ const DetailMenus = ({ status }) => {
       {
         menu: "영수증 보러가기",
         title: "영수증 조회",
-        content: <ReceiptModal />,
+        content: (
+          <ReceiptModal
+            plan={plan}
+            photographer={photographer}
+            date={date}
+            day={day}
+            category={category.kor}
+          />
+        ),
       },
       {
         menu: "작가에게 문의하기",
@@ -41,7 +52,15 @@ const DetailMenus = ({ status }) => {
       {
         menu: "영수증 보러가기",
         title: "영수증 조회",
-        content: <ReceiptModal />,
+        content: (
+          <ReceiptModal
+            plan={plan}
+            photographer={photographer}
+            date={date}
+            day={day}
+            category={category.kor}
+          />
+        ),
       },
       {
         menu: "작가에게 문의하기",
@@ -54,7 +73,15 @@ const DetailMenus = ({ status }) => {
       {
         menu: "영수증 보러가기",
         title: "영수증 조회",
-        content: <ReceiptModal />,
+        content: (
+          <ReceiptModal
+            plan={plan}
+            photographer={photographer}
+            date={date}
+            day={day}
+            category={category.kor}
+          />
+        ),
       },
       {
         menu: "작가에게 문의하기",

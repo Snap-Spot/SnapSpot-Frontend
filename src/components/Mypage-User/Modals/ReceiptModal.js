@@ -1,27 +1,33 @@
 import React from "react";
 import { styled } from "styled-components";
 
-const ReceiptModal = () => {
+const ReceiptModal = ({ plan, photographer, date, day, category }) => {
   return (
     <Wrapper>
       <Header>
         <div className="subject">
           <div>스냅 예약번호</div>
-          <div>0123920293848</div>
+          <div>{plan.planId}</div>
         </div>
         <div className="subject">
           <div>거래일시</div>
-          <div>2023.07.20.목</div>
+          <div>
+            {date}&nbsp;
+            {day}
+          </div>
         </div>
         <div className="subject">
           <div>상품명</div>
-          <div>한빛나리 작가&nbsp;&nbsp;|&nbsp;&nbsp;졸업스냅</div>
+          <div>
+            {photographer.nickname} 작가&nbsp;&nbsp;|&nbsp;&nbsp;
+            {category}
+          </div>
         </div>
       </Header>
       <Line />
       <Footer>
         <div>결제금액</div>
-        <div className="price">120,000원</div>
+        <div className="price">{plan.price}원</div>
       </Footer>
     </Wrapper>
   );

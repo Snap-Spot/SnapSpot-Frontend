@@ -80,7 +80,14 @@ const DetailedItem = () => {
             </div>
           </Main>
         </div>
-        <DetailMenus status={status} />
+        <DetailMenus
+          status={status}
+          plan={plan}
+          photographer={photographer}
+          date={date}
+          day={day}
+          category={category}
+        />
         <KakaoMap />
       </Wrapper>
     </>
