@@ -2,9 +2,7 @@ import { React } from "react";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import styled from "styled-components";
-
 import RecommendBox from "./RecommendBox";
-
 import glass from "../../assets/search/glass.png";
 import right from "../../assets/search/ic_right.png";
 import left from "../../assets/search/ic_left.png";
@@ -59,17 +57,21 @@ const EamptySearch = ({ data }) => {
             renderPrevButton={renderPrevButton}
             renderNextButton={renderNextButton}
           >
-            {data.map((item) => (
-              <RecommendBox
-                id={item.photographerId}
-                image={item.image}
-                tags={item.tags}
-                photographer={item.nickname}
-                star={item.averageScore}
-                price={item.lowestPay}
-                review={item.totalReview}
-              />
-            ))}
+            {data && data.length > 0 ? (
+              data.map((item) => (
+                <RecommendBox
+                  id={item.photographerId}
+                  image={item.image}
+                  tags={item.tags}
+                  photographer={item.nickname}
+                  star={item.averageScore}
+                  price={item.lowestPay}
+                  review={item.totalReview}
+                />
+              ))
+            ) : (
+              <></>
+            )}
           </AliceCarousel>
         </RecommendList>
       </div>
