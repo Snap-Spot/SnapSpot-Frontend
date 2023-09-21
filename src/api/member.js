@@ -11,10 +11,15 @@ export const getMyProfile = async () => {
   }
 };
 
-//멤버 프로필 수정
-export const updateMyProfile = async (body, initialImage) => {
-  //s3업로드 및 url 얻기
+//멤버 프로필 수정, s3업로드 및 url 얻기
+export const updateMyProfile = async (isPhotographer, body, initialImage) => {
+  let endPoint = "";
 
+  if (isPhotographer) {
+    endPoint = "/photographers/setting";
+  } else {
+    endPoint = "/members/setting";
+  }
   if (body.profileImage === "") {
     //이미지 변경 안 했을시 기존 url 다시 첨부
     body.profileImage = initialImage;
@@ -25,7 +30,7 @@ export const updateMyProfile = async (body, initialImage) => {
   }
 
   try {
-    const res = await client.put(`/members/setting`, body);
+    const res = await client.put(endPoint, body);
     console.log(res);
     return res.data;
   } catch (err) {

@@ -11,6 +11,7 @@ const SettingsForm = () => {
   });
   const [previewImg, setPreviewImg] = useState(null);
   const [initialImage, setInitialImage] = useState("");
+  const [isPhotographer, setIsPhotographer] = useState(false);
   //사진 첨부 및 미리보기
   const uploadImg = () => {
     let file = imgRef.current.files[0];
@@ -37,6 +38,12 @@ const SettingsForm = () => {
       });
       setPreviewImg(data.profile);
       setInitialImage(data.profile);
+
+      if (data.role === "ROLE_MEMBER") {
+        setIsPhotographer(false);
+      } else if (data.role === "ROLE_PHOTOGRAPHER") {
+        setIsPhotographer(true);
+      }
     } catch (err) {
       //프로필 정보 조회 안될때 (unauthorized: 로그인 안 했을때)
       //로그인 화면으로 리다이렉트
@@ -46,7 +53,7 @@ const SettingsForm = () => {
   };
   const updateData = async () => {
     try {
-      await updateMyProfile(inputs, initialImage);
+      await updateMyProfile(isPhotographer, inputs, initialImage);
     } catch (err) {
       if (err.response.data.status === 500) {
         alert(err.response.data.error);
