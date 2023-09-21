@@ -22,7 +22,7 @@ const ReservationItem = ({ item }) => {
 
   const status = getStatusFromEng(item.status);
   const category = getCategoryFromEng(item.category);
-  const [photographer, setPhotographer] = useState("");
+  const [photographer, setPhotographer] = useState({});
 
   const getData = async (id) => {
     const data = await getPhotographer(id);
