@@ -35,9 +35,9 @@ const ReservationList = () => {
               time={item.time || 0}
               place={item.wishPlace}
               requirement={item.request}
-              date={item.planDate.slice(0, 10).split("-").join(".")}
+              date={item.planDate.slice(0, 10)}
               num={item.planId}
-              id={item.id}
+              id={item.planId}
               profile={item.customer.profile}
               btn_text="예약완료"
             />

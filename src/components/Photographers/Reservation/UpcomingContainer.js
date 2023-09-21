@@ -2,6 +2,7 @@ import styled from "styled-components";
 import arrow from "../../../assets/photograph/arrow.png";
 import { useNavigate } from "react-router-dom";
 import UpcomingSchedule from "./UpcomingSchedule";
+import { category } from "../../common/category";
 
 const UpcomingContainer = ({ reservation }) => {
   const navigate = useNavigate();
@@ -19,12 +20,12 @@ const UpcomingContainer = ({ reservation }) => {
             <UpcomingSchedule
               key={idx}
               nickname={item.customer.nickname}
-              snapType={item.category}
+              snapType={category.filter((el) => el.key === item.category)}
               headCount={item.people}
               time={item.time || 0}
               place={item.wishPlace}
               requirement={item.request}
-              date={item.planDate.slice(0, 10).split("-").join(".")}
+              date={item.planDate.slice(0, 10)}
               num={item.planId}
               id={item.planId}
               profile={item.customer.profile}

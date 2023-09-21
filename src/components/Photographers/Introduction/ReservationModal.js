@@ -3,15 +3,50 @@ import cancel from "../../../assets/photograph/cancel.png";
 import Filtering from "./Filtering";
 import { postReservation } from "../../../api/plan";
 import { useState } from "react";
+import { category } from "../../common/category";
 
 const ReservationModal = ({ setModalOpen, photographerId }) => {
-  const type_option = ["결혼스냅", "우정스냅", "커플스냅", "기타"];
+  const type_option = [
+    "커플스냅",
+    "우정스냅",
+    "졸업스냅",
+    "웨딩스냅",
+    "가족스냅",
+  ];
   const head_count = ["1명", "2명", "3명", "4+"];
-  const [planDate, setPlanDate] = useState();
-  const [category, setCategory] = useState();
-  const [wishPlace, setWishPlace] = useState();
-  const [people, setPeople] = useState();
-  const [request, setRequest] = useState();
+  const [planDate, setPlanDate] = useState("");
+  const [time, setTime] = useState();
+  const [categories, setCategories] = useState("커플스냅");
+  const [wishPlace, setWishPlace] = useState("");
+  const [people, setPeople] = useState("1명");
+  const [request, setRequest] = useState("");
+
+  const postRequest = async (
+    photographerId,
+    planDate,
+    time,
+    category,
+    people,
+    wishPlace,
+    request
+  ) => {
+    try {
+      const data = await postReservation(
+        photographerId,
+        planDate,
+        time,
+        category,
+        people,
+        wishPlace,
+        request
+      );
+      console.log(data);
+      alert("성공적으로 예약되었습니다!");
+      setModalOpen(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleCalendarInputChange = (e) => {
     setPlanDate(e.target.value); // calendarInput의 값을 상태에 저장
@@ -25,22 +60,30 @@ const ReservationModal = ({ setModalOpen, photographerId }) => {
           <CancelIcon src={cancel} onClick={() => setModalOpen(false)} />
         </Header>
         <SubTitle>예약날짜</SubTitle>
-        {/* <input
-          type="datetime-local" // 날짜와 시간 입력을 위한 타입 설정
-          value={planDate}
-          onChange={(e) => setPlanDate(e.target.value)}
-        /> */}
         <CalendarInput
           type="date"
           value={planDate}
           onChange={handleCalendarInputChange}
         />
         <SubTitle>예약시간</SubTitle>
-        <TimeInput type="time" />
+        <TimeInput
+          type="time"
+          value={time}
+          onChange={(e) => setTime(e.target.value)}
+        />
         <SubTitle>스냅사진 종류</SubTitle>
-        <Filtering option={type_option} setCategory={setCategory} />
+        <Filtering
+          option={type_option}
+          setSelect={setCategories}
+          select={categories}
+        />
         <SubTitle>인원</SubTitle>
-        <Filtering option={head_count} short={true} setPeople={setPeople} />
+        <Filtering
+          option={head_count}
+          short={true}
+          setSelect={setPeople}
+          select={people}
+        />
         <SubTitle>위치</SubTitle>
         <LocationInput
           placeholder="스냅사진을 찍을 위치를 작성해주세요."
@@ -51,17 +94,18 @@ const ReservationModal = ({ setModalOpen, photographerId }) => {
         <RequestInput
           placeholder="요청사항을 작성해주세요."
           value={request}
-          onChange={(e) => setPeople(e.target.value)}
+          onChange={(e) => setRequest(e.target.value)}
         />
         <BtnContainer>
           <CancelBtn onClick={() => setModalOpen(false)}>취소</CancelBtn>
           <ConfirmBtn
             onClick={() =>
-              postReservation(
-                photographerId,
-                planDate,
-                category,
-                people,
+              postRequest(
+                +photographerId,
+                planDate + "T00:00:00",
+                time,
+                category.filter((el) => el.label === categories)[0].key,
+                +people[0],
                 wishPlace,
                 request
               )

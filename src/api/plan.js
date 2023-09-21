@@ -21,18 +21,20 @@ export const getMyReservation = async (id) => {
 };
 
 // 고객 -> 작가 촬영 신청
-export const postReservation = async ({
+export const postReservation = async (
   photographerId,
   planDate,
+  time,
   category,
   people,
   wishPlace,
-  request,
-}) => {
+  request
+) => {
   try {
     const res = await client.post(`/plans`, {
       photographerId: photographerId,
       planDate: planDate,
+      time: time,
       category: category,
       people: people,
       wishPlace: wishPlace,

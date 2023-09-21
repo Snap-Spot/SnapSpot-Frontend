@@ -37,7 +37,7 @@ const UpcomingSchedule = ({
           <Btn>{btn_text}</Btn>
         </Row>
         <Row>
-          <SnapType>{snapType}</SnapType>
+          <SnapType>{snapType[0].label}</SnapType>
           <Line src={line} />
           <Headcount>{headCount}인</Headcount>
         </Row>

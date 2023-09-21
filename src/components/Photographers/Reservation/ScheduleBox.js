@@ -32,7 +32,7 @@ const ScheduleBox = ({
           </Detail>
         </Header>
         <RowContainer>
-          <SnapType>{snapType}</SnapType>
+          <SnapType>{snapType[0].label}</SnapType>
           <Line src={line} />
           <Headcount>{headCount}인</Headcount>
         </RowContainer>

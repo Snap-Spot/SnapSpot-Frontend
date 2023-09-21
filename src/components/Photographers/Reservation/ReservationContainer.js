@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Calendar from "./Calendar";
 import ScheduleBox from "./ScheduleBox";
 import { useState } from "react";
+import { category } from "../../common/category";
 
 const ReservationContainer = ({ data }) => {
   const date = new Date();
@@ -37,7 +38,7 @@ const ReservationContainer = ({ data }) => {
               <ScheduleBox
                 key={idx}
                 nickname={item.customer.nickname}
-                snapType={item.category}
+                snapType={category.filter((el) => el.key === item.category)}
                 headCount={item.people}
                 time={item.time || 0}
                 place={item.wishPlace}
