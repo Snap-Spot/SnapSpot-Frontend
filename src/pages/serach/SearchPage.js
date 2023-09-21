@@ -67,7 +67,7 @@ const SearchPage = () => {
                             image={data.image}
                             tags={data.tags}
                             photographer={data.nickname}
-                            star="4.7"
+                            star={data.averageScore}
                             region={
                               data.areas.length > 0
                                 ? data.areas[0].metropolitan
@@ -78,7 +78,7 @@ const SearchPage = () => {
                             }
                             regionCount={data.areas.length}
                             price={data.lowestPay}
-                            review="238"
+                            review={data.totalReview}
                           />
                         </div>
                       )
@@ -107,12 +107,12 @@ const SearchPage = () => {
                             image={data.image}
                             tags={data.tags}
                             photographer={data.nickname}
-                            star="4.7"
+                            star={data.averageScore}
                             region={data.areas[0].metropolitan}
                             subregion={data.areas[0].city}
                             regionCount={data.areas.length}
                             price={data.lowestPay}
-                            review="238"
+                            review={data.totalReview}
                           />
                         </div>
                       )
