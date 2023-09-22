@@ -19,3 +19,14 @@ export const postBestSnap = async (file, inputs, photoDate, photographerId) => {
     throw err;
   }
 };
+
+export const getBestSnaps = async () => {
+  try {
+    const res = await client.get("/photos");
+    console.log(res);
+    return res.data;
+  } catch (err) {
+    console.log("에러 발생", err);
+    throw err;
+  }
+};
