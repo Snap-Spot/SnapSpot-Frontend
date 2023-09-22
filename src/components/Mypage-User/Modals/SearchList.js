@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import { useState } from "react";
 import search from "../../../assets/mypage/modals/search.png";
 import { getPhotographers } from "../../../api/photographer";
-const SearchList = () => {
+const SearchList = ({ setPhotographerId }) => {
   //전체리스트 받아와서 filter
 
   //전체 작가 데이터 get
@@ -39,6 +39,7 @@ const SearchList = () => {
 
   const selectItem = (el) => {
     setKeyword(el.nickname);
+    setPhotographerId(el.photographerId);
     setShowList(false);
   };
 
