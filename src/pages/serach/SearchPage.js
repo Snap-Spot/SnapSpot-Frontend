@@ -14,8 +14,9 @@ const SearchPage = () => {
   const location = useLocation();
 
   const [searchData, setSearchData] = useState([]);
-  const nicknameData = searchData.nicknameResult || [];
-  const areaData = searchData.areaResult || [];
+  const [recommendData, setRecommendData] = useState([]);
+  const nicknameData = searchData?.nicknameResult || [];
+  const areaData = searchData?.areaResult || [];
   const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
@@ -27,8 +28,14 @@ const SearchPage = () => {
     }
   }, [location.search]);
 
-  const handleMoreClick = () => {
-    navigate(`/photographers`);
+  const handleMoreRegionClick = () => {
+    navigate(`/photographers`, { state: { searchData: areaData } });
+    console.log("mordeData", areaData);
+  };
+
+  const handleMoreNicknameClick = () => {
+    navigate(`/photographers`, { state: { searchData: nicknameData } });
+    console.log("mordeData", nicknameData);
   };
 
   const getSearch = async (keyword) => {
@@ -36,6 +43,9 @@ const SearchPage = () => {
       console.log("keyword", keyword);
       const getData = await getKeywordSearch(keyword);
       setSearchData(getData);
+      if (areaData.length === 0 && nicknameData.length === 0) {
+        setRecommendData(getData.recommend);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -54,7 +64,11 @@ const SearchPage = () => {
               <>
                 <SubTitle>
                   <div className="subject">'{keyword}'</div>에서 활동하는 작가
-                  <img src={more} onClick={handleMoreClick} />
+                  {areaData.length > 3 ? (
+                    <img src={more} onClick={handleMoreRegionClick} />
+                  ) : (
+                    <></>
+                  )}
                 </SubTitle>
                 <GridBox>
                   <div className="grid">
@@ -67,7 +81,7 @@ const SearchPage = () => {
                             image={data.image}
                             tags={data.tags}
                             photographer={data.nickname}
-                            star="4.7"
+                            star={data.averageScore}
                             region={
                               data.areas.length > 0
                                 ? data.areas[0].metropolitan
@@ -78,7 +92,7 @@ const SearchPage = () => {
                             }
                             regionCount={data.areas.length}
                             price={data.lowestPay}
-                            review="238"
+                            review={data.totalReview}
                           />
                         </div>
                       )
@@ -93,7 +107,11 @@ const SearchPage = () => {
               <>
                 <SubTitle>
                   <div className="subject">'{keyword}' </div> 작가
-                  <img src={more} onClick={handleMoreClick} />
+                  {nicknameData.length > 3 ? (
+                    <img src={more} onClick={handleMoreNicknameClick} />
+                  ) : (
+                    <></>
+                  )}
                 </SubTitle>
                 <GridBox>
                   <div class="grid">
@@ -107,12 +125,18 @@ const SearchPage = () => {
                             image={data.image}
                             tags={data.tags}
                             photographer={data.nickname}
-                            star="4.7"
-                            region={data.areas[0].metropolitan}
-                            subregion={data.areas[0].city}
+                            star={data.averageScore}
+                            region={
+                              data.areas.length > 0
+                                ? data.areas[0].metropolitan
+                                : ""
+                            }
+                            subregion={
+                              data.areas.length > 0 ? data.areas[0].city : ""
+                            }
                             regionCount={data.areas.length}
                             price={data.lowestPay}
-                            review="238"
+                            review={data.totalReview}
                           />
                         </div>
                       )
@@ -125,7 +149,7 @@ const SearchPage = () => {
             )}
           </Content>
         ) : (
-          <EamptySearch />
+          <EamptySearch data={recommendData} />
         )}
       </Wrapper>
     </>
