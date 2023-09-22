@@ -12,14 +12,21 @@ const Carousel = ({ carouselList }) => {
   const [currList, setCurrList] = useState([]);
 
   useEffect(() => {
-    if (carouselList.length !== 0) {
-      const startData = carouselList[0];
-      const endData = carouselList[carouselList.length - 1];
-      const newList = [endData, ...carouselList, startData];
+    if (carouselList) {
+      const imageKeys = Object.keys(carouselList);
 
-      setCurrList(newList);
+      if (imageKeys.length > 0) {
+        const startData = carouselList[imageKeys[0]];
+        const endData = carouselList[imageKeys[imageKeys.length - 1]];
+        const newList = [
+          ...imageKeys.map((key) => carouselList[key]),
+          startData,
+        ];
+
+        setCurrList(newList);
+      }
     }
-  }, []);
+  }, [carouselList]);
 
   const handleLeftBtnClick = () => {
     if (currentSlide !== 0) {

@@ -1,20 +1,43 @@
 import styled from "styled-components";
 import ScheduleDetail from "../../components/Photographers/ReservationDetail/ScheduleDetail";
 import LayOut from "../../components/common/LayOut";
+import { getMyReservation } from "../../api/plan";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const ReservationDetail = () => {
+  const [reservation, setReservation] = useState("");
+  const { id } = useParams();
+
+  const getReservationDetail = async () => {
+    try {
+      const data = await getMyReservation(id);
+      setReservation(data);
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getReservationDetail();
+  }, []);
+
   return (
     <LayOut>
       <Container>
         <Title>스냅사진 예약 상세내역</Title>
-        <ScheduleDetail
-          nickname="kui01"
-          reservationNum="01234567812423"
-          time="12:30 ~ 14:30"
-          place="뚝섬유원지"
-          requirement="편안한 분위기에서 촬영하고 싶어요!"
-          date="2023.05.16.화"
-        />
+        {reservation && (
+          <ScheduleDetail
+            nickname={reservation.customer.nickname}
+            reservationNum={reservation.planId}
+            time={reservation.time || 0}
+            place={reservation.wishPlace}
+            requirement={reservation.request}
+            date={reservation.planDate.slice(0, 10)}
+            profile={reservation.customer.profile}
+          />
+        )}
       </Container>
     </LayOut>
   );

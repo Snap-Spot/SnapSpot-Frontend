@@ -1,44 +1,79 @@
 import styled from "styled-components";
-import photo from "../../../assets/photograph/photo.png";
 import heart from "../../../assets/photograph/heart_.png";
 import useMobileDetection from "../../common/mobileDetection";
+import { icon_img } from "../Custom/Data/IconList";
+import SNS from "./SNS";
 
-const Profile = ({ setModalOpen }) => {
+const Profile = ({
+  setModalOpen,
+  nickname,
+  profile,
+  lowestPay,
+  paymentImage,
+  areas,
+  sns,
+  bio,
+}) => {
   const isMobile = useMobileDetection(); // 모바일 여부 감지
+  const values = Object.values(sns);
 
   return (
     <>
       <ProfileContainer>
-        <ProfileImg src={photo} />
+        <ProfileImg src={profile} />
         <Contents>
-          <ProfileContainer>
-            <TitleContainer>
-              <SubTitle1>작가명</SubTitle1>
-              <SubTitle1>가격표</SubTitle1>
-            </TitleContainer>
-            <ContentContainer>
-              <Align>
-                <HighLight>이명한 작가</HighLight>
-                <Heart src={heart} />
-              </Align>
-              <Price>120,000원 ~</Price>
-            </ContentContainer>
-          </ProfileContainer>
+          <Container>
+            <SubTitle>작가명</SubTitle>
+            <Align>
+              <HighLight>{nickname}</HighLight>
+              <Heart src={heart} />
+            </Align>
+          </Container>
+          <Container>
+            <SubTitle>가격표</SubTitle>
+            <Price>{lowestPay.toLocaleString()}원 ~</Price>
+          </Container>
           {!isMobile && (
             <>
               <Line />
-              <ProfileContainer>
-                <TitleContainer>
-                  <SubTitle>활동 지역</SubTitle>
-                  <SubTitle>SNS</SubTitle>
-                  <SubTitle>한 줄 소개</SubTitle>
-                </TitleContainer>
-                <ContentContainer>
-                  <Content>제주도 전역 </Content>
-                  <Content>인스타그램 @myonghans </Content>
-                  <Content>빛과 그림자를 이용한 극적인 연출</Content>
-                </ContentContainer>
-              </ProfileContainer>
+              <Container>
+                <SubTitle>활동 지역</SubTitle>
+                <Content>
+                  <Row>
+                    {areas.length !== 0 ? (
+                      areas.map((el, idx) => (
+                        <Content>
+                          {el.city}
+                          {idx !== areas.length - 1 ? "," : ""}
+                        </Content>
+                      ))
+                    ) : (
+                      <Content>없음</Content>
+                    )}
+                  </Row>
+                </Content>
+              </Container>
+              <Container>
+                <SubTitle align="top">SNS</SubTitle>
+                <Content>
+                  {values.filter((el) => !!el).length !== 0 ? (
+                    icon_img.map((el, i) => (
+                      <SNS iconSrc={el} text={values[i]} />
+                    ))
+                  ) : (
+                    <Content>없음</Content>
+                  )}
+                </Content>
+              </Container>
+              <Container>
+                <SubTitle>한 줄 소개</SubTitle>
+                <Content>{bio || "없음"}</Content>
+              </Container>
+              {/* 클릭하면 가격표 보여주기 */}
+              <PriceBtn>상세 가격표 보기</PriceBtn>
+              <ReservationBtn onClick={() => setModalOpen(true)}>
+                예약하기
+              </ReservationBtn>
             </>
           )}
         </Contents>
@@ -48,20 +83,53 @@ const Profile = ({ setModalOpen }) => {
           <Line />
           <InfoContainer>
             <SubTitle>활동 지역</SubTitle>
-            <Content>제주도 전역 </Content>
+            <Content>
+              <Row>
+                {areas.length !== 0 ? (
+                  areas.map((el, idx) => (
+                    <Content>
+                      {el.city}
+                      {idx !== areas.length - 1 ? "," : ""}
+                    </Content>
+                  ))
+                ) : (
+                  <Content>없음</Content>
+                )}
+              </Row>
+            </Content>
             <SubTitle>SNS</SubTitle>
-            <Content>인스타그램 @myonghans </Content>
+            <Content>
+              {values.filter((el) => !!el).length !== 0 ? (
+                icon_img.map((el, i) => <SNS iconSrc={el} text={values[i]} />)
+              ) : (
+                <Content>없음</Content>
+              )}
+            </Content>
             <SubTitle>한 줄 소개</SubTitle>
-            <Content>빛과 그림자를 이용한 극적인 연출</Content>
+            <Content>{bio || "없음"}</Content>
           </InfoContainer>
+          {/* 클릭하면 가격표 보여주기 */}
+          <PriceBtn>상세 가격표 보기</PriceBtn>
+          <ReservationBtn onClick={() => setModalOpen(true)}>
+            예약하기
+          </ReservationBtn>
         </>
       )}
-      <ReservationBtn onClick={() => setModalOpen(true)}>
-        예약하기
-      </ReservationBtn>
     </>
   );
 };
+
+const Row = styled.div`
+  display: flex;
+`;
+
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: 2fr 4fr;
+  align-items: center;
+  margin-bottom: 0.6rem;
+  margin-top: 0.6rem;
+`;
 
 const Align = styled.div`
   display: flex;
@@ -83,7 +151,7 @@ const Heart = styled.img`
 
 const ReservationBtn = styled.button`
   display: flex;
-  width: 504px;
+  width: 100%;
   height: 72px;
   padding: 28px 92px;
   justify-content: center;
@@ -95,6 +163,7 @@ const ReservationBtn = styled.button`
   font-size: 24px;
   font-weight: 600;
   margin-left: auto;
+  cursor: pointer;
 
   @media (max-width: 768px) {
     width: 335px;
@@ -102,7 +171,17 @@ const ReservationBtn = styled.button`
     padding: 0px 22px;
     font-size: 18px;
     border-radius: 30px;
-    margin-top: 2rem;
+    margin-top: 1rem;
+  }
+`;
+
+const PriceBtn = styled(ReservationBtn)`
+  background: #777777;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 0rem;
   }
 `;
 
@@ -124,24 +203,10 @@ const InfoContainer = styled(ProfileContainer)`
   }
 `;
 
-const TitleContainer = styled.div`
-  width: 8rem;
-
-  @media (max-width: 768px) {
-    width: 3.3rem;
-    margin-left: 1.5rem;
-  }
-`;
-
-const ContentContainer = styled.div`
-  width: 17rem;
-
-  @media (max-width: 768px) {
-    width: 10rem;
-  }
-`;
-
 const Content = styled.p`
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+
   @media (max-width: 768px) {
     margin: 0;
     margin-bottom: 1rem;
@@ -165,6 +230,7 @@ const Line = styled.div`
   height: 1px;
   background-color: #d9d9d9;
   margin-top: 1rem;
+  margin-bottom: 1rem;
 
   @media (max-width: 768px) {
     margin-top: 2rem;
@@ -175,7 +241,10 @@ const Line = styled.div`
 const SubTitle = styled.p`
   color: var(--darkgrey, #777);
   font-size: 20px;
-
+  margin-right: 4rem;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+  align-self: ${(props) => (props.align === "top" ? "flex-start" : "")};
   @media (max-width: 768px) {
     font-size: 12px;
     margin: 0;
@@ -183,14 +252,10 @@ const SubTitle = styled.p`
   }
 `;
 
-const SubTitle1 = styled(SubTitle)`
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-`;
-
 const HighLight = styled.h3`
-  margin: 0.3rem;
   margin-left: 0;
+  margin-top: 0rem;
+  margin-bottom: 0;
   font-size: 30px;
 
   @media (max-width: 768px) {

@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import profile from "../../../assets/photograph/profile.png";
 import RejectModal from "./RejectModal";
 import MinInputModal from "./MinInputModal";
 import ChatBox from "./ChatBox";
 import ReviewBox from "../Review/ReviewBox";
 import AddressSearch from "./AddressSearch";
+import { putDeposit } from "../../../api/plan";
+import { useParams } from "react-router-dom";
 
 const ScheduleDetail = ({
   nickname,
@@ -14,6 +15,7 @@ const ScheduleDetail = ({
   place,
   requirement,
   date,
+  profile,
 }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isReject, setIsReject] = useState(false); // 예약 거절 모달
@@ -21,6 +23,8 @@ const ScheduleDetail = ({
   const [isConfirmDeposit, setIsConfirmDeposit] = useState(false); // 입금 확인 모달
   const [message, setMessage] = useState(""); // 전달할 메세지
   const [status, setStatus] = useState(0); // 예약 상태
+  const [price, setPrice] = useState(0); // 가격
+  const [placeAddress, setPlaceAddress] = useState("");
   const status_list = [
     "예약신청",
     "입금요청",
@@ -34,6 +38,7 @@ const ScheduleDetail = ({
     "공지사항 보내기",
     "사진 전송하기",
   ];
+  const { planId } = useParams();
 
   const handleMessageChange = (e) => {
     setMessage(e.target.value);
@@ -60,6 +65,8 @@ const ScheduleDetail = ({
           시간대를 적어주세요. 100자 이상으로 전달사항을 작성해주셔야 거절이
           가능해요."
           status={status}
+          message={message}
+          planId={planId}
         />
       )}
       {!isMinInput && (
@@ -73,6 +80,8 @@ const ScheduleDetail = ({
           content="아래 확인 버튼을 누르시면, 작가분께서는 요청하신 계좌로 입금이 완료되었음을 확인하였으며, 고객분과의 예약이 확정됨을 의미합니다."
           status={status}
           setStatus={setStatus}
+          message={message}
+          planId={planId}
         />
       )}
       <Container>
@@ -82,7 +91,15 @@ const ScheduleDetail = ({
           {!isMobile && <Btn>{status_list[status]}</Btn>}
           <BtnContainer>
             {status === 0 && (
-              <RejectBtn onClick={() => setIsReject(!isReject)}>
+              <RejectBtn
+                onClick={() => {
+                  if (message.length < 100) {
+                    setIsMinInput(false);
+                  } else {
+                    setIsReject(!isReject);
+                  }
+                }}
+              >
                 예약 거절하기
               </RejectBtn>
             )}
@@ -95,6 +112,14 @@ const ScheduleDetail = ({
                     if (message.length < 100) {
                       setIsMinInput(false);
                     } else if (status === 0) {
+                      const res = putDeposit(
+                        planId,
+                        price,
+                        place,
+                        placeAddress,
+                        message
+                      );
+                      console.log(res);
                       setStatus(status + 1);
                       setMessage("");
                     }
@@ -128,12 +153,18 @@ const ScheduleDetail = ({
             <Content>{place}</Content>
             <Content>{requirement}</Content>
             {isMobile ? (
-              <PriceInput placeholder="ex. 120000" />
+              <PriceInput placeholder={price} />
             ) : (
-              <PriceInput placeholder="스냅사진 촬영 가격을 적어주세요!" />
+              <PriceInput
+                placeholder="스냅사진 촬영 가격을 적어주세요!"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              />
             )}
-            {/* 카카오 맵 연결 */}
-            <AddressSearch />
+            <AddressSearch
+              setPlaceAddress={setPlaceAddress}
+              placeAddress={placeAddress}
+            />
           </ContentContainer>
         </Row>
         <MessageBox

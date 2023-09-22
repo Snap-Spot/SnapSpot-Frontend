@@ -43,7 +43,7 @@ function App() {
           path="/photographer/reservationlist"
           element={<ReservationList />}
         />
-        <Route path="photographer/introduction" element={<Introduction />} />
+        <Route path="photographers/:id" element={<Introduction />} />
         <Route path="mypage/reservation" element={<MyReservePage />} />
         <Route path="mypage/reservation/:id" element={<DetailReservePage />} />
         <Route path="mypage/settings" element={<SettingsPage />} />

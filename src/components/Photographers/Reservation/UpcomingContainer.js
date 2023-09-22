@@ -2,9 +2,9 @@ import styled from "styled-components";
 import arrow from "../../../assets/photograph/arrow.png";
 import { useNavigate } from "react-router-dom";
 import UpcomingSchedule from "./UpcomingSchedule";
-import { RequestData } from "./MockData/requestData";
+import { category } from "../../common/category";
 
-const UpcomingContainer = () => {
+const UpcomingContainer = ({ reservation }) => {
   const navigate = useNavigate();
 
   return (
@@ -13,21 +13,25 @@ const UpcomingContainer = () => {
         곧 돌아오는 <Highlight>촬영 일정</Highlight>이 있어요
         <Arrow src={arrow} />
       </Title>
-      {RequestData.map((item, idx) => (
-        <UpcomingSchedule
-          key={idx}
-          nickname={item.nickname}
-          snapType={item.snapType}
-          headCount={item.headCount}
-          time={item.time}
-          place={item.place}
-          requirement={item.requirement}
-          date={item.date}
-          num={item.num}
-          id={item.id}
-          btn_text="예약완료"
-        />
-      ))}
+      {reservation &&
+        reservation
+          .slice(0, 3)
+          .map((item, idx) => (
+            <UpcomingSchedule
+              key={idx}
+              nickname={item.customer.nickname}
+              snapType={category.filter((el) => el.key === item.category)}
+              headCount={item.people}
+              time={item.time || 0}
+              place={item.wishPlace}
+              requirement={item.request}
+              date={item.planDate.slice(0, 10)}
+              num={item.planId}
+              id={item.planId}
+              profile={item.customer.profile}
+              btn_text="예약완료"
+            />
+          ))}
     </>
   );
 };

@@ -3,6 +3,7 @@ import Profile from "./Profile";
 import NameInput from "./NameInput";
 import PriceListInput from "./PriceListInput";
 import useMobileDetection from "../../common/mobileDetection";
+import LowestPriceInput from "./LowestPriceInput";
 
 const BasicInput = () => {
   const isMobile = useMobileDetection();
@@ -14,6 +15,7 @@ const BasicInput = () => {
       <InputContainer>
         <NameInput />
         <PriceListInput />
+        <LowestPriceInput />
       </InputContainer>
     </Container>
   );

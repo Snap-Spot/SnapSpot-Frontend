@@ -1,27 +1,59 @@
 import styled from "styled-components";
 import Carousel from "../../components/Photographers/Introduction/Carousel";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ReservationModal from "../../components/Photographers/Introduction/ReservationModal";
 import LayOut from "../../components/common/LayOut";
-import { carousal_list } from "../../components/Photographers/Introduction/MockData/CarousalData";
 import Profile from "../../components/Photographers/Introduction/Profile";
 import ReviewContainer from "../../components/Photographers/Introduction/Review";
+import { getPhotographer } from "../../api/photographer";
+import { useParams } from "react-router-dom";
 
 const Introduction = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [data, setData] = useState();
+  const { id } = useParams();
+
+  const GetPhotographerInfo = async () => {
+    try {
+      const data = await getPhotographer(id);
+      console.log("data", data.photographer);
+      setData(data.photographer);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    GetPhotographerInfo();
+  }, []);
 
   return (
     <>
       <Center>
-        {modalOpen && <ReservationModal setModalOpen={setModalOpen} />}
+        {modalOpen && (
+          <ReservationModal setModalOpen={setModalOpen} photographerId={id} />
+        )}
       </Center>
       <LayOut>
-        <ProfileContainer>
-          <Title>작가님을 소개합니다!</Title>
-          <Profile setModalOpen={setModalOpen} />
-        </ProfileContainer>
-        <Carousel carouselList={carousal_list} />
-        <ReviewContainer />
+        {data && (
+          <>
+            <ProfileContainer>
+              <Title>작가님을 소개합니다!</Title>
+              <Profile
+                setModalOpen={setModalOpen}
+                nickname={data.member.nickname}
+                profile={data.member.profile}
+                lowestPay={data.lowestPay}
+                paymentImage={data.paymentImage}
+                areas={data.areas}
+                sns={data.sns}
+                bio={data.bio}
+              />
+            </ProfileContainer>
+            <Carousel carouselList={data.images} />
+            <ReviewContainer reviewData={data.review} />
+          </>
+        )}
       </LayOut>
     </>
   );

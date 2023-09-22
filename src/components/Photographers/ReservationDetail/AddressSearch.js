@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import DaumPostcode from "react-daum-postcode";
 
-function AddressSearch() {
-  const [address, setAddress] = useState(""); // 주소 상태
+function AddressSearch({setPlaceAddress, placeAddress}) {
+  // const [address, setAddress] = useState(""); // 주소 상태
   const [popupVisible, setPopupVisible] = useState(false); // 주소 검색 팝업
 
   // Daum 우편번호 검색 완료 시 호출되는 함수
   const handleAddress = (data) => {
-    setAddress(data.address);
+    setPlaceAddress(data.address);
     setPopupVisible(false);
   };
 
@@ -18,7 +18,7 @@ function AddressSearch() {
         type="text"
         id="sample5_address"
         placeholder="처음 만날 장소를 검색해 주세요!"
-        value={address}
+        value={placeAddress}
         readOnly
       />
       <SearchBtn
