@@ -31,7 +31,7 @@ const Profile = ({
           </Container>
           <Container>
             <SubTitle>가격표</SubTitle>
-            <Price>{lowestPay}원 ~</Price>
+            <Price>{lowestPay.toLocaleString()}원 ~</Price>
           </Container>
           {!isMobile && (
             <>
