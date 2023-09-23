@@ -7,6 +7,7 @@ import M_Photographer from "../../assets/signup/photographer_mobile.png";
 import Arrow from "../../assets/signup/arrow_left.png";
 import { useNavigate } from "react-router";
 import useMobileDetection from "../../components/common/mobileDetection";
+import Header from "../../components/common/Header";
 
 const SignUpMemberPage = () => {
   const navigate = useNavigate();
@@ -21,35 +22,38 @@ const SignUpMemberPage = () => {
   const isMobile = useMobileDetection();
 
   return (
-    <Wrapper>
-      <div className="container">
-        <ArrowBack src={Arrow} alt="뒤로가기" />
-        <MainText>회원가입 유형을 골라주세요!</MainText>
-        <MainDiv>
-          <MemberDiv>
-            <MemberImage
-              src={isMobile ? M_Customer : Customer}
-              alt="고객"
-              onClick={() => {
-                // 고객 - customer에서 member로 변경 (이미지 이름은 customer로 유지)
-                navigateToInfoPage("member");
-              }}
-            />
-            <MemberText color="#008EDE">인생사진을 찍고 싶어요!</MemberText>
-          </MemberDiv>
-          <MemberDiv>
-            <MemberImage
-              src={isMobile ? M_Photographer : Photographer}
-              alt="작가"
-              onClick={() => {
-                navigateToInfoPage("photographer");
-              }}
-            />
-            <MemberText color="#3C3AAC">멋진 사진을 찍어드릴게요!</MemberText>
-          </MemberDiv>
-        </MainDiv>
-      </div>
-    </Wrapper>
+    <>
+      <Header isAuthPage={true} />
+      <Wrapper>
+        <div className="container">
+          {/* <ArrowBack src={Arrow} alt="뒤로가기" /> */}
+          <MainText>회원가입 유형을 골라주세요!</MainText>
+          <MainDiv>
+            <MemberDiv>
+              <MemberImage
+                src={isMobile ? M_Customer : Customer}
+                alt="고객"
+                onClick={() => {
+                  // 고객 - customer에서 member로 변경 (이미지 이름은 customer로 유지)
+                  navigateToInfoPage("member");
+                }}
+              />
+              <MemberText color="#008EDE">인생사진을 찍고 싶어요!</MemberText>
+            </MemberDiv>
+            <MemberDiv>
+              <MemberImage
+                src={isMobile ? M_Photographer : Photographer}
+                alt="작가"
+                onClick={() => {
+                  navigateToInfoPage("photographer");
+                }}
+              />
+              <MemberText color="#3C3AAC">멋진 사진을 찍어드릴게요!</MemberText>
+            </MemberDiv>
+          </MainDiv>
+        </div>
+      </Wrapper>
+    </>
   );
 };
 
@@ -60,8 +64,13 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  // PC, 모바일 모두 통일
-  height: 100vh;
+  // PC : 100vh - Header height
+  height: calc(100vh - 6.125rem);
+
+  // Mobile : 100vh - Header height - SearchBox height
+  @media screen and (max-width: 768px) {
+    height: calc(100vh - 6.125rem - 2.375rem);
+  }
 `;
 
 const MainText = styled.div`
