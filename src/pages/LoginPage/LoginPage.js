@@ -3,21 +3,34 @@ import { styled } from "styled-components";
 import Logo from "../../assets/header/logo.png";
 import LoginForm from "../../components/Login/LoginForm";
 import useMobileDetection from "../../components/common/mobileDetection";
+import { useNavigate } from "react-router-dom";
+import Header from "../../components/common/Header";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
   // 실시간 모바일 크기 알아오기
   const isMobile = useMobileDetection();
+
+  // 로고 클릭 시 MainPage로 이동
+  const onClickLogo = () => {
+    navigate(`/`);
+  };
+
   return (
-    <Wrapper>
-      <div className="container">
-        {isMobile ? (
-          <LogoImage src={Logo} alt="snapspot" />
-        ) : (
-          <MainText>로그인</MainText>
-        )}
-        <LoginForm/>
-      </div>
-    </Wrapper>
+    <>
+      {isMobile ? null : <Header isAuthPage={true} />}
+      <Wrapper>
+        <div className="container">
+          {isMobile ? (
+            <LogoImage src={Logo} alt="snapspot" onClick={onClickLogo}/>
+          ) : (
+            <MainText>로그인</MainText>
+          )}
+          <LoginForm />
+        </div>
+      </Wrapper>
+    </>
   );
 };
 
@@ -51,4 +64,6 @@ const LogoImage = styled.img`
   display: block;
   margin-left: auto;
   margin-right: auto;
+
+  cursor: pointer;
 `;

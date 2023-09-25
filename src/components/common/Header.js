@@ -9,7 +9,7 @@ import menu from "../../assets/header/menu.png";
 import HomeMenu from "./HomeMenu";
 import SearchBox from "./SearchBox";
 
-const Header = () => {
+const Header = (props) => {
   const navigate = useNavigate();
   const isMobile = useMobileDetection();
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false);
@@ -46,24 +46,30 @@ const Header = () => {
             />
           </div>
           <MobileLogo src={mobilelogo} alt="로고" onClick={onClickLogo} />
-          {isMobile ? null : <SearchBox />}
-          <Menu>
-            <div className="subMenu" onClick={onClickPhotogreapher}>
-              사진작가
-            </div>
-            <div className="subMenu" onClick={onClickFeed}>
-              피드
-            </div>
-            <img
-              className="mypage"
-              onClick={onClickMyPage}
-              src={profile}
-              alt="마이페이지"
-            />
-            <img className="menu" onClick={openModal} src={menu} alt="메뉴" />
-          </Menu>
+          <RightSection className={props.isAuthPage ? "hidden" : ""}>
+            {isMobile ? null : <SearchBox />}
+          </RightSection>
+          <RightSection className={props.isAuthPage ? "hidden" : ""}>
+            <Menu>
+              <div className="subMenu" onClick={onClickPhotogreapher}>
+                사진작가
+              </div>
+              <div className="subMenu" onClick={onClickFeed}>
+                피드
+              </div>
+              <img
+                className="mypage"
+                onClick={onClickMyPage}
+                src={profile}
+                alt="마이페이지"
+              />
+              <img className="menu" onClick={openModal} src={menu} alt="메뉴" />
+            </Menu>
+          </RightSection>
         </Main>
-        {isMobile ? <SearchBox /> : null}
+        <RightSection className={props.isAuthPage ? "hidden" : ""}>
+          {isMobile ? <SearchBox /> : null}
+        </RightSection>
       </HeaderDiv>
       {isMobile && isHomeMenuOpen && (
         <HomeMenu
@@ -193,5 +199,12 @@ const MobileLogo = styled.img`
     width: 1.84rem;
     height: 1.5rem;
     margin-right: 2rem;
+  }
+`;
+
+// 로고 오른쪽 섹션 - 회원가입/로그인 페이지일 경우 보이지 않음
+const RightSection = styled.div`
+  &.hidden {
+    visibility: hidden;
   }
 `;
