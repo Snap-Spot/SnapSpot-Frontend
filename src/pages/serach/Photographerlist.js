@@ -37,12 +37,13 @@ const Photographerlist = () => {
   };
 
 
-  const onSearch = async (selectedSubRegion, selectedSection, selectedDate) => {
+  const onSearch = async (selectedSubRegion, selectedSection, selectedDate, selectedOrder) => {
     try {
       const areaId = selectedSubRegion;
       const special = selectedSection;
       const ableDate = selectedDate;
-      const getData = await getPhotographerList(areaId, special, ableDate);
+      const sort = selectedOrder;
+      const getData = await getPhotographerList(areaId, special, ableDate, sort);
       setData(getData);
     } catch (err) {
       console.log(err);
