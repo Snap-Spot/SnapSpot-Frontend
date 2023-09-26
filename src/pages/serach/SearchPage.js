@@ -1,58 +1,56 @@
-import { React, useState, useEffect } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
-import styled from 'styled-components'
-import Header from '../../components/common/Header'
-import footer from '../../assets/photograph/Footer.png'
-import more from '../../assets/search/more.png'
-import SearchBox from '../../components/search/SearchBox'
-import EamptySearch from '../../components/search/EamptySearch'
+import { React, useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import styled from "styled-components";
+import Header from "../../components/common/Header";
+import footer from "../../assets/photograph/Footer.png";
+import more from "../../assets/search/more.png";
+import SearchBox from "../../components/search/SearchBox";
+import EamptySearch from "../../components/search/EamptySearch";
 
-import { getKeywordSearch } from '../../api/search'
+import { getKeywordSearch } from "../../api/search";
 
 const SearchPage = () => {
-  const navigate = useNavigate()
-  const location = useLocation()
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const [searchData, setSearchData] = useState([]) //검색 관련 data
-  const [recommendData, setRecommendData] = useState([]) //추천 작가 리스트 data
-  const nicknameData = searchData?.nicknameResult || []
-  const areaData = searchData?.areaResult || []
-  const [keyword, setKeyword] = useState('')
-  const [loading, setLoading] = useState(true) //로딩 상태 함수
+  const [searchData, setSearchData] = useState([]); //검색 관련 data
+  const [recommendData, setRecommendData] = useState([]); //추천 작가 리스트 data
+  const nicknameData = searchData?.nicknameResult || [];
+  const areaData = searchData?.areaResult || [];
+  const [keyword, setKeyword] = useState("");
+  const [loading, setLoading] = useState(true); //로딩 상태 함수
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(location.search)
-    const keywordParam = searchParams.get('keyword')
+    const searchParams = new URLSearchParams(location.search);
+    const keywordParam = searchParams.get("keyword");
     if (keywordParam) {
-      setKeyword(keywordParam)
-      getSearch(keywordParam)
+      setKeyword(keywordParam);
+      getSearch(keywordParam);
     }
-  }, [location.search])
+  }, [location.search]);
 
   const handleMoreRegionClick = () => {
-    navigate(`/photographers`, { state: { searchData: areaData } })
-    console.log('mordeData', areaData)
-  }
+    navigate(`/photographers`, { state: { searchData: areaData } });
+  };
 
   const handleMoreNicknameClick = () => {
-    navigate(`/photographers`, { state: { searchData: nicknameData } })
-    console.log('mordeData', nicknameData)
-  }
+    navigate(`/photographers`, { state: { searchData: nicknameData } });
+  };
 
-  const getSearch = async (keyword) => { //검색 함수
+  const getSearch = async (keyword) => {
+    //검색 함수
     try {
-      console.log('keyword', keyword)
-      const getData = await getKeywordSearch(keyword)
-      setSearchData(getData)
+      const getData = await getKeywordSearch(keyword);
+      setSearchData(getData);
       if (areaData.length === 0 && nicknameData.length === 0) {
-        setRecommendData(getData.recommend)
+        setRecommendData(getData.recommend);
       }
-      setLoading(false) //데이터를 받아온 후 Loading false로 설정
+      setLoading(false); //데이터를 받아온 후 Loading false로 설정
     } catch (err) {
-      console.log(err)
-      setLoading(false) //오류 출력 후 Loading false로 설정
+      console.log(err);
+      setLoading(false); //오류 출력 후 Loading false로 설정
     }
-  }
+  };
 
   return (
     <>
@@ -93,19 +91,19 @@ const SearchPage = () => {
                                 region={
                                   data.areas.length > 0
                                     ? data.areas[0].metropolitan
-                                    : ''
+                                    : ""
                                 }
                                 subregion={
                                   data.areas.length > 0
                                     ? data.areas[0].city
-                                    : ''
+                                    : ""
                                 }
                                 regionCount={data.areas.length}
                                 price={data.lowestPay}
                                 review={data.totalReview}
                               />
                             </div>
-                          ),
+                          )
                         )}
                       </div>
                     </GridBox>
@@ -125,30 +123,34 @@ const SearchPage = () => {
                     </SubTitle>
                     <GridBox>
                       <div class="grid">
-                        {nicknameData.slice(0, 3).map((
-                          data, //상단 3개까지만 표시
-                        ) => (
-                          <div key={data.photographerId}>
-                            <SearchBox
-                              id={data.photographerId}
-                              image={data.image}
-                              tags={data.tags}
-                              photographer={data.nickname}
-                              star={data.averageScore}
-                              region={
-                                data.areas.length > 0
-                                  ? data.areas[0].metropolitan
-                                  : ''
-                              }
-                              subregion={
-                                data.areas.length > 0 ? data.areas[0].city : ''
-                              }
-                              regionCount={data.areas.length}
-                              price={data.lowestPay}
-                              review={data.totalReview}
-                            />
-                          </div>
-                        ))}
+                        {nicknameData.slice(0, 3).map(
+                          (
+                            data //상단 3개까지만 표시
+                          ) => (
+                            <div key={data.photographerId}>
+                              <SearchBox
+                                id={data.photographerId}
+                                image={data.image}
+                                tags={data.tags}
+                                photographer={data.nickname}
+                                star={data.averageScore}
+                                region={
+                                  data.areas.length > 0
+                                    ? data.areas[0].metropolitan
+                                    : ""
+                                }
+                                subregion={
+                                  data.areas.length > 0
+                                    ? data.areas[0].city
+                                    : ""
+                                }
+                                regionCount={data.areas.length}
+                                price={data.lowestPay}
+                                review={data.totalReview}
+                              />
+                            </div>
+                          )
+                        )}
                       </div>
                     </GridBox>
                   </>
@@ -163,10 +165,10 @@ const SearchPage = () => {
         )}
       </Wrapper>
     </>
-  )
-}
+  );
+};
 
-export default SearchPage
+export default SearchPage;
 
 const Wrapper = styled.div`
   width: 75%;
@@ -179,12 +181,12 @@ const Wrapper = styled.div`
   @media (max-width: 768px) {
     width: 90%;
   }
-`
+`;
 
 const Content = styled.div`
   width: 100%;
   max-width: 1048px;
-`
+`;
 
 const GridBox = styled.div`
   position: relative;
@@ -217,7 +219,7 @@ const GridBox = styled.div`
       margin-top: 1.25rem;
     }
   }
-`
+`;
 
 const SearchTitle = styled.div`
   display: flex;
@@ -242,7 +244,7 @@ const SearchTitle = styled.div`
     font-size: 16px;
     margin-top: 1.063rem;
   }
-`
+`;
 
 const SubTitle = styled.div`
   display: flex;
@@ -281,4 +283,4 @@ const SubTitle = styled.div`
       height: 13.333px;
     }
   }
-`
+`;

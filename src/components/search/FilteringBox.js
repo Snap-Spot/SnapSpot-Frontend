@@ -1,36 +1,36 @@
-import styled from 'styled-components'
-import { React, useState, useEffect } from 'react'
-import CustomCalendar from './CustomCalendar'
-import { regions, orders } from './FilteringList.js'
-import { category } from '../common/category'
+import styled from "styled-components";
+import { React, useState, useEffect } from "react";
+import CustomCalendar from "./CustomCalendar";
+import { regions, orders } from "./FilteringList.js";
+import { category } from "../common/category";
 
 const FilteringBox = ({ onSearch, setIsFilteringOpen }) => {
-  const [selectedRegion, setSelectedRegion] = useState('서울')
-  const [selectedSubRegion, setSelectedSubRegion] = useState(null)
-  const [selectedSection, setSelectedSection] = useState(null)
-  const [selectedOrder, setSelectedOrder] = useState(null)
-  const [selectedDate, setSelectedDate] = useState(null)
+  const [selectedRegion, setSelectedRegion] = useState("서울");
+  const [selectedSubRegion, setSelectedSubRegion] = useState(null);
+  const [selectedSection, setSelectedSection] = useState(null);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
 
   const handleRegionClick = (region) => {
-    setSelectedRegion(region)
-  }
+    setSelectedRegion(region);
+  };
 
   const handleSubRegionClick = (areaId) => {
-    setSelectedSubRegion(areaId)
-  }
+    setSelectedSubRegion(areaId);
+  };
 
   const handleSectionClick = (section) => {
-    setSelectedSection(section)
-  }
+    setSelectedSection(section);
+  };
 
   const handleOrderClick = (order) => {
-    setSelectedOrder(order)
-  }
+    setSelectedOrder(order);
+  };
 
   const handleSearchBtnClick = (isFilteringOpen) => {
-    onSearch(selectedSubRegion, selectedSection, selectedDate, selectedOrder)
-    setIsFilteringOpen(!isFilteringOpen)
-  }
+    onSearch(selectedSubRegion, selectedSection, selectedDate, selectedOrder);
+    setIsFilteringOpen(!isFilteringOpen);
+  };
 
   return (
     <Wrapper>
@@ -130,10 +130,10 @@ const FilteringBox = ({ onSearch, setIsFilteringOpen }) => {
         <Btn onClick={handleSearchBtnClick}>조회하기</Btn>
       </BtnTab>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default FilteringBox
+export default FilteringBox;
 
 const Wrapper = styled.div`
   width: 100%;
@@ -158,7 +158,7 @@ const Wrapper = styled.div`
     //비율 유지를 위해 height가 작은 기종일 경우 높이 별도 설정
     height: 100vh;
   }
-`
+`;
 
 const FilterTab = styled.div`
   //조회하기 버튼을 제외한 Filter 컴포넌트
@@ -174,7 +174,7 @@ const FilterTab = styled.div`
     height: 100%;
     margin: 0;
   }
-`
+`;
 
 const RegionTab = styled.div`
   width: 24%;
@@ -184,7 +184,7 @@ const RegionTab = styled.div`
     width: 90%;
     border-bottom: 0.063rem solid #dbdbdb;
   }
-`
+`;
 
 const DateTab = styled.div`
   width: 20%;
@@ -196,7 +196,7 @@ const DateTab = styled.div`
     border-bottom: 0.063rem solid #dbdbdb;
     padding: 0.5rem 0;
   }
-`
+`;
 
 const SectionTab = styled.div`
   width: 5.5%;
@@ -208,7 +208,7 @@ const SectionTab = styled.div`
     border-bottom: 0.063rem solid #dbdbdb;
     padding: 0.5rem 0;
   }
-`
+`;
 
 const OrderTab = styled.div`
   width: 8%;
@@ -219,7 +219,7 @@ const OrderTab = styled.div`
     height: 15%;
     padding: 0.5rem 0;
   }
-`
+`;
 
 const Title = styled.div`
   color: #000;
@@ -236,7 +236,7 @@ const Title = styled.div`
     font-size: 0.8rem;
     font-weight: 700;
   }
-`
+`;
 
 const List = styled.div`
   display: flex;
@@ -247,7 +247,7 @@ const List = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
   }
-`
+`;
 
 const RegionList = styled.div`
   width: 7rem;
@@ -262,7 +262,7 @@ const RegionList = styled.div`
     padding-bottom: 0.5rem;
     border: none;
   }
-`
+`;
 const Region = styled.div`
   cursor: pointer;
   color: #060606;
@@ -309,7 +309,7 @@ const Region = styled.div`
       font-weight: 700;
       color: #3C3AAC;`}
   }
-`
+`;
 
 const SubregionList = styled.div`
   overflow: auto;
@@ -322,7 +322,7 @@ const SubregionList = styled.div`
     margin-top: 0.3rem;
     padding-bottom: 0.5rem;
   }
-`
+`;
 
 const Subregion = styled.div`
   cursor: pointer;
@@ -384,7 +384,7 @@ const Subregion = styled.div`
     line-height: 128.5%;
 `}
   }
-`
+`;
 
 const SubregionBox = styled.div`
   @media (max-width: 768px) {
@@ -392,7 +392,7 @@ const SubregionBox = styled.div`
     flex-direction: row;
     width: 90%;
   }
-`
+`;
 
 const CalendarBox = styled.div`
   @media (max-width: 768px) {
@@ -402,7 +402,7 @@ const CalendarBox = styled.div`
     align-items: center;
     margin: 0;
   }
-`
+`;
 
 const SectionList = styled.div`
   width: 7rem;
@@ -414,7 +414,7 @@ const SectionList = styled.div`
     overflow: auto;
     padding-bottom: 0.5rem;
   }
-`
+`;
 
 const Section = styled.div`
   cursor: pointer;
@@ -474,14 +474,14 @@ const Section = styled.div`
     line-height: 128.5%;
 `}
   }
-`
+`;
 
 const Box = styled.div`
   @media (max-width: 768px) {
     display: flex;
     flex-direction: row;
   }
-`
+`;
 
 const Line = styled.div`
   width: 5rem;
@@ -491,7 +491,7 @@ const Line = styled.div`
   @media (max-width: 768px) {
     display: none;
   }
-`
+`;
 
 const Btn = styled.div`
   display: flex;
@@ -511,10 +511,10 @@ const Btn = styled.div`
   line-height: normal;
 
   cursor: pointer;
-`
+`;
 
 const BtnTab = styled.div`
   @media (max-width: 768px) {
     height: 4rem;
   }
-`
+`;
