@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { React, useState, useEffect } from "react";
 import CustomCalendar from "./CustomCalendar";
-import { regions, orders } from "./FilteringList.js";
-import { category } from "../common/category";
+import { regions, orders, category } from "./FilteringList.js";
 
 const FilteringBox = ({ onSearch, setIsFilteringOpen }) => {
   const [selectedRegion, setSelectedRegion] = useState("서울");
