@@ -17,11 +17,6 @@ const RecommendBox = ({
     navigate(`/photographers/${id}`);
   };
 
-  // const tag = Object.values(tags)
-  //   .filter((tag) => tag !== null)
-  //   .map((tagValue) => `#${tagValue}`)
-  //   .join(" ");
-
   let tag = "";
 
   if (tags && typeof tags === "object") {
@@ -56,10 +51,8 @@ const Wrapper = styled.div`
   width: 100%;
 
   @media (max-width: 768px) {
-    /* min-width: 3rem; */
     width: 100%;
     align-items: center;
-    /* padding: 0 1rem; */
   }
 `;
 
@@ -139,8 +132,6 @@ const Photographer = styled.div`
     font-size: 10px;
     font-weight: 400;
     height: 15px;
-
-    /* max-width: 48px; */
   }
 `;
 

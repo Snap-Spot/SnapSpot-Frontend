@@ -13,11 +13,12 @@ const SearchPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [searchData, setSearchData] = useState([]);
-  const [recommendData, setRecommendData] = useState([]);
+  const [searchData, setSearchData] = useState([]); //검색 관련 data
+  const [recommendData, setRecommendData] = useState([]); //추천 작가 리스트 data
   const nicknameData = searchData?.nicknameResult || [];
   const areaData = searchData?.areaResult || [];
   const [keyword, setKeyword] = useState("");
+  const [loading, setLoading] = useState(true); //로딩 상태 함수
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -30,24 +31,24 @@ const SearchPage = () => {
 
   const handleMoreRegionClick = () => {
     navigate(`/photographers`, { state: { searchData: areaData } });
-    console.log("mordeData", areaData);
   };
 
   const handleMoreNicknameClick = () => {
     navigate(`/photographers`, { state: { searchData: nicknameData } });
-    console.log("mordeData", nicknameData);
   };
 
   const getSearch = async (keyword) => {
+    //검색 함수
     try {
-      console.log("keyword", keyword);
       const getData = await getKeywordSearch(keyword);
       setSearchData(getData);
       if (areaData.length === 0 && nicknameData.length === 0) {
         setRecommendData(getData.recommend);
       }
+      setLoading(false); //데이터를 받아온 후 Loading false로 설정
     } catch (err) {
       console.log(err);
+      setLoading(false); //오류 출력 후 Loading false로 설정
     }
   };
 
@@ -58,98 +59,109 @@ const SearchPage = () => {
         <SearchTitle>
           <div className="subject">'{keyword}'</div>에 대한 검색결과
         </SearchTitle>
-        {areaData.length > 0 || nicknameData.length > 0 ? (
-          <Content>
-            {areaData && areaData.length > 0 ? (
-              <>
-                <SubTitle>
-                  <div className="subject">'{keyword}'</div>에서 활동하는 작가
-                  {areaData.length > 3 ? (
-                    <img src={more} onClick={handleMoreRegionClick} />
-                  ) : (
-                    <></>
-                  )}
-                </SubTitle>
-                <GridBox>
-                  <div className="grid">
-                    {areaData.slice(0, 3).map(
-                      //상단 3개까지만 표시
-                      (data) => (
-                        <div key={data.photographerId}>
-                          <SearchBox
-                            id={data.photographerId}
-                            image={data.image}
-                            tags={data.tags}
-                            photographer={data.nickname}
-                            star={data.averageScore}
-                            region={
-                              data.areas.length > 0
-                                ? data.areas[0].metropolitan
-                                : ""
-                            }
-                            subregion={
-                              data.areas.length > 0 ? data.areas[0].city : ""
-                            }
-                            regionCount={data.areas.length}
-                            price={data.lowestPay}
-                            review={data.totalReview}
-                          />
-                        </div>
-                      )
-                    )}
-                  </div>
-                </GridBox>
-              </>
-            ) : (
-              <></>
-            )}
-            {nicknameData && nicknameData.length > 0 ? (
-              <>
-                <SubTitle>
-                  <div className="subject">'{keyword}' </div> 작가
-                  {nicknameData.length > 3 ? (
-                    <img src={more} onClick={handleMoreNicknameClick} />
-                  ) : (
-                    <></>
-                  )}
-                </SubTitle>
-                <GridBox>
-                  <div class="grid">
-                    {nicknameData.slice(0, 3).map(
-                      (
-                        data //상단 3개까지만 표시
-                      ) => (
-                        <div key={data.photographerId}>
-                          <SearchBox
-                            id={data.photographerId}
-                            image={data.image}
-                            tags={data.tags}
-                            photographer={data.nickname}
-                            star={data.averageScore}
-                            region={
-                              data.areas.length > 0
-                                ? data.areas[0].metropolitan
-                                : ""
-                            }
-                            subregion={
-                              data.areas.length > 0 ? data.areas[0].city : ""
-                            }
-                            regionCount={data.areas.length}
-                            price={data.lowestPay}
-                            review={data.totalReview}
-                          />
-                        </div>
-                      )
-                    )}
-                  </div>
-                </GridBox>
-              </>
-            ) : (
-              <></>
-            )}
-          </Content>
+        {loading ? ( // 로딩 중일 때 로딩 화면 표시
+          <></>
         ) : (
-          <EamptySearch data={recommendData} />
+          <>
+            {areaData.length > 0 || nicknameData.length > 0 ? ( //지역 관련 검색 결과
+              <Content>
+                {areaData && areaData.length > 0 ? (
+                  <>
+                    <SubTitle>
+                      <div className="subject">'{keyword}'</div>에서 활동하는
+                      작가
+                      {areaData.length > 3 ? (
+                        <img src={more} onClick={handleMoreRegionClick} />
+                      ) : (
+                        <></>
+                      )}
+                    </SubTitle>
+                    <GridBox>
+                      <div className="grid">
+                        {areaData.slice(0, 3).map(
+                          //상단 3개까지만 표시
+                          (data) => (
+                            <div key={data.photographerId}>
+                              <SearchBox
+                                id={data.photographerId}
+                                image={data.image}
+                                tags={data.tags}
+                                photographer={data.nickname}
+                                star={data.averageScore}
+                                region={
+                                  data.areas.length > 0
+                                    ? data.areas[0].metropolitan
+                                    : ""
+                                }
+                                subregion={
+                                  data.areas.length > 0
+                                    ? data.areas[0].city
+                                    : ""
+                                }
+                                regionCount={data.areas.length}
+                                price={data.lowestPay}
+                                review={data.totalReview}
+                              />
+                            </div>
+                          )
+                        )}
+                      </div>
+                    </GridBox>
+                  </>
+                ) : (
+                  <></>
+                )}
+                {nicknameData && nicknameData.length > 0 ? ( //닉네임 관련 검색 결과
+                  <>
+                    <SubTitle>
+                      <div className="subject">'{keyword}' </div> 작가
+                      {nicknameData.length > 3 ? (
+                        <img src={more} onClick={handleMoreNicknameClick} />
+                      ) : (
+                        <></>
+                      )}
+                    </SubTitle>
+                    <GridBox>
+                      <div class="grid">
+                        {nicknameData.slice(0, 3).map(
+                          (
+                            data //상단 3개까지만 표시
+                          ) => (
+                            <div key={data.photographerId}>
+                              <SearchBox
+                                id={data.photographerId}
+                                image={data.image}
+                                tags={data.tags}
+                                photographer={data.nickname}
+                                star={data.averageScore}
+                                region={
+                                  data.areas.length > 0
+                                    ? data.areas[0].metropolitan
+                                    : ""
+                                }
+                                subregion={
+                                  data.areas.length > 0
+                                    ? data.areas[0].city
+                                    : ""
+                                }
+                                regionCount={data.areas.length}
+                                price={data.lowestPay}
+                                review={data.totalReview}
+                              />
+                            </div>
+                          )
+                        )}
+                      </div>
+                    </GridBox>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </Content>
+            ) : (
+              <EamptySearch data={recommendData} />
+            )}
+          </>
         )}
       </Wrapper>
     </>

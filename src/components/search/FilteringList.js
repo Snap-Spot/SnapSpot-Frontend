@@ -256,4 +256,17 @@ export const regions = [
   },
 ];
 
-export const orders = ["기본", "별점 높은 순", "가격 낮은 순", "후기 많은 순"];
+export const orders = [
+  { key: "", label: "기본" },
+  { key: "SCORE", label: "별점 높은 순" },
+  { key: "PAY", label: "가격 낮은 순" },
+  { key: "REVIEW", label: "후기 많은 순" },
+];
+
+export const category = [
+  { key: "COUPLE", label: "커플스냅" },
+  { key: "FRIENDSHIP", label: "우정스냅" },
+  { key: "GRADUATION", label: "졸업스냅" },
+  { key: "WEDDING", label: "웨딩스냅" },
+  { key: "FAMILY", label: "가족스냅" },
+];
