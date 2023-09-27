@@ -42,12 +42,19 @@ const Dropdown = ({ options }) => {
         <Closed>
           {selected !== -1 ? (
             <Title onClick={openDropdown}>
-              {options.list[selected]}
+              <div
+                className="text"
+                $width={`${options.width}px`}
+                $mb_width={`${options.mb_width}px`}
+              >
+                {options.list[selected]}
+              </div>
+
               <img src={openDropdownImg} alt="" />
             </Title>
           ) : (
             <Title onClick={openDropdown}>
-              {options.title}
+              <div className="text">{options.title}</div>
               <img src={openDropdownImg} alt="" />
             </Title>
           )}
@@ -140,5 +147,9 @@ const Title = styled.div`
     }
     border-radius: 16px;
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
+  }
+
+  .text {
+    width: 100%;
   }
 `;
