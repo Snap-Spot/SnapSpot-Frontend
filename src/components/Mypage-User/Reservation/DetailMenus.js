@@ -7,11 +7,10 @@ import ReceiptModal from "../Modals/ReceiptModal";
 import QuestionModal from "../Modals/QuestionModal";
 import ChangeModal from "../Modals/ChangeModal";
 import CancelModal from "../Modals/CancelModal";
-import { useParams } from "react-router-dom";
-import { getMyReservation } from "../../../api/plan";
-import { getPhotographer } from "../../../api/photographer";
+
 const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
-  //status.id -> 3: 에약완료 / 4: 촬영진행 / 6: 사진 전달됨
+  //status.id -> 0,3: 에약신청,완료 / 4: 촬영진행 / 6: 사진 전달됨
+  //1 입금요청 -, 2 예약거절 -> 메뉴없음, 5촬영완료, 7예약취소 -> 메뉴없음
 
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState();
@@ -29,6 +28,61 @@ const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
         title: "예약을 취소하시겠습니까?",
         content: <CancelModal />,
       },
+      {
+        menu: "작가에게 문의하기",
+        title: "문의하기",
+        content: <QuestionModal />,
+      },
+    ],
+    [
+      {
+        menu: "예약 변경하기",
+        title: "무엇을 변경하고 싶으세요?",
+        content: <ChangeModal />,
+      },
+      {
+        menu: "예약 취소하기",
+        title: "예약을 취소하시겠습니까?",
+        content: <CancelModal />,
+      },
+      {
+        menu: "작가에게 문의하기",
+        title: "문의하기",
+        content: <QuestionModal />,
+      },
+    ],
+    [],
+    [
+      {
+        menu: "예약 변경하기",
+        title: "무엇을 변경하고 싶으세요?",
+        content: <ChangeModal />,
+      },
+      {
+        menu: "예약 취소하기",
+        title: "예약을 취소하시겠습니까?",
+        content: <CancelModal />,
+      },
+      {
+        menu: "영수증 보러가기",
+        title: "영수증 조회",
+        content: (
+          <ReceiptModal
+            plan={plan}
+            photographer={photographer}
+            date={date}
+            day={day}
+            category={category.kor}
+          />
+        ),
+      },
+      {
+        menu: "작가에게 문의하기",
+        title: "문의하기",
+        content: <QuestionModal />,
+      },
+    ],
+    [
       {
         menu: "영수증 보러가기",
         title: "영수증 조회",
@@ -89,16 +143,11 @@ const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
         content: <QuestionModal />,
       },
     ],
+    [],
   ];
   let menus = [];
   const getMenus = (id) => {
-    if (id === 3) {
-      menus = list[0];
-    } else if (id === 4) {
-      menus = list[1];
-    } else if (id === 6) {
-      menus = list[2];
-    }
+    menus = list[id];
   };
 
   getMenus(status.id);
