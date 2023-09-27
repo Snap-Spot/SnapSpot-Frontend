@@ -23,10 +23,8 @@ const DetailedItem = () => {
   const getData = async () => {
     const planData = await getMyReservation(id);
     console.log(planData);
-    const photographerData = await getPhotographer(14);
-
+    setPhotographer(planData.photographer);
     setPlan(planData);
-    setPhotographer(photographerData.photographer.member);
 
     setStatus(getStatusFromEng(planData.status));
     setCategory(getCategoryFromEng(planData.category));
@@ -71,7 +69,9 @@ const DetailedItem = () => {
               </div>
               <div className="item">
                 <p className="subject">가격</p>
-                <p className="content">{plan.price ? plan.price원 : "미정"}</p>
+                <p className="content">
+                  {plan.price ? plan.price + "원" : "미정"}
+                </p>
               </div>
               <div className="item">
                 <p className="subject">장소</p>
