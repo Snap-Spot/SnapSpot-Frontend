@@ -70,7 +70,7 @@ const Modal = styled.div`
   flex-direction: column;
   padding: 40px 32px;
   justify-content: space-between;
-  align-items: center;
+  //align-items: center;
   border-radius: 32px;
   background: var(--lesswhite, #f6f6f6);
 
