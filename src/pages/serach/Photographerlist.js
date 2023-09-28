@@ -1,4 +1,4 @@
-import { React, useState, useEffect, useRef } from "react";
+import { React, useState, useEffect, useRef, useSearchParams } from "react";
 import styled from "styled-components";
 import Pagination from "react-js-pagination";
 import "../../components/Photographers/Review/Paging/Paging.css";
@@ -10,14 +10,22 @@ import Header from "../../components/common/Header";
 import { getPhotographerList } from "../../api/search";
 
 const Photographerlist = () => {
-  const location = useLocation();
   const navigate = useNavigate();
+  const location = useLocation();
   const outSection = useRef();
   const [data, setData] = useState([]);
   const [isFilteringOpen, setIsFilteringOpen] = useState(false);
   const tabs = ["지역", "날짜", "전문분야", "순서"];
 
   const searchData = location.state?.searchData;
+
+  const searchParams = new URLSearchParams(location.search);
+
+  const areaId = searchParams.get("areaId") || null;
+  const ableDate = searchParams.get("ableDate") || null;
+  const special = searchParams.get("special") || null;
+  const sort = searchParams.get("sort") || null;
+  console.log(areaId, ableDate, special, sort);
 
   useEffect(() => {
     if (searchData) {
@@ -35,28 +43,36 @@ const Photographerlist = () => {
     }
   };
 
-  const onSearch = async (
-    selectedSubRegion,
-    selectedSection,
-    selectedDate,
-    selectedOrder
-  ) => {
-    try {
-      const areaId = selectedSubRegion;
-      const special = selectedSection;
-      const ableDate = selectedDate;
-      const sort = selectedOrder;
-      const getData = await getPhotographerList(
-        areaId,
-        special,
-        ableDate,
-        sort
-      );
-      setData(getData);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const onSearch = async () =>
+    {
+      try {
+        let endpoint = "/photographers";
+        const queryParams = [];
+        if (areaId) {
+          queryParams.push(`areaId=${areaId}`);
+        }
+        if (special) {
+          queryParams.push(`special=${special}`);
+        }
+        if (ableDate) {
+          queryParams.push(`ableDate=${ableDate}`);
+        }
+        if (sort && sort.length > 0) {
+          queryParams.push(`sort=${sort}`);
+        }
+
+        if (queryParams.length > 0) {
+          endpoint += "?" + queryParams.join("&");
+        }
+        console.log(endpoint);
+        const getData = await getPhotographerList(endpoint);
+        setData(getData);
+
+        navigate(endpoint);
+      } catch (err) {
+        console.log(err);
+      }
+    };
 
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const itemsPerPage = 15; // 페이지당 아이템 개수
