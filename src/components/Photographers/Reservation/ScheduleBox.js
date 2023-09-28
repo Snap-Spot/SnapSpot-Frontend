@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import profile from "../../../assets/photograph/profile.png";
 import arrow from "../../../assets/photograph/arrow.png";
 import line from "../../../assets/photograph/line.png";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +13,7 @@ const ScheduleBox = ({
   requirement,
   idx,
   id,
+  profile,
 }) => {
   const navigate = useNavigate();
 
@@ -32,7 +32,7 @@ const ScheduleBox = ({
           </Detail>
         </Header>
         <RowContainer>
-          <SnapType>{snapType}</SnapType>
+          <SnapType>{snapType[0].label}</SnapType>
           <Line src={line} />
           <Headcount>{headCount}인</Headcount>
         </RowContainer>

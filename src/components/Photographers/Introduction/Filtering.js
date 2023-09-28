@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import btn from "../../../assets/photograph/filterbtn.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const Filtering = ({ option, short }) => {
+const Filtering = ({ option, short, setSelect, select }) => {
   const [toggle, setToggle] = useState(false);
-  const [select, setSelect] = useState("");
 
   return (
     <FilterContainer open={toggle} select={select} short={short}>
@@ -23,12 +22,10 @@ const Filtering = ({ option, short }) => {
                 {el}
               </P>
             ))
-          ) : select.length > 0 ? (
+          ) : (
             <P toggle={toggle} select={select}>
               {select}
             </P>
-          ) : (
-            <P toggle={toggle}>{option[0]}</P>
           )}
         </OptionContainer>
         <Btn src={btn} open={toggle} onClick={() => setToggle(!toggle)} />
@@ -49,7 +46,7 @@ const FilterContainer = styled.div`
   font-size: 20px;
   padding-top: 0.3rem;
   padding-bottom: 0.2rem;
-  height: ${(props) => (props.open ? "200px" : "37px")};
+  height: ${(props) => (props.open ? "220px" : "37px")};
 
   @media (max-width: 768px) {
     font-size: 16px;

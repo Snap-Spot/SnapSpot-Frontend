@@ -2,14 +2,24 @@ import styled from "styled-components";
 import Calendar from "./Calendar";
 import ScheduleBox from "./ScheduleBox";
 import { useState } from "react";
-import { ReservationData } from "./MockData/reservationData";
+import { category } from "../../common/category";
 
-const ReservationContainer = () => {
+const ReservationContainer = ({ data }) => {
   const date = new Date();
   const currentDate = date.getDate();
   const currentMonth = date.getMonth();
   const [selectDate, setSelectDate] = useState(currentDate);
   const [selectMonth, setSelectMonth] = useState(currentMonth);
+
+  // 해당 날짜에 일치하는 일정 보여주기
+  let filteredData = data.filter((el) => {
+    let newDate = new Date(el.planDate);
+    return (
+      newDate.getMonth() === selectMonth && newDate.getDate() === selectDate
+    );
+  });
+
+  console.log(filteredData);
 
   return (
     <>
@@ -25,19 +35,21 @@ const ReservationContainer = () => {
           <SelectedDate>
             {selectMonth + 1}월 {selectDate}일 화요일
           </SelectedDate>
-          {ReservationData.map((item, idx) => (
-            <ScheduleBox
-              key={idx}
-              nickname={item.nickname}
-              snapType={item.snapType}
-              headCount={item.headCount}
-              time={item.time}
-              place={item.place}
-              requirement={item.requirement}
-              idx={idx}
-              id={item.id}
-            />
-          ))}
+          {filteredData &&
+            filteredData.map((item, idx) => (
+              <ScheduleBox
+                key={idx}
+                nickname={item.customer.nickname}
+                snapType={category.filter((el) => el.key === item.category)}
+                headCount={item.people}
+                time={item.time || 0}
+                place={item.wishPlace}
+                requirement={item.request}
+                idx={idx}
+                id={item.planId}
+                profile={item.customer.profile}
+              />
+            ))}
         </ScheduleContainer>
       </Container>
     </>

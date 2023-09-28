@@ -4,6 +4,8 @@ import getS3ImgUrl from "./s3upload";
 export const getMyProfile = async () => {
   try {
     const res = await client.get(`/members/me`);
+    // localStorage에 member role 추가
+    localStorage.setItem("role", res.data.role);
     return res.data;
   } catch (err) {
     console.log("에러 발생", err);

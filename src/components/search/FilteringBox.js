@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { React, useState, useEffect } from "react";
 import CustomCalendar from "./CustomCalendar";
-import { regions, orders } from "./FilteringList.js";
-import { category } from "../common/category";
+import { regions, orders, category } from "./FilteringList.js";
 
 const FilteringBox = ({ onSearch, setIsFilteringOpen }) => {
   const [selectedRegion, setSelectedRegion] = useState("서울");
@@ -21,7 +20,6 @@ const FilteringBox = ({ onSearch, setIsFilteringOpen }) => {
 
   const handleSectionClick = (section) => {
     setSelectedSection(section);
-    console.log(section);
   };
 
   const handleOrderClick = (order) => {
@@ -29,7 +27,7 @@ const FilteringBox = ({ onSearch, setIsFilteringOpen }) => {
   };
 
   const handleSearchBtnClick = (isFilteringOpen) => {
-    onSearch(selectedSubRegion, selectedSection, selectedDate);
+    onSearch(selectedSubRegion, selectedSection, selectedDate, selectedOrder);
     setIsFilteringOpen(!isFilteringOpen);
   };
 
@@ -113,10 +111,10 @@ const FilteringBox = ({ onSearch, setIsFilteringOpen }) => {
                   <>
                     <Section
                       key={index}
-                      onClick={() => handleOrderClick(order)}
-                      isSelected={selectedOrder === order}
+                      onClick={() => handleOrderClick(order.key)}
+                      isSelected={selectedOrder === order.key}
                     >
-                      {order}
+                      {order.label}
                     </Section>
                     {index !== orders.length - 1 && <Line />}
                   </>

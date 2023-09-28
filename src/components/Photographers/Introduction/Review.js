@@ -6,7 +6,7 @@ import ReviewPhoto from "../../../components/Photographers/Introduction/ReviewPh
 import { useEffect, useState } from "react";
 import { ReviewData } from "../Review/MockData/ReviewData";
 
-const ReviewContainer = () => {
+const ReviewContainer = ({ reviewData }) => {
   const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
   const [count, setCount] = useState(0); // 아이템 총 개수
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지. default 값으로 1

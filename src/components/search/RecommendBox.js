@@ -1,12 +1,34 @@
 import styled from "styled-components";
-import photo from "../../assets/search/photo.jpeg";
-import reviewIcon from "../../assets/search/reviewIcon.png";
+import { useNavigate } from "react-router-dom";
 import starIcon from "../../assets/search/starIcon.png";
 
-const RecommendBox = ({ tag, photographer, star, price, review }) => {
+const RecommendBox = ({
+  id,
+  image,
+  tags,
+  photographer,
+  star,
+  price,
+  review,
+}) => {
+  const navigate = useNavigate();
+
+  const onClickPage = () => {
+    navigate(`/photographers/${id}`);
+  };
+
+  let tag = "";
+
+  if (tags && typeof tags === "object") {
+    tag = Object.values(tags)
+      .filter((tag) => tag !== null)
+      .map((tagValue) => `#${tagValue}`)
+      .join(" ");
+  }
+
   return (
-    <Wrapper>
-      <Photo />
+    <Wrapper onClick={onClickPage}>
+      <Photo image={image} />
       <Info>
         <TopInfo>
           <Photographer>{photographer} 작가</Photographer>
@@ -29,10 +51,8 @@ const Wrapper = styled.div`
   width: 100%;
 
   @media (max-width: 768px) {
-    /* min-width: 3rem; */
     width: 100%;
     align-items: center;
-    /* padding: 0 1rem; */
   }
 `;
 
@@ -58,7 +78,7 @@ const Photo = styled.div`
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 0.1) 100%
     ),
-    url(${photo}) center/cover no-repeat, lightgray 50%;
+    url(${(props) => props.image}) center/cover no-repeat, lightgray 50%;
 `;
 
 const Tag = styled.p`
@@ -101,7 +121,12 @@ const Photographer = styled.div`
   font-weight: 700;
   line-height: normal;
 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
   height: 35px;
+
   @media (max-width: 768px) {
     margin: 0.4rem 0.5rem 0rem 0.5rem;
     font-size: 10px;

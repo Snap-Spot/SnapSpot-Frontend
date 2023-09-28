@@ -19,3 +19,13 @@ export const getPhotographer = async (photographerId) => {
     console.log("에러 발생", err);
   }
 };
+
+// 작가별 리뷰 조회
+export const getReview = async (photographerId) => {
+  try {
+    const res = await client.get(`/reviews/photographer/${photographerId}`);
+    return res.data;
+  } catch (err) {
+    console.log("리뷰 조회 에러", err);
+  }
+};

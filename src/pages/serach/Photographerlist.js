@@ -2,8 +2,7 @@ import { React, useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import Pagination from "react-js-pagination";
 import "../../components/Photographers/Review/Paging/Paging.css";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, useLocation } from "react-router-dom";
 import FilteringBox from "../../components/search/FilteringBox";
 import SearchBox from "../../components/search/SearchBox";
 import Header from "../../components/common/Header";
@@ -11,10 +10,22 @@ import Header from "../../components/common/Header";
 import { getPhotographerList } from "../../api/search";
 
 const Photographerlist = () => {
-  const outSection = useRef();
+  const location = useLocation();
   const navigate = useNavigate();
-  const [isFilteringOpen, setIsFilteringOpen] = useState(false);
+  const outSection = useRef();
   const [data, setData] = useState([]);
+  const [isFilteringOpen, setIsFilteringOpen] = useState(false);
+  const tabs = ["지역", "날짜", "전문분야", "순서"];
+
+  const searchData = location.state?.searchData;
+
+  useEffect(() => {
+    if (searchData) {
+      setData(searchData);
+    } else {
+      onSearch();
+    }
+  }, [searchData]);
 
   const handleTabClick = () => {
     if (!isFilteringOpen) {
@@ -24,18 +35,23 @@ const Photographerlist = () => {
     }
   };
 
-  const tabs = ["지역", "날짜", "전문분야", "순서"];
-
-  useEffect(() => {
-    onSearch();
-  }, []);
-
-  const onSearch = async (selectedSubRegion, selectedSection, selectedDate) => {
+  const onSearch = async (
+    selectedSubRegion,
+    selectedSection,
+    selectedDate,
+    selectedOrder
+  ) => {
     try {
       const areaId = selectedSubRegion;
       const special = selectedSection;
       const ableDate = selectedDate;
-      const getData = await getPhotographerList(areaId, special, ableDate);
+      const sort = selectedOrder;
+      const getData = await getPhotographerList(
+        areaId,
+        special,
+        ableDate,
+        sort
+      );
       setData(getData);
     } catch (err) {
       console.log(err);
@@ -55,7 +71,9 @@ const Photographerlist = () => {
   const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
 
   const handleOutsideClick = (e) => {
-    e.stopPropagation();
+    if (!isFilteringOpen) {
+      e.stopPropagation();
+    }
     if (outSection.current && !outSection.current.contains(e.target)) {
       setTimeout(() => {
         setIsFilteringOpen(false);
@@ -100,17 +118,18 @@ const Photographerlist = () => {
               {currentPosts.map((data) => (
                 <div key={data.photographerId}>
                   <SearchBox
-                    image={data.images.image1}
+                    id={data.photographerId}
+                    image={data.image}
                     tags={data.tags}
-                    photographer={data.member.nickname}
-                    star="4.7"
+                    photographer={data.nickname}
+                    star={data.averageScore}
                     region={
                       data.areas.length > 0 ? data.areas[0].metropolitan : ""
                     }
                     subregion={data.areas.length > 0 ? data.areas[0].city : ""}
                     regionCount={data.areas.length}
                     price={data.lowestPay}
-                    review="238"
+                    review={data.totalReview}
                   />
                 </div>
               ))}
@@ -150,7 +169,7 @@ const Content = styled.div`
   justify-content: center;
   align-items: center;
   cursor: ${(props) => (props.isFilteringOpen ? "pointer" : "auto")};
-  pointer-events: ${(props) => (props.isFilteringOpen ? "auto" : "none")};
+  /* pointer-events: ${(props) => (props.isFilteringOpen ? "auto" : "none")}; */
   @media (max-width: 768px) {
     width: 90%;
   }
