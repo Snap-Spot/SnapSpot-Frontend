@@ -199,7 +199,6 @@ const Star = styled.div`
 
   img {
     margin-right: 0.4rem;
-    margin-top: 0.4rem;
     width: 24px;
     height: 24px;
 
