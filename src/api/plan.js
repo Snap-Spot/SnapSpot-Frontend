@@ -59,7 +59,7 @@ export const getReservation = async () => {
 // 사진 작가 예약 내역 & 촬영 내역 전부 조회
 export const getAllReservation = async () => {
   try {
-    const res = await client.get(`/plans/photographer/client`);
+    const res = await client.get(`/plans/photographer`);
     return res.data;
   } catch (err) {
     console.log("예약 내역 조회 에러", err);
@@ -98,5 +98,18 @@ export const putDeposit = async (
     return res.data;
   } catch (err) {
     console.log("입금 요청 에러", err);
+  }
+};
+
+// 입금 확인
+export const putPlansReserve = async (planId, message) => {
+  try {
+    const res = await client.put(`/plans/reserve`, {
+      planId: planId,
+      contents: message,
+    });
+    return res.data;
+  } catch (err) {
+    console.log("입금 확인 에러", err);
   }
 };

@@ -33,7 +33,7 @@ function App() {
         <Route path="mypage" element={<UserMypage />} />
         <Route path="/photographer/reserve" element={<Reservation />} />
         <Route
-          path="/photographer/reserve/:id"
+          path="/photographer/reserve/:planId"
           element={<ReservationDetail />}
         />
         <Route path="/photographer/custom" element={<Custom />} />

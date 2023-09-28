@@ -3,6 +3,7 @@ import Calendar from "./Calendar";
 import ScheduleBox from "./ScheduleBox";
 import { useState } from "react";
 import { category } from "../../common/category";
+import { useEffect } from "react";
 
 const ReservationContainer = ({ data }) => {
   const date = new Date();
@@ -14,12 +15,11 @@ const ReservationContainer = ({ data }) => {
   // 해당 날짜에 일치하는 일정 보여주기
   let filteredData = data.filter((el) => {
     let newDate = new Date(el.planDate);
+    console.log(selectDate);
     return (
       newDate.getMonth() === selectMonth && newDate.getDate() === selectDate
     );
   });
-
-  console.log(filteredData);
 
   return (
     <>
@@ -48,6 +48,7 @@ const ReservationContainer = ({ data }) => {
                 idx={idx}
                 id={item.planId}
                 profile={item.customer.profile}
+                status={item.status}
               />
             ))}
         </ScheduleContainer>

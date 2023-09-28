@@ -1,17 +1,42 @@
 import styled from "styled-components";
 import warn from "../../../assets/photograph/warn.png";
-import { putRejectReservation } from "../../../api/plan";
+import { putRejectReservation, putPlansReserve } from "../../../api/plan";
+import { useNavigate } from "react-router-dom";
 
 const RejectModal = ({
   setIsOpen,
   isOpen,
   title,
   content,
-  status,
-  setStatus,
   message,
   planId,
+  identify,
+  setChange,
+  change,
 }) => {
+  const putReject = async () => {
+    try {
+      const data = await putRejectReservation(planId, message);
+      console.log(data);
+      alert("예약이 취소되었습니다.");
+      navigate("/photographer/reserve");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const putPlansReserveation = async () => {
+    try {
+      const data = await putPlansReserve(planId, message);
+      console.log("예약완료", data);
+      setChange(change + 1);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const navigate = useNavigate();
+
   return (
     <>
       <Conatiner>
@@ -20,15 +45,15 @@ const RejectModal = ({
         <Content>{content}</Content>
         <BtnContainer>
           <CancelBtn onClick={() => setIsOpen(!isOpen)}>아직이에요</CancelBtn>
-          {/* 확인 버튼 클릭시 해당 예약 내역 delete 요청보내기 */}
           <ConfirmBtn
             onClick={() => {
-              if (status === 0) {
-                const res = putRejectReservation(planId, message);
-                console.log(res);
-                //navigate("/photographer/reserve");
+              if (identify === 0) {
+                putReject();
+              } else if (identify === 1) {
+                putPlansReserveation();
+                alert("예약이 완료되었습니다.");
+                setIsOpen(!isOpen);
               } else {
-                setStatus(status + 1);
                 setIsOpen(!isOpen);
               }
             }}

@@ -28,9 +28,17 @@ const Reservation = () => {
       <Container>
         {data && (
           <>
-            <ReservationContainer data={data.reserved} />
-            <RequestContainer request={data.request} />
-            <UpcomingContainer reservation={data.reserved} />
+            <ReservationContainer
+              data={data.filter(
+                (el) => el.status === "REQUEST" || el.status === "RESERVED"
+              )}
+            />
+            <RequestContainer
+              request={data.filter((el) => el.status === "REQUEST")}
+            />
+            <UpcomingContainer
+              reservation={data.filter((el) => el.status === "RESERVED")}
+            />
           </>
         )}
       </Container>

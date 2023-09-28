@@ -8,6 +8,8 @@ import ReviewContainer from "../../components/Photographers/Introduction/Review"
 import { getPhotographer } from "../../api/photographer";
 import { useParams } from "react-router-dom";
 
+import ExCarousel from "../../components/Photographers/Introduction/ex";
+
 const Introduction = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [data, setData] = useState();
@@ -50,7 +52,8 @@ const Introduction = () => {
                 bio={data.bio}
               />
             </ProfileContainer>
-            <Carousel carouselList={data.images} />
+            <ExCarousel carouselList={data.images} />
+            {/* <Carousel carouselList={data.images} /> */}
             <ReviewContainer reviewData={data.review} />
           </>
         )}

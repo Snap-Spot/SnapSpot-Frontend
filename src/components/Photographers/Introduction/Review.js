@@ -16,11 +16,14 @@ const ReviewContainer = ({ reviewData }) => {
   const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
 
   useEffect(() => {
-    setProducts(ReviewData);
-    setCount(products.length);
+    setProducts(reviewData);
+    setCount(products.totalReview);
     setIndexOfLastPost(currentPage * postPerPage);
     setIndexOfFirstPost(indexOfLastPost - postPerPage);
-    setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
+    products.reviews &&
+      setCurrentPosts(
+        products.reviews.slice(indexOfFirstPost, indexOfLastPost)
+      );
   }, [currentPage, postPerPage, indexOfLastPost, indexOfFirstPost]);
 
   const setPage = (error) => {
@@ -32,37 +35,43 @@ const ReviewContainer = ({ reviewData }) => {
       <Review>후기</Review>
       <ReviewPhoto />
       <Row>
-        <Length>총 {products.length}개</Length>
+        <Length>총 {products.totalReview}개</Length>
         <Filtering />
       </Row>
       <Line2 />
       <ReviewList>
-        {currentPosts && products.length > 0 ? (
-          currentPosts.map((productData, idx) => (
-            <ReviewBox
-              key={idx}
-              type="list"
-              profile={productData.profile}
-              nickname={productData.nickname}
-              title={productData.title}
-              content={productData.content}
-              date={productData.date}
-              score={productData.score}
+        {currentPosts && currentPosts.length > 0 ? (
+          <>
+            {currentPosts.map((productData, idx) => (
+              <ReviewBox
+                key={idx}
+                type="list"
+                profile={productData.plan.customer.profile}
+                nickname={productData.plan.customer.nickname}
+                title={productData.title}
+                content={productData.comment}
+                date={productData.plan.planDate.slice(0, 10)}
+                score={productData.score}
+              />
+            ))}
+            <Paging
+              page={currentPage}
+              count={count}
+              setPage={setPage}
+              itemsCountPerPage={6}
             />
-          ))
+          </>
         ) : (
-          <div>리뷰가 없습니다.</div>
+          <Content>리뷰가 없습니다.</Content>
         )}
       </ReviewList>
-      <Paging
-        page={currentPage}
-        count={count}
-        setPage={setPage}
-        itemsCountPerPage={6}
-      />
     </Container>
   );
 };
+
+const Content = styled.div`
+  margin-top: 6rem;
+`;
 
 const Length = styled.p`
   font-weight: 500;

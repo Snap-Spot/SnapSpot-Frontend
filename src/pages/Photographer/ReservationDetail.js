@@ -7,13 +7,14 @@ import { useParams } from "react-router-dom";
 
 const ReservationDetail = () => {
   const [reservation, setReservation] = useState("");
-  const { id } = useParams();
+  const { planId } = useParams();
+  const [change, setChange] = useState(0);
 
   const getReservationDetail = async () => {
     try {
-      const data = await getMyReservation(id);
+      const data = await getMyReservation(planId);
       setReservation(data);
-      console.log(data);
+      console.log("예약상세", data);
     } catch (err) {
       console.log(err);
     }
@@ -21,7 +22,7 @@ const ReservationDetail = () => {
 
   useEffect(() => {
     getReservationDetail();
-  }, []);
+  }, [change]);
 
   return (
     <LayOut>
@@ -36,6 +37,11 @@ const ReservationDetail = () => {
             requirement={reservation.request}
             date={reservation.planDate.slice(0, 10)}
             profile={reservation.customer.profile}
+            status={reservation.status}
+            price={reservation.price}
+            placeAddress={reservation.placeAddress}
+            setChange={setChange}
+            change={change}
           />
         )}
       </Container>

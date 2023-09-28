@@ -57,9 +57,9 @@ const Profile = ({
                 <SubTitle align="top">SNS</SubTitle>
                 <Content>
                   {values.filter((el) => !!el).length !== 0 ? (
-                    icon_img.map((el, i) => (
-                      <SNS iconSrc={el} text={values[i]} />
-                    ))
+                    icon_img.map((el, i) =>
+                      values[i] ? <SNS iconSrc={el} text={values[i]} /> : ""
+                    )
                   ) : (
                     <Content>없음</Content>
                   )}
@@ -121,6 +121,7 @@ const Profile = ({
 
 const Row = styled.div`
   display: flex;
+  flex-direction: column;
 `;
 
 const Container = styled.div`
@@ -187,6 +188,7 @@ const PriceBtn = styled(ReservationBtn)`
 
 const Contents = styled.div`
   margin-left: auto;
+  max-width: 26rem;
 `;
 
 const ProfileContainer = styled.div`
@@ -206,6 +208,7 @@ const InfoContainer = styled(ProfileContainer)`
 const Content = styled.p`
   margin-top: 0rem;
   margin-bottom: 0rem;
+  width: 100%;
 
   @media (max-width: 768px) {
     margin: 0;
