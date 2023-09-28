@@ -51,7 +51,6 @@ const FilteringBox = ({ onSearch, setIsFilteringOpen }) => {
     console.log(endpoint);
     navigate(endpoint);
 
-    // onSearch(selectedSubRegion, selectedSection, selectedDate, selectedOrder);
     setIsFilteringOpen(!isFilteringOpen);
   };
 

@@ -25,7 +25,6 @@ const Photographerlist = () => {
   const ableDate = searchParams.get("ableDate") || null;
   const special = searchParams.get("special") || null;
   const sort = searchParams.get("sort") || null;
-  console.log(areaId, ableDate, special, sort);
 
   useEffect(() => {
     if (searchData) {
@@ -33,7 +32,7 @@ const Photographerlist = () => {
     } else {
       onSearch();
     }
-  }, [searchData]);
+  }, [areaId, ableDate, special, sort]);
 
   const handleTabClick = () => {
     if (!isFilteringOpen) {
@@ -43,36 +42,33 @@ const Photographerlist = () => {
     }
   };
 
-  const onSearch = async () =>
-    {
-      try {
-        let endpoint = "/photographers";
-        const queryParams = [];
-        if (areaId) {
-          queryParams.push(`areaId=${areaId}`);
-        }
-        if (special) {
-          queryParams.push(`special=${special}`);
-        }
-        if (ableDate) {
-          queryParams.push(`ableDate=${ableDate}`);
-        }
-        if (sort && sort.length > 0) {
-          queryParams.push(`sort=${sort}`);
-        }
-
-        if (queryParams.length > 0) {
-          endpoint += "?" + queryParams.join("&");
-        }
-        console.log(endpoint);
-        const getData = await getPhotographerList(endpoint);
-        setData(getData);
-
-        navigate(endpoint);
-      } catch (err) {
-        console.log(err);
+  const onSearch = async () => {
+    try {
+      let endpoint = "/photographers";
+      const queryParams = [];
+      if (areaId) {
+        queryParams.push(`areaId=${areaId}`);
       }
-    };
+      if (special) {
+        queryParams.push(`special=${special}`);
+      }
+      if (ableDate) {
+        queryParams.push(`ableDate=${ableDate}`);
+      }
+      if (sort && sort.length > 0) {
+        queryParams.push(`sort=${sort}`);
+      }
+      if (queryParams.length > 0) {
+        endpoint += "?" + queryParams.join("&");
+      }
+      console.log(endpoint);
+      navigate(endpoint);
+      const getData = await getPhotographerList(endpoint);
+      setData(getData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const itemsPerPage = 15; // 페이지당 아이템 개수
