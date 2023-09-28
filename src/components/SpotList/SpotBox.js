@@ -6,7 +6,9 @@ const SpotBox = ({ post }) => {
   const navigate = useNavigate();
   //네비게이트 링크 작가 필터링으로 수정
   return (
-    <Wrapper onClick={() => navigate(`/search?keyword=${post.photographer}`)}>
+    <Wrapper
+      onClick={() => navigate(`/photographers?areaId=${post.area.areaId}`)}
+    >
       <div className="img">
         <img className="spotImg" src={post.url} alt=""></img>
       </div>
