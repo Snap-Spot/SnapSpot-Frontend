@@ -26,7 +26,15 @@ const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
       {
         menu: "예약 취소하기",
         title: "예약을 취소하시겠습니까?",
-        content: <CancelModal />,
+        content: (
+          <CancelModal
+            plan={plan}
+            photographer={photographer}
+            date={date}
+            day={day}
+            category={category.kor}
+          />
+        ),
       },
       {
         menu: "작가에게 문의하기",

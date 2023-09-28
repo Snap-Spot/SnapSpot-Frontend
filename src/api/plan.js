@@ -19,3 +19,19 @@ export const getMyReservation = async (id) => {
     console.log("에러 발생", err);
   }
 };
+
+//예약취소
+export const cancelReservation = async (id, reason, refundAccount) => {
+  try {
+    const res = await client.put(`/plans/cancel`, {
+      planId: id,
+      reason: reason,
+      refundAccount: refundAccount,
+    });
+
+    console.log(res.data);
+    return res.data;
+  } catch (err) {
+    console.log("에러 발생", err);
+  }
+};
