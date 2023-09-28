@@ -4,6 +4,15 @@ import settings from "../../../assets/mypage/userMypage/settings.png";
 import { useNavigate } from "react-router-dom";
 const ProfileContainer = ({ profileData }) => {
   const navigate = useNavigate();
+
+  // 로그아웃 - 로컬스토리지 token들 삭제 후 메인 페이지로 이동
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    // reload 후 이동해야 localStorage 변경
+    window.location.replace("/");
+  };
+
   return (
     <Wrapper>
       <div className="leftContent">
@@ -18,7 +27,7 @@ const ProfileContainer = ({ profileData }) => {
           <div className="email">{profileData.email}</div>
         </Infos>
       </div>
-      <Logout>로그아웃</Logout>
+      <Logout onClick={handleLogout}>로그아웃</Logout>
     </Wrapper>
   );
 };

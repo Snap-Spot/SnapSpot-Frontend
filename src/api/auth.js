@@ -32,6 +32,7 @@ export const KakaoSignInAPI = async (accessToken, refreshToken) => {
     console.log(res, "로그인 성공");
     // accessToken 로컬스토리지 저장
     localStorage.setItem("accessToken", res.data.token.accessToken);
+    localStorage.setItem("refreshToken", res.data.token.refreshToken);
 
     // main페이지로 이동
     alert("로그인에 성공하였습니다!");
@@ -72,6 +73,7 @@ export const EmailSignInAPI = async (loginInfo) => {
     console.log(res, "로그인 성공");
     // accessToken 로컬스토리지 저장
     localStorage.setItem("accessToken", res.data.token.accessToken);
+    localStorage.setItem("refreshToken", res.data.token.refreshToken);
 
     // main페이지로 이동
     alert("로그인에 성공하였습니다!");
