@@ -5,7 +5,6 @@ import instagram from "../../assets/common/instagram.png";
 const Footer = () => {
   return (
     <Wrapper>
-      {/* <div className="wrapper"> */}
       <div className="copyright">
         <p>Copyright © 2023 EFUB 3RD SNAPSPOT TEAM</p>
         <p>이선의 곽지우 조민서 이주희 김민정 송지민 김예지 조은비 김이원</p>
@@ -14,13 +13,6 @@ const Footer = () => {
         <InstagramLogo src={instagram} alt="인스타그램" />
         <GitLogo src={git} alt="깃허브" />
       </div>
-      {/* <p className="logo">
-          
-        </p>
-        <p className="inquiry">
-          <img src={inquiry} alt="문의하기" /> 문의하기
-        </p> */}
-      {/* </div> */}
     </Wrapper>
   );
 };

@@ -1,5 +1,7 @@
 import styled from "styled-components";
+import { useState, useEffect } from "react";
 import heart from "../../../assets/photograph/heart_.png";
+import clickedheart from "../../../assets/photograph/clickedheart.png";
 import useMobileDetection from "../../common/mobileDetection";
 import { icon_img } from "../Custom/Data/IconList";
 import SNS from "./SNS";
@@ -16,6 +18,7 @@ const Profile = ({
 }) => {
   const isMobile = useMobileDetection(); // 모바일 여부 감지
   const values = Object.values(sns);
+  const [clickedHeart, setClickedHeart] = useState(false);
 
   return (
     <>
@@ -26,7 +29,11 @@ const Profile = ({
             <SubTitle>작가명</SubTitle>
             <Align>
               <HighLight>{nickname}</HighLight>
-              <Heart src={heart} />
+              {clickedHeart ? (
+                <Heart src={clickedheart} />
+              ) : (
+                <Heart src={heart} />
+              )}
             </Align>
           </Container>
           <Container>

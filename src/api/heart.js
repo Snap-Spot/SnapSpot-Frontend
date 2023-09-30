@@ -13,7 +13,9 @@ export const getMyHeartList = async () => {
 //좋아요 생성
 export const postHeart = async (photographerId) => {
   try {
-    const res = await client.post("/hearts");
+    const res = await client.post(`/hearts`, {
+      photographerId: photographerId,
+    });
     return res.data;
   } catch (err) {
     console.log(err);
@@ -23,7 +25,9 @@ export const postHeart = async (photographerId) => {
 //좋아요 취소
 export const deleteHeart = async (photographerId) => {
   try {
-    const res = await client.delete("/hearts");
+    const res = await client.delete(`/hearts`, {
+      photographerId: photographerId,
+    });
     return res.data;
   } catch (err) {
     console.log(err);
