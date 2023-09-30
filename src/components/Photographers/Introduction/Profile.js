@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import { postHeart, deleteHeart, getMyHeartList } from "../../../api/heart";
 import heart from "../../../assets/photograph/heart_.png";
 import clickedheart from "../../../assets/photograph/clickedheart.png";
 import useMobileDetection from "../../common/mobileDetection";
@@ -7,6 +8,7 @@ import { icon_img } from "../Custom/Data/IconList";
 import SNS from "./SNS";
 
 const Profile = ({
+  photographerId,
   setModalOpen,
   nickname,
   profile,
@@ -20,6 +22,25 @@ const Profile = ({
   const values = Object.values(sns);
   const [clickedHeart, setClickedHeart] = useState(false);
 
+  const handleHeartClick = async () => {
+    try {
+      if (clickedHeart) {
+        console.log("하트 취소");
+        await deleteHeart(photographerId);
+      } else {
+        console.log("하트 클릭");
+        await postHeart(photographerId);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+
+    setClickedHeart((prevLikes) => ({
+      ...prevLikes,
+      clickedHeart: !prevLikes.clickedHeart,
+    }));
+  };
+
   return (
     <>
       <ProfileContainer>
@@ -29,11 +50,10 @@ const Profile = ({
             <SubTitle>작가명</SubTitle>
             <Align>
               <HighLight>{nickname}</HighLight>
-              {clickedHeart ? (
-                <Heart src={clickedheart} />
-              ) : (
-                <Heart src={heart} />
-              )}
+              <Heart
+                src={clickedHeart ? clickedheart : heart}
+                onClick={handleHeartClick}
+              />
             </Align>
           </Container>
           <Container>

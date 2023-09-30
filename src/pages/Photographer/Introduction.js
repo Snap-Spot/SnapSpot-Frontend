@@ -40,6 +40,7 @@ const Introduction = () => {
             <ProfileContainer>
               <Title>작가님을 소개합니다!</Title>
               <Profile
+                photographerId={id}
                 setModalOpen={setModalOpen}
                 nickname={data.member.nickname}
                 profile={data.member.profile}
