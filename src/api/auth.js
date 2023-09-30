@@ -84,3 +84,11 @@ export const EmailSignInAPI = async (loginInfo) => {
     return "Login Error";
   }
 };
+
+// 로그아웃 (로컬스토리지 토큰 삭제 후 메인페이지 이동)
+export const LogoutAPI = () => {
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+  // reload 후 이동해야 localStorage 변경
+  window.location.replace("/");
+};
