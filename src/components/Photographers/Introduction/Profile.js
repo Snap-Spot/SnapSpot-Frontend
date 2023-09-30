@@ -26,36 +26,28 @@ const Profile = ({
     getHeartData();
   }, []);
 
-  const getHeartData = async () => {
+  const getHeartData = async () => { //좋아요 리스트 포함 여부에 따라 clickedHeart 설정
     try {
       const heartDate = await getMyHeartList();
       const heartList = heartDate.map((data) => data.photographerId);
       const isClicked = heartList.includes(Number(photographerId));
-      console.log("isClicked", isClicked);
       setClickedHeart(isClicked);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const handleHeartClick = async () => {
-    console.log(clickedHeart);
+  const handleHeartClick = async () => { //좋아요 클릭 함수
     try {
       if (clickedHeart) {
         await deleteHeart(photographerId);
-        console.log("하트 취소");
       } else {
         await postHeart(photographerId);
-        console.log("하트 클릭");
       }
+      setClickedHeart((prevClicked) => !prevClicked);
     } catch (err) {
       console.log(err);
     }
-
-    setClickedHeart((prevLikes) => ({
-      ...prevLikes,
-      clickedHeart: !prevLikes.clickedHeart,
-    }));
   };
 
   return (
