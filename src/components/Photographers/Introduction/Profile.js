@@ -22,14 +22,31 @@ const Profile = ({
   const values = Object.values(sns);
   const [clickedHeart, setClickedHeart] = useState(false);
 
+  useEffect(() => {
+    getHeartData();
+  }, []);
+
+  const getHeartData = async () => {
+    try {
+      const heartDate = await getMyHeartList();
+      const heartList = heartDate.map((data) => data.photographerId);
+      const isClicked = heartList.includes(Number(photographerId));
+      console.log("isClicked", isClicked);
+      setClickedHeart(isClicked);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleHeartClick = async () => {
+    console.log(clickedHeart);
     try {
       if (clickedHeart) {
-        console.log("하트 취소");
         await deleteHeart(photographerId);
+        console.log("하트 취소");
       } else {
-        console.log("하트 클릭");
         await postHeart(photographerId);
+        console.log("하트 클릭");
       }
     } catch (err) {
       console.log(err);
