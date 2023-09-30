@@ -1,34 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import SpotBox from "./SpotBox";
+import { getFeedPosts } from "../../api/area";
 const SpotList = () => {
+  const [posts, setPosts] = useState([]);
+  const getData = async () => {
+    const data = await getFeedPosts();
+    setPosts(data.images);
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <Wrapper>
       <GridBox>
-        <SpotBox />
-        <SpotBox />
-        <SpotBox />
-        <SpotBox />
-        <SpotBox />
-        <SpotBox />
-        <SpotBox />
-        <SpotBox />
-        <SpotBox />
-        <SpotBox />
-        <SpotBox />
-        <SpotBox />
-        <SpotBox />
-        <SpotBox />
-        <SpotBox />
-        <SpotBox />
-        <SpotBox />
-        <SpotBox />
-        <SpotBox />
-        <SpotBox />
-        <SpotBox />
-        <SpotBox />
-        <SpotBox />
-        <SpotBox />
+        {posts &&
+          posts.map((post) => {
+            return <SpotBox post={post} />;
+          })}
       </GridBox>
     </Wrapper>
   );

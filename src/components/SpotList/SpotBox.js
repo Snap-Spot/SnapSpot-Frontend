@@ -1,11 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
-const SpotBox = () => {
+const SpotBox = ({ post }) => {
+  const navigate = useNavigate();
+  //네비게이트 링크 작가 필터링으로 수정
   return (
-    <Wrapper>
+    <Wrapper
+      onClick={() => navigate(`/photographers?areaId=${post.area.areaId}`)}
+    >
       <div className="img">
-        <img className="spotImg" src="" alt=""></img>
+        <img className="spotImg" src={post.url} alt=""></img>
       </div>
     </Wrapper>
   );
@@ -34,6 +39,7 @@ const Wrapper = styled.div`
   border-radius: 32px;
 
   .img {
+    overflow: hidden;
     border-radius: 32px;
     width: 100%;
     height: 100%;
@@ -42,5 +48,10 @@ const Wrapper = styled.div`
       //모바일
       border-radius: 9px;
     }
+  }
+
+  .spotImg {
+    width: 100%;
+    height: 100%;
   }
 `;
