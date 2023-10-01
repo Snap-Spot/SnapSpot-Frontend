@@ -23,10 +23,8 @@ const DetailedItem = () => {
   const getData = async () => {
     const planData = await getMyReservation(id);
     console.log(planData);
-    const photographerData = await getPhotographer(14);
-
+    setPhotographer(planData.photographer);
     setPlan(planData);
-    setPhotographer(photographerData.photographer.member);
 
     setStatus(getStatusFromEng(planData.status));
     setCategory(getCategoryFromEng(planData.category));
@@ -71,7 +69,9 @@ const DetailedItem = () => {
               </div>
               <div className="item">
                 <p className="subject">가격</p>
-                <p className="content">{plan.price}원</p>
+                <p className="content">
+                  {plan.price ? plan.price + "원" : "미정"}
+                </p>
               </div>
               <div className="item">
                 <p className="subject">장소</p>
@@ -104,7 +104,7 @@ const Title = styled.div`
   @media (max-width: 768px) {
     //모바일
     font-size: 16px;
-    width: 85%;
+    width: 90%;
   }
 `;
 const Wrapper = styled.div`
@@ -163,6 +163,7 @@ const Main = styled.div`
       width: 100%;
       display: flex;
       align-items: center;
+
       .category {
         color: var(--darkgrey, #777);
       }

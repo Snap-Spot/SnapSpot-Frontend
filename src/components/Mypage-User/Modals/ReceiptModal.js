@@ -12,8 +12,7 @@ const ReceiptModal = ({ plan, photographer, date, day, category }) => {
         <div className="subject">
           <div>거래일시</div>
           <div>
-            {date}&nbsp;
-            {day}
+            {date}&nbsp;({day})
           </div>
         </div>
         <div className="subject">

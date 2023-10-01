@@ -22,17 +22,8 @@ const ReservationItem = ({ item }) => {
 
   const status = getStatusFromEng(item.status);
   const category = getCategoryFromEng(item.category);
-  const [photographer, setPhotographer] = useState({});
+  const photographer = item.photographer;
 
-  const getData = async (id) => {
-    const data = await getPhotographer(id);
-    console.log(data);
-    setPhotographer(data.member);
-  };
-
-  useEffect(() => {
-    getData(item.photographer);
-  }, []);
   return (
     <Wrapper>
       <Header>
@@ -58,10 +49,12 @@ const ReservationItem = ({ item }) => {
           <img src={photographer.profile} alt="" />
         </div>
         <Infos>
-          <div className="status">{status}</div>
+          <div className="status">{status.kor}</div>
           <p>
             <div className="name">{photographer.nickname} 작가</div>
-            <div className="category">&nbsp;&nbsp;|&nbsp;&nbsp;{category}</div>
+            <div className="category">
+              &nbsp;&nbsp;|&nbsp;&nbsp;{category.kor}
+            </div>
           </p>
           <div className="dateNtime">
             {date}({day}) {item.time}
