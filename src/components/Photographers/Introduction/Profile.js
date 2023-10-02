@@ -1,10 +1,14 @@
 import styled from "styled-components";
+import { useState, useEffect } from "react";
+import { postHeart, deleteHeart, getMyHeartList } from "../../../api/heart";
 import heart from "../../../assets/photograph/heart_.png";
+import clickedheart from "../../../assets/photograph/clickedheart.png";
 import useMobileDetection from "../../common/mobileDetection";
 import { icon_img } from "../Custom/Data/IconList";
 import SNS from "./SNS";
 
 const Profile = ({
+  photographerId,
   setModalOpen,
   nickname,
   profile,
@@ -16,6 +20,35 @@ const Profile = ({
 }) => {
   const isMobile = useMobileDetection(); // 모바일 여부 감지
   const values = Object.values(sns);
+  const [clickedHeart, setClickedHeart] = useState(false);
+
+  useEffect(() => {
+    getHeartData();
+  }, []);
+
+  const getHeartData = async () => { //좋아요 리스트 포함 여부에 따라 clickedHeart 설정
+    try {
+      const heartDate = await getMyHeartList();
+      const heartList = heartDate.map((data) => data.photographerId);
+      const isClicked = heartList.includes(Number(photographerId));
+      setClickedHeart(isClicked);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleHeartClick = async () => { //좋아요 클릭 함수
+    try {
+      if (clickedHeart) {
+        await deleteHeart(photographerId);
+      } else {
+        await postHeart(photographerId);
+      }
+      setClickedHeart((prevClicked) => !prevClicked);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -26,7 +59,10 @@ const Profile = ({
             <SubTitle>작가명</SubTitle>
             <Align>
               <HighLight>{nickname}</HighLight>
-              <Heart src={heart} />
+              <Heart
+                src={clickedHeart ? clickedheart : heart}
+                onClick={handleHeartClick}
+              />
             </Align>
           </Container>
           <Container>
