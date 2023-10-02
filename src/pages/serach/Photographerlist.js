@@ -61,7 +61,6 @@ const Photographerlist = () => {
       if (queryParams.length > 0) {
         endpoint += "?" + queryParams.join("&");
       }
-      console.log(endpoint);
       navigate(endpoint);
       const getData = await getPhotographerList(endpoint);
       setData(getData);
@@ -149,15 +148,19 @@ const Photographerlist = () => {
           </GridBox>
         </Content>
       </Wrapper>
-      <Pagination
-        activePage={currentPage}
-        itemsCountPerPage={itemsPerPage}
-        totalItemsCount={data.length}
-        pageRangeDisplayed={5}
-        prevPageText={"<"}
-        nextPageText={">"}
-        onChange={handlePageChange}
-      />
+      {data.length > 0 ? (
+        <Pagination
+          activePage={currentPage}
+          itemsCountPerPage={itemsPerPage}
+          totalItemsCount={data.length}
+          pageRangeDisplayed={5}
+          prevPageText={"<"}
+          nextPageText={">"}
+          onChange={handlePageChange}
+        />
+      ) : (
+        <></>
+      )}
     </>
   );
 };
