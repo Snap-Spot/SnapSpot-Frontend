@@ -1,4 +1,4 @@
-import { React, useState, useEffect, useRef } from "react";
+import { React, useState, useEffect, useRef, useSearchParams } from "react";
 import styled from "styled-components";
 import Pagination from "react-js-pagination";
 import "../../components/Photographers/Review/Paging/Paging.css";
@@ -10,8 +10,8 @@ import Header from "../../components/common/Header";
 import { getPhotographerList } from "../../api/search";
 
 const Photographerlist = () => {
-  const location = useLocation();
   const navigate = useNavigate();
+  const location = useLocation();
   const outSection = useRef();
   const [data, setData] = useState([]);
   const [isFilteringOpen, setIsFilteringOpen] = useState(false);
@@ -19,13 +19,20 @@ const Photographerlist = () => {
 
   const searchData = location.state?.searchData;
 
+  const searchParams = new URLSearchParams(location.search);
+
+  const areaId = searchParams.get("areaId") || null;
+  const ableDate = searchParams.get("ableDate") || null;
+  const special = searchParams.get("special") || null;
+  const sort = searchParams.get("sort") || null;
+
   useEffect(() => {
     if (searchData) {
       setData(searchData);
     } else {
       onSearch();
     }
-  }, [searchData]);
+  }, [areaId, ableDate, special, sort]);
 
   const handleTabClick = () => {
     if (!isFilteringOpen) {
@@ -35,23 +42,28 @@ const Photographerlist = () => {
     }
   };
 
-  const onSearch = async (
-    selectedSubRegion,
-    selectedSection,
-    selectedDate,
-    selectedOrder
-  ) => {
+  const onSearch = async () => {
     try {
-      const areaId = selectedSubRegion;
-      const special = selectedSection;
-      const ableDate = selectedDate;
-      const sort = selectedOrder;
-      const getData = await getPhotographerList(
-        areaId,
-        special,
-        ableDate,
-        sort
-      );
+      let endpoint = "/photographers";
+      const queryParams = [];
+      if (areaId) {
+        queryParams.push(`areaId=${areaId}`);
+      }
+      if (special) {
+        queryParams.push(`special=${special}`);
+      }
+      if (ableDate) {
+        queryParams.push(`ableDate=${ableDate}`);
+      }
+      if (sort && sort.length > 0) {
+        queryParams.push(`sort=${sort}`);
+      }
+      if (queryParams.length > 0) {
+        endpoint += "?" + queryParams.join("&");
+      }
+      console.log(endpoint);
+      navigate(endpoint);
+      const getData = await getPhotographerList(endpoint);
       setData(getData);
     } catch (err) {
       console.log(err);

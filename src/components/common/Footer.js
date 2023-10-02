@@ -1,17 +1,17 @@
 import React from "react";
 import { styled } from "styled-components";
-import footerLogo from "../../assets/common/footerLogo.png";
-import inquiry from "../../assets/common/inquiry.png";
+import git from "../../assets/common/git.png";
+import instagram from "../../assets/common/instagram.png";
 const Footer = () => {
   return (
     <Wrapper>
-      <div className="wrapper">
-        <p className="logo">
-          <img src={footerLogo} alt="로고" />
-        </p>
-        <p className="inquiry">
-          <img src={inquiry} alt="문의하기" /> 문의하기
-        </p>
+      <div className="copyright">
+        <p>Copyright © 2023 EFUB 3RD SNAPSPOT TEAM</p>
+        <p>이선의 곽지우 조민서 이주희 김민정 송지민 김예지 조은비 김이원</p>
+      </div>
+      <div className="icon">
+        <InstagramLogo src={instagram} alt="인스타그램" />
+        <GitLogo src={git} alt="깃허브" />
       </div>
     </Wrapper>
   );
@@ -21,49 +21,45 @@ export default Footer;
 
 const Wrapper = styled.div`
   width: 100vw;
-  height: 453px;
-  background: linear-gradient(
-    180deg,
-    rgba(4, 0, 255, 0) 0%,
-    rgba(0, 70, 250, 0.08) 100%
-  );
+  height: 162px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 100px;
+
   p {
     margin: 0;
+    color: var(--Grey-5, #a9a8b7);
+
+    font-family: Noto Sans KR;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
   }
-  .wrapper {
-    width: 191px;
-    padding-top: 323px;
-    padding-left: 73%;
-    display: flex;
-    flex-direction: column;
-    align-items: end;
-    .logo {
-      img {
-        width: 191px;
-      }
-    }
 
-    .inquiry {
-      cursor: pointer;
-      height: 29px;
+  .copyright {
+    margin-left: 10%;
+  }
 
-      display: flex;
-      align-items: center;
-      font-weight: 500;
-
-      img {
-        width: 22px;
-        margin-right: 8px;
-      }
-    }
+  .icon {
+    margin-right: 10%;
   }
 
   //모바일
   @media (max-width: 768px) {
-    height: 225px;
     display: none;
-    .wrapper {
-      display: none;
-    }
   }
+`;
+
+const GitLogo = styled.img`
+  width: 32px;
+  height: 32px;
+
+  margin-left: 16px;
+`;
+const InstagramLogo = styled.img`
+  width: 32px;
+  height: 32px;
 `;
