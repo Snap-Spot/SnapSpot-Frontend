@@ -8,21 +8,30 @@ const MyHeartsPage = () => {
   const [list, setList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const itemsPerPage = 12; // 페이지당 아이템 개수
-
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+  const [currentPosts, setCurrentPosts] = useState([]);
 
   // 데이터 배열을 페이지에 맞게 자르기
   const indexOfLastPost = currentPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
-  const currentPosts = list.slice(indexOfFirstPost, indexOfLastPost);
+  //const currentPosts = list.slice(indexOfFirstPost, indexOfLastPost);
 
   const getData = async () => {
     const data = await getMyHeartList();
     console.log(data);
 
     setList(data);
+    setCurrentPosts(data.slice(indexOfFirstPost, indexOfLastPost));
+  };
+  const filterData = (id) => {
+    console.log("업뎃");
+    setCurrentPosts(
+      list
+        .slice(indexOfFirstPost, indexOfLastPost)
+        .filter((el) => el.photographerId !== id)
+    );
   };
   useEffect(() => {
     getData();
@@ -36,15 +45,19 @@ const MyHeartsPage = () => {
         <GridBox>
           <div class="grid">
             {currentPosts.map((el) => {
-              const region = `${el.areas[0].metropolitan} ${
-                el.areas[0].city
-              } 외 ${el.areas.length - 1}곳`;
+              const region =
+                el.areas[0] &&
+                `${el.areas[0].metropolitan} ${el.areas[0].city} 외 ${
+                  el.areas.length - 1
+                }곳`;
               return (
                 <div>
                   <PhotoBox
+                    id={el.photographerId}
                     photo={el.image}
                     photographer={el.nickname}
                     region={region}
+                    filterData={filterData}
                   />
                 </div>
               );
