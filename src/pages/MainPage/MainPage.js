@@ -12,7 +12,7 @@ const MainPage = () => {
       <Wrapper>
         <MainSlider />
         <MainDiv>
-          <MainLogo src={Main_Logo} alt="snap-spot" />
+          <img src={Main_Logo} alt="snap-spot" />
         </MainDiv>
         <RecommendSection />
         <RecommendSection />
@@ -45,8 +45,8 @@ const MainDiv = styled.div`
   @media screen and (max-width: 768px) {
     display: none;
   }
-`;
 
-const MainLogo = styled.img`
-  width: 50%;
+  img {
+    width: 50%;
+  }
 `;

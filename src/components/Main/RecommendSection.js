@@ -8,12 +8,15 @@ import left from "../../assets/search/ic_left.png";
 
 const responsive = {
   0: {
+    items: 2,
+  },
+  374: {
     items: 3,
   },
-  600: {
-    items: 3,
+  768: {
+    items: 2,
   },
-  1024: {
+  1200: {
     items: 3,
   },
 };
@@ -101,15 +104,17 @@ const RecommendSection = () => {
 export default RecommendSection;
 
 const Wrapper = styled.div`
-  width: 1050px;
+  width: 75%;
+  max-width: 1048px;
   @media (max-width: 768px) {
-    width: 95%;
+    width: 90%;
   }
 `;
 
 const Title = styled.div`
   display: flex;
-  width: 1050px;
+  /* width: 1050px; */
+  width: 100%;
   /* margin-left: 14%; */
   color: var(--black, #060606);
   font-family: Noto Sans KR;
@@ -154,6 +159,10 @@ const RecommendList = styled.div`
     height: 40px;
     top: 170px;
     right: 10px;
+  }
+
+  .alice-carousel__stage-item {
+    padding: 0 0.3rem;
   }
 
   /* 모바일에서의 스타일 */

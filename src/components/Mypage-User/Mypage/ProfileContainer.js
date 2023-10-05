@@ -2,6 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 import settings from "../../../assets/mypage/userMypage/settings.png";
 import { useNavigate } from "react-router-dom";
+import { LogoutAPI } from "../../../api/auth";
 const ProfileContainer = ({ profileData }) => {
   const navigate = useNavigate();
   return (
@@ -18,7 +19,7 @@ const ProfileContainer = ({ profileData }) => {
           <div className="email">{profileData.email}</div>
         </Infos>
       </div>
-      <Logout>로그아웃</Logout>
+      <Logout onClick={LogoutAPI}>로그아웃</Logout>
     </Wrapper>
   );
 };
