@@ -1,12 +1,11 @@
 import styled from "styled-components";
 
-const TagInput = () => {
+const TagInput = ({ tags }) => {
   return (
     <>
       <SubTitle>태그 입력</SubTitle>
-      <Input />
-      <Input />
-      <Input />
+      {tags &&
+        Object.values(tags).map((el) => <Input placeholder={el || ""} />)}
     </>
   );
 };

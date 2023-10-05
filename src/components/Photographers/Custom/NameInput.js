@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-const NameInput = () => {
+const NameInput = ({ nickname }) => {
   return (
     <>
       <SubTitle>작가명</SubTitle>
-      <Input />
+      <Input placeholder={nickname || ""} />
     </>
   );
 };

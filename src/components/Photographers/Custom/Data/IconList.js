@@ -7,12 +7,12 @@ import home from "../../../../assets/photograph/home.png";
 // sns 아이콘 리스트
 export const icon_src = [
   {
-    src: instagram,
-    text: "@ instagram",
+    src: home,
+    text: "@ homepage",
   },
   {
-    src: twitter,
-    text: "@ twitter",
+    src: instagram,
+    text: "@ instagram",
   },
   {
     src: kakao,
@@ -23,8 +23,8 @@ export const icon_src = [
     text: "@ naver blog",
   },
   {
-    src: home,
-    text: "@ homepage",
+    src: twitter,
+    text: "@ twitter",
   },
 ];
 

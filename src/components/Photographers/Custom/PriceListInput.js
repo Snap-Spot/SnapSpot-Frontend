@@ -2,8 +2,8 @@ import styled from "styled-components";
 import plus from "../../../assets/photograph/plus.png";
 import { useState, useRef } from "react";
 
-const PriceListInput = () => {
-  const [imgfile, setImgFile] = useState(""); // 가격표 이미지
+const PriceListInput = ({ priceImg }) => {
+  const [imgfile, setImgFile] = useState(priceImg || ""); // 가격표 이미지
 
   const imgRef = useRef();
 

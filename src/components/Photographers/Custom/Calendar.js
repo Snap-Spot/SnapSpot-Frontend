@@ -7,6 +7,7 @@ import getMonth from "date-fns/getMonth";
 import previousarrow from "../../../assets/search/previousarrow.png";
 import nextarrow from "../../../assets/search/nextarrow.png";
 import styled from "styled-components";
+import { format } from "date-fns";
 
 const months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
 
@@ -23,9 +24,28 @@ const customKoLocale = {
   },
 };
 
-function Calender() {
-  const [selectedDates, setSelectedDates] = useState([]); // 선택한 날짜 배열
+function Calender({ unableSchedules }) {
+  let defaultval =
+    unableSchedules &&
+    Object.values(unableSchedules.unableDates).map((el) => {
+      const isoDate = new Date(el);
+      return isoDate.toLocaleString("en-US", options);
+    });
+  const [selectedDates, setSelectedDates] = useState(defaultval || []); // 선택한 날짜 배열
   const [key, setKey] = useState(0);
+
+  const options = {
+    weekday: "short",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    timeZoneName: "short",
+  };
+
+  console.log(selectedDates);
 
   const toggleDateSelection = (date) => {
     // 이미 선택된 날짜인지 확인
@@ -46,6 +66,10 @@ function Calender() {
 
     setKey(key + 1);
   };
+
+  // {selectedDates.map(
+  //   (date) => format(date, "yyyy-MM-dd'T'HH:mm:ss") // "2023-10-06T00:00:00" 형식으로 포맷
+  // )}
 
   return (
     <>

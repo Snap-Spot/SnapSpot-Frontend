@@ -29,3 +29,47 @@ export const getReview = async (photographerId) => {
     console.log("리뷰 조회 에러", err);
   }
 };
+
+// 커스텀 페이지 조회
+export const getCustomInfo = async () => {
+  try {
+    const res = await client.get(`/photographers/me`);
+    return res.data;
+  } catch (err) {
+    console.log("커스텀 조회 에러", err);
+  }
+};
+
+// 커스텀 페이지 수정
+export const putCustomInfo = async ({
+  nickname,
+  profileImage,
+  paymentImage,
+  lowestPay,
+  bio,
+  areaId,
+  sns,
+  specialList,
+  tag,
+  unableDates,
+  image,
+}) => {
+  try {
+    const res = await client.put(`/photographers/me`, {
+      nickname: nickname,
+      profileImage: profileImage,
+      paymentImage: paymentImage,
+      lowestPay: lowestPay,
+      bio: bio,
+      areaId: areaId,
+      sns: sns,
+      specialList: specialList,
+      tag: tag,
+      unableDates: unableDates,
+      image: image,
+    });
+    return res;
+  } catch (err) {
+    console.log("커스텀 수정 에러", err);
+  }
+};

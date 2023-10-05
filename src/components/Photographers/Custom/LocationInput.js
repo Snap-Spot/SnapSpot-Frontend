@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import RegionInput from "./RegionInput";
 
-const LocationInput = () => {
+const LocationInput = ({ location }) => {
   return (
     <>
       <SubTitle>활동 지역 설정</SubTitle>
-      <RegionInput />
+      <RegionInput location={location} />
     </>
   );
 };

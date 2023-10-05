@@ -2,9 +2,9 @@ import { styled } from "styled-components";
 import arrow from "../../../assets/photograph/dropdown.png";
 import { useState } from "react";
 
-const Dropdown = () => {
+const Dropdown = ({ specialList }) => {
   const [toggle, setToggle] = useState(false);
-  const [select, setSelect] = useState("");
+  const [select, setSelect] = useState(specialList.keywords || []);
   const option = [
     "전문 분야를 선택해주세요.",
     "결혼스냅",
@@ -12,6 +12,16 @@ const Dropdown = () => {
     "커플스냅",
     "기타",
   ];
+
+  const handleSelect = (value) => {
+    if (select.includes(value)) {
+      // 이미 선택된 경우 선택 취소
+      setSelect(select.filter((item) => item !== value));
+    } else {
+      // 선택되지 않은 경우 선택 추가
+      setSelect([...select, value]);
+    }
+  };
 
   return (
     <>
@@ -25,16 +35,16 @@ const Dropdown = () => {
                   <P
                     key={i}
                     onClick={() => {
-                      setSelect(el);
+                      handleSelect(el); // 선택 핸들러 호출
                       setToggle(!toggle);
                     }}
-                    color={i === 0 ? "#A5A5A5" : "black"}
+                    color={select.includes(el) ? "#3c3aac" : "black"} // 선택된 경우 색상 변경
                   >
                     {el}
                   </P>
                 ))
               ) : select.length > 0 ? (
-                select
+                <P color={"black"}>{select.join(", ")} </P>
               ) : (
                 <P color={"#A5A5A5"}>{option[0]}</P>
               )}

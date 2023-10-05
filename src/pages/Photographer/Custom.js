@@ -2,17 +2,93 @@ import styled from "styled-components";
 import LayOut from "../../components/common/LayOut";
 import BasicInput from "../../components/Photographers/Custom/BasicInput";
 import OtherInputs from "../../components/Photographers/Custom/OtherInputs";
+import { getCustomInfo, putCustomInfo } from "../../api/photographer";
+import { useEffect, useState } from "react";
 
 const Custom = () => {
+  const [data, setData] = useState({ member: {} });
+  const [nickname, setNickname] = useState("");
+  const [profileImage, setProfileImage] = useState("");
+  const [paymentImage, setPaymentImage] = useState("");
+  const [lowestPay, setLowestPay] = useState("");
+  const [bio, setBio] = useState("");
+  const [areaId, setAreaId] = useState([]);
+  const [sns, setSns] = useState({
+    instagram: "",
+    twitter: "",
+    kakaoChannel: "",
+    naverBlog: "",
+    homepage: "",
+  });
+  const [specialList, setSpecialList] = useState([]);
+  const [tag, setTag] = useState({
+    tag1: "",
+    tag2: "",
+    tag3: "",
+  });
+  const [unableDates, setUnableDates] = useState([]);
+  const [image, setImage] = useState({});
+
+  const getCustomInfos = async () => {
+    try {
+      const res = await getCustomInfo();
+      setData(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const putCustomInfos = async () => {
+    try {
+      const res = await putCustomInfo(
+        nickname,
+        profileImage,
+        paymentImage,
+        lowestPay,
+        bio,
+        areaId,
+        sns,
+        specialList,
+        tag,
+        unableDates,
+        image
+      );
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getCustomInfos();
+  }, []);
+
   return (
     <LayOut>
       <Container>
-        <Title>작가 페이지 커스텀</Title>
-        <Line />
-        <BasicInput />
-        <Line2 />
-        <OtherInputs />
-        <ChangeBtn>변경하기</ChangeBtn>
+        {data && data.member && (
+          <>
+            <Title>작가 페이지 커스텀</Title>
+            <Line />
+            <BasicInput
+              profile={data.member.profile}
+              nickname={data.member.nickname}
+              priceImg={data.paymentImage}
+              lowestPay={data.lowestPay}
+            />
+            <Line2 />
+            <OtherInputs
+              location={data.areas}
+              sns={data.sns}
+              bio={data.bio}
+              specialList={data.specialList}
+              tags={data.tags}
+              unableSchedules={data.unableSchedules}
+              images={data.images}
+            />
+            <ChangeBtn onClick={() => putCustomInfos()}>변경하기</ChangeBtn>
+          </>
+        )}
       </Container>
     </LayOut>
   );

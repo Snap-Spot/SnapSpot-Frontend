@@ -1,8 +1,7 @@
-import profile from "../../../assets/photograph/ex_profile.png";
 import styled from "styled-components";
 import { useState, useRef } from "react";
 
-const Profile = () => {
+const Profile = ({ profile }) => {
   const [profileImg, setProfileImg] = useState(""); // 프로필 이미지
 
   const imgRef = useRef();

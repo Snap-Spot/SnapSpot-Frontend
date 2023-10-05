@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-const IntroductionInput = () => {
+const IntroductionInput = ({ bio }) => {
   return (
     <>
       <SubTitle>한 줄 소개글 등록 (최대 500자)</SubTitle>
-      <TextArea />
+      <TextArea placeholder={bio || ""} />
     </>
   );
 };

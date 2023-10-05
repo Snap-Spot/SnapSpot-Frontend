@@ -4,9 +4,9 @@ import { regions } from "../../search/FilteringList";
 import arrow from "../../../assets/photograph/dropdown.png";
 import deleteIcon from "../../../assets/photograph/optionDelete.png";
 
-const RegionInput = () => {
+const RegionInput = ({ location }) => {
   const [selectedRegion, setSelectedRegion] = useState("서울");
-  const [selectedSubRegion, setSelectedSubRegion] = useState([]);
+  const [selectedSubRegion, setSelectedSubRegion] = useState(location || []);
   const [toggle, setToggle] = useState(false);
 
   const handleRegionClick = (region) => {

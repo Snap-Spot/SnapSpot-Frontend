@@ -1,10 +1,10 @@
 import { styled } from "styled-components";
 
-const LowestPriceInput = () => {
+const LowestPriceInput = ({ lowestPay }) => {
   return (
     <>
       <SubTitle>최저 가격 입력</SubTitle>
-      <Input />
+      <Input placeholder={lowestPay || ""} />
     </>
   );
 };

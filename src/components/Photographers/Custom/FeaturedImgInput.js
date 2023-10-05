@@ -2,8 +2,9 @@ import styled from "styled-components";
 import imgPlus from "../../../assets/photograph/imgPlus.png";
 import { useState, useRef } from "react";
 
-const FeaturedImgInput = () => {
-  const [featuredImgfiles, setFeaturedImgFiles] = useState([]); // 대표 이미지
+const FeaturedImgInput = ({ images }) => {
+  let defaultImg = images ? Object.values(images) : [];
+  const [featuredImgfiles, setFeaturedImgFiles] = useState(defaultImg); // 대표 이미지
 
   const featuredImgRef = useRef([]);
 
