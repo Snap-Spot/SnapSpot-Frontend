@@ -3,11 +3,7 @@ import { styled } from "styled-components";
 const YourChat = ({ profile, contents }) => {
   return (
     <Wrapper>
-      <Chat>
-        {
-          "jsdlkjklkjkljkljsdlkjklkjkljkljlkjkljkljakldjklsajdkljaskldjkjsdlkjklkjkljkljlkjkljkljakldjklsajdkljaskldjkjsdlkjklkjkljkljlkjkljkljakldjklsajdkljaskldjkjsdlkjklkjkljkljlkjkljkljakldjklsajdkljaskldjkjsdlkjklkjkljkljlkjkljkljakldjklsajdkljaskldjkjsdlkjklkjkljkljlkjkljkljakldjklsajdkljaskldjkjsdlkjklkjkljkljlkjkljkljakldjklsajdkljaskldjkjsdlkjklkjkljkljlkjkljkljakldjklsajdkljaskldjkjsdlkjklkjkljkljlkjkljkljakldjklsajdkljaskldjkjlkjkljkljakldjklsajdkljaskldjk"
-        }
-      </Chat>
+      <Chat>{contents}</Chat>
     </Wrapper>
   );
 };

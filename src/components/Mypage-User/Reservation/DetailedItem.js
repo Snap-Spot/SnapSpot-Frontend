@@ -90,8 +90,8 @@ const DetailedItem = () => {
           category={category}
         />
 
-        <ChatsContainer photographer={photographer.profile} />
-        <KakaoMap />
+        <ChatsContainer photographer={photographer.profile} planId={id} />
+        {/*  <KakaoMap />*/}
       </Wrapper>
     </>
   );

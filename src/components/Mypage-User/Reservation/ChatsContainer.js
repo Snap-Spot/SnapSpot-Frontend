@@ -1,29 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import MyChat from "./MyChat";
 import YourChat from "./YourChat";
+import { getMessages } from "../../../api/message";
 
-const ChatsContainer = ({ profile }) => {
-  const [messages, setMessage] = useState([
-    {
-      isMine: true,
-      contents: 1,
-    },
-    {
-      isMine: false,
-      contents: 1,
-    },
-  ]);
+const ChatsContainer = ({ profile, planId }) => {
+  const [messages, setMessages] = useState([]);
+  const getData = async () => {
+    const res = await getMessages(planId);
+    setMessages(res);
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     messages.length !== 0 && (
       <Wrapper>
         <div className="chatsTitle">지금까지 보낸 메세지 확인하기</div>
         {messages.map((message) => {
-          return message.isMine ? (
-            <MyChat contents={message.contents} />
-          ) : (
-            <YourChat profile={profile} contents={message.contents} />
-          );
+          return message.isMine
+            ? message.contents && (
+                <MyChat contents={message.contents} key={message.messageId} />
+              )
+            : message.contents && (
+                <YourChat
+                  profile={profile}
+                  contents={message.contents}
+                  key={message.messageId}
+                />
+              );
         })}
       </Wrapper>
     )

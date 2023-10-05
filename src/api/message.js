@@ -11,3 +11,12 @@ export const postMessage = async (planId, contents) => {
     throw err;
   }
 };
+
+export const getMessages = async (planId) => {
+  try {
+    const res = await client.get(`/messages/${planId}`);
+    return res.data;
+  } catch (err) {
+    throw err;
+  }
+};
