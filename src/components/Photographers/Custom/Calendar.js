@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
@@ -24,28 +24,21 @@ const customKoLocale = {
   },
 };
 
-function Calender({ unableSchedules }) {
-  let defaultval =
-    unableSchedules &&
-    Object.values(unableSchedules).map((el) => {
-      const isoDate = new Date(el);
-      return isoDate.toLocaleString("en-US", options);
-    });
-  const [selectedDates, setSelectedDates] = useState(defaultval || []); // 선택한 날짜 배열
+function Calender({ unableSchedules, setUnableDates }) {
+  const [selectedDates, setSelectedDates] = useState([]); // 선택한 날짜 배열
   const [key, setKey] = useState(0);
 
-  const options = {
-    weekday: "short",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-    second: "numeric",
-    timeZoneName: "short",
-  };
+  useEffect(() => {
+    setSelectedDates(unableSchedules.map((dateStr) => new Date(dateStr)));
+  }, [unableSchedules]);
 
-  console.log(selectedDates);
+  useEffect(() => {
+    setUnableDates(
+      selectedDates.map(
+        (date) => format(date, "yyyy-MM-dd'T'HH:mm:ss") // "2023-10-06T00:00:00" 형식으로 포맷
+      )
+    );
+  }, [key]);
 
   const toggleDateSelection = (date) => {
     // 이미 선택된 날짜인지 확인
@@ -67,14 +60,9 @@ function Calender({ unableSchedules }) {
     setKey(key + 1);
   };
 
-  // {selectedDates.map(
-  //   (date) => format(date, "yyyy-MM-dd'T'HH:mm:ss") // "2023-10-06T00:00:00" 형식으로 포맷
-  // )}
-
   return (
     <>
       <SubTitle>불가능한 날짜 선택</SubTitle>
-
       <StyledCalendar>
         <DatePicker
           key={key} // 키 값 변경으로 다시 렌더링

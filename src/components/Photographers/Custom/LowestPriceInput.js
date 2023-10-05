@@ -1,10 +1,14 @@
 import { styled } from "styled-components";
 
-const LowestPriceInput = ({ lowestPay }) => {
+const LowestPriceInput = ({ lowestPay, setLowestPay }) => {
   return (
     <>
       <SubTitle>최저 가격 입력</SubTitle>
-      <Input placeholder={lowestPay || ""} />
+      <Input
+        placeholder={lowestPay || ""}
+        value={lowestPay}
+        onChange={(e) => setLowestPay(e.target.value)}
+      />
     </>
   );
 };

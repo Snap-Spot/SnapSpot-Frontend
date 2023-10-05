@@ -1,4 +1,6 @@
 import client from "./client";
+import getS3ImgUrl from "./s3upload";
+import { format } from "date-fns";
 
 //포토그래퍼 전체 이름 겟
 export const getPhotographers = async () => {
@@ -41,7 +43,7 @@ export const getCustomInfo = async () => {
 };
 
 // 커스텀 페이지 수정
-export const putCustomInfo = async ({
+export const putCustomInfo = async (
   nickname,
   profileImage,
   paymentImage,
@@ -49,25 +51,46 @@ export const putCustomInfo = async ({
   bio,
   areaId,
   sns,
-  specialList,
+  special,
   tag,
   unableDates,
-  image,
-}) => {
+  image
+) => {
+  const profileImageUrl = await getS3ImgUrl(profileImage);
+  const paymentImageUrl = await getS3ImgUrl(paymentImage);
+  const imagesUrl = {};
+
+  for (const key in image) {
+    if (image.hasOwnProperty(key)) {
+      imagesUrl[key] = await getS3ImgUrl(image[key]);
+    }
+  }
+  const body = {
+    nickname: nickname,
+    profileImage: profileImageUrl,
+    paymentImage: paymentImageUrl,
+    lowestPay: lowestPay,
+    bio: bio,
+    areaId: areaId,
+    sns: {
+      instagram: "happysnap_",
+      twitter: "happysnap_",
+      kakaoChannel: "https://pf.kakao.com/_happySNAP",
+      naverBlog: "https://blog.naver.com",
+      homepage: "https://happysnap.com",
+    },
+    specialList: special,
+    tag: tag,
+    unableDates: unableDates,
+    image: imagesUrl,
+  };
+
+  console.log(body);
+
   try {
-    const res = await client.put(`/photographers/me`, {
-      nickname: nickname,
-      profileImage: profileImage,
-      paymentImage: paymentImage,
-      lowestPay: lowestPay,
-      bio: bio,
-      areaId: areaId,
-      sns: sns,
-      specialList: specialList,
-      tag: tag,
-      unableDates: unableDates,
-      image: image,
-    });
+    const res = await client.put(`/photographers/me`, body);
+    console.log("응답", res);
+    alert("변경되었습니다.");
     return res;
   } catch (err) {
     console.log("커스텀 수정 에러", err);

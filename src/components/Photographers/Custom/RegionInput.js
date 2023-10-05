@@ -1,12 +1,11 @@
 import styled from "styled-components";
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { regions } from "../../search/FilteringList";
 import arrow from "../../../assets/photograph/dropdown.png";
 import deleteIcon from "../../../assets/photograph/optionDelete.png";
 
-const RegionInput = ({ location }) => {
+const RegionInput = ({ areaId, setAreaId }) => {
   const [selectedRegion, setSelectedRegion] = useState("서울");
-  const [selectedSubRegion, setSelectedSubRegion] = useState(location || []);
   const [toggle, setToggle] = useState(false);
 
   const handleRegionClick = (region) => {
@@ -14,13 +13,13 @@ const RegionInput = ({ location }) => {
   };
 
   const cancelSelect = (el) => {
-    setSelectedSubRegion((prevSelectedSubRegion) =>
+    setAreaId((prevSelectedSubRegion) =>
       prevSelectedSubRegion.filter((item) => item !== el)
     );
   };
 
   const handleSubRegionClick = (subregion) => {
-    setSelectedSubRegion((prevSelectedSubRegion) => {
+    setAreaId((prevSelectedSubRegion) => {
       if (prevSelectedSubRegion.includes(subregion)) {
         return prevSelectedSubRegion.filter((item) => item !== subregion);
       } else {
@@ -34,35 +33,65 @@ const RegionInput = ({ location }) => {
       <FilterTab open={toggle}>
         {!toggle && (
           <Option>
-            {selectedSubRegion.map((el, idx) => (
-              <SelectedOption
-                key={idx}
-                isSelected={true}
-                onClick={() => cancelSelect(el)}
-                open={toggle}
-              >
-                <Row>
-                  {el} <DeleteIcon src={deleteIcon} />
-                </Row>
-              </SelectedOption>
-            ))}
+            {regions
+              .reduce((result, region) => {
+                // 현재 region의 subregions 배열에서 areaId가 포함되어 있는지 확인
+                const subregions = region.subregions.filter((subregion) =>
+                  areaId.includes(subregion.areaId)
+                );
+
+                // 만약 subregions가 비어있지 않다면 결과에 추가
+                if (subregions.length > 0) {
+                  result.push(...subregions);
+                }
+
+                return result;
+              }, [])
+              .map((data) => (
+                <SelectedOption
+                  key={data.areaId}
+                  isSelected={true}
+                  onClick={() => cancelSelect(data.areaId)}
+                  open={toggle}
+                >
+                  <Row>
+                    {data.subregion}
+                    <DeleteIcon src={deleteIcon} />
+                  </Row>
+                </SelectedOption>
+              ))}
           </Option>
         )}
         <BaseLine>
           {toggle && (
             <RegionTab>
-              {selectedSubRegion.map((el, idx) => (
-                <SelectedOption
-                  key={idx}
-                  isSelected={true}
-                  onClick={() => cancelSelect(el)}
-                  open={toggle}
-                >
-                  <Row>
-                    {el} <DeleteIcon src={deleteIcon} />
-                  </Row>
-                </SelectedOption>
-              ))}
+              {regions
+                .reduce((result, region) => {
+                  // 현재 region의 subregions 배열에서 areaId가 포함되어 있는지 확인
+                  const subregions = region.subregions.filter((subregion) =>
+                    areaId.includes(subregion.areaId)
+                  );
+
+                  // 만약 subregions가 비어있지 않다면 결과에 추가
+                  if (subregions.length > 0) {
+                    result.push(...subregions);
+                  }
+
+                  return result;
+                }, [])
+                .map((data) => (
+                  <SelectedOption
+                    key={data.areaId}
+                    isSelected={true}
+                    onClick={() => cancelSelect(data.areaId)}
+                    open={toggle}
+                  >
+                    <Row>
+                      {data.subregion}
+                      <DeleteIcon src={deleteIcon} />
+                    </Row>
+                  </SelectedOption>
+                ))}
               <List>
                 {regions && regions.length > 0 && (
                   <RegionList>
@@ -78,28 +107,24 @@ const RegionInput = ({ location }) => {
                     ))}
                   </RegionList>
                 )}
-                <SubregionList>
-                  {selectedRegion && (
+                {selectedRegion && (
+                  <SubregionList>
                     <Box>
                       {regions
                         .find((region) => region.name === selectedRegion)
-                        .subregions.map((subregion, index) => (
-                          <SubregionBox key={index}>
+                        .subregions.map((data) => (
+                          <SubregionBox key={data.areaId}>
                             <Subregion
-                              onClick={() =>
-                                handleSubRegionClick(subregion.subregion)
-                              }
-                              isSelected={selectedSubRegion.includes(
-                                subregion.subregion
-                              )}
+                              onClick={() => handleSubRegionClick(data.areaId)}
+                              isSelected={areaId === data.areaId}
                             >
-                              {subregion.subregion}
+                              {data.subregion}
                             </Subregion>
                           </SubregionBox>
                         ))}
                     </Box>
-                  )}
-                </SubregionList>
+                  </SubregionList>
+                )}
               </List>
             </RegionTab>
           )}

@@ -1,25 +1,26 @@
 import { styled } from "styled-components";
 import arrow from "../../../assets/photograph/dropdown.png";
 import { useState } from "react";
+import { category } from "../../common/category";
 
-const Dropdown = ({ specialList }) => {
+const Dropdown = ({ specialList, setSpecialList }) => {
   const [toggle, setToggle] = useState(false);
-  const [select, setSelect] = useState(specialList.keywords || []);
   const option = [
     "전문 분야를 선택해주세요.",
-    "결혼스냅",
-    "우정스냅",
     "커플스냅",
-    "기타",
+    "우정스냅",
+    "졸업스냅",
+    "웨딩스냅",
+    "가족스냅",
   ];
 
   const handleSelect = (value) => {
-    if (select.includes(value)) {
+    if (specialList.includes(value)) {
       // 이미 선택된 경우 선택 취소
-      setSelect(select.filter((item) => item !== value));
+      setSpecialList(specialList.filter((item) => item !== value));
     } else {
       // 선택되지 않은 경우 선택 추가
-      setSelect([...select, value]);
+      setSpecialList([...specialList, value]);
     }
   };
 
@@ -38,13 +39,13 @@ const Dropdown = ({ specialList }) => {
                       handleSelect(el); // 선택 핸들러 호출
                       setToggle(!toggle);
                     }}
-                    color={select.includes(el) ? "#3c3aac" : "black"} // 선택된 경우 색상 변경
+                    color={specialList.includes(el) ? "#3c3aac" : "black"} // 선택된 경우 색상 변경
                   >
                     {el}
                   </P>
                 ))
-              ) : select.length > 0 ? (
-                <P color={"black"}>{select.join(", ")} </P>
+              ) : specialList.length > 0 ? (
+                <P color={"black"}>{specialList.join(", ")} </P>
               ) : (
                 <P color={"#A5A5A5"}>{option[0]}</P>
               )}
@@ -108,7 +109,7 @@ const Container = styled.div`
 `;
 
 const Status = styled.div`
-  height: ${(props) => (props.open ? "15rem" : "2rem")};
+  height: ${(props) => (props.open ? "19rem" : "2rem")};
   border-radius: 20px;
   border: none;
   background: #f6f6f6;

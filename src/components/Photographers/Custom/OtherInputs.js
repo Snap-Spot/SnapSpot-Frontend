@@ -9,20 +9,27 @@ import FeaturedImgInput from "./FeaturedImgInput";
 import { icon_src } from "./Data/IconList";
 
 const OtherInputs = ({
-  location,
+  areaId,
   sns,
   bio,
   specialList,
   tags,
   unableSchedules,
   images,
+  setAreaId,
+  setSns,
+  setBio,
+  setSpecialList,
+  setTag,
+  setUnableDates,
+  setImage,
 }) => {
   let snsList = sns ? Object.values(sns) : [];
 
   return (
     <Center>
       <InputContainer>
-        <LocationInput location={location} />
+        <LocationInput areaId={areaId} setAreaId={setAreaId} />
         <SubTitle>SNS 등록</SubTitle>
         {icon_src.map((item, idx) => (
           <SNSInput
@@ -31,13 +38,14 @@ const OtherInputs = ({
             text={snsList[idx] || item.text}
           />
         ))}
-        <IntroductionInput bio={bio} />
-        {specialList && specialList.keywords ? (
-          <Dropdown specialList={specialList.keywords} />
-        ) : null}
-        <TagInput tags={tags} />
-        <Calendar unableSchedules={unableSchedules} />
-        <FeaturedImgInput images={images} />
+        <IntroductionInput bio={bio} setBio={setBio} />
+        <Dropdown specialList={specialList} setSpecialList={setSpecialList} />
+        <TagInput tags={tags} setTag={setTag} />
+        <Calendar
+          unableSchedules={unableSchedules}
+          setUnableDates={setUnableDates}
+        />
+        <FeaturedImgInput images={images} setImage={setImage} />
       </InputContainer>
     </Center>
   );

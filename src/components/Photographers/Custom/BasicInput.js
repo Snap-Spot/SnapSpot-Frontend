@@ -12,6 +12,8 @@ const BasicInput = ({
   lowestPay,
   setNickname,
   setProfileImage,
+  setPaymentImage,
+  setLowestPay,
 }) => {
   const isMobile = useMobileDetection();
 
@@ -21,8 +23,8 @@ const BasicInput = ({
       {isMobile && <Line2 />}
       <InputContainer>
         <NameInput nickname={nickname} setNickname={setNickname} />
-        <PriceListInput priceImg={priceImg} />
-        <LowestPriceInput lowestPay={lowestPay} />
+        <PriceListInput priceImg={priceImg} setPaymentImage={setPaymentImage} />
+        <LowestPriceInput lowestPay={lowestPay} setLowestPay={setLowestPay} />
       </InputContainer>
     </Container>
   );

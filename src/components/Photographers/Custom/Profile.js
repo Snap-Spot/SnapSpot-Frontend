@@ -1,23 +1,26 @@
 import styled from "styled-components";
-import { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 const Profile = ({ profile, setProfileImage }) => {
+  const [previewImg, setPreviewImg] = useState("");
   const imgRef = useRef();
 
   // 프로필 이미지 프리뷰 생성
   const saveProfileImgFile = () => {
     const file = imgRef.current.files[0];
+    setProfileImage(file);
+
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setProfileImage(reader.result);
+    reader.onloadend = async (e) => {
+      setPreviewImg(e.target.result);
     };
   };
 
   return (
     <label htmlFor="file">
       <PhotoContainer>
-        <ProfileImg src={profile} />
+        <ProfileImg src={previewImg || profile} />
         <InputImg
           type="file"
           name="file"
