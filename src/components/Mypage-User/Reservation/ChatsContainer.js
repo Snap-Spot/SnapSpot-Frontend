@@ -31,6 +31,7 @@ const ChatsContainer = ({ profile, planId }) => {
                 />
               );
         })}
+        <YourChat profile={profile} />
       </Wrapper>
     )
   );

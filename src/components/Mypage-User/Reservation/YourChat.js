@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 const YourChat = ({ profile, contents }) => {
   return (
     <Wrapper>
+      <img className="profile" src={profile} alt="" />
       <Chat>{contents}</Chat>
     </Wrapper>
   );
@@ -14,6 +15,19 @@ const Wrapper = styled.div`
   width: 100%;
   display: flex;
   margin-bottom: 20px;
+
+  .profile {
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    background-color: lightgray;
+    margin-right: 10px;
+
+    @media (max-width: 768px) {
+      width: 40px;
+      height: 40px;
+    }
+  }
 `;
 const Chat = styled.textarea`
   padding-right: 15px;
@@ -32,6 +46,10 @@ const Chat = styled.textarea`
   padding-left: 24px;
   padding-top: 16px;
 
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+
   @media (max-width: 768px) {
     padding-right: 10px;
     width: 55%;
@@ -41,5 +59,9 @@ const Chat = styled.textarea`
     font-size: 12px;
     padding-left: 14px;
     padding-top: 10px;
+
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
   }
 `;
