@@ -21,13 +21,13 @@ import RequestList from "./pages/Photographer/RequestList";
 import ReservationList from "./pages/Photographer/ReservationList";
 import Introduction from "./pages/Photographer/Introduction";
 import MainPage from "./pages/MainPage/MainPage";
-
 import { Routes, Route } from "react-router-dom";
 import KakaoSignUpPage from "./pages/SignUpPage/KakaoSignUpPage";
+import { LoadingProvider } from "./components/common/LoadingContext";
 
 function App() {
   return (
-    <>
+    <LoadingProvider>
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="mypage" element={<UserMypage />} />
@@ -60,7 +60,7 @@ function App() {
         <Route path="/spot-list" element={<SpotListPage />} />
       </Routes>
       <Footer />
-    </>
+    </LoadingProvider>
   );
 }
 

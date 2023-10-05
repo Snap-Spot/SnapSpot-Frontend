@@ -6,10 +6,13 @@ import { useNavigate, useLocation } from "react-router-dom";
 import FilteringBox from "../../components/search/FilteringBox";
 import SearchBox from "../../components/search/SearchBox";
 import Header from "../../components/common/Header";
-
+import { useLoadingContext } from "../../components/common/LoadingContext";
 import { getPhotographerList } from "../../api/search";
+import Loading from "../../components/common/Loading";
 
 const Photographerlist = () => {
+  const { isLoading, startLoading, stopLoading } = useLoadingContext();
+
   const navigate = useNavigate();
   const location = useLocation();
   const outSection = useRef();
@@ -43,6 +46,7 @@ const Photographerlist = () => {
   };
 
   const onSearch = async () => {
+    startLoading(); //로딩 시작
     try {
       let endpoint = "/photographers";
       const queryParams = [];
@@ -61,12 +65,13 @@ const Photographerlist = () => {
       if (queryParams.length > 0) {
         endpoint += "?" + queryParams.join("&");
       }
-      console.log(endpoint);
       navigate(endpoint);
       const getData = await getPhotographerList(endpoint);
       setData(getData);
     } catch (err) {
       console.log(err);
+    } finally {
+      stopLoading(); //데이터 받은 후 로딩 중지
     }
   };
 
@@ -102,62 +107,76 @@ const Photographerlist = () => {
 
   return (
     <>
-      <Header />
-      <Wrapper>
-        <div>
-          <Box>
-            <TabBox>
-              {tabs.map((tab, index) => (
-                <Tab key={index} onClick={handleTabClick}>
-                  {tab}
-                </Tab>
-              ))}
-            </TabBox>
-          </Box>
-          {isFilteringOpen && (
-            <div ref={outSection}>
-              <FilteringBox
-                onSearch={onSearch}
-                isFilteringOpen={isFilteringOpen}
-                setIsFilteringOpen={setIsFilteringOpen}
-              />
-            </div>
-          )}
-        </div>
-        <Content isFilteringOpen={isFilteringOpen}>
-          <GridBox>
-            <div className="grid">
-              {currentPosts.map((data) => (
-                <div key={data.photographerId}>
-                  <SearchBox
-                    id={data.photographerId}
-                    image={data.image}
-                    tags={data.tags}
-                    photographer={data.nickname}
-                    star={data.averageScore}
-                    region={
-                      data.areas.length > 0 ? data.areas[0].metropolitan : ""
-                    }
-                    subregion={data.areas.length > 0 ? data.areas[0].city : ""}
-                    regionCount={data.areas.length}
-                    price={data.lowestPay}
-                    review={data.totalReview}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <Header />
+          <Wrapper>
+            <div>
+              <Box>
+                <TabBox>
+                  {tabs.map((tab, index) => (
+                    <Tab key={index} onClick={handleTabClick}>
+                      {tab}
+                    </Tab>
+                  ))}
+                </TabBox>
+              </Box>
+              {isFilteringOpen && (
+                <div ref={outSection}>
+                  <FilteringBox
+                    onSearch={onSearch}
+                    isFilteringOpen={isFilteringOpen}
+                    setIsFilteringOpen={setIsFilteringOpen}
                   />
                 </div>
-              ))}
+              )}
             </div>
-          </GridBox>
-        </Content>
-      </Wrapper>
-      <Pagination
-        activePage={currentPage}
-        itemsCountPerPage={itemsPerPage}
-        totalItemsCount={data.length}
-        pageRangeDisplayed={5}
-        prevPageText={"<"}
-        nextPageText={">"}
-        onChange={handlePageChange}
-      />
+            <Content isFilteringOpen={isFilteringOpen}>
+              <GridBox>
+                <div className="grid">
+                  {currentPosts.map((data) => (
+                    <div key={data.photographerId}>
+                      <SearchBox
+                        id={data.photographerId}
+                        image={data.image}
+                        tags={data.tags}
+                        photographer={data.nickname}
+                        star={data.averageScore}
+                        region={
+                          data.areas.length > 0
+                            ? data.areas[0].metropolitan
+                            : ""
+                        }
+                        subregion={
+                          data.areas.length > 0 ? data.areas[0].city : ""
+                        }
+                        regionCount={data.areas.length}
+                        price={data.lowestPay}
+                        review={data.totalReview}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </GridBox>
+            </Content>
+          </Wrapper>
+          {data.length > 0 ? (
+            <Pagination
+              activePage={currentPage}
+              itemsCountPerPage={itemsPerPage}
+              totalItemsCount={data.length}
+              pageRangeDisplayed={5}
+              prevPageText={"<"}
+              nextPageText={">"}
+              onChange={handlePageChange}
+            />
+          ) : (
+            <></>
+          )}
+        </>
+      )}
     </>
   );
 };
