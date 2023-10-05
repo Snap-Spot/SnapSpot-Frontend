@@ -39,7 +39,7 @@ const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
       {
         menu: "작가에게 문의하기",
         title: "문의하기",
-        content: <QuestionModal />,
+        content: <QuestionModal planId={plan.planId} />,
       },
     ],
     [
@@ -64,7 +64,7 @@ const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
       {
         menu: "작가에게 문의하기",
         title: "문의하기",
-        content: <QuestionModal />,
+        content: <QuestionModal planId={plan.planId} />,
       },
     ],
     [],
@@ -103,7 +103,7 @@ const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
       {
         menu: "작가에게 문의하기",
         title: "문의하기",
-        content: <QuestionModal />,
+        content: <QuestionModal planId={plan.planId} />,
       },
     ],
     [
@@ -123,7 +123,7 @@ const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
       {
         menu: "작가에게 문의하기",
         title: "문의하기",
-        content: <QuestionModal />,
+        content: <QuestionModal planId={plan.planId} />,
       },
     ],
     [
@@ -143,7 +143,7 @@ const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
       {
         menu: "작가에게 문의하기",
         title: "문의하기",
-        content: <QuestionModal />,
+        content: <QuestionModal planId={plan.planId} />,
       },
     ],
     [
@@ -168,7 +168,7 @@ const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
       {
         menu: "작가에게 문의하기",
         title: "문의하기",
-        content: <QuestionModal />,
+        content: <QuestionModal planId={plan.planId} />,
       },
     ],
     [],
