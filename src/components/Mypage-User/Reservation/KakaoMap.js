@@ -2,18 +2,18 @@ import React, { useEffect } from "react";
 import { styled } from "styled-components";
 import arrow from "../../../assets/mypage/reservation/arrow.png";
 import mapMarker from "../../../assets/mypage/reservation/mapMarker.png";
-const KakaoMap = () => {
+const KakaoMap = ({ placeName, placeAddress, x, y }) => {
   const { kakao } = window;
   const openKakaoMap = () => {
     window.open(
-      "https://map.kakao.com/link/to/카카오판교오피스,37.402056,127.108212",
+      `https://map.kakao.com/link/to/${placeName},${x},${y}`,
       "_blank"
     );
   };
   useEffect(() => {
     const container = document.getElementById("map");
     const options = {
-      center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+      center: new kakao.maps.LatLng(x, y), // 지도의 중심좌표
       level: 3, // 지도의 확대 레벨
     };
 
@@ -37,7 +37,7 @@ const KakaoMap = () => {
         imageSize,
         imageOption
       ),
-      markerPosition = new kakao.maps.LatLng(33.450701, 126.570667);
+      markerPosition = new kakao.maps.LatLng(x, y);
     // 마커를 생성합니다
     var marker = new kakao.maps.Marker({
       position: markerPosition,
@@ -53,8 +53,8 @@ const KakaoMap = () => {
 
   return (
     <Wrapper>
-      <div className="location">게임파티룸 시크 신대방점</div>
-      <div className="detailLocation">서울 관악구 신사로 128-1 지하 1층</div>
+      <div className="location">{placeName}</div>
+      <div className="detailLocation">{placeAddress}</div>
       <Container>
         <Map id="map" />
         <div className="button" onClick={openKakaoMap}>
