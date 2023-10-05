@@ -4,7 +4,7 @@ import MyChat from "./MyChat";
 import YourChat from "./YourChat";
 import { getMessages } from "../../../api/message";
 
-const ChatsContainer = ({ profile, messages }) => {
+const ChatsContainer = ({ profile, messages = [] }) => {
   return (
     <Wrapper>
       <div className="chatsTitle">지금까지 보낸 메세지 확인하기</div>
