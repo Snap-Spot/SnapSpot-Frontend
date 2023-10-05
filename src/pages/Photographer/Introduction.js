@@ -7,11 +7,13 @@ import Profile from "../../components/Photographers/Introduction/Profile";
 import ReviewContainer from "../../components/Photographers/Introduction/Review";
 import { getPhotographer } from "../../api/photographer";
 import { useParams } from "react-router-dom";
+import PriceModal from "../../components/Photographers/Introduction/PriceModal";
 
 import ExCarousel from "../../components/Photographers/Introduction/ex";
 
 const Introduction = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [priceModalOpen, setPriceModalOpen] = useState(false);
   const [data, setData] = useState();
   const { id } = useParams();
 
@@ -35,6 +37,12 @@ const Introduction = () => {
         {modalOpen && (
           <ReservationModal setModalOpen={setModalOpen} photographerId={id} />
         )}
+        {data && priceModalOpen && (
+          <PriceModal
+            setPriceModalOpen={setPriceModalOpen}
+            paymentImage={data.paymentImage}
+          />
+        )}
       </Center>
       <LayOut>
         {data && (
@@ -46,10 +54,10 @@ const Introduction = () => {
                 nickname={data.member.nickname}
                 profile={data.member.profile}
                 lowestPay={data.lowestPay}
-                paymentImage={data.paymentImage}
                 areas={data.areas}
                 sns={data.sns}
                 bio={data.bio}
+                setPriceModalOpen={setPriceModalOpen}
               />
             </ProfileContainer>
             <ExCarousel carouselList={data.images} />
