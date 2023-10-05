@@ -81,7 +81,7 @@ const Wrapper = styled.div`
 
   .item-image {
     width: 100%;
-    height: 500px;
+    height: 550px;
 
     @media screen and (max-width: 768px) {
       width: 100%;
