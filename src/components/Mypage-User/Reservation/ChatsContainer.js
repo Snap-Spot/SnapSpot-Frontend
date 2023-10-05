@@ -4,21 +4,12 @@ import MyChat from "./MyChat";
 import YourChat from "./YourChat";
 import { getMessages } from "../../../api/message";
 
-const ChatsContainer = ({ profile, planId }) => {
-  const [messages, setMessages] = useState([]);
-  const getData = async () => {
-    const res = await getMessages(planId);
-    setMessages(res);
-  };
-  useEffect(() => {
-    getData();
-  }, []);
-
+const ChatsContainer = ({ profile, messages }) => {
   return (
-    messages.length !== 0 && (
-      <Wrapper>
-        <div className="chatsTitle">지금까지 보낸 메세지 확인하기</div>
-        {messages.map((message) => {
+    <Wrapper>
+      <div className="chatsTitle">지금까지 보낸 메세지 확인하기</div>
+      {messages.length ? (
+        messages.map((message) => {
           return message.isMine
             ? message.contents && (
                 <MyChat contents={message.contents} key={message.messageId} />
@@ -30,9 +21,11 @@ const ChatsContainer = ({ profile, planId }) => {
                   key={message.messageId}
                 />
               );
-        })}
-      </Wrapper>
-    )
+        })
+      ) : (
+        <div className="empty">보내거나 받은 메세지가 없습니다.</div>
+      )}
+    </Wrapper>
   );
 };
 
@@ -48,6 +41,18 @@ const Wrapper = styled.div`
       font-size: 15px;
       margin-top: 60px;
       margin-bottom: 30px;
+    }
+  }
+
+  .empty {
+    margin-top: 80px;
+    text-align: center;
+    color: gray;
+    font-size: 16px;
+    @media (max-width: 768px) {
+      //모바일
+      margin-top: 50px;
+      font-size: 12px;
     }
   }
 `;
