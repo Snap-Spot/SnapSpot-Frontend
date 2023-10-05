@@ -22,6 +22,8 @@ const SearchBox = ({
     navigate(`/photographers/${id}`);
   };
 
+  const starValue = !isNaN(parseFloat(star)) ? parseFloat(star).toFixed(1) : "";
+
   const tagValues = Object.values(tags).filter((tag) => tag !== null);
   const tag = Object.values(tags)
     .filter((tag) => tag !== null)
@@ -38,7 +40,7 @@ const SearchBox = ({
           <Photographer>{photographer} 작가</Photographer>
           <Star>
             <img src={starIcon} />
-            {star} ({review})
+            {starValue} ({review})
           </Star>
         </TopInfo>
         {regionCount > 1 ? (
@@ -132,7 +134,6 @@ const Photographer = styled.div`
   @media (max-width: 768px) {
     font-size: 10px;
     height: 15px;
-
     max-width: 48px;
   }
 `;
@@ -198,7 +199,6 @@ const Star = styled.div`
 
   img {
     margin-right: 0.4rem;
-    margin-top: 0.4rem;
     width: 24px;
     height: 24px;
 

@@ -29,7 +29,7 @@ const MySnapBox = ({ photo, photographer, region, date, tags }) => {
       </Container>
 
       <ContainerMb>
-        <img className="photo" src="" alt="" />
+        <img className="photo" src={photo} alt="" />
         <img className="heart" src={filledHeart} alt="" />
       </ContainerMb>
     </>

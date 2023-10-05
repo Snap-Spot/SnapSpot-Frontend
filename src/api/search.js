@@ -11,19 +11,10 @@ export const getKeywordSearch = async (keyword) => {
 };
 
 //사진 작가 목록 조회
-export const getPhotographerList = async (areaId, special, ableDate) => {
+export const getPhotographerList = async (data) => {
   try {
-    let endpoint = "/photographers";
-    if (areaId) {
-      endpoint += `?areaId=${areaId}`;
-    }
-    if (special) {
-      endpoint += `${areaId ? "&" : "?"}special=${special}`;
-    }
-    if (ableDate) {
-      endpoint += `${areaId || special ? "&" : "?"}ableDate=${ableDate}`;
-    }
-    const res = await client.get(endpoint);
+
+    const res = await client.get(data);
     return res.data;
   } catch (err) {
     console.error("에러 발생", err);

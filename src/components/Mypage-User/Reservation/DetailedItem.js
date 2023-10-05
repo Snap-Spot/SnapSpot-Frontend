@@ -17,23 +17,20 @@ const DetailedItem = () => {
   const [photographer, setPhotographer] = useState({});
   const [date, setDate] = useState("");
   const [day, setDay] = useState("");
-  const [time, setTime] = useState("");
   const [status, setStatus] = useState({});
   const [category, setCategory] = useState({});
 
   const getData = async () => {
     const planData = await getMyReservation(id);
-    const photographerData = await getPhotographer(14);
-
+    console.log(planData);
+    setPhotographer(planData.photographer);
     setPlan(planData);
-    setPhotographer(photographerData.photographer.member);
 
     setStatus(getStatusFromEng(planData.status));
     setCategory(getCategoryFromEng(planData.category));
 
     setDate(planData.planDate.substr(0, 10));
     setDay(getDayOfWeek(planData.planDate.substr(0, 10)));
-    setTime(planData.planDate.substr(11, 5));
   };
 
   useEffect(() => {
@@ -63,7 +60,7 @@ const DetailedItem = () => {
               <div className="item">
                 <p className="subject">예약일시</p>
                 <p className="content">
-                  {date}({day}) {time}
+                  {date}({day}) {plan.time}
                 </p>
               </div>
               <div className="item">
@@ -72,7 +69,9 @@ const DetailedItem = () => {
               </div>
               <div className="item">
                 <p className="subject">가격</p>
-                <p className="content">{plan.price}원</p>
+                <p className="content">
+                  {plan.price ? plan.price + "원" : "미정"}
+                </p>
               </div>
               <div className="item">
                 <p className="subject">장소</p>
@@ -81,7 +80,14 @@ const DetailedItem = () => {
             </div>
           </Main>
         </div>
-        <DetailMenus status={status} />
+        <DetailMenus
+          status={status}
+          plan={plan}
+          photographer={photographer}
+          date={date}
+          day={day}
+          category={category}
+        />
         <KakaoMap />
       </Wrapper>
     </>
@@ -98,7 +104,7 @@ const Title = styled.div`
   @media (max-width: 768px) {
     //모바일
     font-size: 16px;
-    width: 85%;
+    width: 90%;
   }
 `;
 const Wrapper = styled.div`
@@ -157,6 +163,7 @@ const Main = styled.div`
       width: 100%;
       display: flex;
       align-items: center;
+
       .category {
         color: var(--darkgrey, #777);
       }

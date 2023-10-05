@@ -5,15 +5,22 @@ import PriceListInput from "./PriceListInput";
 import useMobileDetection from "../../common/mobileDetection";
 import LowestPriceInput from "./LowestPriceInput";
 
-const BasicInput = ({ profile, nickname, priceImg, lowestPay }) => {
+const BasicInput = ({
+  profile,
+  nickname,
+  priceImg,
+  lowestPay,
+  setNickname,
+  setProfileImage,
+}) => {
   const isMobile = useMobileDetection();
 
   return (
     <Container>
-      <Profile profile={profile} />
+      <Profile profile={profile} setProfileImage={setProfileImage} />
       {isMobile && <Line2 />}
       <InputContainer>
-        <NameInput nickname={nickname} />
+        <NameInput nickname={nickname} setNickname={setNickname} />
         <PriceListInput priceImg={priceImg} />
         <LowestPriceInput lowestPay={lowestPay} />
       </InputContainer>

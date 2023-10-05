@@ -27,7 +27,7 @@ const customKoLocale = {
 function Calender({ unableSchedules }) {
   let defaultval =
     unableSchedules &&
-    Object.values(unableSchedules.unableDates).map((el) => {
+    Object.values(unableSchedules).map((el) => {
       const isoDate = new Date(el);
       return isoDate.toLocaleString("en-US", options);
     });

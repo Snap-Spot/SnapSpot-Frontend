@@ -6,12 +6,24 @@ const PriceModal = ({ setPriceModalOpen, paymentImage }) => {
     <>
       <Conatiner>
         <CancelIcon src={cancel} onClick={() => setPriceModalOpen(false)} />
-        <Img src={paymentImage} />
+        {paymentImage ? (
+          <Img src={paymentImage} />
+        ) : (
+          <Message>이미지가 없습니다.</Message>
+        )}
       </Conatiner>
       <BG></BG>
     </>
   );
 };
+
+const Message = styled.p`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+`;
 
 const Img = styled.img`
   margin-top: 1rem;

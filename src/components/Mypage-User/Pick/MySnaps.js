@@ -2,146 +2,10 @@ import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import MySnapBox from "./MySnapBox";
 import Paging from "../../Photographers/Review/Paging/Paging";
+import { getBestSnaps } from "../../../api/best-snap";
+import { getDayOfWeek } from "../Reservation/ReservationItem";
 const MySnaps = () => {
-  const [list, setList] = useState([
-    {
-      photo: "",
-      photographer: "뮴먕묭",
-      region: "제주특별자치도 어디시 어디로 18길",
-      date: "2023.07.23(일)",
-      tags: ["커플스냅", "유채꽃", "상큼"],
-    },
-    {
-      photo: "",
-      photographer: "뮴먕묭",
-      region: "제주특별자치도 어디시 어디로 18길",
-      date: "2023.07.23(일)",
-      tags: ["커플스냅", "유채꽃", "상큼"],
-    },
-    {
-      photo: "",
-      photographer: "뮴먕묭",
-      region: "제주특별자치도 어디시 어디로 18길",
-      date: "2023.07.23(일)",
-      tags: ["커플스냅", "유채꽃", "상큼"],
-    },
-    {
-      photo: "",
-      photographer: "뮴먕묭",
-      region: "제주특별자치도 어디시 어디로 18길",
-      date: "2023.07.23(일)",
-      tags: ["커플스냅", "유채꽃", "상큼"],
-    },
-    {
-      photo: "",
-      photographer: "뮴먕묭",
-      region: "제주특별자치도 어디시 어디로 18길",
-      date: "2023.07.23(일)",
-      tags: ["커플스냅", "유채꽃", "상큼"],
-    },
-
-    {
-      photo: "",
-      photographer: "뮴먕묭",
-      region: "제주특별자치도 어디시 어디로 18길",
-      date: "2023.07.23(일)",
-      tags: ["커플스냅", "유채꽃", "상큼"],
-    },
-    {
-      photo: "",
-      photographer: "뮴먕묭",
-      region: "제주특별자치도 어디시 어디로 18길",
-      date: "2023.07.23(일)",
-      tags: ["커플스냅", "유채꽃", "상큼"],
-    },
-    {
-      photo: "",
-      photographer: "뮴먕묭",
-      region: "제주특별자치도 어디시 어디로 18길",
-      date: "2023.07.23(일)",
-      tags: ["커플스냅", "유채꽃", "상큼"],
-    },
-
-    {
-      photo: "",
-      photographer: "뮴먕묭",
-      region: "제주특별자치도 어디시 어디로 18길",
-      date: "2023.07.23(일)",
-      tags: ["커플스냅", "유채꽃", "상큼"],
-    },
-    {
-      photo: "",
-      photographer: "뮴먕묭",
-      region: "제주특별자치도 어디시 어디로 18길",
-      date: "2023.07.23(일)",
-      tags: ["커플스냅", "유채꽃", "상큼"],
-    },
-
-    {
-      photo: "",
-      photographer: "뮴먕묭",
-      region: "제주특별자치도 어디시 어디로 18길",
-      date: "2023.07.23(일)",
-      tags: ["커플스냅", "유채꽃", "상큼"],
-    },
-    {
-      photo: "",
-      photographer: "뮴먕묭",
-      region: "제주특별자치도 어디시 어디로 18길",
-      date: "2023.07.23(일)",
-      tags: ["커플스냅", "유채꽃", "상큼"],
-    },
-    {
-      photo: "",
-      photographer: "뮴먕묭",
-      region: "제주특별자치도 어디시 어디로 18길",
-      date: "2023.07.23(일)",
-      tags: ["커플스냅", "유채꽃", "상큼"],
-    },
-    {
-      photo: "",
-      photographer: "뮴먕묭",
-      region: "제주특별자치도 어디시 어디로 18길",
-      date: "2023.07.23(일)",
-      tags: ["커플스냅", "유채꽃", "상큼"],
-    },
-    {
-      photo: "",
-      photographer: "뮴먕묭",
-      region: "제주특별자치도 어디시 어디로 18길",
-      date: "2023.07.23(일)",
-      tags: ["커플스냅", "유채꽃", "상큼"],
-    },
-    {
-      photo: "",
-      photographer: "뮴먕묭",
-      region: "제주특별자치도 어디시 어디로 18길",
-      date: "2023.07.23(일)",
-      tags: ["커플스냅", "유채꽃", "상큼"],
-    },
-    {
-      photo: "",
-      photographer: "뮴먕묭",
-      region: "제주특별자치도 어디시 어디로 18길",
-      date: "2023.07.23(일)",
-      tags: ["커플스냅", "유채꽃", "상큼"],
-    },
-    {
-      photo: "",
-      photographer: "뮴먕묭",
-      region: "제주특별자치도 어디시 어디로 18길",
-      date: "2023.07.23(일)",
-      tags: ["커플스냅", "유채꽃", "상큼"],
-    },
-    {
-      photo: "",
-      photographer: "뮴먕묭",
-      region: "제주특별자치도 어디시 어디로 18길",
-      date: "2023.07.23(일)",
-      tags: ["커플스냅", "유채꽃", "상큼"],
-    },
-  ]);
-
+  const [list, setList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
 
   const handlePageChange = (pageNumber) => {
@@ -153,7 +17,7 @@ const MySnaps = () => {
   // 데이터 배열을 페이지에 맞게 자르기
   const indexOfLastPost = currentPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
-  const currentPosts = list.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = list && list.slice(indexOfFirstPost, indexOfLastPost);
 
   const resizingHandler = () => {
     if (window.innerWidth <= 768) {
@@ -174,21 +38,33 @@ const MySnaps = () => {
     };
   }, []);
 
+  const getData = async () => {
+    const data = await getBestSnaps();
+    setList(data);
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <>
       <Wrapper>
         <GridBox>
-          {currentPosts.map((el) => {
-            return (
-              <MySnapBox
-                photo={el.photo}
-                photographer={el.photographer}
-                region={el.region}
-                date={el.date}
-                tags={el.tags}
-              />
-            );
-          })}
+          {currentPosts &&
+            currentPosts.map((el) => {
+              const tags = [el.tag1, el.tag2, el.tag3];
+              const date = `${el.photoDate.substr(0, 10)} 
+                (${getDayOfWeek(el.photoDate.substr(0, 10))})`;
+              return (
+                <MySnapBox
+                  photo={el.imageUrl}
+                  photographer={el.photographerName}
+                  region={el.location}
+                  date={date}
+                  tags={tags}
+                />
+              );
+            })}
         </GridBox>
       </Wrapper>
       <PagingContainer>

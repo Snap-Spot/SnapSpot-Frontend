@@ -1,9 +1,7 @@
 import styled from "styled-components";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 
-const Profile = ({ profile }) => {
-  const [profileImg, setProfileImg] = useState(""); // 프로필 이미지
-
+const Profile = ({ profile, setProfileImage }) => {
   const imgRef = useRef();
 
   // 프로필 이미지 프리뷰 생성
@@ -12,14 +10,14 @@ const Profile = ({ profile }) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setProfileImg(reader.result);
+      setProfileImage(reader.result);
     };
   };
 
   return (
     <label htmlFor="file">
       <PhotoContainer>
-        <ProfileImg src={profileImg ? profileImg : profile} />
+        <ProfileImg src={profile} />
         <InputImg
           type="file"
           name="file"

@@ -1,30 +1,119 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { styled } from "styled-components";
-
+import { getMyProfile, updateMyProfile } from "../../../api/member";
 const SettingsForm = () => {
+  const imgRef = useRef();
+  const [inputs, setInputs] = useState({
+    profileImage: "",
+    nickname: "",
+    email: "",
+    password: "",
+  });
+  const [previewImg, setPreviewImg] = useState(null);
+  const [initialImage, setInitialImage] = useState("");
+  const [isPhotographer, setIsPhotographer] = useState(false);
+  //사진 첨부 및 미리보기
+  const uploadImg = () => {
+    let file = imgRef.current.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = async (e) => {
+      setPreviewImg(e.target.result);
+
+      setInputs({
+        ...inputs, // 기존의 input 객체를 복사한 뒤
+        profileImage: file, // name 키를 가진 값을 value 로 설정
+      });
+    };
+  };
+
+  const getData = async () => {
+    try {
+      const data = await getMyProfile();
+      setInputs({
+        nickname: data.nickname,
+        profileImage: "",
+        email: data.email,
+        password: "",
+      });
+      setPreviewImg(data.profile);
+      setInitialImage(data.profile);
+
+      if (data.role === "ROLE_MEMBER") {
+        setIsPhotographer(false);
+      } else if (data.role === "ROLE_PHOTOGRAPHER") {
+        setIsPhotographer(true);
+      }
+    } catch (err) {
+      //프로필 정보 조회 안될때 (unauthorized: 로그인 안 했을때)
+      //로그인 화면으로 리다이렉트
+      alert("로그인 되지 않았습니다. 로그인화면으로 이동합니다.");
+      window.location.href = "/login";
+    }
+  };
+  const updateData = async () => {
+    try {
+      await updateMyProfile(isPhotographer, inputs, initialImage);
+    } catch (err) {
+      if (err.response.data.status === 500) {
+        alert(err.response.data.error);
+      }
+    }
+  };
+  const { profileImage, nickname, email, password } = inputs;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <Wrapper>
       <div className="container">
         <ProfileImg>
-          <img src="" alt="" />
-          <div className="btn">사진 변경</div>
+          <img src={previewImg} alt="" />
+          <input
+            className="input"
+            accept=".jpg, .jpeg, .png"
+            type="file"
+            id="file"
+            multiple
+            onChange={uploadImg}
+            ref={imgRef}
+          />
+          <label htmlFor="file">
+            <div className="btn">사진 변경</div>
+          </label>
         </ProfileImg>
         <div className="line" />
         <TextInputs>
           <div className="item">
             <div className="subject">닉네임</div>
-            <input />
+            <input name="nickname" onChange={handleChange} value={nickname} />
           </div>
           <div className="item">
             <div className="subject">이메일</div>
-            <input />
+            <input name="email" onChange={handleChange} value={email} />
           </div>
           <div className="item">
             <div className="subject">비밀번호</div>
-            <input />
+            <input
+              type="password"
+              name="password"
+              onChange={handleChange}
+              value={password}
+            />
           </div>
 
-          <div className="btn">변경하기</div>
+          <div className="btn" onClick={updateData}>
+            변경하기
+          </div>
         </TextInputs>
       </div>
     </Wrapper>
@@ -88,6 +177,9 @@ const ProfileImg = styled.div`
       margin-left: 20px;
       margin-top: 0px;
     }
+  }
+  .input {
+    display: none;
   }
 `;
 const TextInputs = styled.div`

@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
-const NameInput = ({ nickname }) => {
+const NameInput = ({ nickname, setNickname }) => {
   return (
     <>
       <SubTitle>작가명</SubTitle>
-      <Input placeholder={nickname || ""} />
+      <Input
+        placeholder={nickname || ""}
+        value={nickname}
+        onChange={(e) => setNickname(e.target.value)}
+      />
     </>
   );
 };

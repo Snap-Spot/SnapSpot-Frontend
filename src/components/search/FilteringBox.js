@@ -1,10 +1,12 @@
 import styled from "styled-components";
+import { useNavigate, useLocation } from "react-router-dom";
 import { React, useState, useEffect } from "react";
 import CustomCalendar from "./CustomCalendar";
-import { regions, orders } from "./FilteringList.js";
-import { category } from "../common/category";
+import { regions, orders, category } from "./FilteringList.js";
 
 const FilteringBox = ({ onSearch, setIsFilteringOpen }) => {
+  const navigate = useNavigate();
+
   const [selectedRegion, setSelectedRegion] = useState("서울");
   const [selectedSubRegion, setSelectedSubRegion] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
@@ -21,7 +23,6 @@ const FilteringBox = ({ onSearch, setIsFilteringOpen }) => {
 
   const handleSectionClick = (section) => {
     setSelectedSection(section);
-    console.log(section);
   };
 
   const handleOrderClick = (order) => {
@@ -29,7 +30,27 @@ const FilteringBox = ({ onSearch, setIsFilteringOpen }) => {
   };
 
   const handleSearchBtnClick = (isFilteringOpen) => {
-    onSearch(selectedSubRegion, selectedSection, selectedDate);
+    let endpoint = "/photographers";
+    const queryParams = [];
+    if (selectedSubRegion) {
+      queryParams.push(`areaId=${selectedSubRegion}`);
+    }
+    if (selectedSection) {
+      queryParams.push(`special=${selectedSection}`);
+    }
+    if (selectedDate) {
+      queryParams.push(`ableDate=${selectedDate}`);
+    }
+    if (selectedOrder && selectedOrder.length > 0) {
+      queryParams.push(`sort=${selectedOrder}`);
+    }
+
+    if (queryParams.length > 0) {
+      endpoint += "?" + queryParams.join("&");
+    }
+    console.log(endpoint);
+    navigate(endpoint);
+
     setIsFilteringOpen(!isFilteringOpen);
   };
 
@@ -113,10 +134,10 @@ const FilteringBox = ({ onSearch, setIsFilteringOpen }) => {
                   <>
                     <Section
                       key={index}
-                      onClick={() => handleOrderClick(order)}
-                      isSelected={selectedOrder === order}
+                      onClick={() => handleOrderClick(order.key)}
+                      isSelected={selectedOrder === order.key}
                     >
-                      {order}
+                      {order.label}
                     </Section>
                     {index !== orders.length - 1 && <Line />}
                   </>

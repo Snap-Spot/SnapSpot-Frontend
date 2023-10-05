@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import openDropdownImg from "../../../assets/mypage/openDropdown.png";
-const Dropdown = ({ options }) => {
+const Dropdown = ({ options, handleTarget }) => {
   const [selected, setSelected] = useState(-1);
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
-  const handleSelect = (index) => {
+  const handleSelect = (index, el) => {
     setSelected(index);
+    handleTarget(el);
 
     setTimeout(() => {
       setIsOpenDropdown(false);
-    }, 300);
+    }, 100);
   };
   const openDropdown = () => {
     //수정
@@ -31,7 +32,7 @@ const Dropdown = ({ options }) => {
             return (
               <>
                 {index !== 0 && <Line />}
-                <Item $color={color} onClick={() => handleSelect(index)}>
+                <Item $color={color} onClick={() => handleSelect(index, el)}>
                   {el}
                 </Item>
               </>
@@ -42,12 +43,19 @@ const Dropdown = ({ options }) => {
         <Closed>
           {selected !== -1 ? (
             <Title onClick={openDropdown}>
-              {options.list[selected]}
+              <div
+                className="text"
+                $width={`${options.width}px`}
+                $mb_width={`${options.mb_width}px`}
+              >
+                {options.list[selected]}
+              </div>
+
               <img src={openDropdownImg} alt="" />
             </Title>
           ) : (
             <Title onClick={openDropdown}>
-              {options.title}
+              <div className="text">{options.title}</div>
               <img src={openDropdownImg} alt="" />
             </Title>
           )}
@@ -140,5 +148,9 @@ const Title = styled.div`
     }
     border-radius: 16px;
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
+  }
+
+  .text {
+    width: 100%;
   }
 `;

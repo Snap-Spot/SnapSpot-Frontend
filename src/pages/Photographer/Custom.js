@@ -33,10 +33,25 @@ const Custom = () => {
     try {
       const res = await getCustomInfo();
       setData(res);
+      setNickname(res.member.nickname);
+      setProfileImage(res.member.profile);
+      setPaymentImage(res.paymentImage);
+      setLowestPay(res.lowestPay);
+      setAreaId(res.areas);
+      setSns(res.sns);
+      setBio(res.bio);
+      setSpecialList(res.specialList);
+      setTag(res.tags);
+      setUnableDates(res.unableSchedules.unableDates);
+      setImage(res.images);
+      console.log(res);
     } catch (err) {
       console.log(err);
     }
   };
+
+  console.log("닉네임", nickname);
+  // console.log("프로필", profileImage);
 
   const putCustomInfos = async () => {
     try {
@@ -71,20 +86,22 @@ const Custom = () => {
             <Title>작가 페이지 커스텀</Title>
             <Line />
             <BasicInput
-              profile={data.member.profile}
-              nickname={data.member.nickname}
-              priceImg={data.paymentImage}
-              lowestPay={data.lowestPay}
+              profile={profileImage}
+              nickname={nickname}
+              priceImg={paymentImage}
+              lowestPay={lowestPay}
+              setNickname={setNickname}
+              setProfileImage={setProfileImage}
             />
             <Line2 />
             <OtherInputs
-              location={data.areas}
-              sns={data.sns}
-              bio={data.bio}
-              specialList={data.specialList}
-              tags={data.tags}
-              unableSchedules={data.unableSchedules}
-              images={data.images}
+              location={areaId}
+              sns={sns}
+              bio={bio}
+              specialList={specialList}
+              tags={tag}
+              unableSchedules={unableDates}
+              images={image}
             />
             <ChangeBtn onClick={() => putCustomInfos()}>변경하기</ChangeBtn>
           </>

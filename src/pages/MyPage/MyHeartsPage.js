@@ -3,77 +3,9 @@ import styled from "styled-components";
 import Header from "../../components/common/Header";
 import PhotoBox from "../../components/Mypage-User/Pick/PhotoBox";
 import Paging from "../../components/Photographers/Review/Paging/Paging";
+import { getMyHeartList } from "../../api/heart";
 const MyHeartsPage = () => {
-  const [list, setList] = useState([
-    {
-      photo: "",
-      photographer: "에밀리",
-      region: "제주도 서귀포",
-    },
-    {
-      photo: "",
-      photographer: "에밀리",
-      region: "제주도 서귀포",
-    },
-    {
-      photo: "",
-      photographer: "에밀리",
-      region: "제주도 서귀포",
-    },
-    {
-      photo: "",
-      photographer: "에밀리",
-      region: "제주도 서귀포",
-    },
-
-    {
-      photo: "",
-      photographer: "에밀리",
-      region: "제주도 서귀포",
-    },
-    {
-      photo: "",
-      photographer: "에밀리",
-      region: "제주도 서귀포",
-    },
-    {
-      photo: "",
-      photographer: "에밀리",
-      region: "제주도 서귀포",
-    },
-    {
-      photo: "",
-      photographer: "에밀리",
-      region: "제주도 서귀포",
-    },
-    {
-      photo: "",
-      photographer: "에밀리",
-      region: "제주도 서귀포",
-    },
-
-    {
-      photo: "",
-      photographer: "에밀리",
-      region: "제주도 서귀포",
-    },
-    {
-      photo: "",
-      photographer: "에밀리",
-      region: "제주도 서귀포",
-    },
-    {
-      photo: "",
-      photographer: "에밀리",
-      region: "제주도 서귀포",
-    },
-    {
-      photo: "",
-      photographer: "에밀리",
-      region: "제주도 서귀포",
-    },
-  ]); // 리스트에 나타낼 아이템들
-
+  const [list, setList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const itemsPerPage = 12; // 페이지당 아이템 개수
 
@@ -86,6 +18,15 @@ const MyHeartsPage = () => {
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
   const currentPosts = list.slice(indexOfFirstPost, indexOfLastPost);
 
+  const getData = async () => {
+    const data = await getMyHeartList();
+    console.log(data);
+
+    setList(data);
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <>
       <Header />
@@ -95,12 +36,15 @@ const MyHeartsPage = () => {
         <GridBox>
           <div class="grid">
             {currentPosts.map((el) => {
+              const region = `${el.areas[0].metropolitan} ${
+                el.areas[0].city
+              } 외 ${el.areas.length - 1}곳`;
               return (
                 <div>
                   <PhotoBox
-                    photo={el.photo}
-                    photographer={el.photographer}
-                    region={el.region}
+                    photo={el.image}
+                    photographer={el.nickname}
+                    region={region}
                   />
                 </div>
               );
