@@ -73,14 +73,14 @@ const Map = styled.div`
 `;
 const Container = styled.div`
   width: 70%;
-  height: 60%;
+  height: 610px;
   margin: 0px auto;
   margin-top: 35px;
 
   @media (max-width: 768px) {
     //모바일
     width: 80%;
-    height: 70%;
+    height: 280px;
     margin-top: 17px;
   }
   .button {
@@ -115,14 +115,14 @@ const Container = styled.div`
 const Wrapper = styled.div`
   margin-top: 84px;
   width: 100%;
-  height: 1018px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 100px;
 
   @media (max-width: 768px) {
     //모바일
-    height: 394px;
     margin-top: 40px;
+    margin-bottom: 100px;
   }
 
   .location {
