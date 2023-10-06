@@ -56,15 +56,33 @@ export const putCustomInfo = async (
   unableDates,
   image
 ) => {
-  const profileImageUrl = await getS3ImgUrl(profileImage);
-  const paymentImageUrl = await getS3ImgUrl(paymentImage);
+  let profileImageUrl = profileImage; // 프로필 이미지 URL 초기값을 변경 전 이미지로 설정
+  let paymentImageUrl = paymentImage; // 결제 이미지 URL 초기값을 변경 전 이미지로 설정
   const imagesUrl = {};
 
+  // 프로필 이미지(`profileImage`)가 변경된 경우에만 URL을 다시 가져옴
+  if (profileImage instanceof File) {
+    profileImageUrl = await getS3ImgUrl(profileImage);
+  }
+
+  // 결제 이미지(`paymentImage`)가 `File` 객체인 경우에만 URL을 다시 가져옴
+  if (paymentImage instanceof File) {
+    paymentImageUrl = await getS3ImgUrl(paymentImage);
+  }
+
+  // 변경된 이미지(`image`)에 대해서 URL을 다시 가져옴
   for (const key in image) {
     if (image.hasOwnProperty(key)) {
-      imagesUrl[key] = await getS3ImgUrl(image[key]);
+      // `image[key]`가 `File` 객체인 경우에만 URL을 다시 가져옴
+      if (image[key] instanceof File) {
+        imagesUrl[key] = await getS3ImgUrl(image[key]);
+      } else {
+        // `image[key]`가 URL 형식이 아니라면 이미지 URL 변경 없음
+        imagesUrl[key] = image[key];
+      }
     }
   }
+
   const body = {
     nickname: nickname,
     profileImage: profileImageUrl,
@@ -72,26 +90,20 @@ export const putCustomInfo = async (
     lowestPay: lowestPay,
     bio: bio,
     areaId: areaId,
-    sns: {
-      instagram: "happysnap_",
-      twitter: "happysnap_",
-      kakaoChannel: "https://pf.kakao.com/_happySNAP",
-      naverBlog: "https://blog.naver.com",
-      homepage: "https://happysnap.com",
-    },
+    sns: sns,
     specialList: special,
     tag: tag,
     unableDates: unableDates,
     image: imagesUrl,
   };
 
-  console.log(body);
+  console.log("request", body);
 
   try {
     const res = await client.put(`/photographers/me`, body);
     console.log("응답", res);
     alert("변경되었습니다.");
-    return res;
+    return res.data;
   } catch (err) {
     console.log("커스텀 수정 에러", err);
   }

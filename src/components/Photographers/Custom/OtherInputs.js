@@ -25,6 +25,7 @@ const OtherInputs = ({
   setImage,
 }) => {
   let snsList = sns ? Object.values(sns) : [];
+  console.log(snsList);
 
   return (
     <Center>
@@ -34,8 +35,11 @@ const OtherInputs = ({
         {icon_src.map((item, idx) => (
           <SNSInput
             key={idx}
+            index={idx}
             iconSrc={item.src}
             text={snsList[idx] || item.text}
+            sns={sns}
+            setSns={setSns}
           />
         ))}
         <IntroductionInput bio={bio} setBio={setBio} />

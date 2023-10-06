@@ -28,6 +28,8 @@ const RegionInput = ({ areaId, setAreaId }) => {
     });
   };
 
+  console.log("지역", areaId);
+
   return (
     <>
       <FilterTab open={toggle}>

@@ -19,12 +19,12 @@ export const icon_src = [
     text: "@ kakao channel",
   },
   {
-    src: blog,
-    text: "@ naver blog",
-  },
-  {
     src: twitter,
     text: "@ twitter",
+  },
+  {
+    src: blog,
+    text: "@ naver blog",
   },
 ];
 

@@ -15,11 +15,11 @@ const Custom = () => {
   const [bio, setBio] = useState("");
   const [areaId, setAreaId] = useState([]);
   const [sns, setSns] = useState({
-    instagram: "",
-    twitter: "",
-    kakaoChannel: "",
-    naverBlog: "",
     homepage: "",
+    instagram: "",
+    kakaoChannel: "",
+    twitter: "",
+    naverBlog: "",
   });
   const [specialList, setSpecialList] = useState([]);
   const [tag, setTag] = useState({
@@ -41,9 +41,14 @@ const Custom = () => {
     image10: "",
   });
 
+  useEffect(() => {
+    getCustomInfos();
+  }, []);
+
   const getCustomInfos = async () => {
     try {
       const res = await getCustomInfo();
+
       setData(res);
       setNickname(res.member.nickname);
       setProfileImage(res.member.profile);
@@ -60,7 +65,8 @@ const Custom = () => {
       setTag(res.tags);
       setUnableDates(res.unableSchedules.unableDates);
       setImage(res.images);
-      console.log(res);
+
+      console.log("결과", res);
     } catch (err) {
       console.log(err);
     }
@@ -71,13 +77,12 @@ const Custom = () => {
   // console.log("가격표", paymentImage);
   // console.log("가격", lowestPay);
   // console.log("소개", bio);
-  // console.log("지역", areaId);
+  // console.log("지역id", areaId);
   // console.log("태그", tag);
   // console.log("이미지", image);
   // console.log("전문분야", specialList);
   // console.log("날짜", unableDates);
-
-  // sns
+  // console.log("sns", sns);
 
   const putCustomInfos = async () => {
     let special = category
@@ -97,12 +102,9 @@ const Custom = () => {
       unableDates,
       image
     );
+
     console.log(res);
   };
-
-  useEffect(() => {
-    getCustomInfos();
-  }, []);
 
   return (
     <LayOut>

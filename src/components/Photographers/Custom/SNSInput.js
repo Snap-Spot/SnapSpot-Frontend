@@ -1,10 +1,25 @@
 import styled from "styled-components";
 
-const SNSInput = ({ iconSrc, text }) => {
+const SNSInput = ({ index, iconSrc, text, setSns, sns }) => {
+  const handleChange = (e) => {
+    let newVal = e.target.value;
+    if (index === 0) {
+      setSns({ ...sns, homepage: newVal });
+    } else if (index === 1) {
+      setSns({ ...sns, instagram: newVal });
+    } else if (index === 2) {
+      setSns({ ...sns, kakaoChannel: newVal });
+    } else if (index === 3) {
+      setSns({ ...sns, twitter: newVal });
+    } else if (index === 4) {
+      setSns({ ...sns, naverBlog: newVal });
+    }
+  };
+
   return (
     <Container>
       <Icon src={iconSrc} />
-      <Input placeholder={text} />
+      <Input placeholder={text} value={text} onChange={handleChange} />
     </Container>
   );
 };
