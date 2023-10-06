@@ -29,7 +29,7 @@ const Wrapper = styled.div`
     }
   }
 `;
-const Chat = styled.textarea`
+const Chat = styled.div`
   padding-right: 15px;
   resize: none;
   outline: none;
@@ -39,6 +39,7 @@ const Chat = styled.textarea`
   width: 60%;
   max-width: 600px;
   height: 100px;
+  overflow-y: scroll;
   border-radius: 32px 32px 32px 0px;
   background: #fff;
   box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.25);

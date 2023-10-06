@@ -17,13 +17,14 @@ const Wrapper = styled.div`
   justify-content: end;
   margin-bottom: 20px;
 `;
-const Chat = styled.textarea`
+const Chat = styled.div`
   padding-right: 15px;
   resize: none;
   outline: none;
   width: 60%;
   max-width: 600px;
   height: 100px;
+  overflow-y: scroll;
   border-radius: 32px 32px 0px 32px;
   background: #fff;
   border: #5170de;
