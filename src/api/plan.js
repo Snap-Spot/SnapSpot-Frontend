@@ -115,3 +115,25 @@ export const putDeposit = async (
     console.log("입금 요청 에러", err);
   }
 };
+//고객의 예약 변경
+export const putPlanChange = async (
+  planId,
+  people,
+  reason,
+  time,
+  localeDateTime
+) => {
+  console.log(localeDateTime);
+  try {
+    const res = await client.put(`/plans/change`, {
+      planId: planId,
+      reason: reason,
+      planDate: localeDateTime,
+      time: time,
+      people: people,
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};

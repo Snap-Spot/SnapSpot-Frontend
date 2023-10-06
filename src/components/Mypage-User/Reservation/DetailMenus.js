@@ -21,7 +21,13 @@ const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
       {
         menu: "예약 변경하기",
         title: "무엇을 변경하고 싶으세요?",
-        content: <ChangeModal />,
+        content: (
+          <ChangeModal
+            planId={plan.planId}
+            photographerName={photographer.nickname}
+            category={category.kor}
+          />
+        ),
       },
       {
         menu: "예약 취소하기",
@@ -46,7 +52,13 @@ const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
       {
         menu: "예약 변경하기",
         title: "무엇을 변경하고 싶으세요?",
-        content: <ChangeModal />,
+        content: (
+          <ChangeModal
+            planId={plan.planId}
+            photographerName={photographer.nickname}
+            category={category.kor}
+          />
+        ),
       },
       {
         menu: "예약 취소하기",
@@ -72,7 +84,13 @@ const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
       {
         menu: "예약 변경하기",
         title: "무엇을 변경하고 싶으세요?",
-        content: <ChangeModal />,
+        content: (
+          <ChangeModal
+            planId={plan.planId}
+            photographerName={photographer.nickname}
+            category={category.kor}
+          />
+        ),
       },
       {
         menu: "예약 취소하기",

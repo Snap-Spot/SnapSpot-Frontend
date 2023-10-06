@@ -29,6 +29,7 @@ function MiniCalendar({
   setStringdate,
   setPrevDate,
   prevDate,
+  setLocaleDateTime,
 }) {
   const [selectedDate, setSelectedDate] = useState(prevDate);
 
@@ -46,13 +47,26 @@ function MiniCalendar({
     const week = ["일", "월", "화", "수", "목", "금", "토"];
 
     const strDate = JSON.stringify(date);
+    //utc로 변환됨..
+    console.log(date);
+    console.log(strDate);
     const year = strDate.substring(1, 5);
     const month = strDate.substring(6, 8);
-    const day = parseInt(strDate.substring(9, 11));
+    const day = strDate.substring(9, 11);
     const dayOfWeek = week[new Date(strDate.substring(1, 11)).getDay() % 7];
 
     setStringdate(
       year + "년 " + month + "월 " + day + "일 " + dayOfWeek + "요일"
+    );
+    console.log(date);
+
+    setLocaleDateTime(
+      year +
+        "-" +
+        month.padStart(2, "0") +
+        "-" +
+        day.padStart(2, "0") +
+        "T00:00:00"
     );
   };
 

@@ -3,7 +3,8 @@ import { styled } from "styled-components";
 import Dropdown from "./Dropdown";
 import MiniCalendar from "./MiniCalendar";
 import calendar from "../../../assets/mypage/modals/calendar.png";
-const ChangeModal = () => {
+import { putPlanChange } from "../../../api/plan";
+const ChangeModal = ({ planId, photographerName, category }) => {
   const [isOpenCalendar, setIsOpenCalendar] = useState(false); //수정
   const openCalendar = () => {
     setIsOpenCalendar(true);
@@ -47,7 +48,7 @@ const ChangeModal = () => {
       mb_width: "83",
     },
     {
-      list: ["1명", "2명", "3명", "4명", "5명"],
+      list: ["1명", "2명", "3명", "4명", "5명+"],
       title: "1명",
       width: "102",
       mb_width: "69",
@@ -59,14 +60,47 @@ const ChangeModal = () => {
     setPrevDate(new Date());
     formatDate(new Date());
   }, []);
+  const [people, setPeople] = useState(1);
+  const [time, setTime] = useState("09:00");
+  const [reason, setReason] = useState("");
+  const handlePeople = (text) => {
+    setPeople(Number(text.substr(0, 1)));
+  };
+  const handleTime = (text) => {
+    setTime(String(text).padStart(5, "0"));
+  };
+  const handleReason = (text) => {
+    setReason(text);
+  };
+  const handleSubmit = async () => {
+    if (reason !== "") {
+      try {
+        const res = await putPlanChange(
+          planId,
+          people,
+          reason,
+          time,
+          localeDateTime
+        );
 
+        if (res.status === 200) {
+          alert("예약을 변경했습니다.");
+          window.location.reload();
+        }
+      } catch (err) {
+        alert("에러");
+      }
+    } else {
+      alert("변경 이유를 선택해주세요.");
+    }
+  };
   const formatDate = (date) => {
     const week = ["일", "월", "화", "수", "목", "금", "토"];
 
     const strDate = JSON.stringify(date);
     const year = strDate.substring(1, 5);
     const month = strDate.substring(6, 8);
-    const day = parseInt(strDate.substring(9, 11));
+    const day = strDate.substring(9, 11);
     const dayOfWeek = week[new Date(strDate.substring(1, 11)).getDay() % 7];
 
     setStringdate(
@@ -76,6 +110,7 @@ const ChangeModal = () => {
 
   const [prevDate, setPrevDate] = useState();
   const [stringDate, setStringdate] = useState("");
+  const [localeDateTime, setLocaleDateTime] = useState("");
   return (
     <Wrapper>
       <div className="subtitle">
@@ -84,13 +119,13 @@ const ChangeModal = () => {
       </div>
       <div className="subject">예약 세부 정보</div>
       <div className="content">
-        <div className="name">한빛나리 작가</div>
-        <div className="category">&nbsp;&nbsp;|&nbsp;&nbsp;졸업스냅</div>
+        <div className="name">{photographerName} 작가</div>
+        <div className="category">&nbsp;&nbsp;|&nbsp;&nbsp;{category}</div>
       </div>
 
       <div className="subject">변경하시는 이유가 무엇입니까?</div>
       <div className="content">
-        <Dropdown options={options[0]} />
+        <Dropdown options={options[0]} handleTarget={handleReason} />
       </div>
 
       <div className="subject">날짜</div>
@@ -103,6 +138,7 @@ const ChangeModal = () => {
                 setStringdate={setStringdate}
                 setPrevDate={setPrevDate}
                 prevDate={prevDate}
+                setLocaleDateTime={setLocaleDateTime}
               />
             </Open>
           ) : (
@@ -116,15 +152,17 @@ const ChangeModal = () => {
 
       <div className="subject">시간</div>
       <div className="content">
-        <Dropdown options={options[1]} />
+        <Dropdown options={options[1]} handleTarget={handleTime} />
       </div>
 
       <div className="subject">인원</div>
       <div className="content">
-        <Dropdown options={options[2]} />
+        <Dropdown options={options[2]} handleTarget={handlePeople} />
       </div>
 
-      <div className="btn">변경하기</div>
+      <div className="btn" onClick={handleSubmit}>
+        변경하기
+      </div>
     </Wrapper>
   );
 };
