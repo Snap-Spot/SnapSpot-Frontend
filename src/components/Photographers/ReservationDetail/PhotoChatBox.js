@@ -1,11 +1,9 @@
 import styled from "styled-components";
-import profile from "../../../assets/photograph/profile.png";
 
-const ChatBox = ({ text, time, profile }) => {
+const PhotoChatBox = ({ text, time }) => {
   return (
     <ChatBoxContainer>
       <ChatContainer>
-        <Profile src={profile} />
         <Chat>{text}</Chat>
       </ChatContainer>
       <Time>{time}</Time>
@@ -17,6 +15,7 @@ const ChatBoxContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 68%;
+  margin-left: auto;
 
   @media (max-width: 768px) {
     width: 80%;
@@ -33,18 +32,6 @@ const ChatContainer = styled.div`
   }
 `;
 
-const Profile = styled.img`
-  width: 60px;
-  height: 60px;
-  margin-right: 1rem;
-
-  @media (max-width: 768px) {
-    width: 24px;
-    height: 24px;
-    margin-right: 0.8rem;
-  }
-`;
-
 const Chat = styled.div`
   display: inline-flex;
   flex-direction: column;
@@ -53,7 +40,8 @@ const Chat = styled.div`
   height: 100px;
   border-radius: 32px;
   background: #fff;
-  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.25);
+  border: 1px solid #5170de;
+  /* box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.25); */
   font-size: 16px;
   padding-left: 24px;
   padding-top: 16px;
@@ -79,4 +67,4 @@ const Time = styled.p`
   }
 `;
 
-export default ChatBox;
+export default PhotoChatBox;

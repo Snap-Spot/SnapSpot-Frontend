@@ -134,6 +134,7 @@ const Arrow = styled.img`
 const Profile = styled.img`
   width: 1.5rem;
   height: 1.5rem;
+  border-radius: 50%;
 
   @media (max-width: 768px) {
     width: 1.2rem;

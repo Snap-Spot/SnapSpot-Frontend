@@ -4,6 +4,7 @@ import Paging from "../../components/Photographers/Review/Paging/Paging";
 import { ReviewData } from "../../components/Photographers/Review/MockData/ReviewData";
 import { useEffect, useState } from "react";
 import LayOut from "../../components/common/LayOut";
+import { getReviews } from "../../api/review";
 
 const Review = () => {
   const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
@@ -14,12 +15,25 @@ const Review = () => {
   const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
   const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
 
+  const getReview = async () => {
+    try {
+      const data = await getReviews();
+      console.log("데이터", data);
+      setProducts(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
-    setProducts(ReviewData);
-    setCount(products.length);
+    getReview();
+    setCount(products.totalReview);
     setIndexOfLastPost(currentPage * postPerPage);
     setIndexOfFirstPost(indexOfLastPost - postPerPage);
-    setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
+    products.reviews &&
+      setCurrentPosts(
+        products.reviews.slice(indexOfFirstPost, indexOfLastPost)
+      );
   }, [currentPage, postPerPage, indexOfLastPost, indexOfFirstPost]);
 
   const setPage = (error) => {
@@ -33,33 +47,39 @@ const Review = () => {
         <Length>총 {products.length}개</Length>
         <Line />
         <ReviewContainer>
-          {currentPosts && products.length > 0 ? (
-            currentPosts.map((productData, idx) => (
-              <ReviewBox
-                key={idx}
-                type="list"
-                profile={productData.profile}
-                nickname={productData.nickname}
-                title={productData.title}
-                content={productData.content}
-                date={productData.date}
-                score={productData.score}
+          {currentPosts && currentPosts.length > 0 ? (
+            <>
+              {currentPosts.map((productData, idx) => (
+                <ReviewBox
+                  key={idx}
+                  type="list"
+                  profile={productData.plan.customer.profile}
+                  nickname={productData.plan.customer.nickname}
+                  title={productData.title}
+                  content={productData.comment}
+                  date={productData.plan.planDate.slice(0, 10)}
+                  score={productData.score}
+                />
+              ))}
+              <Paging
+                page={currentPage}
+                count={count}
+                setPage={setPage}
+                itemsCountPerPage={6}
               />
-            ))
+            </>
           ) : (
-            <div>리뷰가 없습니다.</div>
+            <Content>리뷰가 없습니다.</Content>
           )}
         </ReviewContainer>
-        <Paging
-          page={currentPage}
-          count={count}
-          setPage={setPage}
-          itemsCountPerPage={6}
-        />
       </Container>
     </LayOut>
   );
 };
+
+const Content = styled.div`
+  margin-top: 6rem;
+`;
 
 const Container = styled.div`
   display: flex;

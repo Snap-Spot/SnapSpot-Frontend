@@ -3,6 +3,7 @@ import UpcomingSchedule from "../../components/Photographers/Reservation/Upcomin
 import LayOut from "../../components/common/LayOut";
 import { getAllReservation } from "../../api/plan";
 import { useState, useEffect } from "react";
+import { category } from "../../components/common/category";
 
 const ReservationList = () => {
   const [reservation, setReservation] = useState();
@@ -10,7 +11,7 @@ const ReservationList = () => {
   const getReservation = async () => {
     try {
       const data = await getAllReservation();
-      setReservation(data.reserved);
+      setReservation(data.filter((el) => el.status === "RESERVED"));
       console.log(reservation);
     } catch (err) {
       console.log(err);
@@ -30,7 +31,7 @@ const ReservationList = () => {
             <UpcomingSchedule
               key={idx}
               nickname={item.customer.nickname}
-              snapType={item.category}
+              snapType={category.filter((el) => el.key === item.category)}
               headCount={item.people}
               time={item.time || 0}
               place={item.wishPlace}

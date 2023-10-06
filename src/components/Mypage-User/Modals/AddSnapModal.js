@@ -82,6 +82,7 @@ const AddSnapModal = () => {
       alert("입력 오류");
     }
   };
+
   return (
     <Wrapper>
       <Photo>
