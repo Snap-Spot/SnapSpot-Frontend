@@ -37,6 +37,7 @@ const Profile = styled.img`
   width: 60px;
   height: 60px;
   margin-right: 1rem;
+  border-radius: 50%;
 
   @media (max-width: 768px) {
     width: 24px;
