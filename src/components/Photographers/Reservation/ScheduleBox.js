@@ -2,6 +2,7 @@ import styled from "styled-components";
 import arrow from "../../../assets/photograph/arrow.png";
 import line from "../../../assets/photograph/line.png";
 import { useNavigate } from "react-router-dom";
+import { status_list } from "./MockData/status";
 
 //복구
 const ScheduleBox = ({
@@ -14,6 +15,7 @@ const ScheduleBox = ({
   idx,
   id,
   profile,
+  status,
 }) => {
   const navigate = useNavigate();
 
@@ -25,7 +27,7 @@ const ScheduleBox = ({
           <RowContainer>
             <Profile src={profile} />
             <NickName>{nickname}</NickName>
-            <Btn>예약완료</Btn>
+            <Btn>{status_list[status][0]}</Btn>
           </RowContainer>
           <Detail onClick={() => navigate(`/photographer/reserve/${id}`)}>
             상세보기 <Arrow src={arrow} />
@@ -110,6 +112,7 @@ const Container = styled.div`
 const Profile = styled.img`
   width: 1.5rem;
   height: 1.5rem;
+  border-radius: 50%;
 
   @media (max-width: 768px) {
     width: 1.2rem;

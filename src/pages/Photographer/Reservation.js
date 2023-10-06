@@ -14,6 +14,7 @@ const Reservation = () => {
     try {
       const reservationData = await getAllReservation();
       setData(reservationData);
+      console.log("이거!!", reservationData);
     } catch (err) {
       console.log(err);
     }
@@ -28,9 +29,13 @@ const Reservation = () => {
       <Container>
         {data && (
           <>
-            <ReservationContainer data={data.reserved} />
-            <RequestContainer request={data.request} />
-            <UpcomingContainer reservation={data.reserved} />
+            <ReservationContainer data={data} />
+            <RequestContainer
+              request={data.filter((el) => el.status === "REQUEST")}
+            />
+            <UpcomingContainer
+              reservation={data.filter((el) => el.status === "RESERVED")}
+            />
           </>
         )}
       </Container>

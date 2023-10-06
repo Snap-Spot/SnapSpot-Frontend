@@ -17,6 +17,7 @@ const Profile = ({
   areas,
   sns,
   bio,
+  setPriceModalOpen,
 }) => {
   const isMobile = useMobileDetection(); // 모바일 여부 감지
   const values = Object.values(sns);
@@ -67,7 +68,9 @@ const Profile = ({
           </Container>
           <Container>
             <SubTitle>가격표</SubTitle>
-            <Price>{lowestPay.toLocaleString()}원 ~</Price>
+            <Price>
+              {lowestPay ? lowestPay.toLocaleString() + "원 ~" : "없음"}
+            </Price>
           </Container>
           {!isMobile && (
             <>
@@ -93,9 +96,9 @@ const Profile = ({
                 <SubTitle align="top">SNS</SubTitle>
                 <Content>
                   {values.filter((el) => !!el).length !== 0 ? (
-                    icon_img.map((el, i) => (
-                      <SNS iconSrc={el} text={values[i]} />
-                    ))
+                    icon_img.map((el, i) =>
+                      values[i] ? <SNS iconSrc={el} text={values[i]} /> : ""
+                    )
                   ) : (
                     <Content>없음</Content>
                   )}
@@ -106,7 +109,9 @@ const Profile = ({
                 <Content>{bio || "없음"}</Content>
               </Container>
               {/* 클릭하면 가격표 보여주기 */}
-              <PriceBtn>상세 가격표 보기</PriceBtn>
+              <PriceBtn onClick={() => setPriceModalOpen(true)}>
+                상세 가격표 보기
+              </PriceBtn>
               <ReservationBtn onClick={() => setModalOpen(true)}>
                 예약하기
               </ReservationBtn>
@@ -157,6 +162,7 @@ const Profile = ({
 
 const Row = styled.div`
   display: flex;
+  flex-direction: column;
 `;
 
 const Container = styled.div`
@@ -223,6 +229,7 @@ const PriceBtn = styled(ReservationBtn)`
 
 const Contents = styled.div`
   margin-left: auto;
+  max-width: 26rem;
 `;
 
 const ProfileContainer = styled.div`
@@ -242,6 +249,7 @@ const InfoContainer = styled(ProfileContainer)`
 const Content = styled.p`
   margin-top: 0rem;
   margin-bottom: 0rem;
+  width: 100%;
 
   @media (max-width: 768px) {
     margin: 0;

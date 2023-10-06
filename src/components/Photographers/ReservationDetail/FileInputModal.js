@@ -2,23 +2,51 @@ import styled from "styled-components";
 import cancel from "../../../assets/photograph/cancel.png";
 import { useState, useEffect, useRef } from "react";
 import filebtn from "../../../assets/photograph/filebtn.png";
+import { putDelivery } from "../../../api/plan";
 
-const FileInputModal = ({ setIsOpen, isOpen }) => {
+const FileInputModal = ({ setIsPhotoModal, planId, contents }) => {
   const [imgfile, setImgFile] = useState([]);
+  const [isHidden, setIsHidden] = useState(false);
+  const [preview, setPreview] = useState([]);
   const imgRef = useRef([]);
 
-  const saveImgFile = () => {
-    const file = imgRef.current[imgfile.length].files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setImgFile((prevImgFiles) => [...prevImgFiles, reader.result]);
-    };
+  const saveImgFiles = async () => {
+    const newImages = [];
+    const preview = [];
+
+    for (let i = 0; i < imgRef.current.length; i++) {
+      const files = imgRef.current[i].files;
+      for (let j = 0; j < files.length; j++) {
+        const file = files[j];
+        const reader = new FileReader();
+        await new Promise((resolve) => {
+          reader.onloadend = () => {
+            preview.push(reader.result);
+            newImages.push(file);
+            resolve();
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+    }
+
+    setPreview([...preview]);
+    setImgFile([...imgfile, ...newImages]);
+    setIsHidden(!isHidden);
+  };
+
+  const sendDelivery = async () => {
+    try {
+      const res = await putDelivery(planId, contents, imgfile[0]);
+      console.log("응답", res);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const deleteFileImg = (index) => {
     const updatedFiles = [...imgfile];
-    updatedFiles[index] = null;
+    updatedFiles.splice(index, 1);
     setImgFile(updatedFiles);
   };
 
@@ -27,23 +55,28 @@ const FileInputModal = ({ setIsOpen, isOpen }) => {
       <Conatiner>
         <Header>
           <Title>파일 삽입</Title>
-          <CancelIcon src={cancel} onClick={() => setIsOpen(!isOpen)} />
+          <CancelIcon src={cancel} onClick={() => setIsPhotoModal(false)} />
         </Header>
-        <Message>업로드</Message>
-        <InputImg
-          type="file"
-          name="file"
-          id={`file-${imgfile.length}-photo`}
-          accept="image/*"
-          onChange={saveImgFile}
-          ref={(el) => (imgRef.current[imgfile.length] = el)}
-        />
-        <label htmlFor={`file-${imgfile.length}-photo`}>
-          <FileInput />
-          <FileSelectBtn src={filebtn} />
-        </label>
+        {!isHidden && (
+          <>
+            <Message>업로드</Message>
+            <InputImg
+              type="file"
+              name="file"
+              id={`file-${imgfile.length}-photo`}
+              accept="image/*"
+              multiple
+              onChange={saveImgFiles}
+              ref={(el) => (imgRef.current[imgfile.length] = el)}
+            />
+            <label htmlFor={`file-${imgfile.length}-photo`}>
+              <FileInput />
+              <FileSelectBtn src={filebtn} />
+            </label>
+          </>
+        )}
         <Row2>
-          {imgfile.map((imgFile, index) => (
+          {preview.map((imgFile, index) => (
             <ImgContainer key={index} imgfile={imgFile}>
               <PreImgs
                 src={imgFile ? imgFile : ``}
@@ -53,8 +86,8 @@ const FileInputModal = ({ setIsOpen, isOpen }) => {
           ))}
         </Row2>
         <BtnContainer>
-          <CancelBtn onClick={() => setIsOpen(!isOpen)}>취소</CancelBtn>
-          <ConfirmBtn>확인</ConfirmBtn>
+          <CancelBtn onClick={() => setIsPhotoModal(false)}>취소</CancelBtn>
+          <ConfirmBtn onClick={sendDelivery}>확인</ConfirmBtn>
         </BtnContainer>
       </Conatiner>
       <BG></BG>

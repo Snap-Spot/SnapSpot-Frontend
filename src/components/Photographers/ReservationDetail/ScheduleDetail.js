@@ -7,6 +7,9 @@ import ReviewBox from "../Review/ReviewBox";
 import AddressSearch from "./AddressSearch";
 import { putDeposit } from "../../../api/plan";
 import { useParams } from "react-router-dom";
+import { status_list } from "../Reservation/MockData/status";
+import PhotoChatBox from "./PhotoChatBox";
+import FileInputModal from "./FileInputModal";
 
 const ScheduleDetail = ({
   nickname,
@@ -16,28 +19,21 @@ const ScheduleDetail = ({
   requirement,
   date,
   profile,
+  status,
+  price,
+  placeAddress,
+  setChange,
+  change,
+  messages,
 }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isReject, setIsReject] = useState(false); // 예약 거절 모달
   const [isMinInput, setIsMinInput] = useState(true); // 최소 입력 미달시 띄울 모달
   const [isConfirmDeposit, setIsConfirmDeposit] = useState(false); // 입금 확인 모달
   const [message, setMessage] = useState(""); // 전달할 메세지
-  const [status, setStatus] = useState(0); // 예약 상태
-  const [price, setPrice] = useState(0); // 가격
-  const [placeAddress, setPlaceAddress] = useState("");
-  const status_list = [
-    "예약신청",
-    "입금요청",
-    "예약완료",
-    "촬영진행",
-    "사진전달",
-  ];
-  const btn_list = [
-    "입금 요청하기",
-    "입금 확인 완료",
-    "공지사항 보내기",
-    "사진 전송하기",
-  ];
+  const [prices, setPrices] = useState(0); // 가격
+  const [placeAddressinput, setPlaceAddressinput] = useState("");
+  const [isPhotoModal, setIsPhotoModal] = useState(false);
   const { planId } = useParams();
 
   const handleMessageChange = (e) => {
@@ -54,6 +50,22 @@ const ScheduleDetail = ({
     };
   }, []);
 
+  const putDeposits = async () => {
+    try {
+      const data = await putDeposit(
+        planId,
+        prices,
+        place,
+        placeAddressinput,
+        message
+      );
+      console.log("입금결과", data);
+      setChange(change + 1);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       {isReject && (
@@ -67,6 +79,9 @@ const ScheduleDetail = ({
           status={status}
           message={message}
           planId={planId}
+          identify={0}
+          setChange={setChange}
+          change={change}
         />
       )}
       {!isMinInput && (
@@ -79,18 +94,27 @@ const ScheduleDetail = ({
           title="계좌 입금을 확인하셨나요?"
           content="아래 확인 버튼을 누르시면, 작가분께서는 요청하신 계좌로 입금이 완료되었음을 확인하였으며, 고객분과의 예약이 확정됨을 의미합니다."
           status={status}
-          setStatus={setStatus}
           message={message}
           planId={planId}
+          identify={1}
+          setChange={setChange}
+          change={change}
+        />
+      )}
+      {isPhotoModal && (
+        <FileInputModal
+          setIsPhotoModal={setIsPhotoModal}
+          planId={planId}
+          contents={message}
         />
       )}
       <Container>
         <Row2>
           <Profile src={profile} />
           <NickName>{nickname}</NickName>
-          {!isMobile && <Btn>{status_list[status]}</Btn>}
+          {!isMobile && <Btn>{status_list[status][0]}</Btn>}
           <BtnContainer>
-            {status === 0 && (
+            {status === "REQUEST" && (
               <RejectBtn
                 onClick={() => {
                   if (message.length < 100) {
@@ -103,30 +127,27 @@ const ScheduleDetail = ({
                 예약 거절하기
               </RejectBtn>
             )}
-            {status !== 2 && (
+            {status_list[status][1] !== "" && (
               <RequestBtn
                 onClick={() => {
-                  if (status === 1) {
+                  if (status === "DEPOSIT") {
                     setIsConfirmDeposit(!isConfirmDeposit);
+                  } else if (status === "COMPLETE") {
+                    setIsPhotoModal(true);
                   } else {
                     if (message.length < 100) {
                       setIsMinInput(false);
-                    } else if (status === 0) {
-                      const res = putDeposit(
-                        planId,
-                        price,
-                        place,
-                        placeAddress,
-                        message
-                      );
-                      console.log(res);
-                      setStatus(status + 1);
+                    } else if (!prices || !placeAddressinput) {
+                      alert("내용을 모두 입력해주세요.");
+                    } else if (status === "REQUEST") {
+                      putDeposits();
+                      alert("입금 요청이 완료되었습니다.");
                       setMessage("");
                     }
                   }
                 }}
               >
-                {btn_list[status]}
+                {status_list[status][1]}
               </RequestBtn>
             )}
           </BtnContainer>
@@ -139,8 +160,19 @@ const ScheduleDetail = ({
             <SubTitle>시간</SubTitle>
             <SubTitle>장소</SubTitle>
             <SubTitle>요청사항</SubTitle>
-            <SubTitle2>가격</SubTitle2>
-            <SubTitle2>여기서 만나요</SubTitle2>
+            {status === "REQUEST" ? (
+              <>
+                <SubTitle2>가격</SubTitle2>
+                <SubTitle2>여기서 만나요</SubTitle2>
+              </>
+            ) : (
+              <>
+                <SubTitle>가격</SubTitle>
+                <SubTitle style={{ marginBottom: "0.5rem" }}>
+                  여기서 만나요
+                </SubTitle>
+              </>
+            )}
             {isMobile ? (
               <SubTitle>메세지</SubTitle>
             ) : (
@@ -152,19 +184,23 @@ const ScheduleDetail = ({
             <Content>{time}</Content>
             <Content>{place}</Content>
             <Content>{requirement}</Content>
-            {isMobile ? (
-              <PriceInput placeholder={price} />
-            ) : (
+            {status === "REQUEST" ? (
               <PriceInput
                 placeholder="스냅사진 촬영 가격을 적어주세요!"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                value={price || prices}
+                onChange={(e) => setPrices(e.target.value)}
               />
+            ) : (
+              <Content>{price || prices}</Content>
             )}
-            <AddressSearch
-              setPlaceAddress={setPlaceAddress}
-              placeAddress={placeAddress}
-            />
+            {status === "REQUEST" ? (
+              <AddressSearch
+                setPlaceAddress={setPlaceAddressinput}
+                placeAddress={placeAddress || placeAddressinput}
+              />
+            ) : (
+              <Content>{placeAddress || placeAddressinput}</Content>
+            )}
           </ContentContainer>
         </Row>
         <MessageBox
@@ -172,9 +208,37 @@ const ScheduleDetail = ({
           onChange={handleMessageChange}
           value={message}
         />
+        {status === "RESERVED" && (
+          <BtnContainer style={{ marginTop: "2rem" }}>
+            <RequestBtn>공지사항 보내기</RequestBtn>
+          </BtnContainer>
+        )}
+        {messages.length > 0 && (
+          <>
+            <MessageTitle>지금까지 보낸 메세지 확인하기</MessageTitle>
+            {messages.map((el) =>
+              el.contents ? (
+                el.isMine ? (
+                  <PhotoChatBox
+                    text={el.contents}
+                    time="2023.06.28 오전 06:32"
+                  />
+                ) : (
+                  <ChatBox
+                    text={el.contents}
+                    time="2023.06.28 오전 06:32"
+                    profile={profile}
+                  />
+                )
+              ) : (
+                ""
+              )
+            )}
+          </>
+        )}
         {status === 2 && (
           <>
-            <AlertBtn>{btn_list[status]}</AlertBtn>
+            <AlertBtn>{status_list[status]}</AlertBtn>
             {/* 리뷰 확인 */}
             <ReviewTitle>이런 리뷰를 남겨주셨어요!</ReviewTitle>
             <ReviewBox
@@ -186,9 +250,6 @@ const ScheduleDetail = ({
               date="2023.5.8"
               score="5.0"
             />
-            {/* 메세지 확인 */}
-            <MessageTitle>지금까지 보낸 메세지 확인하기</MessageTitle>
-            <ChatBox text="가나다라마바사" time="2023.06.28 오전 06:32" />
           </>
         )}
       </Container>
@@ -234,7 +295,7 @@ const AlertBtn = styled(RequestBtn)`
 const MessageBox = styled.textarea`
   padding: 20px;
   border-radius: 32px;
-  margin-top: 0rem;
+  margin-top: 1rem;
   background: var(--lightgrey-1, #e6e6e6);
   border: none;
   outline: none;
@@ -286,7 +347,6 @@ const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: -4rem;
-  height: 17.5rem;
 
   @media (max-width: 768px) {
     margin-right: 1rem;
@@ -296,7 +356,7 @@ const TitleContainer = styled.div`
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 17.5rem;
+  margin-bottom: auto;
 `;
 
 const Container = styled.div`
@@ -309,6 +369,7 @@ const Container = styled.div`
 const Profile = styled.img`
   width: 60px;
   height: 60px;
+  border-radius: 50%;
 
   @media (max-width: 768px) {
     width: 20px;
@@ -393,6 +454,7 @@ const ReviewTitle = styled(SubTitle)`
 `;
 
 const MessageTitle = styled(SubTitle)`
+  margin-top: 4rem;
   @media (max-width: 768px) {
     width: 13rem;
     margin-top: 5rem;

@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
-const IntroductionInput = () => {
+const IntroductionInput = ({ bio, setBio }) => {
   return (
     <>
       <SubTitle>한 줄 소개글 등록 (최대 500자)</SubTitle>
-      <TextArea />
+      <TextArea
+        placeholder={bio || ""}
+        value={bio}
+        onChange={(e) => setBio(e.target.value)}
+      />
     </>
   );
 };
