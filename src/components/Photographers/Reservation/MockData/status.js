@@ -3,8 +3,8 @@ export const status_list = {
   DEPOSIT: ["입금요청", "입금 확인 완료"],
   REFUSE: "촬영거절",
   RESERVED: ["예약완료", ""],
-  TODAY: "오늘",
-  COMPLETE: ["촬영진행", "공지사항 보내기"],
+  TODAY: ["촬영당일", ""],
+  COMPLETE: ["촬영진행", "사진 전송하기"],
   DELIVERY: "전달완료",
   CANCEL: "예약취소",
 };

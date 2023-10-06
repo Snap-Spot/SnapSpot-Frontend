@@ -9,6 +9,7 @@ import { putDeposit } from "../../../api/plan";
 import { useParams } from "react-router-dom";
 import { status_list } from "../Reservation/MockData/status";
 import PhotoChatBox from "./PhotoChatBox";
+import FileInputModal from "./FileInputModal";
 
 const ScheduleDetail = ({
   nickname,
@@ -32,6 +33,7 @@ const ScheduleDetail = ({
   const [message, setMessage] = useState(""); // 전달할 메세지
   const [prices, setPrices] = useState(0); // 가격
   const [placeAddressinput, setPlaceAddressinput] = useState("");
+  const [isPhotoModal, setIsPhotoModal] = useState(false);
   const { planId } = useParams();
 
   const handleMessageChange = (e) => {
@@ -99,6 +101,13 @@ const ScheduleDetail = ({
           change={change}
         />
       )}
+      {isPhotoModal && (
+        <FileInputModal
+          setIsPhotoModal={setIsPhotoModal}
+          planId={planId}
+          contents={message}
+        />
+      )}
       <Container>
         <Row2>
           <Profile src={profile} />
@@ -123,6 +132,8 @@ const ScheduleDetail = ({
                 onClick={() => {
                   if (status === "DEPOSIT") {
                     setIsConfirmDeposit(!isConfirmDeposit);
+                  } else if (status === "COMPLETE") {
+                    setIsPhotoModal(true);
                   } else {
                     if (message.length < 100) {
                       setIsMinInput(false);
@@ -187,7 +198,7 @@ const ScheduleDetail = ({
             <RequestBtn>공지사항 보내기</RequestBtn>
           </BtnContainer>
         )}
-        {messages && (
+        {messages.length > 0 && (
           <>
             <MessageTitle>지금까지 보낸 메세지 확인하기</MessageTitle>
             {messages.map((el) =>
@@ -210,7 +221,6 @@ const ScheduleDetail = ({
             )}
           </>
         )}
-
         {status === 2 && (
           <>
             <AlertBtn>{status_list[status]}</AlertBtn>

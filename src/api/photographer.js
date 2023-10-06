@@ -1,6 +1,5 @@
 import client from "./client";
 import getS3ImgUrl from "./s3upload";
-import { format } from "date-fns";
 
 //포토그래퍼 전체 이름 겟
 export const getPhotographers = async () => {

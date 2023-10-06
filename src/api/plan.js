@@ -1,4 +1,5 @@
 import client from "./client";
+import getS3ImgUrl from "./s3upload";
 
 //고객의 예약 내역 리스트 조회
 export const getMyReservationList = async () => {
@@ -126,5 +127,34 @@ export const putPlansReserve = async (planId, message) => {
     return res.data;
   } catch (err) {
     console.log("입금 확인 에러", err);
+  }
+};
+
+// 파일 전달
+export const putDelivery = async (planId, contents, file) => {
+  file = await getS3ImgUrl(file);
+
+  try {
+    const formData = new FormData();
+
+    formData.append("file", file);
+
+    formData.append("json", JSON.stringify({ planId, contents }));
+
+    // 요청 헤더를 설정합니다.
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+
+    // PUT 요청을 보냅니다.
+    const response = await client.put("/plans/delivery", formData, config);
+
+    // 성공적으로 요청을 보내고 응답을 받으면 처리합니다.
+    console.log("응답 데이터:", response.data);
+  } catch (error) {
+    // 오류 발생 시 처리합니다.
+    console.error("에러 발생:", error.response.data);
   }
 };
