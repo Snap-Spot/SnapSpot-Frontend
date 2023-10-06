@@ -8,6 +8,7 @@ import AddressSearch from "./AddressSearch";
 import { putDeposit } from "../../../api/plan";
 import { useParams } from "react-router-dom";
 import { status_list } from "../Reservation/MockData/status";
+import PhotoChatBox from "./PhotoChatBox";
 
 const ScheduleDetail = ({
   nickname,
@@ -22,6 +23,7 @@ const ScheduleDetail = ({
   placeAddress,
   setChange,
   change,
+  messages,
 }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isReject, setIsReject] = useState(false); // 예약 거절 모달
@@ -180,6 +182,35 @@ const ScheduleDetail = ({
           onChange={handleMessageChange}
           value={message}
         />
+        {status === "RESERVED" && (
+          <BtnContainer style={{ marginTop: "2rem" }}>
+            <RequestBtn>공지사항 보내기</RequestBtn>
+          </BtnContainer>
+        )}
+        {messages && (
+          <>
+            <MessageTitle>지금까지 보낸 메세지 확인하기</MessageTitle>
+            {messages.map((el) =>
+              el.contents ? (
+                el.isMine ? (
+                  <PhotoChatBox
+                    text={el.contents}
+                    time="2023.06.28 오전 06:32"
+                  />
+                ) : (
+                  <ChatBox
+                    text={el.contents}
+                    time="2023.06.28 오전 06:32"
+                    profile={profile}
+                  />
+                )
+              ) : (
+                ""
+              )
+            )}
+          </>
+        )}
+
         {status === 2 && (
           <>
             <AlertBtn>{status_list[status]}</AlertBtn>
@@ -194,9 +225,6 @@ const ScheduleDetail = ({
               date="2023.5.8"
               score="5.0"
             />
-            {/* 메세지 확인 */}
-            <MessageTitle>지금까지 보낸 메세지 확인하기</MessageTitle>
-            <ChatBox text="가나다라마바사" time="2023.06.28 오전 06:32" />
           </>
         )}
       </Container>
@@ -402,6 +430,7 @@ const ReviewTitle = styled(SubTitle)`
 `;
 
 const MessageTitle = styled(SubTitle)`
+  margin-top: 4rem;
   @media (max-width: 768px) {
     width: 13rem;
     margin-top: 5rem;

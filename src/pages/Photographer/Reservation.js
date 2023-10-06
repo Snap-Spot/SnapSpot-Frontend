@@ -14,6 +14,7 @@ const Reservation = () => {
     try {
       const reservationData = await getAllReservation();
       setData(reservationData);
+      console.log("이거!!", reservationData);
     } catch (err) {
       console.log(err);
     }
@@ -30,7 +31,10 @@ const Reservation = () => {
           <>
             <ReservationContainer
               data={data.filter(
-                (el) => el.status === "REQUEST" || el.status === "RESERVED"
+                (el) =>
+                  el.status === "REQUEST" ||
+                  el.status === "RESERVED" ||
+                  el.status === "DEPOSIT"
               )}
             />
             <RequestContainer

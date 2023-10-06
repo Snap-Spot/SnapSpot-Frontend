@@ -42,6 +42,7 @@ const ReservationDetail = () => {
             placeAddress={reservation.placeAddress}
             setChange={setChange}
             change={change}
+            messages={reservation.messages}
           />
         )}
       </Container>
