@@ -40,7 +40,7 @@ function MiniCalendar({
     setTimeout(() => {
       formatDate(date[0]);
       setIsOpenCalendar(false);
-    }, 400);
+    }, 250);
   };
 
   const formatDate = (date) => {
