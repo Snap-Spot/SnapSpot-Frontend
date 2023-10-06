@@ -3,17 +3,18 @@ import { styled } from "styled-components";
 import arrow from "../../../assets/mypage/reservation/arrow.png";
 import mapMarker from "../../../assets/mypage/reservation/mapMarker.png";
 const KakaoMap = ({ placeName, placeAddress, x, y }) => {
+  console.log(x, y);
   const { kakao } = window;
   const openKakaoMap = () => {
     window.open(
-      `https://map.kakao.com/link/to/${placeName},${x},${y}`,
+      `https://map.kakao.com/link/to/${placeName},${y},${x}`,
       "_blank"
     );
   };
   useEffect(() => {
     const container = document.getElementById("map");
     const options = {
-      center: new kakao.maps.LatLng(x, y), // 지도의 중심좌표
+      center: new kakao.maps.LatLng(y, x), // 지도의 중심좌표
       level: 3, // 지도의 확대 레벨
     };
 
@@ -37,7 +38,7 @@ const KakaoMap = ({ placeName, placeAddress, x, y }) => {
         imageSize,
         imageOption
       ),
-      markerPosition = new kakao.maps.LatLng(x, y);
+      markerPosition = new kakao.maps.LatLng(y, x);
     // 마커를 생성합니다
     var marker = new kakao.maps.Marker({
       position: markerPosition,
