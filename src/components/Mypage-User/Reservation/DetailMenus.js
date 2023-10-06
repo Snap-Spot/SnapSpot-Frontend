@@ -26,6 +26,7 @@ const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
             planId={plan.planId}
             photographerName={photographer.nickname}
             category={category.kor}
+            date={date}
           />
         ),
       },

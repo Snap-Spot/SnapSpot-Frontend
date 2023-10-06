@@ -46,14 +46,10 @@ function MiniCalendar({
   const formatDate = (date) => {
     const week = ["일", "월", "화", "수", "목", "금", "토"];
 
-    const strDate = JSON.stringify(date);
-    //utc로 변환됨..
-    console.log(date);
-    console.log(strDate);
-    const year = strDate.substring(1, 5);
-    const month = strDate.substring(6, 8);
-    const day = strDate.substring(9, 11);
-    const dayOfWeek = week[new Date(strDate.substring(1, 11)).getDay() % 7];
+    let year = date.getFullYear();
+    let month = String(date.getMonth() + 1);
+    let day = String(date.getDate());
+    let dayOfWeek = week[date.getDay() % 7];
 
     setStringdate(
       year + "년 " + month + "월 " + day + "일 " + dayOfWeek + "요일"
