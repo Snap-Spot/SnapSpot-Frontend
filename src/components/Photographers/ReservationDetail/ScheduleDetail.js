@@ -160,8 +160,19 @@ const ScheduleDetail = ({
             <SubTitle>시간</SubTitle>
             <SubTitle>장소</SubTitle>
             <SubTitle>요청사항</SubTitle>
-            <SubTitle2>가격</SubTitle2>
-            <SubTitle2>여기서 만나요</SubTitle2>
+            {status === "REQUEST" ? (
+              <>
+                <SubTitle2>가격</SubTitle2>
+                <SubTitle2>여기서 만나요</SubTitle2>
+              </>
+            ) : (
+              <>
+                <SubTitle>가격</SubTitle>
+                <SubTitle style={{ marginBottom: "0.5rem" }}>
+                  여기서 만나요
+                </SubTitle>
+              </>
+            )}
             {isMobile ? (
               <SubTitle>메세지</SubTitle>
             ) : (
@@ -173,19 +184,23 @@ const ScheduleDetail = ({
             <Content>{time}</Content>
             <Content>{place}</Content>
             <Content>{requirement}</Content>
-            {isMobile ? (
-              <PriceInput placeholder={price || prices} />
-            ) : (
+            {status === "REQUEST" ? (
               <PriceInput
                 placeholder="스냅사진 촬영 가격을 적어주세요!"
                 value={price || prices}
                 onChange={(e) => setPrices(e.target.value)}
               />
+            ) : (
+              <Content>{price || prices}</Content>
             )}
-            <AddressSearch
-              setPlaceAddress={setPlaceAddressinput}
-              placeAddress={placeAddress || placeAddressinput}
-            />
+            {status === "REQUEST" ? (
+              <AddressSearch
+                setPlaceAddress={setPlaceAddressinput}
+                placeAddress={placeAddress || placeAddressinput}
+              />
+            ) : (
+              <Content>{placeAddress || placeAddressinput}</Content>
+            )}
           </ContentContainer>
         </Row>
         <MessageBox
@@ -280,7 +295,7 @@ const AlertBtn = styled(RequestBtn)`
 const MessageBox = styled.textarea`
   padding: 20px;
   border-radius: 32px;
-  margin-top: 0rem;
+  margin-top: 1rem;
   background: var(--lightgrey-1, #e6e6e6);
   border: none;
   outline: none;
@@ -332,7 +347,6 @@ const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: -4rem;
-  height: 17.5rem;
 
   @media (max-width: 768px) {
     margin-right: 1rem;
@@ -342,7 +356,7 @@ const TitleContainer = styled.div`
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 17.5rem;
+  margin-bottom: auto;
 `;
 
 const Container = styled.div`
