@@ -4,11 +4,31 @@ import { useState, useEffect, useRef } from "react";
 import filebtn from "../../../assets/photograph/filebtn.png";
 import { putDelivery } from "../../../api/plan";
 
-const FileInputModal = ({ setIsPhotoModal, planId, contents }) => {
+const FileInputModal = ({
+  setIsPhotoModal,
+  planId,
+  contents,
+  setChange,
+  change,
+  setMessage,
+}) => {
   const [imgfile, setImgFile] = useState([]);
   const [isHidden, setIsHidden] = useState(false);
   const [preview, setPreview] = useState([]);
   const imgRef = useRef([]);
+
+  const sendDelivery = async () => {
+    try {
+      const res = await putDelivery(planId, contents, imgfile);
+      console.log("응답", res);
+      alert("성공적으로 전달되었습니다!");
+      setIsPhotoModal(false);
+      setChange(change + 1);
+      setMessage("");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const saveImgFiles = async () => {
     const newImages = [];
@@ -33,15 +53,6 @@ const FileInputModal = ({ setIsPhotoModal, planId, contents }) => {
     setPreview([...preview]);
     setImgFile([...imgfile, ...newImages]);
     setIsHidden(!isHidden);
-  };
-
-  const sendDelivery = async () => {
-    try {
-      const res = await putDelivery(planId, contents, imgfile[0]);
-      console.log("응답", res);
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   const deleteFileImg = (index) => {
@@ -87,7 +98,7 @@ const FileInputModal = ({ setIsPhotoModal, planId, contents }) => {
         </Row2>
         <BtnContainer>
           <CancelBtn onClick={() => setIsPhotoModal(false)}>취소</CancelBtn>
-          <ConfirmBtn onClick={sendDelivery}>확인</ConfirmBtn>
+          <ConfirmBtn onClick={() => sendDelivery()}>확인</ConfirmBtn>
         </BtnContainer>
       </Conatiner>
       <BG></BG>

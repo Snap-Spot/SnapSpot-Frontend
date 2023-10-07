@@ -12,7 +12,7 @@ const ScheduleBox = ({
   place,
   requirement,
   idx,
-  id,
+  planId,
   profile,
   status,
 }) => {
@@ -28,7 +28,7 @@ const ScheduleBox = ({
             <NickName>{nickname}</NickName>
             <Btn>{status_list[status][0]}</Btn>
           </RowContainer>
-          <Detail onClick={() => navigate(`/photographer/reserve/${id}`)}>
+          <Detail onClick={() => navigate(`/photographer/reserve/${planId}`)}>
             상세보기 <Arrow src={arrow} />
           </Detail>
         </Header>

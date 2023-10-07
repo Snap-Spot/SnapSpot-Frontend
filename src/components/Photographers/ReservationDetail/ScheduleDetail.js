@@ -106,6 +106,9 @@ const ScheduleDetail = ({
           setIsPhotoModal={setIsPhotoModal}
           planId={planId}
           contents={message}
+          setChange={setChange}
+          change={change}
+          setMessage={setMessage}
         />
       )}
       <Container>
@@ -133,7 +136,11 @@ const ScheduleDetail = ({
                   if (status === "DEPOSIT") {
                     setIsConfirmDeposit(!isConfirmDeposit);
                   } else if (status === "COMPLETE") {
-                    setIsPhotoModal(true);
+                    if (message.length === 0) {
+                      setIsMinInput(false);
+                    } else {
+                      setIsPhotoModal(true);
+                    }
                   } else {
                     if (message.length < 100) {
                       setIsMinInput(false);

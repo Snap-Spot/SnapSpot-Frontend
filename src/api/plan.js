@@ -132,12 +132,12 @@ export const putPlansReserve = async (planId, message) => {
 
 // 파일 전달
 export const putDelivery = async (planId, contents, file) => {
-  file = await getS3ImgUrl(file);
-
   try {
     const formData = new FormData();
 
-    formData.append("file", file);
+    for (let i = 0; i < file.length; i++) {
+      formData.append("file", file[i]);
+    }
 
     formData.append("json", JSON.stringify({ planId, contents }));
 
@@ -147,10 +147,11 @@ export const putDelivery = async (planId, contents, file) => {
       },
     };
 
-    const response = await client.put("/plans/delivery", formData, config);
+    const response = await client.put(`/plans/delivery`, formData, config);
 
-    console.log("응답 데이터:", response.data);
+    console.log("응답 데이터:", response);
+    return response;
   } catch (error) {
-    console.error("에러 발생:", error.response.data);
+    console.error("에러 발생:", error.response);
   }
 };

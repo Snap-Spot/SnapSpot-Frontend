@@ -49,7 +49,7 @@ const ReservationContainer = ({ data }) => {
                 place={item.wishPlace}
                 requirement={item.request}
                 idx={idx}
-                id={item.planId}
+                planId={item.planId}
                 profile={item.customer.profile}
                 status={item.status}
               />
