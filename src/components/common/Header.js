@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { getMyProfile } from "../../api/member";
@@ -21,7 +21,7 @@ const Header = (props) => {
       const data = await getMyProfile();
       setProfileData(data);
     } catch (err) {
-      console.log(err);
+      setProfileData({ profile: profile });
     }
   };
 
@@ -74,7 +74,7 @@ const Header = (props) => {
               </div>
               <img
                 className="mypage"
-                src={profileData.profile || profile}
+                src={profileData.profile}
                 onClick={onClickMyPage}
                 alt=""
               />
@@ -95,8 +95,8 @@ const Header = (props) => {
     </Wrapper>
   );
 };
+export default React.memo(Header);
 
-export default Header;
 const Wrapper = styled.div``;
 
 const HeaderDiv = styled.div`
