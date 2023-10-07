@@ -35,7 +35,7 @@ const RecommendSection = ({ info }) => {
     if (isDisabled) {
       return null;
     }
-    return <img src={left} className="prev-button" />;
+    return <img src={left} className="prev-button" alt="prev-button" />;
   };
 
   // > 버튼
@@ -43,7 +43,7 @@ const RecommendSection = ({ info }) => {
     if (isDisabled) {
       return null;
     }
-    return <img src={right} className="next-button" />;
+    return <img src={right} className="next-button" alt="next-button" />;
   };
 
   // api로 받아온 데이터
@@ -68,7 +68,7 @@ const RecommendSection = ({ info }) => {
       let endpoint = "/photographers";
       const queryParams = [];
       // 옵션에 따라 query 붙이기 (ex. sort=SCORE&special=WEDDING)
-      Object.entries(info.keyword).map((item) => {
+      Object.entries(info.keyword).forEach((item) => {
         queryParams.push(`${item[0]}=${item[1]}`);
       });
       // query들을 모아서 사진작가 리스트 조회
