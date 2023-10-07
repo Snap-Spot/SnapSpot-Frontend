@@ -141,20 +141,16 @@ export const putDelivery = async (planId, contents, file) => {
 
     formData.append("json", JSON.stringify({ planId, contents }));
 
-    // 요청 헤더를 설정합니다.
     const config = {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     };
 
-    // PUT 요청을 보냅니다.
     const response = await client.put("/plans/delivery", formData, config);
 
-    // 성공적으로 요청을 보내고 응답을 받으면 처리합니다.
     console.log("응답 데이터:", response.data);
   } catch (error) {
-    // 오류 발생 시 처리합니다.
     console.error("에러 발생:", error.response.data);
   }
 };

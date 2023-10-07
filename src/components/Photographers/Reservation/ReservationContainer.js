@@ -12,7 +12,6 @@ const ReservationContainer = ({ data }) => {
   const [selectDate, setSelectDate] = useState(currentDate);
   const [selectMonth, setSelectMonth] = useState(currentMonth);
   const [selectDay, setSelectDay] = useState(currentDay);
-  const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
 
   // 해당 날짜에 일치하는 일정 보여주기
   let filteredData = data.filter((el) => {

@@ -4,7 +4,6 @@ import line from "../../../assets/photograph/line.png";
 import { useNavigate } from "react-router-dom";
 import { status_list } from "./MockData/status";
 
-//복구
 const ScheduleBox = ({
   nickname,
   snapType,
