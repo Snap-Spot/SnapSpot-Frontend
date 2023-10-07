@@ -164,6 +164,7 @@ const ChangeBtn = styled.button`
   border: none;
   margin-bottom: 10rem;
   margin-left: 11rem;
+  cursor: pointer;
 
   @media (max-width: 768px) {
     width: 333px;
