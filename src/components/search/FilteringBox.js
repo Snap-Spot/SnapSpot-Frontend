@@ -4,7 +4,12 @@ import { React, useState, useEffect } from "react";
 import CustomCalendar from "./CustomCalendar";
 import { regions, orders, category } from "./FilteringList.js";
 
-const FilteringBox = ({ onSearch, setIsFilteringOpen }) => {
+const FilteringBox = ({
+  onSearch,
+  setIsFilteringOpen,
+  setCurrentPage,
+  currentPage,
+}) => {
   const navigate = useNavigate();
 
   const [selectedRegion, setSelectedRegion] = useState("서울");
@@ -50,7 +55,8 @@ const FilteringBox = ({ onSearch, setIsFilteringOpen }) => {
     }
     console.log(endpoint);
     navigate(endpoint);
-
+    localStorage.setItem("currentPage", "1");
+    setCurrentPage(1);
     setIsFilteringOpen(!isFilteringOpen);
   };
 
