@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 import Dropdown from "./Dropdown";
-const option = {
+import { cancelReservation } from "../../../api/plan";
+const options = {
   list: [
     "다른 작가님으로 변경했어요",
     "날씨가 안 좋아요",
@@ -13,7 +14,24 @@ const option = {
   width: "224",
   mb_width: "190",
 };
-const CancelModal = () => {
+
+const CancelModal = ({ plan, photographer, date, day, category }) => {
+  const [account, setAccount] = useState("");
+  const [reason, setReason] = useState("");
+  const handleChange = (e) => {
+    setAccount(e.target.value);
+  };
+
+  const handleCancel = async (id, reason, refundAccount) => {
+    const res = await cancelReservation(id, reason, refundAccount);
+    if (res.status === 200) {
+      alert(res.message);
+      window.location.reload();
+    }
+  };
+  const handleReason = (text) => {
+    setReason(text);
+  };
   return (
     <Wrapper>
       <div className="subtitle">
@@ -22,40 +40,50 @@ const CancelModal = () => {
       <div className="subject">취소하시는 이유가 무엇입니까?</div>
       <div className="content">
         <div className="dropdown">
-          <Dropdown options={option} />
+          <Dropdown options={options} handleTarget={handleReason} />
         </div>
       </div>
       <div className="subject">예약 세부 정보</div>
       <div>
         <div className="row">
-          <div className="name">한빛나리 작가 </div>
-          <div className="category">&nbsp;&nbsp;|&nbsp;&nbsp;졸업스냅</div>
-        </div>{" "}
+          <div className="name">{photographer.nickname} 작가 </div>
+          <div className="category">&nbsp;&nbsp;|&nbsp;&nbsp;{category}</div>
+        </div>
         <div className="margin"></div>
         <div className="row">
           <div className="sub-subject">예약일시</div>
-          <div className="content">2023.7.23(일) 14:30</div>
+          <div className="content">
+            {date}({day}) {plan.time}
+          </div>
         </div>
         <div className="row">
           <div className="sub-subject">예약원수</div>
-          <div className="content">2인</div>
+          <div className="content">{plan.people}인</div>
         </div>
         <div className="row">
           <div className="sub-subject">가격</div>
-          <div className="content">120000원</div>
+          <div className="content">
+            {plan.price ? plan.price + "원" : "미정"}
+          </div>
         </div>
         <div className="row">
           <div className="sub-subject">장소</div>
-          <div className="content">서울시 서대문구</div>
+          <div className="content">{plan.wishPlace}</div>
         </div>
         <div className="row">
           <div className="sub-subject">
             <div className="refund">환불계좌</div>
           </div>
-          <input placeholder="신한 1102223342와 같이 입력해주세요" />
+          <input
+            onChange={handleChange}
+            value={account}
+            placeholder="신한 1102223342와 같이 입력해주세요"
+          />
         </div>
       </div>
-      <Btn>취소하기</Btn>
+      <Btn onClick={() => handleCancel(plan.planId, reason, account)}>
+        취소하기
+      </Btn>
     </Wrapper>
   );
 };
@@ -63,7 +91,6 @@ const CancelModal = () => {
 export default CancelModal;
 
 const Wrapper = styled.div`
-  width: 100%;
   display: flex;
   flex-direction: column;
   .subtitle {

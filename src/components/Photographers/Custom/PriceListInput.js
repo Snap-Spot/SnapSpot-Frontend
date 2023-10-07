@@ -2,45 +2,47 @@ import styled from "styled-components";
 import plus from "../../../assets/photograph/plus.png";
 import { useState, useRef } from "react";
 
-const PriceListInput = () => {
-  const [imgfile, setImgFile] = useState(""); // 가격표 이미지
-
+const PriceListInput = ({ priceImg, setPaymentImage }) => {
+  const [previewImg, setPreviewImg] = useState("");
   const imgRef = useRef();
 
   // 가격표 이미지 프리뷰
   const saveImgFile = () => {
     const file = imgRef.current.files[0];
+    setPaymentImage(file);
+
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setImgFile(reader.result);
+    reader.onloadend = async (e) => {
+      setPreviewImg(e.target.result);
     };
   };
 
   // 가격표 이미지 프리뷰 삭제
   const deleteFileImg = () => {
-    setImgFile("");
+    setPreviewImg("");
+    setPaymentImage("");
   };
 
   return (
     <>
       <SubTitle>가격표 사진 업로드</SubTitle>
       <Row2>
-        <ImgContainer imgfile={imgfile}>
+        <ImgContainer priceImg={priceImg}>
           <PreImgs
-            src={imgfile ? imgfile : ``}
+            src={previewImg || priceImg}
             onClick={() => deleteFileImg()}
           />
         </ImgContainer>
         <InputImg
           type="file"
           name="file"
-          id={`file-${imgfile.length}-price`}
+          id={`file-price`}
           accept="image/*"
           onChange={saveImgFile}
           ref={imgRef}
         />
-        <label htmlFor={`file-${imgfile.length}-price`}>
+        <label htmlFor={`file-price`}>
           <Plus src={plus} />
         </label>
       </Row2>
@@ -50,11 +52,11 @@ const PriceListInput = () => {
 
 const ImgContainer = styled.div`
   position: relative;
-  display: ${(props) => (props.imgfile ? "inline" : "none")};
-  height: ${(props) => (props.imgfile ? "100%" : "0px")};
+  display: ${(props) => (props.priceImg ? "inline" : "none")};
+  height: ${(props) => (props.priceImg ? "100%" : "0px")};
 
   @media (max-width: 768px) {
-    display: ${(props) => (props.imgfile ? "inline" : "none")};
+    display: ${(props) => (props.priceImg ? "inline" : "none")};
   }
 `;
 

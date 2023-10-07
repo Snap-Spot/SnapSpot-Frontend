@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { getStatusFromEng } from "../../common/TranslateStatus";
 import { getMyReservation } from "../../../api/plan";
 import { getCategoryFromEng } from "../../common/TranslateCategory";
+import ChatsContainer from "./ChatsContainer";
 
 const DetailedItem = () => {
   //경로에서 planId 겟
@@ -23,10 +24,8 @@ const DetailedItem = () => {
   const getData = async () => {
     const planData = await getMyReservation(id);
     console.log(planData);
-    const photographerData = await getPhotographer(14);
-
+    setPhotographer(planData.photographer);
     setPlan(planData);
-    setPhotographer(photographerData.photographer.member);
 
     setStatus(getStatusFromEng(planData.status));
     setCategory(getCategoryFromEng(planData.category));
@@ -71,7 +70,9 @@ const DetailedItem = () => {
               </div>
               <div className="item">
                 <p className="subject">가격</p>
-                <p className="content">{plan.price}원</p>
+                <p className="content">
+                  {plan.price ? plan.price + "원" : "미정"}
+                </p>
               </div>
               <div className="item">
                 <p className="subject">장소</p>
@@ -88,7 +89,20 @@ const DetailedItem = () => {
           day={day}
           category={category}
         />
-        <KakaoMap />
+
+        <ChatsContainer
+          profile={photographer.profile}
+          messages={plan.messages}
+        />
+
+        {plan.placeAddress && (
+          <KakaoMap
+            placeName={plan.placeAddress}
+            placeAddress={plan.placeAddress}
+            x={plan.x}
+            y={plan.y}
+          />
+        )}
       </Wrapper>
     </>
   );
@@ -104,7 +118,7 @@ const Title = styled.div`
   @media (max-width: 768px) {
     //모바일
     font-size: 16px;
-    width: 85%;
+    width: 90%;
   }
 `;
 const Wrapper = styled.div`
@@ -163,6 +177,7 @@ const Main = styled.div`
       width: 100%;
       display: flex;
       align-items: center;
+
       .category {
         color: var(--darkgrey, #777);
       }

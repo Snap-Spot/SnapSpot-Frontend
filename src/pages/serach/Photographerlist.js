@@ -1,4 +1,4 @@
-import { React, useState, useEffect, useRef } from "react";
+import { React, useState, useEffect, useRef, useSearchParams } from "react";
 import styled from "styled-components";
 import Pagination from "react-js-pagination";
 import "../../components/Photographers/Review/Paging/Paging.css";
@@ -6,12 +6,15 @@ import { useNavigate, useLocation } from "react-router-dom";
 import FilteringBox from "../../components/search/FilteringBox";
 import SearchBox from "../../components/search/SearchBox";
 import Header from "../../components/common/Header";
-
+import { useLoadingContext } from "../../components/common/LoadingContext";
 import { getPhotographerList } from "../../api/search";
+import Loading from "../../components/common/Loading";
 
 const Photographerlist = () => {
-  const location = useLocation();
+  const { isLoading, startLoading, stopLoading } = useLoadingContext();
+
   const navigate = useNavigate();
+  const location = useLocation();
   const outSection = useRef();
   const [data, setData] = useState([]);
   const [isFilteringOpen, setIsFilteringOpen] = useState(false);
@@ -19,13 +22,20 @@ const Photographerlist = () => {
 
   const searchData = location.state?.searchData;
 
+  const searchParams = new URLSearchParams(location.search);
+
+  const areaId = searchParams.get("areaId") || null;
+  const ableDate = searchParams.get("ableDate") || null;
+  const special = searchParams.get("special") || null;
+  const sort = searchParams.get("sort") || null;
+
   useEffect(() => {
     if (searchData) {
       setData(searchData);
     } else {
       onSearch();
     }
-  }, [searchData]);
+  }, [areaId, ableDate, special, sort]);
 
   const handleTabClick = () => {
     if (!isFilteringOpen) {
@@ -35,26 +45,33 @@ const Photographerlist = () => {
     }
   };
 
-  const onSearch = async (
-    selectedSubRegion,
-    selectedSection,
-    selectedDate,
-    selectedOrder
-  ) => {
+  const onSearch = async () => {
+    startLoading(); //로딩 시작
     try {
-      const areaId = selectedSubRegion;
-      const special = selectedSection;
-      const ableDate = selectedDate;
-      const sort = selectedOrder;
-      const getData = await getPhotographerList(
-        areaId,
-        special,
-        ableDate,
-        sort
-      );
+      let endpoint = "/photographers";
+      const queryParams = [];
+      if (areaId) {
+        queryParams.push(`areaId=${areaId}`);
+      }
+      if (special) {
+        queryParams.push(`special=${special}`);
+      }
+      if (ableDate) {
+        queryParams.push(`ableDate=${ableDate}`);
+      }
+      if (sort && sort.length > 0) {
+        queryParams.push(`sort=${sort}`);
+      }
+      if (queryParams.length > 0) {
+        endpoint += "?" + queryParams.join("&");
+      }
+      navigate(endpoint);
+      const getData = await getPhotographerList(endpoint);
       setData(getData);
     } catch (err) {
       console.log(err);
+    } finally {
+      stopLoading(); //데이터 받은 후 로딩 중지
     }
   };
 
@@ -90,62 +107,76 @@ const Photographerlist = () => {
 
   return (
     <>
-      <Header />
-      <Wrapper>
-        <div>
-          <Box>
-            <TabBox>
-              {tabs.map((tab, index) => (
-                <Tab key={index} onClick={handleTabClick}>
-                  {tab}
-                </Tab>
-              ))}
-            </TabBox>
-          </Box>
-          {isFilteringOpen && (
-            <div ref={outSection}>
-              <FilteringBox
-                onSearch={onSearch}
-                isFilteringOpen={isFilteringOpen}
-                setIsFilteringOpen={setIsFilteringOpen}
-              />
-            </div>
-          )}
-        </div>
-        <Content isFilteringOpen={isFilteringOpen}>
-          <GridBox>
-            <div className="grid">
-              {currentPosts.map((data) => (
-                <div key={data.photographerId}>
-                  <SearchBox
-                    id={data.photographerId}
-                    image={data.image}
-                    tags={data.tags}
-                    photographer={data.nickname}
-                    star={data.averageScore}
-                    region={
-                      data.areas.length > 0 ? data.areas[0].metropolitan : ""
-                    }
-                    subregion={data.areas.length > 0 ? data.areas[0].city : ""}
-                    regionCount={data.areas.length}
-                    price={data.lowestPay}
-                    review={data.totalReview}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <Header />
+          <Wrapper>
+            <div>
+              <Box>
+                <TabBox>
+                  {tabs.map((tab, index) => (
+                    <Tab key={index} onClick={handleTabClick}>
+                      {tab}
+                    </Tab>
+                  ))}
+                </TabBox>
+              </Box>
+              {isFilteringOpen && (
+                <div ref={outSection}>
+                  <FilteringBox
+                    onSearch={onSearch}
+                    isFilteringOpen={isFilteringOpen}
+                    setIsFilteringOpen={setIsFilteringOpen}
                   />
                 </div>
-              ))}
+              )}
             </div>
-          </GridBox>
-        </Content>
-      </Wrapper>
-      <Pagination
-        activePage={currentPage}
-        itemsCountPerPage={itemsPerPage}
-        totalItemsCount={data.length}
-        pageRangeDisplayed={5}
-        prevPageText={"<"}
-        nextPageText={">"}
-        onChange={handlePageChange}
-      />
+            <Content isFilteringOpen={isFilteringOpen}>
+              <GridBox>
+                <div className="grid">
+                  {currentPosts.map((data) => (
+                    <div key={data.photographerId}>
+                      <SearchBox
+                        id={data.photographerId}
+                        image={data.image}
+                        tags={data.tags}
+                        photographer={data.nickname}
+                        star={data.averageScore}
+                        region={
+                          data.areas.length > 0
+                            ? data.areas[0].metropolitan
+                            : ""
+                        }
+                        subregion={
+                          data.areas.length > 0 ? data.areas[0].city : ""
+                        }
+                        regionCount={data.areas.length}
+                        price={data.lowestPay}
+                        review={data.totalReview}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </GridBox>
+            </Content>
+          </Wrapper>
+          {data.length > 0 ? (
+            <Pagination
+              activePage={currentPage}
+              itemsCountPerPage={itemsPerPage}
+              totalItemsCount={data.length}
+              pageRangeDisplayed={5}
+              prevPageText={"<"}
+              nextPageText={">"}
+              onChange={handlePageChange}
+            />
+          ) : (
+            <></>
+          )}
+        </>
+      )}
     </>
   );
 };

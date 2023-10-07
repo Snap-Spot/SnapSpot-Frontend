@@ -8,20 +8,48 @@ import Calendar from "./Calendar";
 import FeaturedImgInput from "./FeaturedImgInput";
 import { icon_src } from "./Data/IconList";
 
-const OtherInputs = () => {
+const OtherInputs = ({
+  areaId,
+  sns,
+  bio,
+  specialList,
+  tags,
+  unableSchedules,
+  images,
+  setAreaId,
+  setSns,
+  setBio,
+  setSpecialList,
+  setTag,
+  setUnableDates,
+  setImage,
+}) => {
+  let snsList = sns ? Object.values(sns) : [];
+  console.log(snsList);
+
   return (
     <Center>
       <InputContainer>
-        <LocationInput />
+        <LocationInput areaId={areaId} setAreaId={setAreaId} />
         <SubTitle>SNS 등록</SubTitle>
         {icon_src.map((item, idx) => (
-          <SNSInput key={idx} iconSrc={item.src} text={item.text} />
+          <SNSInput
+            key={idx}
+            index={idx}
+            iconSrc={item.src}
+            text={snsList[idx] || item.text}
+            sns={sns}
+            setSns={setSns}
+          />
         ))}
-        <IntroductionInput />
-        <Dropdown />
-        <TagInput />
-        <Calendar />
-        <FeaturedImgInput />
+        <IntroductionInput bio={bio} setBio={setBio} />
+        <Dropdown specialList={specialList} setSpecialList={setSpecialList} />
+        <TagInput tags={tags} setTag={setTag} />
+        <Calendar
+          unableSchedules={unableSchedules}
+          setUnableDates={setUnableDates}
+        />
+        <FeaturedImgInput images={images} setImage={setImage} />
       </InputContainer>
     </Center>
   );

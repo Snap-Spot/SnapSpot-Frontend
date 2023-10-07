@@ -32,6 +32,7 @@ export const KakaoSignInAPI = async (accessToken, refreshToken) => {
     console.log(res, "로그인 성공");
     // accessToken 로컬스토리지 저장
     localStorage.setItem("accessToken", res.data.token.accessToken);
+    localStorage.setItem("refreshToken", res.data.token.refreshToken);
 
     // main페이지로 이동
     alert("로그인에 성공하였습니다!");
@@ -72,6 +73,7 @@ export const EmailSignInAPI = async (loginInfo) => {
     console.log(res, "로그인 성공");
     // accessToken 로컬스토리지 저장
     localStorage.setItem("accessToken", res.data.token.accessToken);
+    localStorage.setItem("refreshToken", res.data.token.refreshToken);
 
     // main페이지로 이동
     alert("로그인에 성공하였습니다!");
@@ -81,4 +83,12 @@ export const EmailSignInAPI = async (loginInfo) => {
     console.log(err, "로그인 에러");
     return "Login Error";
   }
+};
+
+// 로그아웃 (로컬스토리지 토큰 삭제 후 메인페이지 이동)
+export const LogoutAPI = () => {
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+  // reload 후 이동해야 localStorage 변경
+  window.location.replace("/");
 };

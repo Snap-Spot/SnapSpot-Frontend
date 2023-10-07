@@ -1,15 +1,17 @@
 import { React, useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Header from "../../components/common/Header";
-import footer from "../../assets/photograph/Footer.png";
 import more from "../../assets/search/more.png";
 import SearchBox from "../../components/search/SearchBox";
 import EamptySearch from "../../components/search/EamptySearch";
-
+import { useLoadingContext } from "../../components/common/LoadingContext";
 import { getKeywordSearch } from "../../api/search";
+import Loading from "../../components/common/Loading";
 
 const SearchPage = () => {
+  const { isLoading, startLoading, stopLoading } = useLoadingContext();
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -18,7 +20,6 @@ const SearchPage = () => {
   const nicknameData = searchData?.nicknameResult || [];
   const areaData = searchData?.areaResult || [];
   const [keyword, setKeyword] = useState("");
-  const [loading, setLoading] = useState(true); //로딩 상태 함수
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -39,30 +40,31 @@ const SearchPage = () => {
 
   const getSearch = async (keyword) => {
     //검색 함수
+    startLoading();
     try {
       const getData = await getKeywordSearch(keyword);
       setSearchData(getData);
       if (areaData.length === 0 && nicknameData.length === 0) {
         setRecommendData(getData.recommend);
       }
-      setLoading(false); //데이터를 받아온 후 Loading false로 설정
     } catch (err) {
       console.log(err);
-      setLoading(false); //오류 출력 후 Loading false로 설정
+    } finally {
+      stopLoading();
     }
   };
 
   return (
     <>
-      <Header></Header>
-      <Wrapper>
-        <SearchTitle>
-          <div className="subject">'{keyword}'</div>에 대한 검색결과
-        </SearchTitle>
-        {loading ? ( // 로딩 중일 때 로딩 화면 표시
-          <></>
-        ) : (
-          <>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <Header></Header>
+          <Wrapper>
+            <SearchTitle>
+              <div className="subject">'{keyword}'</div>에 대한 검색결과
+            </SearchTitle>
             {areaData.length > 0 || nicknameData.length > 0 ? ( //지역 관련 검색 결과
               <Content>
                 {areaData && areaData.length > 0 ? (
@@ -161,9 +163,9 @@ const SearchPage = () => {
             ) : (
               <EamptySearch data={recommendData} />
             )}
-          </>
-        )}
-      </Wrapper>
+          </Wrapper>
+        </>
+      )}
     </>
   );
 };
@@ -282,5 +284,21 @@ const SubTitle = styled.div`
       width: 8px;
       height: 13.333px;
     }
+  }
+`;
+const spinner_animation = keyframes`
+    from {
+        transform: rotate(0deg);
+    } to {
+        transform: rotate(360deg);
+    }
+`;
+
+const LoadingImage = styled.img`
+  width: 15%;
+  animation: ${spinner_animation} 1s linear infinite;
+
+  @media screen and (max-width: 768px) {
+    width: 50%;
   }
 `;

@@ -1,12 +1,21 @@
 import styled from "styled-components";
 
-const TagInput = () => {
+const TagInput = ({ tags, setTag }) => {
+  const handleTagChange = (tagName, value) => {
+    setTag({ ...tags, [tagName]: value });
+  };
+
   return (
     <>
       <SubTitle>태그 입력</SubTitle>
-      <Input />
-      <Input />
-      <Input />
+      {Object.entries(tags).map(([tagName, value]) => (
+        <Input
+          key={tagName}
+          placeholder={value}
+          value={value}
+          onChange={(e) => handleTagChange(tagName, e.target.value)}
+        />
+      ))}
     </>
   );
 };

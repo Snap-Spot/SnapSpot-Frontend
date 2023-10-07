@@ -4,7 +4,6 @@ import { styled } from "styled-components";
 import useMobileDetection from "./mobileDetection";
 import search from "../../assets/header/search.png";
 
-
 function SearchBox() {
   const navigate = useNavigate();
   const isMobile = useMobileDetection();
@@ -22,6 +21,12 @@ function SearchBox() {
     }
   };
 
+  const handleOnKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onClickSearchBtn();
+    }
+  };
+
   return (
     <div>
       {isMobile ? (
@@ -31,6 +36,7 @@ function SearchBox() {
               placeholder="찾고 싶은 스팟이나 사진작가를 검색하세요."
               value={searchValue}
               onChange={onInputChange}
+              onKeyPress={handleOnKeyPress}
             ></input>
             <img onClick={onClickSearchBtn} src={search} alt="검색하기" />
           </Search>
@@ -41,6 +47,7 @@ function SearchBox() {
             placeholder="찾고 싶은 스팟이나 사진작가를 검색하세요."
             value={searchValue}
             onChange={onInputChange}
+            onKeyPress={handleOnKeyPress}
           ></input>
           <img onClick={onClickSearchBtn} src={search} alt="검색하기" />
         </Search>

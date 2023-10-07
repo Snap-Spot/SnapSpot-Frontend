@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import profile from "../../../assets/photograph/profile.png";
 
-const ChatBox = ({ text, time }) => {
+const ChatBox = ({ text, time, profile }) => {
   return (
     <ChatBoxContainer>
       <ChatContainer>
@@ -57,6 +57,7 @@ const Chat = styled.div`
   font-size: 16px;
   padding-left: 24px;
   padding-top: 16px;
+  padding-right: 24px;
 
   @media (max-width: 768px) {
     width: 100%;

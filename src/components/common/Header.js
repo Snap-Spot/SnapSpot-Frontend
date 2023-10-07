@@ -1,6 +1,7 @@
-import { React, useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
+import { getMyProfile } from "../../api/member";
 import useMobileDetection from "./mobileDetection";
 import profile from "../../assets/header/profile.png";
 import logo from "../../assets/header/logo.png";
@@ -12,7 +13,21 @@ import SearchBox from "./SearchBox";
 const Header = (props) => {
   const navigate = useNavigate();
   const isMobile = useMobileDetection();
+  const [profileData, setProfileData] = useState({});
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false);
+
+  const getData = async () => {
+    try {
+      const data = await getMyProfile();
+      setProfileData(data);
+    } catch (err) {
+      setProfileData({ profile: profile });
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const openModal = () => {
     setIsHomeMenuOpen(!isHomeMenuOpen);
@@ -59,9 +74,9 @@ const Header = (props) => {
               </div>
               <img
                 className="mypage"
+                src={profileData.profile}
                 onClick={onClickMyPage}
-                src={profile}
-                alt="마이페이지"
+                alt=""
               />
               <img className="menu" onClick={openModal} src={menu} alt="메뉴" />
             </Menu>
@@ -80,8 +95,8 @@ const Header = (props) => {
     </Wrapper>
   );
 };
+export default React.memo(Header);
 
-export default Header;
 const Wrapper = styled.div``;
 
 const HeaderDiv = styled.div`
