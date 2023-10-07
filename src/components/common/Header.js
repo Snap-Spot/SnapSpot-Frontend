@@ -74,7 +74,7 @@ const Header = (props) => {
               </div>
               <img
                 className="mypage"
-                src={profileData.profile}
+                src={profileData.profile || profile}
                 onClick={onClickMyPage}
                 alt=""
               />
