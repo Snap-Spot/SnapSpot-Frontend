@@ -21,7 +21,14 @@ const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
       {
         menu: "예약 변경하기",
         title: "무엇을 변경하고 싶으세요?",
-        content: <ChangeModal />,
+        content: (
+          <ChangeModal
+            planId={plan.planId}
+            photographerName={photographer.nickname}
+            category={category.kor}
+            date={date}
+          />
+        ),
       },
       {
         menu: "예약 취소하기",
@@ -39,24 +46,38 @@ const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
       {
         menu: "작가에게 문의하기",
         title: "문의하기",
-        content: <QuestionModal />,
+        content: <QuestionModal planId={plan.planId} />,
       },
     ],
     [
       {
         menu: "예약 변경하기",
         title: "무엇을 변경하고 싶으세요?",
-        content: <ChangeModal />,
+        content: (
+          <ChangeModal
+            planId={plan.planId}
+            photographerName={photographer.nickname}
+            category={category.kor}
+          />
+        ),
       },
       {
         menu: "예약 취소하기",
         title: "예약을 취소하시겠습니까?",
-        content: <CancelModal />,
+        content: (
+          <CancelModal
+            plan={plan}
+            photographer={photographer}
+            date={date}
+            day={day}
+            category={category.kor}
+          />
+        ),
       },
       {
         menu: "작가에게 문의하기",
         title: "문의하기",
-        content: <QuestionModal />,
+        content: <QuestionModal planId={plan.planId} />,
       },
     ],
     [],
@@ -64,12 +85,26 @@ const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
       {
         menu: "예약 변경하기",
         title: "무엇을 변경하고 싶으세요?",
-        content: <ChangeModal />,
+        content: (
+          <ChangeModal
+            planId={plan.planId}
+            photographerName={photographer.nickname}
+            category={category.kor}
+          />
+        ),
       },
       {
         menu: "예약 취소하기",
         title: "예약을 취소하시겠습니까?",
-        content: <CancelModal />,
+        content: (
+          <CancelModal
+            plan={plan}
+            photographer={photographer}
+            date={date}
+            day={day}
+            category={category.kor}
+          />
+        ),
       },
       {
         menu: "영수증 보러가기",
@@ -87,7 +122,7 @@ const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
       {
         menu: "작가에게 문의하기",
         title: "문의하기",
-        content: <QuestionModal />,
+        content: <QuestionModal planId={plan.planId} />,
       },
     ],
     [
@@ -107,7 +142,7 @@ const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
       {
         menu: "작가에게 문의하기",
         title: "문의하기",
-        content: <QuestionModal />,
+        content: <QuestionModal planId={plan.planId} />,
       },
     ],
     [
@@ -127,11 +162,15 @@ const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
       {
         menu: "작가에게 문의하기",
         title: "문의하기",
-        content: <QuestionModal />,
+        content: <QuestionModal planId={plan.planId} />,
       },
     ],
     [
-      { menu: "리뷰 쓰러가기", title: "리뷰쓰기", content: <ReviewModal /> },
+      {
+        menu: "리뷰 쓰러가기",
+        title: "리뷰쓰기",
+        content: <ReviewModal planId={plan.planId} />,
+      },
       {
         menu: "영수증 보러가기",
         title: "영수증 조회",
@@ -148,7 +187,7 @@ const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
       {
         menu: "작가에게 문의하기",
         title: "문의하기",
-        content: <QuestionModal />,
+        content: <QuestionModal planId={plan.planId} />,
       },
     ],
     [],

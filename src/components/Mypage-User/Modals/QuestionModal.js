@@ -1,13 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
-
-const QuestionModal = () => {
+import { postMessage } from "../../../api/message";
+const QuestionModal = ({ planId }) => {
+  const [contents, setContents] = useState("");
+  const handleChange = (e) => {
+    setContents(e.target.value);
+  };
+  const submitQuestion = async () => {
+    if (contents !== "") {
+      const res = await postMessage(planId, contents);
+      if (res.status === 200) {
+        alert("문의 메세지를 전송했습니다.");
+        window.location.reload();
+      }
+    } else {
+      alert("문의할 내용을 작성해주세요.");
+    }
+  };
   return (
     <Wrapper>
       <div className="subtitle">촬영에 대해 궁금한 점을 작성해주세요!</div>
 
-      <Form placeholder="문의할 내용을 작성해주세요 (500자 이내)" />
-      <div className="button">문의하기</div>
+      <Form
+        onChange={handleChange}
+        placeholder="문의할 내용을 작성해주세요 (500자 이내)"
+        value={contents}
+      />
+      <div className="button" onClick={submitQuestion}>
+        문의하기
+      </div>
     </Wrapper>
   );
 };
