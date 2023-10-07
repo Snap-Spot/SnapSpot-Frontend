@@ -76,8 +76,7 @@ const ReviewContainer = styled.div`
 
 const ProfileContainer = styled.div`
   display: flex;
-  margin-right: 4rem;
-  margin-left: 2.5rem;
+  width: 14rem;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -90,7 +89,7 @@ const ProfileContainer = styled.div`
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 30rem;
+  width: 33rem;
   margin-right: 1rem;
 
   @media (max-width: 768px) {
@@ -115,6 +114,7 @@ const Profile = styled.img`
 const NickName = styled.p`
   font-weight: 500;
   margin-top: 0;
+  font-size: 0.8rem;
 
   @media (max-width: 768px) {
     font-size: 0.6rem;

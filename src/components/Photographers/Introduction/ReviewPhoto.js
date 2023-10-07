@@ -1,19 +1,11 @@
 import styled from "styled-components";
-import reviewPhoto from "../../../assets/photograph/review.png";
 import useMobileDetection from "../../common/mobileDetection";
 
-const ReviewPhoto = () => {
-  const img_list = [
-    reviewPhoto,
-    reviewPhoto,
-    reviewPhoto,
-    reviewPhoto,
-    reviewPhoto,
-    reviewPhoto,
-    reviewPhoto,
-  ];
+const ReviewPhoto = ({ reviews }) => {
   const isMobile = useMobileDetection();
+  const img_list = Object.values(reviews.map((el) => el.image));
   const slice_list = isMobile ? img_list.slice(0, 4) : img_list.slice(0, 5); // 4개까지만 잘라서 보여주기
+  console.log(slice_list);
 
   return (
     <Container>

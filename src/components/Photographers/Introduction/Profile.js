@@ -27,7 +27,8 @@ const Profile = ({
     getHeartData();
   }, []);
 
-  const getHeartData = async () => { //좋아요 리스트 포함 여부에 따라 clickedHeart 설정
+  const getHeartData = async () => {
+    //좋아요 리스트 포함 여부에 따라 clickedHeart 설정
     try {
       const heartDate = await getMyHeartList();
       const heartList = heartDate.map((data) => data.photographerId);
@@ -38,7 +39,8 @@ const Profile = ({
     }
   };
 
-  const handleHeartClick = async () => { //좋아요 클릭 함수
+  const handleHeartClick = async () => {
+    //좋아요 클릭 함수
     try {
       if (clickedHeart) {
         await deleteHeart(photographerId);
@@ -181,7 +183,7 @@ const Align = styled.div`
 const Heart = styled.img`
   width: 46px;
   height: 44px;
-  margin-left: 5rem;
+  margin-left: auto;
 
   @media (max-width: 768px) {
     margin-left: 0;

@@ -65,6 +65,7 @@ const CancelIcon = styled.img`
   width: 32px;
   height: 32px;
   cursor: pointer;
+  margin-left: auto;
 
   @media (max-width: 768px) {
     width: 25px;
