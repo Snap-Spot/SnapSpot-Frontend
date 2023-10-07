@@ -6,7 +6,6 @@ const PhotoChatBox = ({ text, time }) => {
       <ChatContainer>
         <Chat>{text}</Chat>
       </ChatContainer>
-      <Time>{time}</Time>
     </ChatBoxContainer>
   );
 };

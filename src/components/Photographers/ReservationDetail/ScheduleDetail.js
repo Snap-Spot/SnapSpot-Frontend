@@ -223,11 +223,12 @@ const ScheduleDetail = ({
             value={message}
           />
         )}
-        {status === "RESERVED" && (
-          <BtnContainer style={{ marginTop: "2rem" }}>
-            <RequestBtn>공지사항 보내기</RequestBtn>
-          </BtnContainer>
-        )}
+        {status === "RESERVED" ||
+          (status === "TODAY" && (
+            <BtnContainer style={{ marginTop: "2rem" }}>
+              <RequestBtn>공지사항 보내기</RequestBtn>
+            </BtnContainer>
+          ))}
         {status === "DELIVERY" && review.length > 0 && (
           <>
             {/* 리뷰 확인 */}

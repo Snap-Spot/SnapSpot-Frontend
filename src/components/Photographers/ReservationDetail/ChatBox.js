@@ -8,7 +8,6 @@ const ChatBox = ({ text, time, profile }) => {
         <Profile src={profile} />
         <Chat>{text}</Chat>
       </ChatContainer>
-      <Time>{time}</Time>
     </ChatBoxContainer>
   );
 };

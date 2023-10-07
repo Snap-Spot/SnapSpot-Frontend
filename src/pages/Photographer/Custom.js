@@ -77,7 +77,7 @@ const Custom = () => {
   // console.log("가격표", paymentImage);
   // console.log("가격", lowestPay);
   // console.log("소개", bio);
-  // console.log("지역id", areaId);
+  console.log("지역id", areaId);
   // console.log("태그", tag);
   // console.log("이미지", image);
   // console.log("전문분야", specialList);
@@ -88,35 +88,36 @@ const Custom = () => {
     let special = category
       .filter((item) => specialList.includes(item.label))
       .map((el) => el.key);
-
-    const res = await putCustomInfo(
-      nickname,
-      profileImage,
-      paymentImage,
-      lowestPay,
-      bio,
-      areaId,
-      sns,
-      special,
-      tag,
-      unableDates,
-      image
-    );
-
-    console.log(res);
+    try {
+      const res = await putCustomInfo(
+        nickname,
+        profileImage,
+        paymentImage,
+        lowestPay,
+        bio,
+        areaId,
+        sns,
+        special,
+        tag,
+        unableDates,
+        image
+      );
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <LayOut>
       <Container>
-        {data && data.member && (
+        {data && data.member && data.images && (
           <>
             <Title>작가 페이지 커스텀</Title>
             <Line />
             <BasicInput
               profile={profileImage}
               nickname={nickname}
-              priceImg={paymentImage}
+              priceimg={paymentImage}
               lowestPay={lowestPay}
               setNickname={setNickname}
               setProfileImage={setProfileImage}
