@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { getStatusFromEng } from "../../common/TranslateStatus";
 import { getMyReservation } from "../../../api/plan";
 import { getCategoryFromEng } from "../../common/TranslateCategory";
+import ChatsContainer from "./ChatsContainer";
 
 const DetailedItem = () => {
   //경로에서 planId 겟
@@ -88,7 +89,20 @@ const DetailedItem = () => {
           day={day}
           category={category}
         />
-        <KakaoMap />
+
+        <ChatsContainer
+          profile={photographer.profile}
+          messages={plan.messages}
+        />
+
+        {plan.placeAddress && (
+          <KakaoMap
+            placeName={plan.placeAddress}
+            placeAddress={plan.placeAddress}
+            x={plan.x}
+            y={plan.y}
+          />
+        )}
       </Wrapper>
     </>
   );

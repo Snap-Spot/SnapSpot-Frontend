@@ -1,32 +1,99 @@
-import React from "react";
+import React, { useRef } from "react";
 import { styled } from "styled-components";
 import { useEffect, useState } from "react";
 import nullstar from "../../../assets/mypage/modals/nullstar.png";
 import filledstar from "../../../assets/mypage/modals/filledstar.png";
 import photo from "../../../assets/mypage/modals/photo.png";
+import { postReview } from "../../../api/review";
 
-const ReviewModal = () => {
-  const [starCount, setStarCount] = useState();
+const ReviewModal = ({ planId }) => {
+  const imgRef = useRef();
+  const [inputs, setInputs] = useState({
+    planId: planId,
+    score: 0,
+    title: "",
+    comment: "",
+    image: "",
+  });
+  const { title, comment } = inputs;
+  const [previewImg, setPreviewImg] = useState(null);
+
+  //사진 첨부 및 미리보기
+  const uploadImg = () => {
+    let file = imgRef.current.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = async (e) => {
+      setPreviewImg(e.target.result);
+
+      setInputs({
+        ...inputs, // 기존의 input 객체를 복사한 뒤
+        image: file, // name 키를 가진 값을 value 로 설정
+      });
+    };
+  };
+  const submitReview = async () => {
+    try {
+      const res = await postReview(inputs);
+      if (res.stauts === 201) {
+        alert(res.message);
+      }
+    } catch (err) {
+      alert("제목, 별점, 리뷰, 사진을 모두 작성 및 첨부해주세요");
+    }
+  };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  };
   return (
     <Wrapper>
+      <div className="subTitle">제목</div>
+      <input
+        name="title"
+        placeholder="제목을 작성하세요."
+        className="titleField"
+        onChange={handleChange}
+        value={title}
+      />
       <div className="subTitle">별점을 매겨주세요</div>
-      <Stars setStarCount={setStarCount} />
-      <Form placeholder="리뷰를 작성해주세요.(1000자 이내)"></Form>
+      <Stars setInputs={setInputs} inputs={inputs} />
+      <Form
+        name="comment"
+        placeholder="리뷰를 작성해주세요.(1000자 이내)"
+        onChange={handleChange}
+        value={comment}
+      ></Form>
+      <input
+        className="imageInput"
+        accept=".jpg, .jpeg, .png"
+        type="file"
+        id="file"
+        multiple
+        onChange={uploadImg}
+        ref={imgRef}
+      />
+      <label htmlFor="file">
+        <div className="subTitle" style={{ cursor: "pointer" }}>
+          사진 첨부하기 <img src={photo} alt="" />
+        </div>
+      </label>
 
-      <div className="subTitle" style={{ cursor: "pointer" }}>
-        사진 첨부하기 <img src={photo} alt="" />
+      <Preview previewImg={previewImg} />
+
+      <div className="button" onClick={submitReview}>
+        등록
       </div>
-
-      <Preview />
-
-      <div className="button">등록</div>
     </Wrapper>
   );
 };
 
 export default ReviewModal;
 
-const Stars = ({ setStarCount }) => {
+const Stars = ({ setInputs, inputs }) => {
   const [clicked, setClicked] = useState([false, false, false, false, false]);
   const array = [0, 1, 2, 3, 4];
   const handleStarClick = (index) => {
@@ -37,7 +104,11 @@ const Stars = ({ setStarCount }) => {
     setClicked(clickStates);
   };
   useEffect(() => {
-    setStarCount(clicked.filter(Boolean).length);
+    //setStarCount(clicked.filter(Boolean).length);
+    setInputs({
+      ...inputs,
+      score: clicked.filter(Boolean).length,
+    });
   }, [clicked]);
   return (
     <>
@@ -68,12 +139,14 @@ const Stars = ({ setStarCount }) => {
   );
 };
 
-const Preview = () => {
+const Preview = ({ previewImg }) => {
   return (
     <PreviewContainer>
-      <div className="image">
-        <img src="" alt="" />
-      </div>
+      {previewImg && (
+        <div className="image">
+          <img src={previewImg} alt="" />
+        </div>
+      )}
     </PreviewContainer>
   );
 };
@@ -100,6 +173,29 @@ const StarContainer = styled.div`
 
 const Wrapper = styled.div`
   width: 100%;
+  .imageInput {
+    display: none;
+  }
+  .titleField {
+    margin: 14px 0;
+    width: 75%;
+    height: 44px;
+    border-radius: 22px;
+    background: var(--lightgrey1, #e6e6e6);
+    outline: none;
+    border: none;
+    font-size: 20px;
+    font-weight: 500;
+    box-sizing: border-box;
+    padding-left: 1rem;
+    @media (max-width: 768px) {
+      margin: 11px 0;
+      width: 100%;
+      height: 34px;
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
   .subTitle {
     width: 100%;
     font-size: 20px;

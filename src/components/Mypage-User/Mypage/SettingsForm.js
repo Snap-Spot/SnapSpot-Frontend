@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { styled } from "styled-components";
 import { getMyProfile, updateMyProfile } from "../../../api/member";
+
 const SettingsForm = () => {
   const imgRef = useRef();
   const [inputs, setInputs] = useState({
@@ -53,7 +54,12 @@ const SettingsForm = () => {
   };
   const updateData = async () => {
     try {
-      await updateMyProfile(isPhotographer, inputs, initialImage);
+      const res = await updateMyProfile(isPhotographer, inputs, initialImage);
+      console.log(res);
+      if (res.status === 200) {
+        alert("회원정보가 수정되었습니다.");
+        window.location.href = "/mypage";
+      }
     } catch (err) {
       if (err.response.data.status === 500) {
         alert(err.response.data.error);

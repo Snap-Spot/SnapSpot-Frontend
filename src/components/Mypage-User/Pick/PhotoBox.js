@@ -2,8 +2,14 @@ import styled from "styled-components";
 import filledHeart from "../../../assets/mypage/pick/filledHeart.png";
 import unfilledHeart from "../../../assets/mypage/pick/unfilledHeart.png";
 import { useState } from "react";
-const PhotoBox = ({ photo, photographer, region }) => {
+import { deleteHeart } from "../../../api/heart";
+const PhotoBox = ({ id, photo, photographer, region, filterData }) => {
   const [isHeart, setIsHeart] = useState(true);
+  const handleCancel = () => {
+    setIsHeart(!isHeart);
+    deleteHeart(id);
+    filterData(id);
+  };
   return (
     <Wrapper>
       <Photo>
@@ -12,11 +18,7 @@ const PhotoBox = ({ photo, photographer, region }) => {
       <Info>
         <TopInfo>
           <Photographer>{photographer} 작가</Photographer>
-          <Heart
-            onClick={() => {
-              setIsHeart(!isHeart);
-            }}
-          >
+          <Heart onClick={handleCancel}>
             {isHeart ? (
               <img src={filledHeart} alt="" />
             ) : (
