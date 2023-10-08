@@ -66,7 +66,9 @@ const DetailedItem = () => {
               </div>
               <div className="item">
                 <p className="subject">예약원수</p>
-                <p className="content">{plan.people}인</p>
+                <p className="content">
+                  {plan.people === 5 ? "5인 이상" : plan.people + "인"}
+                </p>
               </div>
               <div className="item">
                 <p className="subject">가격</p>

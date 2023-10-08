@@ -59,7 +59,9 @@ const ReservationItem = ({ item }) => {
           <div className="dateNtime">
             {date}({day}) {item.time}
           </div>
-          <div className="count">예약인원 : {item.people}인</div>
+          <div className="count">
+            예약인원 : {item.people === 5 ? "5인 이상" : item.people + "인"}
+          </div>
         </Infos>
       </Footer>
     </Wrapper>
