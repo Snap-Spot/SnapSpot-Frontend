@@ -75,17 +75,32 @@ const Photographerlist = () => {
     }
   };
 
-  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const itemsPerPage = 15; // 페이지당 아이템 개수
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+    // 페이지 넘버 변경 시 로컬 스토리지에 저장
+    localStorage.setItem("currentPage", pageNumber.toString());
   };
+
+  const initialPageNumber = parseInt(localStorage.getItem("currentPage")) || 1;
+  const [currentPage, setCurrentPage] = useState(initialPageNumber);
 
   // 데이터 배열을 페이지에 맞게 자르기
   const indexOfLastPost = currentPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
   const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
+
+  useEffect(() => {
+    const savedPageNumber = localStorage.getItem("currentPage");
+    if (savedPageNumber) {
+      setCurrentPage(parseInt(savedPageNumber));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("currentPage", currentPage.toString());
+  }, [currentPage]);
 
   const handleOutsideClick = (e) => {
     if (!isFilteringOpen) {
@@ -129,6 +144,8 @@ const Photographerlist = () => {
                     onSearch={onSearch}
                     isFilteringOpen={isFilteringOpen}
                     setIsFilteringOpen={setIsFilteringOpen}
+                    setCurrentPage={setCurrentPage}
+                    currentPage={currentPage}
                   />
                 </div>
               )}
