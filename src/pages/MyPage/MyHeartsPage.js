@@ -41,7 +41,7 @@ const MyHeartsPage = () => {
       <Wrapper>
         <div className="title">좋아요 모아보기</div>
         <GridBox>
-          <div class="grid">
+          <div className="grid">
             {currentPosts.map((el) => {
               const region =
                 el.areas[0] &&
@@ -49,7 +49,7 @@ const MyHeartsPage = () => {
                   el.areas.length - 1
                 }곳`;
               return (
-                <div>
+                <div key={el.photographerId}>
                   <PhotoBox
                     id={el.photographerId}
                     photo={el.image}

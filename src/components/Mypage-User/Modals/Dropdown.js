@@ -30,12 +30,12 @@ const Dropdown = ({ options, handleTarget }) => {
               color = "blue";
             }
             return (
-              <>
+              <div key={el}>
                 {index !== 0 && <Line />}
                 <Item $color={color} onClick={() => handleSelect(index, el)}>
                   {el}
                 </Item>
-              </>
+              </div>
             );
           })}
         </Open>
