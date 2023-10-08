@@ -3,7 +3,6 @@ import { styled } from "styled-components";
 import arrow from "../../../assets/mypage/reservation/arrow.png";
 import mapMarker from "../../../assets/mypage/reservation/mapMarker.png";
 const KakaoMap = ({ placeName, placeAddress, x, y }) => {
-  console.log(x, y);
   const { kakao } = window;
   const openKakaoMap = () => {
     window.open(

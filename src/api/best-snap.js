@@ -9,10 +9,10 @@ export const postBestSnap = async (file, inputs, photoDate, photographerId) => {
     photoDate: photoDate,
     photographerId: photographerId,
   };
-  console.log(body);
+
   try {
     const res = await client.post("/photos", body);
-    console.log(res);
+
     return res;
   } catch (err) {
     console.log("에러 발생", err);
@@ -23,7 +23,7 @@ export const postBestSnap = async (file, inputs, photoDate, photographerId) => {
 export const getBestSnaps = async () => {
   try {
     const res = await client.get("/photos");
-    console.log(res);
+
     return res.data;
   } catch (err) {
     console.log("에러 발생", err);

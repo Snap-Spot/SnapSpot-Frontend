@@ -9,10 +9,18 @@ const SettingsPage = () => {
   const openModal = () => {
     setShowModal(true);
   };
+  let isPhotographer;
+  if (localStorage.getItem("role") === "ROLE_PHOTOGRAPHER") {
+    isPhotographer = true;
+  }
+
   return (
     <>
       {showModal && (
-        <SignOutCheckModal setShowModal={setShowModal} isPhotographer={true} />
+        <SignOutCheckModal
+          setShowModal={setShowModal}
+          isPhotographer={isPhotographer}
+        />
       )}
       <Header />
       <Wrapper>

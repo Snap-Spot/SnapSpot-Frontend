@@ -2,7 +2,6 @@ import React from "react";
 import { styled } from "styled-components";
 
 const MyChat = ({ contents }) => {
-  console.log(contents);
   return (
     <Wrapper>
       <Chat>{contents}</Chat>

@@ -55,7 +55,7 @@ const SettingsForm = () => {
   const updateData = async () => {
     try {
       const res = await updateMyProfile(isPhotographer, inputs, initialImage);
-      console.log(res);
+
       if (res.status === 200) {
         alert("회원정보가 수정되었습니다.");
         window.location.href = "/mypage";

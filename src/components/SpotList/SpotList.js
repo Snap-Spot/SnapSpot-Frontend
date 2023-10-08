@@ -15,8 +15,8 @@ const SpotList = () => {
     <Wrapper>
       <GridBox>
         {posts &&
-          posts.map((post) => {
-            return <SpotBox post={post} />;
+          posts.map((post, index) => {
+            return <SpotBox key={index} post={post} />;
           })}
       </GridBox>
     </Wrapper>
