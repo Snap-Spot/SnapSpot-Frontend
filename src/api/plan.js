@@ -30,7 +30,6 @@ export const cancelReservation = async (id, reason, refundAccount) => {
       refundAccount: refundAccount,
     });
 
-    console.log(res.data);
     return res.data;
   } catch (err) {
     console.log("에러 발생", err);
@@ -124,7 +123,6 @@ export const putPlanChange = async (
   time,
   localeDateTime
 ) => {
-  console.log(localeDateTime);
   try {
     const res = await client.put(`/plans/change`, {
       planId: planId,

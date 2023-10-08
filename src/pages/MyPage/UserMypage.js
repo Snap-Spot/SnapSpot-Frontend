@@ -23,8 +23,6 @@ const UserMypage = () => {
       } else if (data.role === "ROLE_PHOTOGRAPHER") {
         setIsPhotographer(true);
       }
-
-      console.log(data);
     } catch (err) {
       //프로필 정보 조회 안될때 (unauthorized: 로그인 안 했을때)
       //로그인 화면으로 리다이렉트

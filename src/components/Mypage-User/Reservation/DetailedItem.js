@@ -23,7 +23,7 @@ const DetailedItem = () => {
 
   const getData = async () => {
     const planData = await getMyReservation(id);
-    console.log(planData);
+
     setPhotographer(planData.photographer);
     setPlan(planData);
 

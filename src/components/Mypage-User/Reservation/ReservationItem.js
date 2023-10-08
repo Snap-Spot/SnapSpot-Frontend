@@ -15,7 +15,6 @@ export const getDayOfWeek = (date) => {
 };
 
 const ReservationItem = ({ item }) => {
-  console.log(item);
   const navigate = useNavigate();
   const date = item.planDate.substr(0, 10);
   const day = getDayOfWeek(date);

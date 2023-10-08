@@ -28,7 +28,7 @@ export const deleteHeart = async (photographerId) => {
     const res = await client.delete(`/hearts`, {
       data: { photographerId: photographerId },
     });
-    console.log("좋아요 취소");
+
     return res.data;
   } catch (err) {
     console.log(err);
