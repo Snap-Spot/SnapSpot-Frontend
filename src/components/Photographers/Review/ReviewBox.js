@@ -2,7 +2,15 @@ import styled from "styled-components";
 import star from "../../../assets/photograph/star.png";
 import { useState, useEffect } from "react";
 
-const ReviewBox = ({ profile, nickname, title, content, date, score }) => {
+const ReviewBox = ({
+  profile,
+  nickname,
+  title,
+  content,
+  date,
+  score,
+  isLine,
+}) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   // 모바일 너비에서는 리뷰 상세내용 50자로 잘라서 보여주기
@@ -17,7 +25,7 @@ const ReviewBox = ({ profile, nickname, title, content, date, score }) => {
   }, []);
 
   return (
-    <ReviewContainer>
+    <ReviewContainer isLine={isLine}>
       <ProfileContainer>
         <Profile src={profile} />
         <NickName>{nickname}</NickName>
@@ -63,7 +71,8 @@ const Star = styled.img`
 const ReviewContainer = styled.div`
   height: 10rem;
   padding-top: 2.5rem;
-  border-bottom: 1px solid #d9d9d9;
+  border-bottom: ${(props) =>
+    props.isLine === "none" ? "none" : "1px solid #d9d9d9"};
   display: flex;
   width: 100%;
 
@@ -76,8 +85,7 @@ const ReviewContainer = styled.div`
 
 const ProfileContainer = styled.div`
   display: flex;
-  margin-right: 4rem;
-  margin-left: 2.5rem;
+  width: 14rem;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -90,7 +98,7 @@ const ProfileContainer = styled.div`
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 30rem;
+  width: 33rem;
   margin-right: 1rem;
 
   @media (max-width: 768px) {
@@ -115,6 +123,7 @@ const Profile = styled.img`
 const NickName = styled.p`
   font-weight: 500;
   margin-top: 0;
+  font-size: 0.8rem;
 
   @media (max-width: 768px) {
     font-size: 0.6rem;
@@ -123,7 +132,7 @@ const NickName = styled.p`
 
 const Title = styled.p`
   font-weight: 700;
-  font-size: 18px;
+  font-size: 19px;
   margin-bottom: 0.2rem;
   margin-top: 0;
 
@@ -143,7 +152,7 @@ const Content = styled.p`
 `;
 
 const Date = styled.p`
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 
   @media (max-width: 768px) {
     margin: 0;

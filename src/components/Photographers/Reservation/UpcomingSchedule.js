@@ -2,7 +2,7 @@ import styled from "styled-components";
 import arrow from "../../../assets/photograph/arrow.png";
 import line from "../../../assets/photograph/line.png";
 import { useNavigate } from "react-router-dom";
-//복구
+
 const UpcomingSchedule = ({
   nickname,
   snapType,
@@ -39,7 +39,9 @@ const UpcomingSchedule = ({
         <Row>
           <SnapType>{snapType[0].label}</SnapType>
           <Line src={line} />
-          <Headcount>{headCount}인</Headcount>
+          <Headcount>
+            {headCount < 5 ? `${headCount}인` : `${headCount}인 이상`}
+          </Headcount>
         </Row>
         <Row>
           <TitleContainer>

@@ -58,6 +58,7 @@ const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
             planId={plan.planId}
             photographerName={photographer.nickname}
             category={category.kor}
+            date={date}
           />
         ),
       },
@@ -90,6 +91,7 @@ const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
             planId={plan.planId}
             photographerName={photographer.nickname}
             category={category.kor}
+            date={date}
           />
         ),
       },
@@ -217,13 +219,13 @@ const DetailMenus = ({ status, plan, photographer, date, day, category }) => {
         {menus &&
           menus.map((el) => {
             return (
-              <>
+              <div key={el.menu}>
                 <Item onClick={() => openModal(el.title, el.content)}>
                   <div className="title">{el.menu}</div>
                   <img src={arrow} alt="" />
                 </Item>
                 <Line />
-              </>
+              </div>
             );
           })}
       </List>

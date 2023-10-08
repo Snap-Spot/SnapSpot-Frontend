@@ -15,7 +15,6 @@ export const getDayOfWeek = (date) => {
 };
 
 const ReservationItem = ({ item }) => {
-  console.log(item);
   const navigate = useNavigate();
   const date = item.planDate.substr(0, 10);
   const day = getDayOfWeek(date);
@@ -50,16 +49,18 @@ const ReservationItem = ({ item }) => {
         </div>
         <Infos>
           <div className="status">{status.kor}</div>
-          <p>
+          <div className="nNc">
             <div className="name">{photographer.nickname} 작가</div>
             <div className="category">
               &nbsp;&nbsp;|&nbsp;&nbsp;{category.kor}
             </div>
-          </p>
+          </div>
           <div className="dateNtime">
             {date}({day}) {item.time}
           </div>
-          <div className="count">예약인원 : {item.people}인</div>
+          <div className="count">
+            예약인원 : {item.people === 5 ? "5인 이상" : item.people + "인"}
+          </div>
         </Infos>
       </Footer>
     </Wrapper>
@@ -181,7 +182,7 @@ const Infos = styled.div`
     height: 100px;
   }
 
-  p {
+  .nNc {
     margin: 6px 0 8px 0;
     @media (max-width: 768px) {
       //모바일

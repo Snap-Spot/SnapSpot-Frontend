@@ -52,8 +52,6 @@ const AddSnapModal = () => {
       ...inputs,
       [name]: value,
     });
-
-    console.log(value);
   };
   const handleDate = (e) => {
     const { name, value } = e.target;
@@ -74,7 +72,7 @@ const AddSnapModal = () => {
     const photoDate = `${date.year}-${date.month}-${date.date}T00:00:00`;
 
     const res = await postBestSnap(imgFile, inputs, photoDate, photographerId);
-    console.log(res);
+
     if (res.status === 201) {
       alert("등록되었습니다.");
       window.location.reload();

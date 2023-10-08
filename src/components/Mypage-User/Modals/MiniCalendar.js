@@ -54,7 +54,6 @@ function MiniCalendar({
     setStringdate(
       year + "년 " + month + "월 " + day + "일 " + dayOfWeek + "요일"
     );
-    console.log(date);
 
     setLocaleDateTime(
       year +

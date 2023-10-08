@@ -57,6 +57,7 @@ const MySnaps = () => {
                 (${getDayOfWeek(el.photoDate.substr(0, 10))})`;
               return (
                 <MySnapBox
+                  key={el.snapPhotoId}
                   photo={el.imageUrl}
                   photographer={el.photographerName}
                   region={el.location}

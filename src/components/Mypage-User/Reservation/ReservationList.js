@@ -31,7 +31,7 @@ const ReservationList = () => {
       <div className="list">
         {list &&
           list.map((item) => {
-            return <ReservationItem item={item} />;
+            return <ReservationItem key={item.planId} item={item} />;
           })}
       </div>
     </Wrapper>

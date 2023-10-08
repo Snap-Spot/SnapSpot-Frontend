@@ -8,7 +8,6 @@ import ReviewContainer from "../../components/Photographers/Introduction/Review"
 import { getPhotographer } from "../../api/photographer";
 import { useParams } from "react-router-dom";
 import PriceModal from "../../components/Photographers/Introduction/PriceModal";
-
 import ExCarousel from "../../components/Photographers/Introduction/ex";
 
 const Introduction = () => {
@@ -61,8 +60,9 @@ const Introduction = () => {
                 setPriceModalOpen={setPriceModalOpen}
               />
             </ProfileContainer>
-            <ExCarousel carouselList={data.images} />
-            {/* <Carousel carouselList={data.images} /> */}
+            {data.images.image1 !== null && (
+              <ExCarousel carouselList={data.images} />
+            )}
             <ReviewContainer reviewData={data.review} />
           </>
         )}

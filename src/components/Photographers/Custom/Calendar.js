@@ -30,15 +30,7 @@ function Calender({ unableSchedules, setUnableDates }) {
 
   useEffect(() => {
     setSelectedDates(unableSchedules.map((dateStr) => new Date(dateStr)));
-  }, [unableSchedules]);
-
-  useEffect(() => {
-    setUnableDates(
-      selectedDates.map(
-        (date) => format(date, "yyyy-MM-dd'T'HH:mm:ss") // "2023-10-06T00:00:00" 형식으로 포맷
-      )
-    );
-  }, [key]);
+  }, []);
 
   const toggleDateSelection = (date) => {
     // 이미 선택된 날짜인지 확인
@@ -56,9 +48,15 @@ function Calender({ unableSchedules, setUnableDates }) {
     } else {
       setSelectedDates([...selectedDates, date]);
     }
-
-    setKey(key + 1);
   };
+
+  useEffect(() => {
+    // 선택한 날짜를 포맷하여 불가능한 날짜로 설정
+    const formattedDates = selectedDates.map((date) =>
+      format(date, "yyyy-MM-dd'T'HH:mm:ss")
+    );
+    setUnableDates(formattedDates);
+  }, [selectedDates]);
 
   return (
     <>

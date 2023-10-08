@@ -37,7 +37,7 @@ const Filtering = ({ option, short, setSelect, select }) => {
 const FilterContainer = styled.div`
   display: flex;
   align-items: center;
-  width: ${(props) => (props.short ? "90px" : "140px")};
+  width: ${(props) => (props.short ? "100px" : "140px")};
   height: 44px;
   border-radius: 22px;
   border: 1px solid black;
@@ -46,7 +46,7 @@ const FilterContainer = styled.div`
   font-size: 20px;
   padding-top: 0.3rem;
   padding-bottom: 0.2rem;
-  height: ${(props) => (props.open ? "220px" : "37px")};
+  height: ${(props) => (props.open ? "250px" : "37px")};
 
   @media (max-width: 768px) {
     font-size: 16px;

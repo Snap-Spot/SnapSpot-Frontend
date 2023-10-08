@@ -43,7 +43,7 @@ const MyMenu = ({ id }) => {
         <div className="menus">
           {menus[id].map((el, index) => {
             return (
-              <>
+              <div key={index}>
                 {menus[id].length !== 1 && index !== 0 && <Line />}
                 <Menu onClick={() => navigate(el.route)}>
                   <div className="subject">
@@ -52,7 +52,7 @@ const MyMenu = ({ id }) => {
                   </div>
                   <img className="arrow" src={arrow} alt="" />
                 </Menu>
-              </>
+              </div>
             );
           })}
         </div>

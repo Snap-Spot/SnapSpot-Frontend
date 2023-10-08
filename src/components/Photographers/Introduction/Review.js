@@ -4,7 +4,6 @@ import Paging from "../../../components/Photographers/Review/Paging/Paging";
 import Filtering from "../../../components/Photographers/Introduction/ReviewFiltering";
 import ReviewPhoto from "../../../components/Photographers/Introduction/ReviewPhoto";
 import { useEffect, useState } from "react";
-import { ReviewData } from "../Review/MockData/ReviewData";
 
 const ReviewContainer = ({ reviewData }) => {
   const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
@@ -33,7 +32,9 @@ const ReviewContainer = ({ reviewData }) => {
   return (
     <Container>
       <Review>후기</Review>
-      <ReviewPhoto />
+      {currentPosts && currentPosts.length > 0 && (
+        <ReviewPhoto reviews={products.reviews} />
+      )}
       <Row>
         <Length>총 {products.totalReview}개</Length>
         <Filtering />

@@ -54,7 +54,7 @@ const LoginForm = () => {
   const handleSubmit = async () => {
     const res = await EmailSignInAPI(loginInfo);
     // 로그인에 실패할 경우 "아이디 또는 비밀번호를 다시 확인해주세요." 문구 표시
-    if (res === "Login Error") {
+    if (res === "Login Fail") {
       setIsLoginSuccess(false);
     }
   };

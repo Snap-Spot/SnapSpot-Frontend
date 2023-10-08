@@ -24,31 +24,14 @@ import MainPage from "./pages/MainPage/MainPage";
 import { Routes, Route } from "react-router-dom";
 import KakaoSignUpPage from "./pages/SignUpPage/KakaoSignUpPage";
 import { LoadingProvider } from "./components/common/LoadingContext";
+import PrivateRoute from "./components/Route/PrivateRoute";
 
 function App() {
   return (
     <LoadingProvider>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="mypage" element={<UserMypage />} />
-        <Route path="/photographer/reserve" element={<Reservation />} />
-        <Route
-          path="/photographer/reserve/:planId"
-          element={<ReservationDetail />}
-        />
-        <Route path="/photographer/custom" element={<Custom />} />
-        <Route path="/photographer/review" element={<Review />} />
-        <Route path="/photographer/request" element={<RequestList />} />
-        <Route
-          path="/photographer/reservationlist"
-          element={<ReservationList />}
-        />
-        <Route path="photographers/:id" element={<Introduction />} />
-        <Route path="mypage/reservation" element={<MyReservePage />} />
-        <Route path="mypage/reservation/:id" element={<DetailReservePage />} />
-        <Route path="mypage/settings" element={<SettingsPage />} />
-        <Route path="mypage/hearts" element={<MyHeartsPage />} />
-        <Route path="mypage/best-snap" element={<BestSnapPage />} />
+
         <Route path="/signup/member" element={<SignUpMemberPage />} />
         <Route path="/signup/:memberType/info" element={<SignUpInfoPage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -56,8 +39,36 @@ function App() {
         <Route path="/auth/kakao-signup" element={<KakaoSignUpPage />} />
 
         <Route path="/search" element={<SearchPage />} />
+
+        <Route path="photographers/:id" element={<Introduction />} />
         <Route path="/photographers" element={<Photographerlist />} />
         <Route path="/spot-list" element={<SpotListPage />} />
+
+        {/* 로그인해야 접근 가능한 페이지 */}
+        <Route element={<PrivateRoute />}>
+          <Route path="mypage" element={<UserMypage />} />
+          <Route path="mypage/reservation" element={<MyReservePage />} />
+          <Route
+            path="mypage/reservation/:id"
+            element={<DetailReservePage />}
+          />
+          <Route path="mypage/settings" element={<SettingsPage />} />
+          <Route path="mypage/hearts" element={<MyHeartsPage />} />
+          <Route path="mypage/best-snap" element={<BestSnapPage />} />
+
+          <Route path="/photographer/reserve" element={<Reservation />} />
+          <Route
+            path="/photographer/reserve/:planId"
+            element={<ReservationDetail />}
+          />
+          <Route path="/photographer/custom" element={<Custom />} />
+          <Route path="/photographer/review" element={<Review />} />
+          <Route path="/photographer/request" element={<RequestList />} />
+          <Route
+            path="/photographer/reservationlist"
+            element={<ReservationList />}
+          />
+        </Route>
       </Routes>
       <Footer />
     </LoadingProvider>

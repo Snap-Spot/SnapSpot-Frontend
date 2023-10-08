@@ -24,9 +24,9 @@ const DropdownFilter = ({ filterList }) => {
           <img className="close" src={close} alt="close" onClick={closeModal} />
           {filterList.map((el, index) => {
             return (
-              <>
+              <div key={el}>
                 <Item onClick={() => handleSelect(index)}>{el}</Item>
-              </>
+              </div>
             );
           })}
         </Open>

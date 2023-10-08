@@ -20,13 +20,11 @@ const MyHeartsPage = () => {
 
   const getData = async () => {
     const data = await getMyHeartList();
-    console.log(data);
 
     setList(data);
     setCurrentPosts(data.slice(indexOfFirstPost, indexOfLastPost));
   };
   const filterData = (id) => {
-    console.log("업뎃");
     setCurrentPosts(
       list
         .slice(indexOfFirstPost, indexOfLastPost)
@@ -43,7 +41,7 @@ const MyHeartsPage = () => {
       <Wrapper>
         <div className="title">좋아요 모아보기</div>
         <GridBox>
-          <div class="grid">
+          <div className="grid">
             {currentPosts.map((el) => {
               const region =
                 el.areas[0] &&
@@ -51,7 +49,7 @@ const MyHeartsPage = () => {
                   el.areas.length - 1
                 }곳`;
               return (
-                <div>
+                <div key={el.photographerId}>
                   <PhotoBox
                     id={el.photographerId}
                     photo={el.image}
