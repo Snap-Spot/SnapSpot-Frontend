@@ -13,7 +13,7 @@ const ReservationModal = ({ setModalOpen, photographerId }) => {
     "웨딩스냅",
     "가족스냅",
   ];
-  const head_count = ["1명", "2명", "3명", "4+"];
+  const head_count = ["1명", "2명", "3명", "4명", "5명+"];
   const [planDate, setPlanDate] = useState("");
   const [time, setTime] = useState();
   const [categories, setCategories] = useState("커플스냅");

@@ -4,7 +4,6 @@ import line from "../../../assets/photograph/line.png";
 import { useNavigate } from "react-router-dom";
 import { status_list } from "./MockData/status";
 
-//복구
 const ScheduleBox = ({
   nickname,
   snapType,
@@ -13,7 +12,7 @@ const ScheduleBox = ({
   place,
   requirement,
   idx,
-  id,
+  planId,
   profile,
   status,
 }) => {
@@ -29,14 +28,16 @@ const ScheduleBox = ({
             <NickName>{nickname}</NickName>
             <Btn>{status_list[status][0]}</Btn>
           </RowContainer>
-          <Detail onClick={() => navigate(`/photographer/reserve/${id}`)}>
+          <Detail onClick={() => navigate(`/photographer/reserve/${planId}`)}>
             상세보기 <Arrow src={arrow} />
           </Detail>
         </Header>
         <RowContainer>
           <SnapType>{snapType[0].label}</SnapType>
           <Line src={line} />
-          <Headcount>{headCount}인</Headcount>
+          <Headcount>
+            {headCount < 5 ? `${headCount}인` : `${headCount}인 이상`}
+          </Headcount>
         </RowContainer>
         <RowContainer>
           <TitleContainer>

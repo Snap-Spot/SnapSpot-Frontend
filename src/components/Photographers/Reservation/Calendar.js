@@ -1,8 +1,15 @@
 import { styled } from "styled-components";
 import prev from "../../../assets/photograph/prev_btn.png";
 import next from "../../../assets/photograph/next_btn.png";
-//복구
-const Calendar = ({ setSelect, select, setMonth, month }) => {
+
+const Calendar = ({
+  setSelect,
+  select,
+  setMonth,
+  month,
+  setSelectDay,
+  selectDay,
+}) => {
   const date = new Date();
   const currentYear = date.getFullYear();
   const week = ["일", "월", "화", "수", "목", "금", "토"];
@@ -15,6 +22,12 @@ const Calendar = ({ setSelect, select, setMonth, month }) => {
   const lastDayOfMonth = new Date(currentYear, month + 1, 0);
 
   const daysInMonth = [];
+
+  const selectedDate = new Date(currentYear, month, select);
+  const selectedDayIndex = selectedDate.getDay(); // 0부터 6까지의 값 (일요일부터 토요일)
+
+  // 선택한 날짜의 요일을 setSelectDay로 저장
+  setSelectDay(week[selectedDayIndex]);
 
   // 첫 날부터 마지막 날까지의 날짜를 순회하며 일(day)을 추출하여 배열에 추가
   for (

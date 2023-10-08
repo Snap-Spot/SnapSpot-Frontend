@@ -2,7 +2,7 @@ import styled from "styled-components";
 import plus from "../../../assets/photograph/plus.png";
 import { useState, useRef } from "react";
 
-const PriceListInput = ({ priceImg, setPaymentImage }) => {
+const PriceListInput = ({ priceimg, setPaymentImage }) => {
   const [previewImg, setPreviewImg] = useState("");
   const imgRef = useRef();
 
@@ -28,9 +28,9 @@ const PriceListInput = ({ priceImg, setPaymentImage }) => {
     <>
       <SubTitle>가격표 사진 업로드</SubTitle>
       <Row2>
-        <ImgContainer priceImg={priceImg}>
+        <ImgContainer priceimg={priceimg}>
           <PreImgs
-            src={previewImg || priceImg}
+            src={previewImg || priceimg}
             onClick={() => deleteFileImg()}
           />
         </ImgContainer>
@@ -52,11 +52,11 @@ const PriceListInput = ({ priceImg, setPaymentImage }) => {
 
 const ImgContainer = styled.div`
   position: relative;
-  display: ${(props) => (props.priceImg ? "inline" : "none")};
-  height: ${(props) => (props.priceImg ? "100%" : "0px")};
+  display: ${(props) => (props.priceimg ? "inline" : "none")};
+  height: ${(props) => (props.priceimg ? "100%" : "0px")};
 
   @media (max-width: 768px) {
-    display: ${(props) => (props.priceImg ? "inline" : "none")};
+    display: ${(props) => (props.priceimg ? "inline" : "none")};
   }
 `;
 

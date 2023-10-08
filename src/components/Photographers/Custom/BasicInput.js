@@ -8,7 +8,7 @@ import LowestPriceInput from "./LowestPriceInput";
 const BasicInput = ({
   profile,
   nickname,
-  priceImg,
+  priceimg,
   lowestPay,
   setNickname,
   setProfileImage,
@@ -23,7 +23,7 @@ const BasicInput = ({
       {isMobile && <Line2 />}
       <InputContainer>
         <NameInput nickname={nickname} setNickname={setNickname} />
-        <PriceListInput priceImg={priceImg} setPaymentImage={setPaymentImage} />
+        <PriceListInput priceimg={priceimg} setPaymentImage={setPaymentImage} />
         <LowestPriceInput lowestPay={lowestPay} setLowestPay={setLowestPay} />
       </InputContainer>
     </Container>

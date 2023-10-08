@@ -25,6 +25,7 @@ const ScheduleDetail = ({
   setChange,
   change,
   messages,
+  review,
 }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isReject, setIsReject] = useState(false); // 예약 거절 모달
@@ -106,6 +107,9 @@ const ScheduleDetail = ({
           setIsPhotoModal={setIsPhotoModal}
           planId={planId}
           contents={message}
+          setChange={setChange}
+          change={change}
+          setMessage={setMessage}
         />
       )}
       <Container>
@@ -113,6 +117,9 @@ const ScheduleDetail = ({
           <Profile src={profile} />
           <NickName>{nickname}</NickName>
           {!isMobile && <Btn>{status_list[status][0]}</Btn>}
+          {!isMobile && review.length > 0 && (
+            <Btn style={{ marginLeft: "1rem" }}>리뷰작성</Btn>
+          )}
           <BtnContainer>
             {status === "REQUEST" && (
               <RejectBtn
@@ -133,7 +140,11 @@ const ScheduleDetail = ({
                   if (status === "DEPOSIT") {
                     setIsConfirmDeposit(!isConfirmDeposit);
                   } else if (status === "COMPLETE") {
-                    setIsPhotoModal(true);
+                    if (message.length === 0) {
+                      setIsMinInput(false);
+                    } else {
+                      setIsPhotoModal(true);
+                    }
                   } else {
                     if (message.length < 100) {
                       setIsMinInput(false);
@@ -155,7 +166,7 @@ const ScheduleDetail = ({
         {isMobile && <Btn>예약신청</Btn>}
         <Headcount>스냅 예약번호 {reservationNum}</Headcount>
         <Row>
-          <TitleContainer>
+          <TitleContainer isMargin={status === "DELIVERY" ? "t" : "f"}>
             <SubTitle>날짜</SubTitle>
             <SubTitle>시간</SubTitle>
             <SubTitle>장소</SubTitle>
@@ -175,8 +186,10 @@ const ScheduleDetail = ({
             )}
             {isMobile ? (
               <SubTitle>메세지</SubTitle>
-            ) : (
+            ) : status !== "DELIVERY" ? (
               <SubTitle>메세지에 전달사항을 입력해주세요</SubTitle>
+            ) : (
+              ""
             )}
           </TitleContainer>
           <ContentContainer>
@@ -203,15 +216,34 @@ const ScheduleDetail = ({
             )}
           </ContentContainer>
         </Row>
-        <MessageBox
-          placeholder="입금 요청 시, 추가적인 공지사항과 입금받으실 계좌번호를 작성해주세요. (예약 거절시에는 거절 사유를 적어주세요.)"
-          onChange={handleMessageChange}
-          value={message}
-        />
-        {status === "RESERVED" && (
-          <BtnContainer style={{ marginTop: "2rem" }}>
-            <RequestBtn>공지사항 보내기</RequestBtn>
-          </BtnContainer>
+        {status !== "DELIVERY" && (
+          <MessageBox
+            placeholder="입금 요청 시, 추가적인 공지사항과 입금받으실 계좌번호를 작성해주세요. (예약 거절시에는 거절 사유를 적어주세요.)"
+            onChange={handleMessageChange}
+            value={message}
+          />
+        )}
+        {status === "RESERVED" ||
+          (status === "TODAY" && (
+            <BtnContainer style={{ marginTop: "2rem" }}>
+              <RequestBtn>공지사항 보내기</RequestBtn>
+            </BtnContainer>
+          ))}
+        {status === "DELIVERY" && review.length > 0 && (
+          <>
+            {/* 리뷰 확인 */}
+            <ReviewTitle>이런 리뷰를 남겨주셨어요!</ReviewTitle>
+            <ReviewBox
+              type="detail"
+              profile={profile}
+              nickname={nickname}
+              title={review[0].title}
+              content={review[0].comment}
+              date={review[0].plan.planDate.slice(0, 10)}
+              score={review[0].score}
+              isLine="none"
+            />
+          </>
         )}
         {messages.length > 0 && (
           <>
@@ -234,22 +266,6 @@ const ScheduleDetail = ({
                 ""
               )
             )}
-          </>
-        )}
-        {status === 2 && (
-          <>
-            <AlertBtn>{status_list[status]}</AlertBtn>
-            {/* 리뷰 확인 */}
-            <ReviewTitle>이런 리뷰를 남겨주셨어요!</ReviewTitle>
-            <ReviewBox
-              type="detail"
-              profile=""
-              nickname="est0908"
-              title="너무 잘 담아주셔서 감사합니다"
-              content="친절한 답변과 깔끔한 일정 소개부터 인생사진까지..!! 너무 좋은 추억 남겨주셔서 감사해요 다른 작가분들과 다르게 소품이나 의상도 준비해주시고 사진 컨셉도 너무 좋았어요.."
-              date="2023.5.8"
-              score="5.0"
-            />
           </>
         )}
       </Container>
@@ -346,8 +362,7 @@ const PriceInput = styled(Input)`
 const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: -4rem;
-
+  margin-right: ${(props) => (props.isMargin === "t" ? "1.5rem" : "-5rem")};
   @media (max-width: 768px) {
     margin-right: 1rem;
   }
@@ -447,6 +462,8 @@ const SubTitle = styled.h3`
 `;
 
 const ReviewTitle = styled(SubTitle)`
+  font-size: 1rem;
+  margin-top: 4rem;
   @media (max-width: 768px) {
     width: 10rem;
     margin-top: 5rem;
