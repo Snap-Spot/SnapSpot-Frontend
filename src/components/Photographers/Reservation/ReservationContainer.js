@@ -3,14 +3,15 @@ import Calendar from "./Calendar";
 import ScheduleBox from "./ScheduleBox";
 import { useState } from "react";
 import { category } from "../../common/category";
-import { useEffect } from "react";
 
 const ReservationContainer = ({ data }) => {
   const date = new Date();
   const currentDate = date.getDate();
   const currentMonth = date.getMonth();
+  const currentDay = date.getDay();
   const [selectDate, setSelectDate] = useState(currentDate);
   const [selectMonth, setSelectMonth] = useState(currentMonth);
+  const [selectDay, setSelectDay] = useState(currentDay);
 
   // 해당 날짜에 일치하는 일정 보여주기
   let filteredData = data.filter((el) => {
@@ -30,10 +31,12 @@ const ReservationContainer = ({ data }) => {
           select={selectDate}
           setMonth={setSelectMonth}
           month={selectMonth}
+          setSelectDay={setSelectDay}
+          selectDay={selectDay}
         />
         <ScheduleContainer>
           <SelectedDate>
-            {selectMonth + 1}월 {selectDate}일 화요일
+            {selectMonth + 1}월 {selectDate}일 {selectDay}요일
           </SelectedDate>
           {filteredData &&
             filteredData.map((item, idx) => (
@@ -46,7 +49,7 @@ const ReservationContainer = ({ data }) => {
                 place={item.wishPlace}
                 requirement={item.request}
                 idx={idx}
-                id={item.planId}
+                planId={item.planId}
                 profile={item.customer.profile}
                 status={item.status}
               />

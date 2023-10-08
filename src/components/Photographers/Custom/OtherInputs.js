@@ -25,7 +25,6 @@ const OtherInputs = ({
   setImage,
 }) => {
   let snsList = sns ? Object.values(sns) : [];
-  console.log(snsList);
 
   return (
     <Center>

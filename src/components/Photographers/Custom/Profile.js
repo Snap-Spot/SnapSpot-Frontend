@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React, { useRef, useState } from "react";
+import basicProfile from "../../../assets/photograph/ex_profile.png";
 
 const Profile = ({ profile, setProfileImage }) => {
   const [previewImg, setPreviewImg] = useState("");
@@ -20,7 +21,7 @@ const Profile = ({ profile, setProfileImage }) => {
   return (
     <label htmlFor="file">
       <PhotoContainer>
-        <ProfileImg src={previewImg || profile} />
+        <ProfileImg src={previewImg || profile || basicProfile} />
         <InputImg
           type="file"
           name="file"

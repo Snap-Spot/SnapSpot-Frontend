@@ -4,9 +4,11 @@ import LayOut from "../../components/common/LayOut";
 import { getMyReservation } from "../../api/plan";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { getReviews } from "../../api/review";
 
 const ReservationDetail = () => {
   const [reservation, setReservation] = useState("");
+  const [review, setReview] = useState([]);
   const { planId } = useParams();
   const [change, setChange] = useState(0);
 
@@ -20,8 +22,18 @@ const ReservationDetail = () => {
     }
   };
 
+  const getReview = async () => {
+    try {
+      const data = await getReviews();
+      setReview(data.filter((el) => el.plan.planId === planId));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     getReservationDetail();
+    getReview();
   }, [change]);
 
   return (
@@ -43,6 +55,7 @@ const ReservationDetail = () => {
             setChange={setChange}
             change={change}
             messages={reservation.messages}
+            review={review}
           />
         )}
       </Container>

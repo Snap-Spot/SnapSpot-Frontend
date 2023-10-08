@@ -102,6 +102,7 @@ export const putCustomInfo = async (
     const res = await client.put(`/photographers/me`, body);
     console.log("응답", res);
     alert("변경되었습니다.");
+    window.location.reload();
     return res.data;
   } catch (err) {
     console.log("커스텀 수정 에러", err);
