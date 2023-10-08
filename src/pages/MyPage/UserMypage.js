@@ -4,12 +4,16 @@ import { styled } from "styled-components";
 import ProfileContainer from "../../components/Mypage-User/Mypage/ProfileContainer";
 import MyMenu from "../../components/Mypage-User/Mypage/MyMenu";
 import { getMyProfile } from "../../api/member";
+import { useLoadingContext } from "../../components/common/LoadingContext";
+import Loading from "../../components/common/Loading";
 const UserMypage = () => {
   const [isPhotographer, setIsPhotographer] = useState(false);
   const [profileData, setProfileData] = useState({});
+  const { isLoading, startLoading, stopLoading } = useLoadingContext();
 
   const getData = async () => {
     try {
+      startLoading();
       const data = await getMyProfile();
       setProfileData(data);
 
@@ -26,6 +30,8 @@ const UserMypage = () => {
       //로그인 화면으로 리다이렉트
       alert("로그인 되지 않았습니다. 로그인화면으로 이동합니다.");
       window.location.href = "/login";
+    } finally {
+      stopLoading();
     }
   };
   useEffect(() => {
@@ -34,24 +40,30 @@ const UserMypage = () => {
 
   return (
     <>
-      <Header />
-      <Wrapper>
-        <div className="title">마이페이지</div>
-        <div className="container">
-          <ProfileContainer profileData={profileData} />
-          <Line />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <Header />
+          <Wrapper>
+            <div className="title">마이페이지</div>
+            <div className="container">
+              <ProfileContainer profileData={profileData} />
+              <Line />
 
-          {!isPhotographer ? (
-            <>
-              <MyMenu id="0" />
-              <SeperateLine />
-              <MyMenu id="1" />
-            </>
-          ) : (
-            <MyMenu id="2" />
-          )}
-        </div>
-      </Wrapper>
+              {!isPhotographer ? (
+                <>
+                  <MyMenu id="0" />
+                  <SeperateLine />
+                  <MyMenu id="1" />
+                </>
+              ) : (
+                <MyMenu id="2" />
+              )}
+            </div>
+          </Wrapper>
+        </>
+      )}
     </>
   );
 };
