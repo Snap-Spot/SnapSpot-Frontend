@@ -35,12 +35,12 @@ export const KakaoSignInAPI = async (accessToken, refreshToken) => {
     localStorage.setItem("refreshToken", res.data.token.refreshToken);
 
     // main페이지로 이동
-    alert("로그인에 성공하였습니다!");
+    // alert("로그인에 성공하였습니다!");
     window.location.replace("/");
   } catch (err) {
     console.log(err, "로그인 에러");
-    if (err.response?.data.details === "가입되지 않은 이메일입니다.") {
-      alert("가입되지 않은 이메일입니다.");
+    if (err.response?.data.details === "PROD_KAKAO에 의해 가입되지 않은 사용자입니다.") {
+      alert("SNAPSPOT에서 카카오로 가입되지 않은 이메일입니다.");
       window.location.replace("/signup/member");
     } else {
       alert("로그인 오류");
@@ -57,8 +57,8 @@ export const EmailSignUpAPI = async (signUpInfo) => {
     window.location.replace("/login");
   } catch (err) {
     console.log(err, "회원가입 에러");
-    if (err.response?.data.details === "이미 가입된 계정입니다.") {
-      alert("이미 가입된 계정입니다.");
+    if (err.response?.data.details === "이미 가입된 이메일입니다.") {
+      alert("이미 가입된 이메일입니다.");
       window.location.replace("/login");
     } else {
       alert("회원가입 오류");
@@ -76,12 +76,16 @@ export const EmailSignInAPI = async (loginInfo) => {
     localStorage.setItem("refreshToken", res.data.token.refreshToken);
 
     // main페이지로 이동
-    alert("로그인에 성공하였습니다!");
+    // alert("로그인에 성공하였습니다!");
     window.location.replace("/");
     return "Login Success";
   } catch (err) {
     console.log(err, "로그인 에러");
-    return "Login Error";
+    if (err.response?.data.details === "Bad credentials") {
+      return "Login Fail";
+    } else {
+      return "Login Error";
+    }
   }
 };
 

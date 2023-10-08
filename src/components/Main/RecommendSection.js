@@ -1,10 +1,18 @@
-import React from "react";
-import { styled } from "styled-components";
+import React, { useState, useEffect } from "react";
+import { styled, keyframes } from "styled-components";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-import RecommendBox from "../../components/search/RecommendBox";
+
 import right from "../../assets/search/ic_right.png";
 import left from "../../assets/search/ic_left.png";
+
+import { getKeywordSearch, getPhotographerList } from "../../api/search";
+import { category } from "../../components/common/category";
+
+import RecommendBox from "../../components/search/RecommendBox";
+import RecommendSnapBox from "./RecommendSnapBox";
+
+import LoadingImg from "../../assets/signup/loading.png";
 
 const responsive = {
   0: {
@@ -21,82 +29,107 @@ const responsive = {
   },
 };
 
-const RecommendSection = () => {
-
+const RecommendSection = ({ info }) => {
+  // < 버튼
   const renderPrevButton = ({ isDisabled }) => {
     if (isDisabled) {
       return null;
     }
-    return <img src={left} className="prev-button" />;
+    return <img src={left} className="prev-button" alt="prev-button" />;
   };
 
+  // > 버튼
   const renderNextButton = ({ isDisabled }) => {
     if (isDisabled) {
       return null;
     }
-    return <img src={right} className="next-button" />;
+    return <img src={right} className="next-button" alt="next-button" />;
   };
+
+  // api로 받아온 데이터
+  const [data, setData] = useState([]);
+
+  // api로 데이터 받아오기
+  const getData = async () => {
+    if (info.type === "keyword") {
+      // 키워드 검색일 경우
+      const res = await getKeywordSearch(info.keyword);
+      // 검색 결과가 있을 경우 areaResult (만약 길이가 7 이상일 경우 6개만 표시),
+      // 없을 경우 recommend
+      setData(
+        res.areaResult
+          ? res.areaResult.length >= 7
+            ? res.areaResult.slice(0, 6)
+            : res.areaResult
+          : res.recommend
+      );
+    } else if (info.type === "photographer") {
+      // 사진작가 리스트 조회일 경우
+      let endpoint = "/photographers";
+      const queryParams = [];
+      // 옵션에 따라 query 붙이기 (ex. sort=SCORE&special=WEDDING)
+      Object.entries(info.keyword).forEach((item) => {
+        queryParams.push(`${item[0]}=${item[1]}`);
+      });
+      // query들을 모아서 사진작가 리스트 조회
+      const res = await getPhotographerList(
+        endpoint + "?" + queryParams.join("&")
+      );
+      // 길이가 7 이상일 경우 6개만 표시
+      setData(res.length >= 7 ? res.slice(0, 6) : res);
+    } else {
+      // 스냅 리스트
+      setData(category);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <Wrapper>
-      <Title>이 사진작가는 어떠세요?</Title>
+      <Title>{info.title}</Title>
       <RecommendList>
-          <AliceCarousel
-            mouseTracking
-            disableDotsControls
-            dotsDisabled={true}
-            responsive={responsive}
-            duration={400}
-            startIndex={1}
-            mouseDragEnabled={true}
-            className="custom-carousel"
-            renderPrevButton={renderPrevButton}
-            renderNextButton={renderNextButton}
-          >
-            <RecommendBox
-              tag="#커플스냅 #유채꽃 #화사함"
-              photographer="한빛나라"
-              star="4.7"
-              price="130,000"
-              review="238"
-            />
-            <RecommendBox
-              tag="#커플스냅 #유채꽃 #화사함"
-              photographer="한빛나라"
-              star="4.7"
-              price="130,000"
-              review="238"
-            />
-            <RecommendBox
-              tag="#커플스냅 #유채꽃 #화사함"
-              photographer="한빛나라"
-              star="4.7"
-              price="130,000"
-              review="238"
-            />
-            <RecommendBox
-              tag="#커플스냅 #유채꽃 #화사함"
-              photographer="한빛나라"
-              star="4.7"
-              price="130,000"
-              review="238"
-            />
-            <RecommendBox
-              tag="#커플스냅 #유채꽃 #화사함"
-              photographer="한빛나라"
-              star="4.7"
-              price="130,000"
-              review="238"
-            />
-            <RecommendBox
-              tag="#커플스냅 #유채꽃 #화사함"
-              photographer="한빛나라"
-              star="4.7"
-              price="130,000"
-              review="238"
-            />
-          </AliceCarousel>
-        </RecommendList>
+        <AliceCarousel
+          mouseTracking
+          disableDotsControls
+          dotsDisabled={true}
+          responsive={responsive}
+          duration={400}
+          startIndex={1}
+          mouseDragEnabled={true}
+          className="custom-carousel"
+          renderPrevButton={renderPrevButton}
+          renderNextButton={renderNextButton}
+        >
+          {data.length > 0 ? (
+            data.map((item, index) => {
+              return info.type === "snap" ? (
+                <RecommendSnapBox
+                  key={index}
+                  keyword={item.key}
+                  label={item.label}
+                  image={item.image}
+                />
+              ) : (
+                <RecommendBox
+                  key={index}
+                  id={item.photographerId}
+                  image={item.image}
+                  tags={item.tags}
+                  photographer={item.nickname}
+                  star={item.averageScore}
+                  price={item.lowestPay}
+                  review={item.totalReview}
+                />
+              );
+            })
+          ) : (
+            <LoadingImage src={LoadingImg} alt="로딩 스피너" /> // 데이터가 로딩 중일 때 표시할 내용
+          )}
+        </AliceCarousel>
+      </RecommendList>
     </Wrapper>
   );
 };
@@ -180,5 +213,23 @@ const RecommendList = styled.div`
       right: 0px;
       top: 55px;
     }
+  }
+`;
+
+// 로딩 관련 style
+const spinner_animation = keyframes`
+    from {
+        transform: rotate(0deg);
+    } to {
+        transform: rotate(360deg);
+    }
+`;
+
+const LoadingImage = styled.img`
+  width: 15%;
+  animation: ${spinner_animation} 1s linear infinite;
+
+  @media screen and (max-width: 768px) {
+    width: 25%;
   }
 `;
