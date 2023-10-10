@@ -53,7 +53,6 @@ const FilteringBox = ({
     if (queryParams.length > 0) {
       endpoint += "?" + queryParams.join("&");
     }
-    console.log(endpoint);
     navigate(endpoint);
     localStorage.setItem("currentPage", "1");
     setCurrentPage(1);

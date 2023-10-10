@@ -1,25 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { styled } from "styled-components";
+import { styled, keyframes } from "styled-components";
 import SpotBox from "./SpotBox";
 import { getFeedPosts } from "../../api/area";
+import LoadingImg from "../../assets/signup/loading.png";
 const SpotList = () => {
   const [posts, setPosts] = useState([]);
+
   const getData = async () => {
-    const data = await getFeedPosts();
-    setPosts(data.images);
+    try {
+      const data = await getFeedPosts();
+      setPosts(data.images);
+    } catch (err) {
+      alert("에러발생");
+    }
   };
   useEffect(() => {
     getData();
   }, []);
   return (
-    <Wrapper>
-      <GridBox>
-        {posts &&
-          posts.map((post, index) => {
-            return <SpotBox key={index} post={post} />;
-          })}
-      </GridBox>
-    </Wrapper>
+    <>
+      {posts.length > 0 ? (
+        <Wrapper>
+          <GridBox>
+            {posts.map((post, index) => {
+              return <SpotBox key={index} post={post} />;
+            })}
+          </GridBox>
+        </Wrapper>
+      ) : (
+        <LoadingImage src={LoadingImg} />
+      )}
+    </>
   );
 };
 
@@ -48,5 +59,24 @@ const Wrapper = styled.div`
     //모바일
     width: 100%;
     margin-top: 32px;
+  }
+`;
+
+// 로딩 관련 style
+const spinner_animation = keyframes`
+    from {
+        transform: rotate(0deg);
+    } to {
+        transform: rotate(360deg);
+    }
+`;
+
+const LoadingImage = styled.img`
+  margin: 200px auto;
+  width: 200px;
+  animation: ${spinner_animation} 1s linear infinite;
+
+  @media screen and (max-width: 768px) {
+    width: 150px;
   }
 `;
