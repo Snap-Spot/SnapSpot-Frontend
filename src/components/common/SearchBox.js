@@ -92,7 +92,8 @@ const Search = styled.div`
     background-color: #e6e6e6;
     font-size: 0.85rem;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
+    font-size: 18px;
     line-height: normal;
     margin-left: 1.875rem;
 
@@ -129,3 +130,5 @@ const Search = styled.div`
     }
   }
 `;
+
+const Input = styled.input``;
