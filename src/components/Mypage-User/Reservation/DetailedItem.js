@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { styled } from "styled-components";
+import { keyframes, styled } from "styled-components";
 import DetailMenus from "./DetailMenus";
 import KakaoMap from "./KakaoMap";
 import { getPhotographer } from "../../../api/photographer";
@@ -9,7 +9,7 @@ import { getStatusFromEng } from "../../common/TranslateStatus";
 import { getMyReservation } from "../../../api/plan";
 import { getCategoryFromEng } from "../../common/TranslateCategory";
 import ChatsContainer from "./ChatsContainer";
-
+import LoadingImg from "../../../assets/signup/loading.png";
 const DetailedItem = () => {
   //경로에서 planId 겟
   const { id } = useParams();
@@ -41,71 +41,77 @@ const DetailedItem = () => {
   return (
     <>
       <Title>예약내역 상세</Title>
-      <Wrapper>
-        <div className="infos">
-          <UpperDiv>
-            <p className="date">
-              {date}({day})
-            </p>
-            <p className="id">스냅 예약번호&nbsp;&nbsp;{plan.planId}</p>
-          </UpperDiv>
-          <Main>
-            <img src={photographer.profile} alt="작가사진" />
-            <div className="list">
-              <p className="status-mobile">{status.kor}</p>
-              <div className="top">
-                <p className="name">{photographer.nickname} 작가&nbsp;&nbsp;</p>
-                <p className="category">|&nbsp;&nbsp;{category.kor}</p>
-                <p className="status-pc">{status.kor}</p>
+      {Object.keys(plan).length > 0 ? (
+        <Wrapper>
+          <div className="infos">
+            <UpperDiv>
+              <p className="date">
+                {date}({day})
+              </p>
+              <p className="id">스냅 예약번호&nbsp;&nbsp;{plan.planId}</p>
+            </UpperDiv>
+            <Main>
+              <img src={photographer.profile} alt="작가사진" />
+              <div className="list">
+                <p className="status-mobile">{status.kor}</p>
+                <div className="top">
+                  <p className="name">
+                    {photographer.nickname} 작가&nbsp;&nbsp;
+                  </p>
+                  <p className="category">|&nbsp;&nbsp;{category.kor}</p>
+                  <p className="status-pc">{status.kor}</p>
+                </div>
+                <div className="item">
+                  <p className="subject">예약일시</p>
+                  <p className="content">
+                    {date}({day}) {plan.time}
+                  </p>
+                </div>
+                <div className="item">
+                  <p className="subject">예약원수</p>
+                  <p className="content">
+                    {plan.people === 5 ? "5인 이상" : plan.people + "인"}
+                  </p>
+                </div>
+                <div className="item">
+                  <p className="subject">가격</p>
+                  <p className="content">
+                    {plan.price ? plan.price + "원" : "미정"}
+                  </p>
+                </div>
+                <div className="item">
+                  <p className="subject">장소</p>
+                  <p className="content">{plan.wishPlace}</p>
+                </div>
               </div>
-              <div className="item">
-                <p className="subject">예약일시</p>
-                <p className="content">
-                  {date}({day}) {plan.time}
-                </p>
-              </div>
-              <div className="item">
-                <p className="subject">예약원수</p>
-                <p className="content">
-                  {plan.people === 5 ? "5인 이상" : plan.people + "인"}
-                </p>
-              </div>
-              <div className="item">
-                <p className="subject">가격</p>
-                <p className="content">
-                  {plan.price ? plan.price + "원" : "미정"}
-                </p>
-              </div>
-              <div className="item">
-                <p className="subject">장소</p>
-                <p className="content">{plan.wishPlace}</p>
-              </div>
-            </div>
-          </Main>
-        </div>
-        <DetailMenus
-          status={status}
-          plan={plan}
-          photographer={photographer}
-          date={date}
-          day={day}
-          category={category}
-        />
-
-        <ChatsContainer
-          profile={photographer.profile}
-          messages={plan.messages}
-        />
-
-        {plan.placeAddress && (
-          <KakaoMap
-            placeName={plan.placeAddress}
-            placeAddress={plan.placeAddress}
-            x={plan.x}
-            y={plan.y}
+            </Main>
+          </div>
+          <DetailMenus
+            status={status}
+            plan={plan}
+            photographer={photographer}
+            date={date}
+            day={day}
+            category={category}
           />
-        )}
-      </Wrapper>
+
+          <ChatsContainer
+            profile={photographer.profile}
+            messages={plan.messages}
+          />
+
+          {plan.placeAddress && (
+            <KakaoMap
+              placeName={plan.placeAddress}
+              placeAddress={plan.placeAddress}
+              x={plan.x}
+              y={plan.y}
+            />
+          )}
+        </Wrapper>
+      ) : (
+        <LoadingImage src={LoadingImg} />
+      )}
     </>
   );
 };
@@ -281,5 +287,24 @@ const Main = styled.div`
       font-weight: 400;
       line-height: 128.5%; /* 17.99px */
     }
+  }
+`;
+// 로딩 관련 style
+const spinner_animation = keyframes`
+    from {
+        transform: rotate(0deg);
+    } to {
+        transform: rotate(360deg);
+    }
+`;
+
+const LoadingImage = styled.img`
+  margin: 200px auto;
+  display: flex;
+  width: 200px;
+  animation: ${spinner_animation} 1s linear infinite;
+
+  @media screen and (max-width: 768px) {
+    width: 150px;
   }
 `;
