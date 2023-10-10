@@ -15,7 +15,7 @@ const FilteringBox = ({
   const [selectedRegion, setSelectedRegion] = useState("서울");
   const [selectedSubRegion, setSelectedSubRegion] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
-  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [selectedOrder, setSelectedOrder] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
 
   const handleRegionClick = (region) => {
