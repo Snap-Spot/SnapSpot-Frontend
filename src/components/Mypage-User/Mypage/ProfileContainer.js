@@ -3,13 +3,18 @@ import { styled } from "styled-components";
 import settings from "../../../assets/mypage/userMypage/settings.png";
 import { useNavigate } from "react-router-dom";
 import { LogoutAPI } from "../../../api/auth";
+import profile from "../../../assets/header/profile.png";
 const ProfileContainer = ({ profileData }) => {
   const navigate = useNavigate();
   return (
     <Wrapper>
       <div className="leftContent">
         <Profile>
-          <img src={profileData.profile} alt="" />
+          {profileData.profile ? (
+            <img src={profileData.profile} alt="" />
+          ) : (
+            <img src={profile} alt="" />
+          )}
         </Profile>
         <Infos>
           <div className="nickname">
