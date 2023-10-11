@@ -22,7 +22,7 @@ const SearchBox = ({
     navigate(`/photographers/${id}`);
   };
 
-  const starValue = !isNaN(parseFloat(star)) ? parseFloat(star).toFixed(1) : "";
+  const starValue = !isNaN(parseFloat(star)) ? parseFloat(star).toFixed(1) : 0;
 
   const tagValues = Object.values(tags).filter((tag) => tag !== null);
   const tag = Object.values(tags)
