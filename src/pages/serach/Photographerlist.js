@@ -9,6 +9,7 @@ import Header from "../../components/common/Header";
 import { useLoadingContext } from "../../components/common/LoadingContext";
 import { getPhotographerList } from "../../api/search";
 import Loading from "../../components/common/Loading";
+import { regions } from "../../components/search/FilteringList.js";
 
 const Photographerlist = () => {
   const { isLoading, startLoading, stopLoading } = useLoadingContext();
@@ -53,6 +54,14 @@ const Photographerlist = () => {
       const queryParams = [];
       if (areaId) {
         queryParams.push(`areaId=${areaId}`);
+        const subregion = regions
+          .map((region) =>
+            region.subregions.find((sub) => sub.areaId === Number(areaId))
+          )
+          .find((sub) => sub !== undefined);
+        if (subregion) {
+          setRegion(subregion.subregion);
+        }
       }
       if (special) {
         queryParams.push(`special=${special}`);
@@ -69,7 +78,6 @@ const Photographerlist = () => {
       navigate(endpoint);
       const getData = await getPhotographerList(endpoint);
       setData(getData);
-      setRegion(areaId);
     } catch (err) {
       console.log(err);
     } finally {
@@ -153,9 +161,14 @@ const Photographerlist = () => {
               )}
             </div>
             <Content isFilteringOpen={isFilteringOpen}>
-              <RegionTitle>
-                {/* <div className="subject">'{region}'</div>에서 활동하는 작가들 */}
-              </RegionTitle>
+              {region && region.length > 0 ? (
+                <RegionTitle>
+                  <div className="subject">'{region}' </div> 에서 활동하는
+                  작가들
+                </RegionTitle>
+              ) : (
+                <></>
+              )}
               <GridBox>
                 <div className="grid">
                   {currentPosts.map((data) => (
@@ -310,14 +323,19 @@ const RegionTitle = styled.div`
   display: flex;
   width: 100%;
   max-width: 1048px;
-  color: var(--black, #060606);
-  font-family: Noto Sans KR;
-  font-size: 1.1rem;
-  font-style: normal;
+  font-size: 1.2rem;
   font-weight: 700;
-  line-height: normal;
 
   flex-direction: row;
   justify-content: flex-start;
   margin-top: 3rem;
+
+  .subject {
+    color: #3c3aac;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.75rem;
+    margin-top: 1rem;
+  }
 `;
