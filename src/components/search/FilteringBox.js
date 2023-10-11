@@ -272,9 +272,10 @@ const List = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 0.3rem;
-
+  height: 82%;
   @media (max-width: 768px) {
     flex-direction: column;
+    height: 100%;
   }
 `;
 

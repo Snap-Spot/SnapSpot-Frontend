@@ -17,6 +17,7 @@ const Photographerlist = () => {
   const location = useLocation();
   const outSection = useRef();
   const [data, setData] = useState([]);
+  const [region, setRegion] = useState("");
   const [isFilteringOpen, setIsFilteringOpen] = useState(false);
   const tabs = ["지역", "날짜", "전문분야", "순서"];
 
@@ -68,6 +69,7 @@ const Photographerlist = () => {
       navigate(endpoint);
       const getData = await getPhotographerList(endpoint);
       setData(getData);
+      setRegion(areaId);
     } catch (err) {
       console.log(err);
     } finally {
@@ -151,6 +153,9 @@ const Photographerlist = () => {
               )}
             </div>
             <Content isFilteringOpen={isFilteringOpen}>
+              <RegionTitle>
+                {/* <div className="subject">'{region}'</div>에서 활동하는 작가들 */}
+              </RegionTitle>
               <GridBox>
                 <div className="grid">
                   {currentPosts.map((data) => (
@@ -299,4 +304,20 @@ const GridBox = styled.div`
       margin-top: 1.25rem;
     }
   }
+`;
+
+const RegionTitle = styled.div`
+  display: flex;
+  width: 100%;
+  max-width: 1048px;
+  color: var(--black, #060606);
+  font-family: Noto Sans KR;
+  font-size: 1.1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: 3rem;
 `;
