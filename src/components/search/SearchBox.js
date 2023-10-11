@@ -24,7 +24,8 @@ const SearchBox = ({
 
   const starValue = !isNaN(parseFloat(star)) ? parseFloat(star).toFixed(1) : 0;
 
-  const tagValues = Object.values(tags).filter((tag) => tag !== null);
+  // const price = pric
+
   const tag = Object.values(tags)
     .filter((tag) => tag !== null)
     .map((tagValue) => `#${tagValue}`)
@@ -52,7 +53,7 @@ const SearchBox = ({
             {region} {subregion}에서 활동중
           </Region>
         )}
-        <Price>{price}원 ~</Price>
+        <Price> {price ? price.toLocaleString() + "원 ~" : "없음"}</Price>
       </Info>
     </Wrapper>
   );
