@@ -151,11 +151,8 @@ const Photographerlist = () => {
               {isFilteringOpen && (
                 <div ref={outSection}>
                   <FilteringBox
-                    onSearch={onSearch}
-                    isFilteringOpen={isFilteringOpen}
                     setIsFilteringOpen={setIsFilteringOpen}
                     setCurrentPage={setCurrentPage}
-                    currentPage={currentPage}
                   />
                 </div>
               )}
