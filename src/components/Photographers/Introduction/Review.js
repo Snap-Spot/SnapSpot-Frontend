@@ -104,7 +104,7 @@ const Review = styled.h2`
     font-size: 24px;
     font-weight: 400;
     margin-bottom: 2rem;
-    margin-top: 3rem;
+    margin-top: 1rem;
   }
 `;
 

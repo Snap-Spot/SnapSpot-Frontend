@@ -61,7 +61,7 @@ const Profile = ({
           <Container>
             <SubTitle>작가명</SubTitle>
             <Align>
-              <HighLight>{nickname}</HighLight>
+              <HighLight>{nickname} 작가</HighLight>
               <Heart
                 src={clickedHeart ? clickedheart : heart}
                 onClick={handleHeartClick}
@@ -97,7 +97,7 @@ const Profile = ({
               <Container>
                 <SubTitle align="top">SNS</SubTitle>
                 <Content>
-                  {values.filter((el) => !!el).length !== 0 ? (
+                  {values.filter((el) => el !== "").length !== 0 ? (
                     icon_img.map((el, i) =>
                       values[i] ? <SNS iconSrc={el} text={values[i]} /> : ""
                     )
@@ -142,8 +142,10 @@ const Profile = ({
             </Content>
             <SubTitle>SNS</SubTitle>
             <Content>
-              {values.filter((el) => !!el).length !== 0 ? (
-                icon_img.map((el, i) => <SNS iconSrc={el} text={values[i]} />)
+              {values.filter((el) => el !== "").length !== 0 ? (
+                icon_img.map((el, i) =>
+                  values[i] ? <SNS iconSrc={el} text={values[i]} /> : ""
+                )
               ) : (
                 <Content>없음</Content>
               )}
@@ -186,7 +188,6 @@ const Heart = styled.img`
   margin-left: auto;
 
   @media (max-width: 768px) {
-    margin-left: 0;
     position: absolute;
     margin-top: 20rem;
     margin-left: 4rem;
@@ -232,6 +233,10 @@ const PriceBtn = styled(ReservationBtn)`
 const Contents = styled.div`
   margin-left: auto;
   max-width: 26rem;
+
+  @media (max-width: 768px) {
+    max-width: 45rem;
+  }
 `;
 
 const ProfileContainer = styled.div`
@@ -255,7 +260,7 @@ const Content = styled.p`
 
   @media (max-width: 768px) {
     margin: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
 `;
 
@@ -269,7 +274,7 @@ const ProfileImg = styled.img`
     width: 159px;
     height: 213.75px;
     border-radius: 20px;
-    margin-right: 1rem;
+    margin-right: 1.5rem;
   }
 `;
 const Line = styled.div`
@@ -306,13 +311,17 @@ const HighLight = styled.h3`
   font-size: 30px;
 
   @media (max-width: 768px) {
-    font-size: 18px;
+    font-size: 17px;
     margin: 0.2rem;
+    width: 150%;
   }
 `;
 
 const Price = styled(HighLight)`
   color: #3c3aac;
+  @media (max-width: 768px) {
+    width: 120%;
+  }
 `;
 
 export default Profile;

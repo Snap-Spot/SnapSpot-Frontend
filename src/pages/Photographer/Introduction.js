@@ -26,6 +26,8 @@ const Introduction = () => {
     }
   };
 
+  console.log(priceModalOpen);
+
   useEffect(() => {
     GetPhotographerInfo();
   }, []);
@@ -36,7 +38,7 @@ const Introduction = () => {
         {modalOpen && (
           <ReservationModal setModalOpen={setModalOpen} photographerId={id} />
         )}
-        {data && priceModalOpen && (
+        {priceModalOpen && (
           <PriceModal
             setPriceModalOpen={setPriceModalOpen}
             paymentImage={data.paymentImage}
