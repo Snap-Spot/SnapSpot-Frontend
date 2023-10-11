@@ -8,9 +8,9 @@ const SpotListPage = () => {
     <>
       <Header />
       <Wrapper>
-        <div className="title">다른 사람들은 어떤 사진을 찍었을까요?</div>
-        <div className="subtitle">베스트 스냅사진들을 모았어요</div>
-        <div className="mb-title">베스트 스냅사진들을 모았어요</div>
+        <div className="title">베스트 스냅 명소를 추천해요</div>
+        <div className="subtitle">스냅사진 대표 명소를 모았어요</div>
+        <div className="mb-title">스냅사진 대표 명소를 모았어요</div>
         <SpotList />
       </Wrapper>
     </>

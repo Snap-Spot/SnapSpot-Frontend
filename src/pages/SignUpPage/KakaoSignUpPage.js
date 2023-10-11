@@ -35,7 +35,6 @@ const KakaoSignUpPage = () => {
 
         // snapspot 회원가입 result
         KakaoSignUpAPI(k_accessToken, k_refreshToken, role);
-
       })
       .catch((err) => {
         console.log("카카오 회원가입 에러.", err);
@@ -74,10 +73,10 @@ const spinner_animation = keyframes`
 `;
 
 const LoadingImage = styled.img`
-  width: 15%;
+  width: 200px;
   animation: ${spinner_animation} 1s linear infinite;
 
   @media screen and (max-width: 768px) {
-    width: 50%;
+    width: 150px;
   }
 `;

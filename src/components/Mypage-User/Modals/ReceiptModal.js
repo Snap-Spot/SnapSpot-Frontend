@@ -2,6 +2,16 @@ import React from "react";
 import { styled } from "styled-components";
 
 const ReceiptModal = ({ plan, photographer, date, day, category }) => {
+  function numFormat(value) {
+    var number = parseFloat(value);
+    if (isNaN(value)) return "0";
+    if (number == 0) return "0";
+
+    var reg = /(^[+-]?\d+)(\d{3})/;
+    var n = number + "";
+    while (reg.test(n)) n = n.replace(reg, "$1" + "," + "$2");
+    return n;
+  }
   return (
     <Wrapper>
       <Header>
@@ -26,7 +36,7 @@ const ReceiptModal = ({ plan, photographer, date, day, category }) => {
       <Line />
       <Footer>
         <div>결제금액</div>
-        <div className="price">{plan.price}원</div>
+        <div className="price">{numFormat(plan.price)}원</div>
       </Footer>
     </Wrapper>
   );

@@ -21,7 +21,16 @@ const CancelModal = ({ plan, photographer, date, day, category }) => {
   const handleChange = (e) => {
     setAccount(e.target.value);
   };
+  function numFormat(value) {
+    var number = parseFloat(value);
+    if (isNaN(value)) return "0";
+    if (number == 0) return "0";
 
+    var reg = /(^[+-]?\d+)(\d{3})/;
+    var n = number + "";
+    while (reg.test(n)) n = n.replace(reg, "$1" + "," + "$2");
+    return n;
+  }
   const handleCancel = async (id, reason, refundAccount) => {
     const res = await cancelReservation(id, reason, refundAccount);
     if (res.status === 200) {
@@ -63,7 +72,7 @@ const CancelModal = ({ plan, photographer, date, day, category }) => {
         <div className="row">
           <div className="sub-subject">가격</div>
           <div className="content">
-            {plan.price ? plan.price + "원" : "미정"}
+            {plan.price ? numFormat(plan.price) + "원" : "미정"}
           </div>
         </div>
         <div className="row">
