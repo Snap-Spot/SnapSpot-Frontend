@@ -3,6 +3,7 @@ import photo from "../../assets/search/photo.jpeg";
 import reviewIcon from "../../assets/search/reviewIcon.png";
 import starIcon from "../../assets/search/starIcon.png";
 import { useNavigate } from "react-router-dom";
+import useMobileDetection from "../common/mobileDetection";
 
 const SearchBox = ({
   id,
@@ -17,6 +18,8 @@ const SearchBox = ({
   review,
 }) => {
   const navigate = useNavigate();
+  const isMobile = useMobileDetection();
+
   const onClickPage = () => {
     navigate(`/photographers/${id}`);
   };
@@ -35,7 +38,9 @@ const SearchBox = ({
       </Photo>
       <Info>
         <TopInfo>
-          <Photographer>{photographer} 작가</Photographer>
+          <Photographer>
+            {isMobile ? <>{photographer}</> : <>{photographer} 작가</>}
+          </Photographer>
           <Star>
             <img src={starIcon} />
             {starValue} ({review})
