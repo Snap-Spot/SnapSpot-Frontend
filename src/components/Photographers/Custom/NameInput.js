@@ -38,7 +38,7 @@ const Input = styled.input`
     width: 100%;
     height: 34px;
     font-size: 14px;
-    padding-left: 0;
+    padding-left: 1rem;
   }
 `;
 
