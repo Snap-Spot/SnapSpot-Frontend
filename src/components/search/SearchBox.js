@@ -193,6 +193,7 @@ const Star = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  min-width: 2.5rem;
 
   display: flex;
   align-items: center;

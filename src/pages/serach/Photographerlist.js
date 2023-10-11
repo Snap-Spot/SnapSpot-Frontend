@@ -312,7 +312,7 @@ const GridBox = styled.div`
 
     @media (max-width: 768px) {
       column-gap: 15px;
-      row-gap: 20px;
+      row-gap: 30px;
 
       margin-top: 1.25rem;
     }
