@@ -17,14 +17,11 @@ const SearchBox = ({
   review,
 }) => {
   const navigate = useNavigate();
-
   const onClickPage = () => {
     navigate(`/photographers/${id}`);
   };
 
   const starValue = !isNaN(parseFloat(star)) ? parseFloat(star).toFixed(1) : 0;
-
-  // const price = pric
 
   const tag = Object.values(tags)
     .filter((tag) => tag !== null)
@@ -44,14 +41,20 @@ const SearchBox = ({
             {starValue} ({review})
           </Star>
         </TopInfo>
-        {regionCount > 1 ? (
-          <Region>
-            {region} {subregion} 외 {regionCount - 1}곳 에서 활동중
-          </Region>
+        {regionCount == 0 ? (
+          <></>
         ) : (
-          <Region>
-            {region} {subregion}에서 활동중
-          </Region>
+          <>
+            {regionCount > 1 ? (
+              <Region>
+                {region} {subregion} 외 {regionCount - 1}곳 에서 활동중
+              </Region>
+            ) : (
+              <Region>
+                {region} {subregion}에서 활동중
+              </Region>
+            )}
+          </>
         )}
         <Price> {price ? price.toLocaleString() + "원 ~" : "없음"}</Price>
       </Info>
