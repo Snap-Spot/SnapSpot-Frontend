@@ -432,6 +432,7 @@ const CalendarBox = styled.div`
 const SectionList = styled.div`
   width: 7rem;
   margin-top: 0.8rem;
+
   @media (max-width: 768px) {
     width: 100%;
     display: flex;
@@ -451,6 +452,7 @@ const Section = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  margin-bottom: 0.6rem;
 
   ${(props) =>
     props.isselected === "true" &&
