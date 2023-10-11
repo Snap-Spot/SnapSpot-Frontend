@@ -284,7 +284,7 @@ const GridBox = styled.div`
     position: relative;
     width: 95%;
     display: grid;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
