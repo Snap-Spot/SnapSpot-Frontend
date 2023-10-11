@@ -200,7 +200,7 @@ const ScheduleDetail = ({
         )}
         <Headcount>스냅 예약번호 {reservationNum}</Headcount>
         <Row>
-          <TitleContainer isMargin={status === "DELIVERY" ? "t" : "f"}>
+          <TitleContainer ismargin={status === "DELIVERY" ? "t" : "f"}>
             <SubTitle>날짜</SubTitle>
             <SubTitle>시간</SubTitle>
             <SubTitle>장소</SubTitle>
@@ -398,7 +398,7 @@ const PriceInput = styled(Input)`
 const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: ${(props) => (props.isMargin === "t" ? "1.5rem" : "-5rem")};
+  margin-right: ${(props) => (props.ismargin === "t" ? "1.5rem" : "-5rem")};
   @media (max-width: 768px) {
     margin-right: 1rem;
   }

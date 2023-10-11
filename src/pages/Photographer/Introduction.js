@@ -19,14 +19,12 @@ const Introduction = () => {
   const GetPhotographerInfo = async () => {
     try {
       const data = await getPhotographer(id);
-      console.log("data", data.photographer);
+      // console.log("data", data.photographer);
       setData(data.photographer);
     } catch (err) {
       console.log(err);
     }
   };
-
-  console.log(priceModalOpen);
 
   useEffect(() => {
     GetPhotographerInfo();

@@ -50,7 +50,7 @@ const RegionInput = ({ areaId, setAreaId }) => {
               .map((data) => (
                 <SelectedOption
                   key={data.areaId}
-                  isSelected={true}
+                  isselected={true}
                   onClick={() => cancelSelect(data.areaId)}
                   open={toggle}
                 >
@@ -82,7 +82,7 @@ const RegionInput = ({ areaId, setAreaId }) => {
                 .map((data) => (
                   <SelectedOption
                     key={data.areaId}
-                    isSelected={true}
+                    isselected={true}
                     onClick={() => cancelSelect(data.areaId)}
                     open={toggle}
                   >
@@ -99,7 +99,7 @@ const RegionInput = ({ areaId, setAreaId }) => {
                       <Box key={index}>
                         <Region
                           onClick={() => handleRegionClick(region.name)}
-                          isSelected={selectedRegion === region.name}
+                          isselected={selectedRegion === region.name}
                         >
                           {region.name}
                         </Region>
@@ -116,7 +116,7 @@ const RegionInput = ({ areaId, setAreaId }) => {
                           <SubregionBox key={data.areaId}>
                             <Subregion
                               onClick={() => handleSubRegionClick(data.areaId)}
-                              isSelected={areaId === data.areaId}
+                              isselected={areaId === data.areaId}
                             >
                               {data.subregion}
                             </Subregion>
@@ -227,7 +227,7 @@ const Subregion = styled.div`
   padding: 0rem 0.2rem;
 
   ${(props) =>
-    props.isSelected &&
+    props.isselected &&
     `
     color: #3C3AAC;
     font-weight: 700;
@@ -260,7 +260,7 @@ const Subregion = styled.div`
     line-height: 128.5%;
 
     ${(props) =>
-      props.isSelected &&
+      props.isselected &&
       `
     border-radius: 0.5rem;
     border: 0.063rem solid #5170DE;
@@ -300,7 +300,7 @@ const Region = styled.div`
   padding: 0.05rem;
 
   ${(props) =>
-    props.isSelected &&
+    props.isselected &&
     `
     color: #3C3AAC;
     font-weight: 700;
@@ -327,7 +327,7 @@ const Region = styled.div`
 
     margin-bottom: 0.5rem;
     ${(props) =>
-      props.isSelected &&
+      props.isselected &&
       `
       font-weight: 700;
       color: #3C3AAC;`}

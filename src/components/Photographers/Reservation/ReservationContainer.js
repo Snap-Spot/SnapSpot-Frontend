@@ -16,7 +16,6 @@ const ReservationContainer = ({ data }) => {
   // 해당 날짜에 일치하는 일정 보여주기
   let filteredData = data.filter((el) => {
     let newDate = new Date(el.planDate);
-    console.log(selectDate);
     return (
       newDate.getMonth() === selectMonth && newDate.getDate() === selectDate
     );

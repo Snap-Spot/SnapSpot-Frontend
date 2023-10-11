@@ -30,8 +30,6 @@ const ReviewContainer = ({ reviewData }) => {
     setCurrentPage(error);
   };
 
-  console.log("3", currentPosts);
-
   return (
     <Container>
       <Review>후기</Review>

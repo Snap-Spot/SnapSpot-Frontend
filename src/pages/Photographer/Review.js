@@ -18,7 +18,7 @@ const Review = () => {
   const getReview = async () => {
     try {
       const data = await getReviews();
-      console.log("데이터", data);
+      // console.log("데이터", data);
       setProducts(data);
       setLoading(false);
     } catch (err) {

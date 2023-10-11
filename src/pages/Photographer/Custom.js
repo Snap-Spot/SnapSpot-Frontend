@@ -66,7 +66,7 @@ const Custom = () => {
       setUnableDates(res.unableSchedules.unableDates);
       setImage(res.images);
 
-      console.log("결과", res);
+      // console.log("결과", res);
     } catch (err) {
       console.log(err);
     }
@@ -77,7 +77,7 @@ const Custom = () => {
   // console.log("가격표", paymentImage);
   // console.log("가격", lowestPay);
   // console.log("소개", bio);
-  console.log("지역id", areaId);
+  // console.log("지역id", areaId);
   // console.log("태그", tag);
   // console.log("이미지", image);
   // console.log("전문분야", specialList);

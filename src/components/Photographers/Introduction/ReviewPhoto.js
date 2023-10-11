@@ -5,7 +5,6 @@ const ReviewPhoto = ({ reviews }) => {
   const isMobile = useMobileDetection();
   const img_list = Object.values(reviews.map((el) => el.image));
   const slice_list = isMobile ? img_list.slice(0, 4) : img_list.slice(0, 5); // 4개까지만 잘라서 보여주기
-  console.log(slice_list);
 
   return (
     <Container>

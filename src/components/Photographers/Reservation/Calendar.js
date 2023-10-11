@@ -81,7 +81,6 @@ const Calendar = ({
   function IsNextMonth(day) {
     return day < 25 ? true : false;
   }
-  console.log(planDates);
 
   return (
     <Center>
