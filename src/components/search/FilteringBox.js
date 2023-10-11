@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { useNavigate, useLocation } from "react-router-dom";
-import { React, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { React, useState } from "react";
 import CustomCalendar from "./CustomCalendar";
 import { regions, orders, category } from "./FilteringList.js";
 
@@ -61,7 +61,6 @@ const FilteringBox = ({ setIsFilteringOpen, setCurrentPage }) => {
   return (
     <Wrapper>
       <FilterTab>
-        {/* 지역필터링 */}
         <RegionTab>
           <Title>지역</Title>
           <List>
@@ -71,7 +70,9 @@ const FilteringBox = ({ setIsFilteringOpen, setCurrentPage }) => {
                   <Box key={index}>
                     <Region
                       onClick={() => handleRegionClick(region.name)}
-                      isSelected={selectedRegion === region.name}
+                      isselected={
+                        selectedRegion === region.name ? "true" : "false"
+                      }
                     >
                       {region.name}
                     </Region>
@@ -88,7 +89,9 @@ const FilteringBox = ({ setIsFilteringOpen, setCurrentPage }) => {
                       <SubregionBox key={data.areaId}>
                         <Subregion
                           onClick={() => handleSubRegionClick(data.areaId)}
-                          isSelected={selectedSubRegion === data.areaId}
+                          isselected={
+                            selectedSubRegion === data.areaId ? "true" : "false"
+                          }
                         >
                           {data.subregion}
                         </Subregion>
@@ -99,7 +102,6 @@ const FilteringBox = ({ setIsFilteringOpen, setCurrentPage }) => {
             )}
           </List>
         </RegionTab>
-        {/* 날짜 필터링 */}
         <DateTab>
           <Title>날짜</Title>
           <CalendarBox>
@@ -109,45 +111,39 @@ const FilteringBox = ({ setIsFilteringOpen, setCurrentPage }) => {
             />
           </CalendarBox>
         </DateTab>
-        {/* 전문분야 필터링 */}
         <SectionTab>
           <Title>전문분야</Title>
           <SectionList>
             {category && (
               <Box>
                 {category.map((section, index) => (
-                  <>
-                    <Section
-                      key={index}
-                      onClick={() => handleSectionClick(section.key)}
-                      isSelected={selectedSection === section.key}
-                    >
-                      {section.label}
-                    </Section>
-                    {index !== category.length - 1 && <Line />}
-                  </>
+                  <Section
+                    key={index}
+                    onClick={() => handleSectionClick(section.key)}
+                    isselected={
+                      selectedSection === section.key ? "true" : "false"
+                    }
+                  >
+                    {section.label}
+                  </Section>
                 ))}
               </Box>
             )}
           </SectionList>
         </SectionTab>
-        {/* 순서 필터링 */}
         <OrderTab>
           <Title>순서</Title>
           <SectionList>
             {orders && (
               <Box>
                 {orders.map((order, index) => (
-                  <>
-                    <Section
-                      key={index}
-                      onClick={() => handleOrderClick(order.key)}
-                      isSelected={selectedOrder === order.key}
-                    >
-                      {order.label}
-                    </Section>
-                    {index !== orders.length - 1 && <Line />}
-                  </>
+                  <Section
+                    key={index}
+                    onClick={() => handleOrderClick(order.key)}
+                    isselected={selectedOrder === order.key ? "true" : "false"}
+                  >
+                    {order.label}
+                  </Section>
                 ))}
               </Box>
             )}
@@ -308,7 +304,7 @@ const Region = styled.div`
   /* padding: 0.05rem; */
 
   ${(props) =>
-    props.isSelected &&
+    props.isselected === "true" &&
     `
     color: #3C3AAC;
     font-weight: 700;
@@ -334,7 +330,7 @@ const Region = styled.div`
 
     margin-bottom: 0.5rem;
     ${(props) =>
-      props.isSelected &&
+      props.isselected === "true" &&
       `
       font-weight: 700;
       color: #3C3AAC;`}
@@ -370,7 +366,7 @@ const Subregion = styled.div`
   padding: 0rem 0.2rem;
 
   ${(props) =>
-    props.isSelected &&
+    props.isselected === "true" &&
     `
     color: #3C3AAC;
     font-weight: 700;
@@ -401,7 +397,7 @@ const Subregion = styled.div`
     line-height: 128.5%;
 
     ${(props) =>
-      props.isSelected &&
+      props.isselected === "true" &&
       `
     border-radius: 0.5rem;
     border: 0.063rem solid #5170DE;
@@ -457,7 +453,7 @@ const Section = styled.div`
   line-height: normal;
 
   ${(props) =>
-    props.isSelected &&
+    props.isselected === "true" &&
     `
     color: #3C3AAC;
     font-weight: 700;
@@ -489,7 +485,7 @@ const Section = styled.div`
     line-height: 128.5%;
 
     ${(props) =>
-      props.isSelected &&
+      props.isselected === "true" &&
       `
     border-radius: 0.5rem;
     border: 0.063rem solid #5170DE;

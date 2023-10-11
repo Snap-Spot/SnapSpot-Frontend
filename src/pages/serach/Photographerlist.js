@@ -130,6 +130,9 @@ const Photographerlist = () => {
     };
   }, []);
 
+  const shouldForwardProp = (prop, defaultValidatorFn) =>
+    !["isFilteringOpen"].includes(prop) && defaultValidatorFn(prop);
+
   return (
     <>
       {isLoading ? (
@@ -224,15 +227,18 @@ const Wrapper = styled.div`
   }
 `;
 
-const Content = styled.div`
+const Content = styled.div.withConfig({
+  shouldForwardProp: (prop, defaultValidatorFn) =>
+    !["isFilteringOpen"].includes(prop),
+})`
   width: 75%;
-  margin: 0px auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   cursor: ${(props) => (props.isFilteringOpen ? "pointer" : "auto")};
-  /* pointer-events: ${(props) => (props.isFilteringOpen ? "auto" : "none")}; */
+
   @media (max-width: 768px) {
     width: 90%;
   }
