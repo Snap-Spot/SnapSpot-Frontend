@@ -4,6 +4,8 @@ import Header from "../../components/common/Header";
 import PhotoBox from "../../components/Mypage-User/Pick/PhotoBox";
 import Paging from "../../components/Photographers/Review/Paging/Paging";
 import { getMyHeartList } from "../../api/heart";
+import { useLoadingContext } from "../../components/common/LoadingContext";
+import Loading from "../../components/common/Loading";
 const MyHeartsPage = () => {
   const [list, setList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
@@ -18,15 +20,22 @@ const MyHeartsPage = () => {
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
   //const currentPosts = list.slice(indexOfFirstPost, indexOfLastPost);
 
-  const getData = async () => {
-    const data = await getMyHeartList();
-    console.log(data);
+  const { isLoading, startLoading, stopLoading } = useLoadingContext();
 
-    setList(data);
-    setCurrentPosts(data.slice(indexOfFirstPost, indexOfLastPost));
+  const getData = async () => {
+    try {
+      startLoading();
+      const data = await getMyHeartList();
+
+      setList(data);
+      setCurrentPosts(data.slice(indexOfFirstPost, indexOfLastPost));
+    } catch (err) {
+      alert("에러발생");
+    } finally {
+      stopLoading();
+    }
   };
   const filterData = (id) => {
-    console.log("업뎃");
     setCurrentPosts(
       list
         .slice(indexOfFirstPost, indexOfLastPost)
@@ -38,41 +47,46 @@ const MyHeartsPage = () => {
   }, []);
   return (
     <>
-      <Header />
-
-      <Wrapper>
-        <div className="title">좋아요 모아보기</div>
-        <GridBox>
-          <div class="grid">
-            {currentPosts.map((el) => {
-              const region =
-                el.areas[0] &&
-                `${el.areas[0].metropolitan} ${el.areas[0].city} 외 ${
-                  el.areas.length - 1
-                }곳`;
-              return (
-                <div>
-                  <PhotoBox
-                    id={el.photographerId}
-                    photo={el.image}
-                    photographer={el.nickname}
-                    region={region}
-                    filterData={filterData}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </GridBox>
-      </Wrapper>
-      <PagingContainer>
-        <Paging
-          page={currentPage}
-          count={list.length}
-          setPage={handlePageChange}
-          itemsCountPerPage={itemsPerPage}
-        />
-      </PagingContainer>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <Header />
+          <Wrapper>
+            <div className="title">좋아요 모아보기</div>
+            <GridBox>
+              <div className="grid">
+                {currentPosts.map((el) => {
+                  const region =
+                    el.areas[0] &&
+                    `${el.areas[0].metropolitan} ${el.areas[0].city} 외 ${
+                      el.areas.length - 1
+                    }곳`;
+                  return (
+                    <div key={el.photographerId}>
+                      <PhotoBox
+                        id={el.photographerId}
+                        photo={el.image}
+                        photographer={el.nickname}
+                        region={region}
+                        filterData={filterData}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            </GridBox>
+          </Wrapper>
+          <PagingContainer>
+            <Paging
+              page={currentPage}
+              count={list.length}
+              setPage={handlePageChange}
+              itemsCountPerPage={itemsPerPage}
+            />
+          </PagingContainer>
+        </>
+      )}
     </>
   );
 };

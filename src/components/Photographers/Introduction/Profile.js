@@ -183,7 +183,7 @@ const Align = styled.div`
 const Heart = styled.img`
   width: 46px;
   height: 44px;
-  margin-left: 5rem;
+  margin-left: auto;
 
   @media (max-width: 768px) {
     margin-left: 0;

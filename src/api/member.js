@@ -33,7 +33,7 @@ export const updateMyProfile = async (isPhotographer, body, initialImage) => {
 
   try {
     const res = await client.put(endPoint, body);
-    console.log(res);
+
     return res;
   } catch (err) {
     console.log("에러 발생", err);

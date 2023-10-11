@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { styled } from "styled-components";
 import { getMyProfile } from "../../api/member";
 import useMobileDetection from "./mobileDetection";
@@ -12,6 +12,7 @@ import SearchBox from "./SearchBox";
 
 const Header = (props) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const isMobile = useMobileDetection();
   const [profileData, setProfileData] = useState({});
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false);
@@ -38,7 +39,9 @@ const Header = (props) => {
   };
 
   const onClickPhotogreapher = () => {
+    localStorage.setItem("currentPage", "1");
     navigate(`/photographers`);
+    window.location.reload();
   };
 
   const onClickFeed = () => {

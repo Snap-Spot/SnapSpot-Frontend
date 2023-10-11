@@ -8,11 +8,13 @@ import right from "../../../assets/photograph/right.png";
 const ExCarousel = ({ carouselList }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  const items = Object.values(carouselList).map((el, idx) => (
-    <div className="item" data-value={idx}>
-      <img src={el} className="item-image" />
-    </div>
-  ));
+  const items = Object.values(carouselList)
+    .filter((el) => !!el)
+    .map((el, idx) => (
+      <div className="item" data-value={idx}>
+        <img src={el} className="item-image" />
+      </div>
+    ));
 
   const renderSlideInfo = ({ item, itemsCount }) => {
     return `${item}/${itemsCount}`;

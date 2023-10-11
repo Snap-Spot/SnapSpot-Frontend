@@ -24,6 +24,29 @@ const Reservation = () => {
     getReservation();
   }, []);
 
+  const today = new Date();
+
+  // 오늘 날짜와 같거나 이후 데이터만 보이도록
+  const filteredData =
+    data &&
+    data.filter((el) => {
+      const planDate = new Date(el.planDate);
+      const planTime = new Date(el.planTime);
+
+      // 날짜 비교
+      const sameDate =
+        planDate.getFullYear() === today.getFullYear() &&
+        planDate.getMonth() === today.getMonth() &&
+        planDate.getDate() === today.getDate();
+
+      // 같은 날짜일 때 시간 비교
+      if (sameDate) {
+        return planTime;
+      } else {
+        return planDate >= today;
+      }
+    });
+
   return (
     <LayOut>
       <Container>
@@ -31,10 +54,12 @@ const Reservation = () => {
           <>
             <ReservationContainer data={data} />
             <RequestContainer
-              request={data.filter((el) => el.status === "REQUEST")}
+              request={filteredData.filter((el) => el.status === "REQUEST")}
             />
             <UpcomingContainer
-              reservation={data.filter((el) => el.status === "RESERVED")}
+              reservation={filteredData.filter(
+                (el) => el.status === "RESERVED"
+              )}
             />
           </>
         )}

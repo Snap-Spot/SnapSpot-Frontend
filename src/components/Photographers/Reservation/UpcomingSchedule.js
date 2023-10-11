@@ -40,7 +40,9 @@ const UpcomingSchedule = ({
         <Row>
           <SnapType>{snapType[0].label}</SnapType>
           <Line src={line} />
-          <Headcount>{headCount}인</Headcount>
+          <Headcount>
+            {headCount < 5 ? `${headCount}인` : `${headCount}인 이상`}
+          </Headcount>
         </Row>
         <Row>
           <TitleContainer>

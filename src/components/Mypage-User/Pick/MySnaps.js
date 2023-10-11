@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { styled } from "styled-components";
+import { styled, keyframes } from "styled-components";
 import MySnapBox from "./MySnapBox";
 import Paging from "../../Photographers/Review/Paging/Paging";
 import { getBestSnaps } from "../../../api/best-snap";
 import { getDayOfWeek } from "../Reservation/ReservationItem";
+import LoadingImg from "../../../assets/signup/loading.png";
 const MySnaps = () => {
   const [list, setList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
@@ -48,33 +49,39 @@ const MySnaps = () => {
 
   return (
     <>
-      <Wrapper>
-        <GridBox>
-          {currentPosts &&
-            currentPosts.map((el) => {
-              const tags = [el.tag1, el.tag2, el.tag3];
-              const date = `${el.photoDate.substr(0, 10)} 
-                (${getDayOfWeek(el.photoDate.substr(0, 10))})`;
-              return (
-                <MySnapBox
-                  photo={el.imageUrl}
-                  photographer={el.photographerName}
-                  region={el.location}
-                  date={date}
-                  tags={tags}
-                />
-              );
-            })}
-        </GridBox>
-      </Wrapper>
-      <PagingContainer>
-        <Paging
-          page={currentPage}
-          count={list.length}
-          setPage={handlePageChange}
-          itemsCountPerPage={itemsPerPage}
-        />
-      </PagingContainer>
+      {currentPosts.length > 0 ? (
+        <>
+          <Wrapper>
+            <GridBox>
+              {currentPosts.map((el) => {
+                const tags = [el.tag1, el.tag2, el.tag3];
+                const date = `${el.photoDate.substr(0, 10)} 
+              (${getDayOfWeek(el.photoDate.substr(0, 10))})`;
+                return (
+                  <MySnapBox
+                    key={el.snapPhotoId}
+                    photo={el.imageUrl}
+                    photographer={el.photographerName}
+                    region={el.location}
+                    date={date}
+                    tags={tags}
+                  />
+                );
+              })}
+            </GridBox>
+          </Wrapper>
+          <PagingContainer>
+            <Paging
+              page={currentPage}
+              count={list.length}
+              setPage={handlePageChange}
+              itemsCountPerPage={itemsPerPage}
+            />
+          </PagingContainer>{" "}
+        </>
+      ) : (
+        <LoadingImage src={LoadingImg} />
+      )}
     </>
   );
 };
@@ -121,5 +128,24 @@ const PagingContainer = styled.div`
   margin-top: 152px;
   @media (max-width: 768px) {
     margin-top: 85px;
+  }
+`;
+
+// 로딩 관련 style
+const spinner_animation = keyframes`
+    from {
+        transform: rotate(0deg);
+    } to {
+        transform: rotate(360deg);
+    }
+`;
+
+const LoadingImage = styled.img`
+  margin: 200px auto;
+  width: 200px;
+  animation: ${spinner_animation} 1s linear infinite;
+
+  @media screen and (max-width: 768px) {
+    width: 150px;
   }
 `;

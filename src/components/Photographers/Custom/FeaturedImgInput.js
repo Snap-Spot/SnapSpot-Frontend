@@ -7,8 +7,8 @@ const FeaturedImgInput = ({ images, setImage }) => {
   const featuredImgRef = useRef([]);
 
   useEffect(() => {
-    setPreviewImg(images);
-  }, [images]);
+    setPreviewImg({ ...images });
+  }, []);
 
   // 대표 이미지 프리뷰
   const saveImgFiles = (index) => {
@@ -21,7 +21,7 @@ const FeaturedImgInput = ({ images, setImage }) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      const updatedImages = { ...images };
+      const updatedImages = { ...previewImg };
       updatedImages[`image${index + 1}`] = reader.result;
       setPreviewImg(updatedImages);
     };
@@ -31,8 +31,11 @@ const FeaturedImgInput = ({ images, setImage }) => {
   const deleteFileImgs = (index) => {
     console.log(index);
     const updatedImages = { ...images };
+    const updatedPreviewImages = { ...previewImg };
     delete updatedImages[`image${index + 1}`];
+    delete updatedPreviewImages[`image${index + 1}`];
     setImage(updatedImages);
+    setPreviewImg(updatedPreviewImages);
   };
 
   return (

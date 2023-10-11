@@ -25,7 +25,7 @@ const customKoLocale = {
 };
 
 function CustomCalendar({ setSelectedDate }) {
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(null);
 
   const handleDateChange = (date) => {
     setStartDate(date);

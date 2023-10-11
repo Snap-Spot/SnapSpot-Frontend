@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { styled } from "styled-components";
 import { getMyProfile, updateMyProfile } from "../../../api/member";
-
+import profile from "../../../assets/header/profile.png";
 const SettingsForm = () => {
   const imgRef = useRef();
   const [inputs, setInputs] = useState({
@@ -55,7 +55,7 @@ const SettingsForm = () => {
   const updateData = async () => {
     try {
       const res = await updateMyProfile(isPhotographer, inputs, initialImage);
-      console.log(res);
+
       if (res.status === 200) {
         alert("회원정보가 수정되었습니다.");
         window.location.href = "/mypage";
@@ -83,7 +83,12 @@ const SettingsForm = () => {
     <Wrapper>
       <div className="container">
         <ProfileImg>
-          <img src={previewImg} alt="" />
+          {previewImg ? (
+            <img src={previewImg} alt="" />
+          ) : (
+            <img src={profile} alt="" />
+          )}
+
           <input
             className="input"
             accept=".jpg, .jpeg, .png"

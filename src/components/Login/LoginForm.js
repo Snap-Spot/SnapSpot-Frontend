@@ -53,8 +53,8 @@ const LoginForm = () => {
   // 로그인 버튼 클릭 시 실행되는 함수
   const handleSubmit = async () => {
     const res = await EmailSignInAPI(loginInfo);
-    // 로그인에 실패할 경우 "아이디 또는 비밀번호를 다시 확인해주세요." 문구 표시
-    if (res === "Login Error") {
+    // 로그인에 실패할 경우 "이메일 또는 비밀번호를 다시 확인해주세요." 문구 표시
+    if (res === "Login Fail") {
       setIsLoginSuccess(false);
     }
   };
@@ -88,7 +88,7 @@ const LoginForm = () => {
           onKeyDown={handleKeyDown}
         />
         <S.PasswordMatchText className={isLoginSuccess ? "isMatched" : ""}>
-          아이디 또는 비밀번호를 다시 확인해주세요.
+          이메일 또는 비밀번호를 다시 확인해주세요.
         </S.PasswordMatchText>
       </S.InputWrapper>
 

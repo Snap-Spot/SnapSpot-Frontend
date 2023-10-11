@@ -4,29 +4,38 @@ import { React, useState, useEffect } from "react";
 import CustomCalendar from "./CustomCalendar";
 import { regions, orders, category } from "./FilteringList.js";
 
-const FilteringBox = ({ onSearch, setIsFilteringOpen }) => {
+const FilteringBox = ({
+  onSearch,
+  setIsFilteringOpen,
+  setCurrentPage,
+  currentPage,
+}) => {
   const navigate = useNavigate();
 
   const [selectedRegion, setSelectedRegion] = useState("서울");
   const [selectedSubRegion, setSelectedSubRegion] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
-  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [selectedOrder, setSelectedOrder] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
 
   const handleRegionClick = (region) => {
-    setSelectedRegion(region);
+    setSelectedRegion((prevRegion) => (prevRegion === region ? null : region));
   };
 
   const handleSubRegionClick = (areaId) => {
-    setSelectedSubRegion(areaId);
+    setSelectedSubRegion((prevAreaId) =>
+      prevAreaId === areaId ? null : areaId
+    );
   };
 
   const handleSectionClick = (section) => {
-    setSelectedSection(section);
+    setSelectedSection((prevSection) =>
+      prevSection === section ? null : section
+    );
   };
 
   const handleOrderClick = (order) => {
-    setSelectedOrder(order);
+    setSelectedOrder((prevOrder) => (prevOrder === order ? null : order));
   };
 
   const handleSearchBtnClick = (isFilteringOpen) => {
@@ -48,9 +57,10 @@ const FilteringBox = ({ onSearch, setIsFilteringOpen }) => {
     if (queryParams.length > 0) {
       endpoint += "?" + queryParams.join("&");
     }
-    console.log(endpoint);
     navigate(endpoint);
-
+    console.log(endpoint);
+    localStorage.setItem("currentPage", "1");
+    setCurrentPage(1);
     setIsFilteringOpen(!isFilteringOpen);
   };
 
@@ -99,7 +109,10 @@ const FilteringBox = ({ onSearch, setIsFilteringOpen }) => {
         <DateTab>
           <Title>날짜</Title>
           <CalendarBox>
-            <CustomCalendar setSelectedDate={setSelectedDate} />
+            <CustomCalendar
+              setSelectedDate={setSelectedDate}
+              selectedDate={selectedDate}
+            />
           </CalendarBox>
         </DateTab>
         {/* 전문분야 필터링 */}

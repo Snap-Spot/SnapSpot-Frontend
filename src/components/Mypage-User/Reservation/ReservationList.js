@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ReservationItem from "./ReservationItem";
-import { styled } from "styled-components";
+import { keyframes, styled } from "styled-components";
 import DropdownFilter from "./DropdownFilter";
 import { getMyReservationList } from "../../../api/plan";
+import LoadingImg from "../../../assets/signup/loading.png";
 const ReservationList = () => {
   const [list, setList] = useState([]);
   const filterList = ["최근 3개월", "최근 6개월", "최근 1년", "최근 2년"];
@@ -29,10 +30,13 @@ const ReservationList = () => {
       </div>
 
       <div className="list">
-        {list &&
+        {list.length > 0 ? (
           list.map((item) => {
-            return <ReservationItem item={item} />;
-          })}
+            return <ReservationItem key={item.planId} item={item} />;
+          })
+        ) : (
+          <LoadingImage src={LoadingImg} />
+        )}
       </div>
     </Wrapper>
   );
@@ -78,5 +82,23 @@ const Wrapper = styled.div`
 
   .dropdown {
     height: 44px;
+  }
+`;
+// 로딩 관련 style
+const spinner_animation = keyframes`
+    from {
+        transform: rotate(0deg);
+    } to {
+        transform: rotate(360deg);
+    }
+`;
+
+const LoadingImage = styled.img`
+  margin: 200px auto;
+  width: 200px;
+  animation: ${spinner_animation} 1s linear infinite;
+
+  @media screen and (max-width: 768px) {
+    width: 150px;
   }
 `;
