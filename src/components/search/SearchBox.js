@@ -137,9 +137,9 @@ const Photographer = styled.div`
   max-width: 175px;
 
   @media (max-width: 768px) {
-    font-size: 10px;
+    font-size: 12px;
     height: 15px;
-    max-width: 60px;
+    max-width: 65px;
   }
 `;
 
@@ -153,7 +153,7 @@ const Region = styled.div`
   line-height: normal;
 
   @media (max-width: 768px) {
-    font-size: 2px;
+    font-size: 11px;
     /* width: 108px; */
   }
 `;
