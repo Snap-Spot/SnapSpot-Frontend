@@ -2,18 +2,14 @@ import styled from "styled-components";
 import redWarn from "../../../assets/photograph/redWarn.png";
 import cancel from "../../../assets/photograph/cancel.png";
 
-const MinInputModal = ({ setIsMinInput, isMinInput }) => {
+const MinInputModal = ({ setIsMinInput, isMinInput, text }) => {
   return (
     <>
       <Conatiner>
         <CancelBtn src={cancel} onClick={() => setIsMinInput(!isMinInput)} />
         <WarnIcon src={redWarn} />
         <Warning>100자 이상 입력해 주세요</Warning>
-        <Content>
-          만약 비슷한 시간대에 촬영이 가능하신 경우, 메세지에 변경 가능한 촬영
-          시간대를 적어주세요. 100자 이상으로 전달사항을 작성해주셔야 거절이
-          가능해요.
-        </Content>
+        <Content>{text}</Content>
       </Conatiner>
       <BG></BG>
     </>
@@ -23,7 +19,7 @@ const MinInputModal = ({ setIsMinInput, isMinInput }) => {
 const BG = styled.div`
   position: absolute;
   display: flex;
-  width: 100%;
+  width: 100vw;
   height: 130vh;
   flex-direction: column;
   align-items: center;

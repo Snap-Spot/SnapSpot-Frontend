@@ -4,9 +4,11 @@ const PhotoChatBox = ({ text, time }) => {
   return (
     <ChatBoxContainer>
       <ChatContainer>
-        <Chat>{text}</Chat>
+        <Chat>
+          <P>{text}</P>
+        </Chat>
       </ChatContainer>
-      <Time>{time}</Time>
+      {/* <Time>{time}</Time> */}
     </ChatBoxContainer>
   );
 };
@@ -32,28 +34,33 @@ const ChatContainer = styled.div`
   }
 `;
 
+const P = styled.p`
+  margin: 0;
+  width: auto;
+`;
+
 const Chat = styled.div`
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  height: 100px;
   border-radius: 32px;
   background: #fff;
   border: 1px solid #5170de;
-  /* box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.25); */
   font-size: 16px;
   padding-left: 24px;
   padding-top: 16px;
   padding-right: 24px;
+  padding-bottom: 16px;
 
   @media (max-width: 768px) {
-    width: 100%;
-    height: 50px;
+    width: 90%;
     border-radius: 20px;
     font-size: 12px;
     padding-left: 14px;
     padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 14px;
   }
 `;
 

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import ReviewBox from "../../components/Photographers/Review/ReviewBox";
 import Paging from "../../components/Photographers/Review/Paging/Paging";
-import { ReviewData } from "../../components/Photographers/Review/MockData/ReviewData";
 import { useEffect, useState } from "react";
 import LayOut from "../../components/common/LayOut";
 import { getReviews } from "../../api/review";
@@ -27,14 +26,14 @@ const Review = () => {
 
   useEffect(() => {
     getReview();
+  }, []);
+
+  useEffect(() => {
     setCount(products.totalReview);
     setIndexOfLastPost(currentPage * postPerPage);
     setIndexOfFirstPost(indexOfLastPost - postPerPage);
-    products.reviews &&
-      setCurrentPosts(
-        products.reviews.slice(indexOfFirstPost, indexOfLastPost)
-      );
-  }, [currentPage, postPerPage, indexOfLastPost, indexOfFirstPost]);
+    setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
+  }, [products, currentPage, postPerPage, indexOfLastPost, indexOfFirstPost]);
 
   const setPage = (error) => {
     setCurrentPage(error);

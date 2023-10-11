@@ -1,14 +1,14 @@
 import styled from "styled-components";
-import profile from "../../../assets/photograph/profile.png";
+import basicProfile from "../../../assets/header/profile.png";
 
 const ChatBox = ({ text, time, profile }) => {
   return (
     <ChatBoxContainer>
       <ChatContainer>
-        <Profile src={profile} />
+        <Profile src={profile || basicProfile} />
         <Chat>{text}</Chat>
       </ChatContainer>
-      <Time>{time}</Time>
+      {/* <Time>{time}</Time> */}
     </ChatBoxContainer>
   );
 };
@@ -37,6 +37,7 @@ const Profile = styled.img`
   width: 60px;
   height: 60px;
   margin-right: 1rem;
+  border-radius: 50%;
 
   @media (max-width: 768px) {
     width: 24px;
@@ -50,7 +51,6 @@ const Chat = styled.div`
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  height: 100px;
   border-radius: 32px;
   background: #fff;
   box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.25);
@@ -58,14 +58,15 @@ const Chat = styled.div`
   padding-left: 24px;
   padding-top: 16px;
   padding-right: 24px;
+  padding-bottom: 16px;
 
   @media (max-width: 768px) {
     width: 100%;
-    height: 50px;
     border-radius: 20px;
     font-size: 12px;
     padding-left: 14px;
     padding-top: 10px;
+    padding-bottom: 10px;
   }
 `;
 

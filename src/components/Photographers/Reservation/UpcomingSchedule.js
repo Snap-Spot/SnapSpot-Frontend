@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import arrow from "../../../assets/photograph/arrow.png";
 import line from "../../../assets/photograph/line.png";
+import basicProfile from "../../../assets/header/profile.png";
 import { useNavigate } from "react-router-dom";
-//복구
+
 const UpcomingSchedule = ({
   nickname,
   snapType,
@@ -32,7 +33,7 @@ const UpcomingSchedule = ({
       <BottomLine />
       <Padding>
         <Row>
-          <Profile src={profile} />
+          <Profile src={profile || basicProfile} />
           <NickName>{nickname}</NickName>
           <Btn>{btn_text}</Btn>
         </Row>

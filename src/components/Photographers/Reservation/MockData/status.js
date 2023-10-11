@@ -5,6 +5,6 @@ export const status_list = {
   RESERVED: ["예약완료", ""],
   TODAY: ["촬영당일", ""],
   COMPLETE: ["촬영진행", "사진 전송하기"],
-  DELIVERY: "전달완료",
+  DELIVERY: ["전달완료", ""],
   CANCEL: "예약취소",
 };

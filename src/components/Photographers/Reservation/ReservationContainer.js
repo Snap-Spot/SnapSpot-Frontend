@@ -3,7 +3,6 @@ import Calendar from "./Calendar";
 import ScheduleBox from "./ScheduleBox";
 import { useState } from "react";
 import { category } from "../../common/category";
-import { useEffect } from "react";
 
 const ReservationContainer = ({ data }) => {
   const date = new Date();
