@@ -89,6 +89,7 @@ const Title = styled.h2`
   @media (max-width: 768px) {
     margin-bottom: 1.7rem;
     font-size: 18px;
+    margin-top: 0rem;
   }
 `;
 

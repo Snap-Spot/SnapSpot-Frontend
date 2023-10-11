@@ -218,12 +218,12 @@ const ScheduleDetail = ({
                 </SubTitle>
               </>
             )}
-            {isMobile ? (
-              <SubTitle>메세지</SubTitle>
-            ) : status !== "DELIVERY" ? (
-              <SubTitle>메세지에 전달사항을 입력해주세요</SubTitle>
-            ) : (
+            {status === "DELIVERY" ? (
               ""
+            ) : isMobile ? (
+              <SubTitle>메세지</SubTitle>
+            ) : (
+              <SubTitle>메세지에 전달사항을 입력해주세요</SubTitle>
             )}
           </TitleContainer>
           <ContentContainer>

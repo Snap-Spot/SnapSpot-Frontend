@@ -42,6 +42,11 @@ const WarnIcon = styled.img`
   height: 35px;
   margin-bottom: 0.3rem;
   margin-top: 0.3rem;
+
+  @media (max-width: 768px) {
+    width: 30px;
+    height: 30px;
+  }
 `;
 
 const Conatiner = styled.div`
@@ -68,11 +73,18 @@ const CancelBtn = styled.img`
   height: 32px;
   align-self: flex-end;
   cursor: pointer;
+  @media (max-width: 768px) {
+    width: 28px;
+    height: 28px;
+  }
 `;
 
 const Warning = styled.h2`
   font-size: 20px;
   color: var(--lessred, #ff3d3d);
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 export default MinInputModal;
