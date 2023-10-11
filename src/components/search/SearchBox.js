@@ -142,7 +142,7 @@ const Photographer = styled.div`
   max-width: 175px;
 
   @media (max-width: 768px) {
-    font-size: 12px;
+    font-size: 0.75rem;
     height: 15px;
     max-width: 65px;
   }
@@ -158,8 +158,7 @@ const Region = styled.div`
   line-height: normal;
 
   @media (max-width: 768px) {
-    font-size: 11px;
-    /* width: 108px; */
+    font-size: 0.7rem;
   }
 `;
 const Price = styled.div`
@@ -174,7 +173,7 @@ const Price = styled.div`
   height: 35px;
   margin-top: 6px;
   @media (max-width: 768px) {
-    font-size: 5px;
+    font-size: 0.75rem;
     height: 10px;
   }
 `;
@@ -206,7 +205,7 @@ const Star = styled.div`
   text-align: center;
 
   @media (max-width: 768px) {
-    font-size: 5px;
+    font-size: 0.7rem;
   }
 
   img {
