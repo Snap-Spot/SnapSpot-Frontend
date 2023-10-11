@@ -37,6 +37,7 @@ const ScheduleDetail = ({
   const [prices, setPrices] = useState(0); // 가격
   const [placeAddressinput, setPlaceAddressinput] = useState("");
   const [isPhotoModal, setIsPhotoModal] = useState(false);
+  const [isMinInput, setIsMinInput] = useState(true);
   const { planId } = useParams();
 
   const handleMessageChange = (e) => {
@@ -102,6 +103,14 @@ const ScheduleDetail = ({
           text="만약 비슷한 시간대에 촬영이 가능하신 경우, 메세지에 변경 가능한 촬영
         시간대를 적어주세요. 100자 이상으로 전달사항을 작성해주셔야 거절이
         가능해요."
+        />
+      )}
+      {!isMinInput && (
+        <MinInputModal
+          setIsMinInput={setIsMinInput}
+          isMinInput={isMinInput}
+          text="사진과 함께 전달할 메세지를 작성해주세요. 100자 이상으로 전달사항을 작성해주셔야 전달이
+          가능해요."
         />
       )}
       {isConfirmDeposit && (
