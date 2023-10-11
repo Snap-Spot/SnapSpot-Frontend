@@ -1,11 +1,23 @@
 import styled from "styled-components";
 import btn from "../../../assets/photograph/filterbtn.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const ReviewFiltering = () => {
+const ReviewFiltering = ({ setCurrentPosts, currentPosts }) => {
   const [toggle, setToggle] = useState(false);
   const [select, setSelect] = useState("");
   const option = ["별점 높은 순", "최신 순"];
+
+  useEffect(() => {
+    if (select === option[0]) {
+      setCurrentPosts([...currentPosts].sort((a, b) => b.score - a.score));
+    } else if (select === option[1]) {
+      setCurrentPosts(
+        [...currentPosts].sort(
+          (a, b) => new Date(b.plan.planDate) - new Date(a.plan.planDate)
+        )
+      );
+    }
+  }, [select]);
 
   return (
     <FilterContainer open={toggle}>
@@ -25,7 +37,7 @@ const ReviewFiltering = () => {
               </P>
             ))
           ) : select.length > 0 ? (
-            <P toggle={toggle} select={select}>
+            <P toggle={toggle} selected={select}>
               {select}
             </P>
           ) : (
@@ -68,7 +80,7 @@ const P = styled.p`
   cursor: pointer;
   margin-bottom: ${(props) => (props.toggle ? "0.9rem" : "1.2rem")};
   margin-top: 0.5rem;
-  margin-right: ${(props) => (props.select === "최신 순" ? "1.6rem" : "")};
+  margin-right: ${(props) => (props.selected === "최신 순" ? "1.6rem" : "")};
 
   @media (max-width: 768px) {
     font-size: 14px;
