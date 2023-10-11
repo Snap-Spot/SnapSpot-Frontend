@@ -68,6 +68,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   max-width: 320px;
 
+  cursor: pointer;
   @media (max-width: 768px) {
     width: 100%;
     align-items: center;
