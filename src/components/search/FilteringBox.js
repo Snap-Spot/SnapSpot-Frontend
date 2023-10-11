@@ -201,7 +201,7 @@ const FilterTab = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    height: 95%;
+    height: 40rem;
     margin: 0;
   }
 `;
@@ -210,7 +210,7 @@ const RegionTab = styled.div`
   width: 24%;
   height: 100%;
   @media (max-width: 768px) {
-    height: 19%;
+    height: 8rem;
     width: 90%;
     border-bottom: 0.063rem solid #dbdbdb;
   }
@@ -221,7 +221,7 @@ const DateTab = styled.div`
   height: 100%;
   padding: 0 2rem;
   @media (max-width: 768px) {
-    height: 42%;
+    height: 17rem;
     width: 90%;
     border-bottom: 0.063rem solid #dbdbdb;
     padding: 0.5rem 0;
@@ -234,7 +234,7 @@ const SectionTab = styled.div`
   padding: 0 2rem;
   @media (max-width: 768px) {
     width: 90%;
-    height: 15%;
+    height: 5rem;
     border-bottom: 0.063rem solid #dbdbdb;
     padding: 0.5rem 0;
   }
@@ -246,7 +246,7 @@ const OrderTab = styled.div`
   padding: 0 2rem;
   @media (max-width: 768px) {
     width: 90%;
-    height: 15%;
+    height: 5rem;
     padding: 0.5rem 0;
   }
 `;
@@ -285,11 +285,12 @@ const RegionList = styled.div`
   border-right: solid 0.063rem #e6e6e6;
 
   @media (max-width: 768px) {
+    height: 2rem;
     width: 100%;
     display: flex;
     flex-direction: row;
     overflow: auto;
-    padding-bottom: 0.7rem;
+    /* padding-bottom: 0.7rem; */
     border: none;
   }
 `;
