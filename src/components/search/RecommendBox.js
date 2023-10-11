@@ -37,7 +37,7 @@ const RecommendBox = ({
             {star} ({review})
           </Star>
         </TopInfo>
-        <Price>{price}원~</Price>
+        <Price> {price ? price.toLocaleString() + "원 ~" : "없음"}</Price>
         <Tag>{tag}</Tag>
       </Info>
     </Wrapper>
