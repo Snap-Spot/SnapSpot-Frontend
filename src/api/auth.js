@@ -39,7 +39,10 @@ export const KakaoSignInAPI = async (accessToken, refreshToken) => {
     window.location.replace("/");
   } catch (err) {
     console.log(err, "로그인 에러");
-    if (err.response?.data.details === "PROD_KAKAO에 의해 가입되지 않은 사용자입니다.") {
+    if (
+      err.response?.data.details ===
+      "PROD_KAKAO에 의해 가입되지 않은 사용자입니다."
+    ) {
       alert("SNAPSPOT에서 카카오로 가입되지 않은 이메일입니다.");
       window.location.replace("/signup/member");
     } else {
@@ -81,7 +84,7 @@ export const EmailSignInAPI = async (loginInfo) => {
     return "Login Success";
   } catch (err) {
     console.log(err, "로그인 에러");
-    if (err.response?.data.details === "Bad credentials") {
+    if (err.response?.data.details === "자격 증명에 실패하였습니다.") {
       return "Login Fail";
     } else {
       return "Login Error";
