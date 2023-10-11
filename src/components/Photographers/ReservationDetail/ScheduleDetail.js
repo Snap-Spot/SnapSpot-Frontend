@@ -188,7 +188,16 @@ const ScheduleDetail = ({
             )}
           </BtnContainer>
         </Row2>
-        {isMobile && <Btn>예약신청</Btn>}
+        {isMobile && (
+          <BtnContainer2>
+            <Btn>{status_list[status][0]}</Btn>
+            {review.length > 0 && (
+              <Btn style={{ marginLeft: "1rem", display: "inline" }}>
+                리뷰작성
+              </Btn>
+            )}
+          </BtnContainer2>
+        )}
         <Headcount>스냅 예약번호 {reservationNum}</Headcount>
         <Row>
           <TitleContainer isMargin={status === "DELIVERY" ? "t" : "f"}>
@@ -297,6 +306,8 @@ const ScheduleDetail = ({
     </>
   );
 };
+
+const BtnContainer2 = styled.div``;
 
 const RejectBtn = styled.button`
   border-radius: 18px;
@@ -490,7 +501,7 @@ const ReviewTitle = styled(SubTitle)`
   font-size: 1rem;
   margin-top: 4rem;
   @media (max-width: 768px) {
-    width: 10rem;
+    width: 12rem;
     margin-top: 5rem;
   }
 `;

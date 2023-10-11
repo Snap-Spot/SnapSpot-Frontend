@@ -103,7 +103,6 @@ const ContentContainer = styled.div`
   margin-right: 1rem;
 
   @media (max-width: 768px) {
-    /* width: 65rem; */
     margin-right: 0;
   }
 `;
@@ -139,7 +138,7 @@ const Title = styled.p`
 
   @media (max-width: 768px) {
     margin-top: 0.3rem;
-    font-size: 13px;
+    font-size: 14px;
   }
 `;
 
