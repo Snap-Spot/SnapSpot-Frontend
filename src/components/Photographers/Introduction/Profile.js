@@ -269,6 +269,7 @@ const ProfileImg = styled.img`
     width: 159px;
     height: 213.75px;
     border-radius: 20px;
+    margin-right: 1rem;
   }
 `;
 const Line = styled.div`

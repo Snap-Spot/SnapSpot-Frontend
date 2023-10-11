@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import arrow from "../../../assets/photograph/arrow.png";
 import line from "../../../assets/photograph/line.png";
+import basicProfile from "../../../assets/header/profile.png";
 import { useNavigate } from "react-router-dom";
 import { status_list } from "./MockData/status";
 
@@ -24,7 +25,7 @@ const ScheduleBox = ({
       <Container>
         <Header>
           <RowContainer>
-            <Profile src={profile} />
+            <Profile src={profile || basicProfile} />
             <NickName>{nickname}</NickName>
             <Btn>{status_list[status][0]}</Btn>
           </RowContainer>

@@ -226,10 +226,10 @@ const spinner_animation = keyframes`
 `;
 
 const LoadingImage = styled.img`
-  width: 15%;
+  width: 200px;
   animation: ${spinner_animation} 1s linear infinite;
 
   @media screen and (max-width: 768px) {
-    width: 25%;
+    width: 150px;
   }
 `;
