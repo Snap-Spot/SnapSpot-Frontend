@@ -70,7 +70,7 @@ const Wrapper = styled.div`
   margin-top: 5rem;
 
   @media screen and (max-width: 768px) {
-    margin-top: 20px;
+    margin-top: 50px;
     margin-bottom: 30px;
   }
 

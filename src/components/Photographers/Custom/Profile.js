@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, { useRef, useState } from "react";
-import basicProfile from "../../../assets/photograph/ex_profile.png";
+import basicProfile from "../../../assets/header/profile.png";
 
 const Profile = ({ profile, setProfileImage }) => {
   const [previewImg, setPreviewImg] = useState("");

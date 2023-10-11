@@ -33,6 +33,7 @@ const ReservationContainer = ({ data }) => {
           month={selectMonth}
           setSelectDay={setSelectDay}
           selectDay={selectDay}
+          planDates={data.map((el) => el.planDate.slice(0, 10))}
         />
         <ScheduleContainer>
           <SelectedDate>

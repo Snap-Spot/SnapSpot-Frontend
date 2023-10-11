@@ -28,8 +28,6 @@ const RegionInput = ({ areaId, setAreaId }) => {
     });
   };
 
-  console.log("지역", areaId);
-
   return (
     <>
       <FilterTab open={toggle}>
@@ -197,7 +195,6 @@ const Box = styled.div`
 const SubregionBox = styled.div`
   @media (max-width: 768px) {
     display: flex;
-    width: 90%;
   }
 `;
 
@@ -228,7 +225,6 @@ const Subregion = styled.div`
   overflow: auto;
   margin: 0.15rem 1rem 0.15rem 0;
   padding: 0rem 0.2rem;
-  /* margin: auto; */
 
   ${(props) =>
     props.isSelected &&
@@ -259,6 +255,7 @@ const Subregion = styled.div`
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 400;
+    margin-right: 0rem;
     margin-bottom: 0.5rem;
     line-height: 128.5%;
 
@@ -281,7 +278,10 @@ const SelectedOption = styled(Subregion)`
   padding-right: 0.5rem;
 
   @media (max-width: 768px) {
-    display: flex;
+    width: 60%;
+    padding: 0.5rem 0.6rem;
+    margin: 0;
+    border-radius: 10px;
   }
 `;
 
@@ -308,12 +308,13 @@ const Region = styled.div`
   `}
 
   @media (max-width: 768px) {
-    width: 100%;
+    width: 70%;
     display: flex;
     flex-direction: column;
     white-space: nowrap;
     justify-content: center;
     align-items: center;
+    margin-right: 0rem;
 
     color: #000;
     text-align: center;
@@ -337,7 +338,7 @@ const RegionTab = styled.div`
   width: 24.5rem;
   height: 22rem;
   @media (max-width: 768px) {
-    /* width: 90%; */
+    width: 18rem;
     height: 22rem;
     border-bottom: 0.063rem solid #dbdbdb;
   }
@@ -347,11 +348,11 @@ const List = styled.div`
   display: flex;
   flex-direction: row;
   height: 82%;
-  margin-top: 0.3rem;
+  margin-top: 0.6rem;
 
   @media (max-width: 768px) {
     flex-direction: row;
-    height: 90%;
+    height: 75%;
   }
 `;
 
@@ -361,7 +362,8 @@ const RegionList = styled.div`
   border-right: solid 0.063rem #e6e6e6;
 
   @media (max-width: 768px) {
-    width: 35%;
+    width: 50%;
+    height: 16rem;
     display: flex;
     flex-direction: column;
     overflow: auto;

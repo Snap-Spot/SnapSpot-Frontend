@@ -96,6 +96,7 @@ const PreImgs = styled.img`
   @media (max-width: 768px) {
     width: 79px;
     height: 79px;
+    border-radius: 15px;
   }
 `;
 

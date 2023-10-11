@@ -61,7 +61,8 @@ const Profile = ({
           <Container>
             <SubTitle>작가명</SubTitle>
             <Align>
-              <HighLight>{nickname} 작가</HighLight>
+              <HighLight>{nickname}</HighLight>
+
               <Heart
                 src={clickedHeart ? clickedheart : heart}
                 onClick={handleHeartClick}
@@ -154,7 +155,9 @@ const Profile = ({
             <Content>{bio || "없음"}</Content>
           </InfoContainer>
           {/* 클릭하면 가격표 보여주기 */}
-          <PriceBtn>상세 가격표 보기</PriceBtn>
+          <PriceBtn onClick={() => setPriceModalOpen(true)}>
+            상세 가격표 보기
+          </PriceBtn>
           <ReservationBtn onClick={() => setModalOpen(true)}>
             예약하기
           </ReservationBtn>

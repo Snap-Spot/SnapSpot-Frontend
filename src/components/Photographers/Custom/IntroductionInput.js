@@ -35,7 +35,7 @@ const TextArea = styled.textarea`
   margin-bottom: 1rem;
 
   @media (max-width: 768px) {
-    width: 94%;
+    width: 92%;
     height: 85px;
     font-size: 14px;
   }
