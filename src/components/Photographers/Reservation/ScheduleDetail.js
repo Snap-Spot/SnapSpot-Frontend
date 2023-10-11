@@ -66,9 +66,6 @@ const ScheduleDetail = ({
           </ContentContainer>
         </Row>
         <MessageBox placeholder="입금 요청 시, 추가적인 공지사항과 입금받으실 계좌번호를 작성해주세요. (예약 거절시에는 거절 사유를 적어주세요.)" />
-        {/* 아래는 예약 완료시 보이게 */}
-        {/* <AlertBtn>공지사항 보내기</AlertBtn>
-        <SubTitle>지금까지 보낸 메세지 확인하기</SubTitle> */}
       </Container>
     </>
   );
