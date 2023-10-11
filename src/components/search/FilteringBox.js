@@ -4,12 +4,7 @@ import { React, useState, useEffect } from "react";
 import CustomCalendar from "./CustomCalendar";
 import { regions, orders, category } from "./FilteringList.js";
 
-const FilteringBox = ({
-  onSearch,
-  setIsFilteringOpen,
-  setCurrentPage,
-  currentPage,
-}) => {
+const FilteringBox = ({ setIsFilteringOpen, setCurrentPage }) => {
   const navigate = useNavigate();
 
   const [selectedRegion, setSelectedRegion] = useState("서울");
@@ -179,13 +174,13 @@ const Wrapper = styled.div`
   align-items: center;
   background: #fff;
   position: absolute;
-  top: 1;
   box-shadow: 0rem 1rem 3.188rem 0rem rgba(0, 0, 0, 0.1);
   z-index: 2;
 
   @media (max-width: 768px) {
-    position: relative;
-    height: 81vh;
+    /* position: relative; */
+    padding-top: 0.3rem;
+    height: 83vh;
     justify-content: space-between;
   }
 
@@ -198,7 +193,7 @@ const Wrapper = styled.div`
 const FilterTab = styled.div`
   //조회하기 버튼을 제외한 Filter 컴포넌트
   width: 100%;
-  height: 21rem;
+  height: 20rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -206,7 +201,7 @@ const FilterTab = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    height: 100%;
+    height: 95%;
     margin: 0;
   }
 `;
@@ -215,7 +210,7 @@ const RegionTab = styled.div`
   width: 24%;
   height: 100%;
   @media (max-width: 768px) {
-    height: 20%;
+    height: 19%;
     width: 90%;
     border-bottom: 0.063rem solid #dbdbdb;
   }
@@ -226,7 +221,7 @@ const DateTab = styled.div`
   height: 100%;
   padding: 0 2rem;
   @media (max-width: 768px) {
-    height: 40%;
+    height: 42%;
     width: 90%;
     border-bottom: 0.063rem solid #dbdbdb;
     padding: 0.5rem 0;
@@ -276,7 +271,6 @@ const Title = styled.div`
 const List = styled.div`
   display: flex;
   flex-direction: row;
-  height: 82%;
   margin-top: 0.3rem;
 
   @media (max-width: 768px) {
@@ -294,7 +288,7 @@ const RegionList = styled.div`
     display: flex;
     flex-direction: row;
     overflow: auto;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.7rem;
     border: none;
   }
 `;
@@ -310,7 +304,7 @@ const Region = styled.div`
   margin-right: 1rem;
 
   margin: 0.15rem 1rem 0.15rem 0;
-  padding: 0.05rem;
+  /* padding: 0.05rem; */
 
   ${(props) =>
     props.isSelected &&
@@ -355,7 +349,7 @@ const SubregionList = styled.div`
     width: 100%;
     margin: 0;
     margin-top: 0.3rem;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.6rem;
   }
 `;
 
@@ -373,7 +367,6 @@ const Subregion = styled.div`
   overflow: auto;
   margin: 0.15rem 1rem 0.15rem 0;
   padding: 0rem 0.2rem;
-  /* margin: auto; */
 
   ${(props) =>
     props.isSelected &&
@@ -447,7 +440,7 @@ const SectionList = styled.div`
     display: flex;
     flex-direction: row;
     overflow: auto;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.7rem;
   }
 `;
 
