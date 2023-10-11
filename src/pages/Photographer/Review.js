@@ -31,7 +31,7 @@ const Review = () => {
   }, []);
 
   useEffect(() => {
-    setCount(products.totalReview);
+    setCount(products.length);
     setIndexOfLastPost(currentPage * postPerPage);
     setIndexOfFirstPost(indexOfLastPost - postPerPage);
     setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
@@ -66,12 +66,14 @@ const Review = () => {
                       score={productData.score}
                     />
                   ))}
-                  <Paging
-                    page={currentPage}
-                    count={count}
-                    setPage={setPage}
-                    itemsCountPerPage={6}
-                  />
+                  {count > 6 && (
+                    <Paging
+                      page={currentPage}
+                      count={count}
+                      setPage={setPage}
+                      itemsCountPerPage={6}
+                    />
+                  )}
                 </>
               ) : (
                 <Content>리뷰가 없습니다.</Content>
@@ -108,8 +110,8 @@ const Title = styled.h2`
   margin-bottom: 2.5rem;
 
   @media (max-width: 768px) {
-    margin-top: 1rem;
-    margin-bottom: 0.9rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
     font-size: 18px;
   }
 `;
@@ -119,7 +121,7 @@ const Length = styled.p`
   font-size: 20px;
 
   @media (max-width: 768px) {
-    font-size: 16px;
+    font-size: 15px;
   }
 `;
 
