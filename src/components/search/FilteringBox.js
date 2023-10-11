@@ -53,7 +53,6 @@ const FilteringBox = ({ setIsFilteringOpen, setCurrentPage }) => {
       endpoint += "?" + queryParams.join("&");
     }
     navigate(endpoint);
-    console.log(endpoint);
     localStorage.setItem("currentPage", "1");
     setCurrentPage(1);
     setIsFilteringOpen(!isFilteringOpen);
