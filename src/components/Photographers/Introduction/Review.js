@@ -83,7 +83,7 @@ const Length = styled.p`
   font-size: 20px;
 
   @media (max-width: 768px) {
-    font-size: 13px;
+    font-size: 15px;
   }
 `;
 
