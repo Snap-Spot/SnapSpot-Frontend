@@ -1,15 +1,10 @@
 import styled from "styled-components";
-import { useNavigate, useLocation } from "react-router-dom";
-import { React, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { React, useState } from "react";
 import CustomCalendar from "./CustomCalendar";
 import { regions, orders, category } from "./FilteringList.js";
 
-const FilteringBox = ({
-  onSearch,
-  setIsFilteringOpen,
-  setCurrentPage,
-  currentPage,
-}) => {
+const FilteringBox = ({ setIsFilteringOpen, setCurrentPage }) => {
   const navigate = useNavigate();
 
   const [selectedRegion, setSelectedRegion] = useState("서울");
@@ -58,7 +53,6 @@ const FilteringBox = ({
       endpoint += "?" + queryParams.join("&");
     }
     navigate(endpoint);
-    console.log(endpoint);
     localStorage.setItem("currentPage", "1");
     setCurrentPage(1);
     setIsFilteringOpen(!isFilteringOpen);
@@ -67,7 +61,6 @@ const FilteringBox = ({
   return (
     <Wrapper>
       <FilterTab>
-        {/* 지역필터링 */}
         <RegionTab>
           <Title>지역</Title>
           <List>
@@ -77,7 +70,9 @@ const FilteringBox = ({
                   <Box key={index}>
                     <Region
                       onClick={() => handleRegionClick(region.name)}
-                      isSelected={selectedRegion === region.name}
+                      isselected={
+                        selectedRegion === region.name ? "true" : "false"
+                      }
                     >
                       {region.name}
                     </Region>
@@ -94,7 +89,9 @@ const FilteringBox = ({
                       <SubregionBox key={data.areaId}>
                         <Subregion
                           onClick={() => handleSubRegionClick(data.areaId)}
-                          isSelected={selectedSubRegion === data.areaId}
+                          isselected={
+                            selectedSubRegion === data.areaId ? "true" : "false"
+                          }
                         >
                           {data.subregion}
                         </Subregion>
@@ -105,7 +102,6 @@ const FilteringBox = ({
             )}
           </List>
         </RegionTab>
-        {/* 날짜 필터링 */}
         <DateTab>
           <Title>날짜</Title>
           <CalendarBox>
@@ -115,45 +111,39 @@ const FilteringBox = ({
             />
           </CalendarBox>
         </DateTab>
-        {/* 전문분야 필터링 */}
         <SectionTab>
           <Title>전문분야</Title>
           <SectionList>
             {category && (
               <Box>
                 {category.map((section, index) => (
-                  <>
-                    <Section
-                      key={index}
-                      onClick={() => handleSectionClick(section.key)}
-                      isSelected={selectedSection === section.key}
-                    >
-                      {section.label}
-                    </Section>
-                    {index !== category.length - 1 && <Line />}
-                  </>
+                  <Section
+                    key={index}
+                    onClick={() => handleSectionClick(section.key)}
+                    isselected={
+                      selectedSection === section.key ? "true" : "false"
+                    }
+                  >
+                    {section.label}
+                  </Section>
                 ))}
               </Box>
             )}
           </SectionList>
         </SectionTab>
-        {/* 순서 필터링 */}
         <OrderTab>
           <Title>순서</Title>
           <SectionList>
             {orders && (
               <Box>
                 {orders.map((order, index) => (
-                  <>
-                    <Section
-                      key={index}
-                      onClick={() => handleOrderClick(order.key)}
-                      isSelected={selectedOrder === order.key}
-                    >
-                      {order.label}
-                    </Section>
-                    {index !== orders.length - 1 && <Line />}
-                  </>
+                  <Section
+                    key={index}
+                    onClick={() => handleOrderClick(order.key)}
+                    isselected={selectedOrder === order.key ? "true" : "false"}
+                  >
+                    {order.label}
+                  </Section>
                 ))}
               </Box>
             )}
@@ -179,13 +169,13 @@ const Wrapper = styled.div`
   align-items: center;
   background: #fff;
   position: absolute;
-  top: 1;
   box-shadow: 0rem 1rem 3.188rem 0rem rgba(0, 0, 0, 0.1);
   z-index: 2;
 
   @media (max-width: 768px) {
-    position: relative;
-    height: 81vh;
+    /* position: relative; */
+    padding-top: 0.3rem;
+    height: 83vh;
     justify-content: space-between;
   }
 
@@ -198,7 +188,7 @@ const Wrapper = styled.div`
 const FilterTab = styled.div`
   //조회하기 버튼을 제외한 Filter 컴포넌트
   width: 100%;
-  height: 21rem;
+  height: 20rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -206,7 +196,7 @@ const FilterTab = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    height: 100%;
+    height: 40rem;
     margin: 0;
   }
 `;
@@ -215,7 +205,7 @@ const RegionTab = styled.div`
   width: 24%;
   height: 100%;
   @media (max-width: 768px) {
-    height: 20%;
+    height: 8rem;
     width: 90%;
     border-bottom: 0.063rem solid #dbdbdb;
   }
@@ -226,7 +216,7 @@ const DateTab = styled.div`
   height: 100%;
   padding: 0 2rem;
   @media (max-width: 768px) {
-    height: 40%;
+    height: 17rem;
     width: 90%;
     border-bottom: 0.063rem solid #dbdbdb;
     padding: 0.5rem 0;
@@ -239,7 +229,7 @@ const SectionTab = styled.div`
   padding: 0 2rem;
   @media (max-width: 768px) {
     width: 90%;
-    height: 15%;
+    height: 5rem;
     border-bottom: 0.063rem solid #dbdbdb;
     padding: 0.5rem 0;
   }
@@ -251,7 +241,7 @@ const OrderTab = styled.div`
   padding: 0 2rem;
   @media (max-width: 768px) {
     width: 90%;
-    height: 15%;
+    height: 5rem;
     padding: 0.5rem 0;
   }
 `;
@@ -276,11 +266,11 @@ const Title = styled.div`
 const List = styled.div`
   display: flex;
   flex-direction: row;
-  height: 82%;
   margin-top: 0.3rem;
-
+  height: 82%;
   @media (max-width: 768px) {
     flex-direction: column;
+    height: 100%;
   }
 `;
 
@@ -290,11 +280,12 @@ const RegionList = styled.div`
   border-right: solid 0.063rem #e6e6e6;
 
   @media (max-width: 768px) {
+    height: 2rem;
     width: 100%;
     display: flex;
     flex-direction: row;
     overflow: auto;
-    padding-bottom: 0.5rem;
+    /* padding-bottom: 0.7rem; */
     border: none;
   }
 `;
@@ -310,10 +301,10 @@ const Region = styled.div`
   margin-right: 1rem;
 
   margin: 0.15rem 1rem 0.15rem 0;
-  padding: 0.05rem;
+  /* padding: 0.05rem; */
 
   ${(props) =>
-    props.isSelected &&
+    props.isselected === "true" &&
     `
     color: #3C3AAC;
     font-weight: 700;
@@ -339,7 +330,7 @@ const Region = styled.div`
 
     margin-bottom: 0.5rem;
     ${(props) =>
-      props.isSelected &&
+      props.isselected === "true" &&
       `
       font-weight: 700;
       color: #3C3AAC;`}
@@ -355,7 +346,7 @@ const SubregionList = styled.div`
     width: 100%;
     margin: 0;
     margin-top: 0.3rem;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.6rem;
   }
 `;
 
@@ -373,10 +364,9 @@ const Subregion = styled.div`
   overflow: auto;
   margin: 0.15rem 1rem 0.15rem 0;
   padding: 0rem 0.2rem;
-  /* margin: auto; */
 
   ${(props) =>
-    props.isSelected &&
+    props.isselected === "true" &&
     `
     color: #3C3AAC;
     font-weight: 700;
@@ -407,7 +397,7 @@ const Subregion = styled.div`
     line-height: 128.5%;
 
     ${(props) =>
-      props.isSelected &&
+      props.isselected === "true" &&
       `
     border-radius: 0.5rem;
     border: 0.063rem solid #5170DE;
@@ -442,12 +432,13 @@ const CalendarBox = styled.div`
 const SectionList = styled.div`
   width: 7rem;
   margin-top: 0.8rem;
+
   @media (max-width: 768px) {
     width: 100%;
     display: flex;
     flex-direction: row;
     overflow: auto;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.7rem;
   }
 `;
 
@@ -461,9 +452,10 @@ const Section = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  margin-bottom: 0.6rem;
 
   ${(props) =>
-    props.isSelected &&
+    props.isselected === "true" &&
     `
     color: #3C3AAC;
     font-weight: 700;
@@ -495,7 +487,7 @@ const Section = styled.div`
     line-height: 128.5%;
 
     ${(props) =>
-      props.isSelected &&
+      props.isselected === "true" &&
       `
     border-radius: 0.5rem;
     border: 0.063rem solid #5170DE;

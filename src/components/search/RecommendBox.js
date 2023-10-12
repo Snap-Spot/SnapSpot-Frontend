@@ -1,5 +1,6 @@
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import useMobileDetection from "../common/mobileDetection";
 import starIcon from "../../assets/search/starIcon.png";
 
 const RecommendBox = ({
@@ -12,10 +13,13 @@ const RecommendBox = ({
   review,
 }) => {
   const navigate = useNavigate();
+  const isMobile = useMobileDetection();
 
   const onClickPage = () => {
     navigate(`/photographers/${id}`);
   };
+
+  const starValue = !isNaN(parseFloat(star)) ? parseFloat(star).toFixed(1) : 0;
 
   let tag = "";
 
@@ -31,13 +35,15 @@ const RecommendBox = ({
       <Photo image={image} />
       <Info>
         <TopInfo>
-          <Photographer>{photographer} 작가</Photographer>
+          <Photographer>
+            {isMobile ? <>{photographer}</> : <>{photographer} 작가</>}
+          </Photographer>
           <Star>
             <img src={starIcon} />
-            {star} ({review})
+            {starValue} ({review})
           </Star>
         </TopInfo>
-        <Price>{price}원~</Price>
+        <Price> {price ? price.toLocaleString() + "원 ~" : "없음"}</Price>
         <Tag>{tag}</Tag>
       </Info>
     </Wrapper>
@@ -85,7 +91,7 @@ const Tag = styled.p`
   color: #060606;
 
   font-family: Noto Sans KR;
-  font-size: 16px;
+  font-size: 0.9rem;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -116,7 +122,7 @@ const Info = styled.div`
 const Photographer = styled.div`
   color: #000;
   font-family: Noto Sans KR;
-  font-size: 20px;
+  font-size: 1.1rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -124,12 +130,12 @@ const Photographer = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 160px;
+  max-width: 180px;
   height: 35px;
 
   @media (max-width: 768px) {
     margin: 0.4rem 0.5rem 0rem 0.5rem;
-    font-size: 10px;
+    font-size: 0.7rem;
     font-weight: 400;
     height: 15px;
   }
@@ -139,7 +145,7 @@ const Price = styled.div`
   color: #3c3aac;
 
   font-family: Noto Sans KR;
-  font-size: 20px;
+  font-size: 1.1rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -149,7 +155,7 @@ const Price = styled.div`
   margin: 0rem 1.25rem;
 
   @media (max-width: 768px) {
-    font-size: 5px;
+    font-size: 0.7rem;
     width: 108px;
     height: 10px;
 
@@ -171,7 +177,7 @@ const TopInfo = styled.div`
 const Star = styled.div`
   color: #000;
   font-family: Noto Sans KR;
-  font-size: 18px;
+  font-size: 1rem
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -190,6 +196,6 @@ const Star = styled.div`
   }
 
   @media (max-width: 768px) {
-    font-size: 5px;
+    font-size: 0.7rem;
   }
 `;

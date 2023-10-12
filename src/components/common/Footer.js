@@ -1,8 +1,14 @@
 import React from "react";
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 import git from "../../assets/common/git.png";
 import instagram from "../../assets/common/instagram.png";
+
 const Footer = () => {
+  const onClickGithub = () => {
+    window.location.href = "https://github.com/Snap-Spot";
+  };
+
   return (
     <Wrapper>
       <div className="copyright">
@@ -11,7 +17,7 @@ const Footer = () => {
       </div>
       <div className="icon">
         <InstagramLogo src={instagram} alt="인스타그램" />
-        <GitLogo src={git} alt="깃허브" />
+        <GitLogo src={git} onClick={onClickGithub} alt="깃허브" />
       </div>
     </Wrapper>
   );
@@ -56,10 +62,12 @@ const Wrapper = styled.div`
 const GitLogo = styled.img`
   width: 32px;
   height: 32px;
-
+  cursor: pointer;
   margin-left: 16px;
 `;
+
 const InstagramLogo = styled.img`
   width: 32px;
   height: 32px;
+  cursor: pointer;
 `;

@@ -88,7 +88,7 @@ const Wrapper = styled.div`
 
 const EmptySection = styled.div`
   display: flex;
-  height: 17rem;
+  height: 25rem;
   width: 100%;
 
   flex-direction: column;
@@ -105,8 +105,6 @@ const EmptySection = styled.div`
     font-size: 1rem;
     font-style: normal;
     font-weight: 400;
-
-    height: 17.25rem;
   }
 
   img {

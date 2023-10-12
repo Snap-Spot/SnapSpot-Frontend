@@ -38,6 +38,17 @@ const DetailedItem = () => {
     getData();
   }, []);
 
+  function numFormat(value) {
+    var number = parseFloat(value);
+    if (isNaN(value)) return "0";
+    if (number == 0) return "0";
+
+    var reg = /(^[+-]?\d+)(\d{3})/;
+    var n = number + "";
+    while (reg.test(n)) n = n.replace(reg, "$1" + "," + "$2");
+    return n;
+  }
+
   return (
     <>
       <Title>예약내역 상세</Title>
@@ -76,7 +87,7 @@ const DetailedItem = () => {
                 <div className="item">
                   <p className="subject">가격</p>
                   <p className="content">
-                    {plan.price ? plan.price + "원" : "미정"}
+                    {plan.price ? numFormat(plan.price) + "원" : "미정"}
                   </p>
                 </div>
                 <div className="item">

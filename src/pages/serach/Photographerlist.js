@@ -9,6 +9,7 @@ import Header from "../../components/common/Header";
 import { useLoadingContext } from "../../components/common/LoadingContext";
 import { getPhotographerList } from "../../api/search";
 import Loading from "../../components/common/Loading";
+import { regions } from "../../components/search/FilteringList.js";
 
 const Photographerlist = () => {
   const { isLoading, startLoading, stopLoading } = useLoadingContext();
@@ -17,6 +18,7 @@ const Photographerlist = () => {
   const location = useLocation();
   const outSection = useRef();
   const [data, setData] = useState([]);
+  const [region, setRegion] = useState("");
   const [isFilteringOpen, setIsFilteringOpen] = useState(false);
   const tabs = ["지역", "날짜", "전문분야", "순서"];
 
@@ -52,6 +54,14 @@ const Photographerlist = () => {
       const queryParams = [];
       if (areaId) {
         queryParams.push(`areaId=${areaId}`);
+        const subregion = regions
+          .map((region) =>
+            region.subregions.find((sub) => sub.areaId === Number(areaId))
+          )
+          .find((sub) => sub !== undefined);
+        if (subregion) {
+          setRegion(subregion.subregion);
+        }
       }
       if (special) {
         queryParams.push(`special=${special}`);
@@ -120,6 +130,9 @@ const Photographerlist = () => {
     };
   }, []);
 
+  const shouldForwardProp = (prop, defaultValidatorFn) =>
+    !["isFilteringOpen"].includes(prop) && defaultValidatorFn(prop);
+
   return (
     <>
       {isLoading ? (
@@ -141,16 +154,21 @@ const Photographerlist = () => {
               {isFilteringOpen && (
                 <div ref={outSection}>
                   <FilteringBox
-                    onSearch={onSearch}
-                    isFilteringOpen={isFilteringOpen}
                     setIsFilteringOpen={setIsFilteringOpen}
                     setCurrentPage={setCurrentPage}
-                    currentPage={currentPage}
                   />
                 </div>
               )}
             </div>
             <Content isFilteringOpen={isFilteringOpen}>
+              {region && region.length > 0 ? (
+                <RegionTitle>
+                  <div className="subject">'{region}' </div> 에서 활동하는
+                  작가들
+                </RegionTitle>
+              ) : (
+                <></>
+              )}
               <GridBox>
                 <div className="grid">
                   {currentPosts.map((data) => (
@@ -209,15 +227,18 @@ const Wrapper = styled.div`
   }
 `;
 
-const Content = styled.div`
+const Content = styled.div.withConfig({
+  shouldForwardProp: (prop, defaultValidatorFn) =>
+    !["isFilteringOpen"].includes(prop),
+})`
   width: 75%;
-  margin: 0px auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   cursor: ${(props) => (props.isFilteringOpen ? "pointer" : "auto")};
-  /* pointer-events: ${(props) => (props.isFilteringOpen ? "auto" : "none")}; */
+
   @media (max-width: 768px) {
     width: 90%;
   }
@@ -284,7 +305,7 @@ const GridBox = styled.div`
     position: relative;
     width: 95%;
     display: grid;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -294,9 +315,30 @@ const GridBox = styled.div`
 
     @media (max-width: 768px) {
       column-gap: 15px;
-      row-gap: 20px;
+      row-gap: 30px;
 
       margin-top: 1.25rem;
     }
+  }
+`;
+
+const RegionTitle = styled.div`
+  display: flex;
+  width: 100%;
+  max-width: 1048px;
+  font-size: 1.2rem;
+  font-weight: 700;
+
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: 3rem;
+
+  .subject {
+    color: #3c3aac;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.75rem;
+    margin-top: 1rem;
   }
 `;
