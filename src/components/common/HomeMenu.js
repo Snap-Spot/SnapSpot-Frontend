@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 const HomeMenu = ({ isHomeMenuOpen, setIsHomeMenuOpen }) => {
   const navigate = useNavigate();
@@ -54,16 +54,18 @@ const MenuDiv = styled.div`
   box-shadow: 0.25rem 0.25rem 0.938rem 0rem rgba(0, 0, 0, 0.25);
 `;
 
-const Menu = styled.div`
+const Menu = styled.div.withConfig({
+  shouldForwardProp: (prop, defaultValidatorFn) =>
+    !["isFirst", "isLast"].includes(prop),
+})`
   width: 100%;
   height: 100%;
   border-radius: ${(props) =>
     props.isFirst
       ? "1.375rem 1.375rem 0rem 0rem"
       : props.isLast
-      ? "0 0 1.375rem 1.375rem;"
+      ? "0 0 1.375rem 1.375rem"
       : "0"};
-
   p {
     color: #000;
     font-family: Noto Sans KR;
@@ -73,11 +75,9 @@ const Menu = styled.div`
     line-height: normal;
     padding-left: 1.429rem;
   }
-
   &:hover {
     background: #3c3aac;
   }
-
   &:hover p {
     color: white;
   }

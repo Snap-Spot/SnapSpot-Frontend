@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import star from "../../../assets/photograph/star.png";
 import { useState, useEffect } from "react";
+import basicProfile from "../../../assets/header/profile.png";
 
 const ReviewBox = ({
   profile,
@@ -27,7 +28,7 @@ const ReviewBox = ({
   return (
     <ReviewContainer isLine={isLine}>
       <ProfileContainer>
-        <Profile src={profile} />
+        <Profile src={profile || basicProfile} />
         <NickName>{nickname}</NickName>
       </ProfileContainer>
       <ContentContainer>
@@ -79,7 +80,7 @@ const ReviewContainer = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     padding-top: 1.5rem;
-    height: 9rem;
+    height: 8rem;
   }
 `;
 

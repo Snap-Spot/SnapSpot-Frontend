@@ -12,7 +12,6 @@ import SearchBox from "./SearchBox";
 
 const Header = (props) => {
   const navigate = useNavigate();
-  const location = useLocation();
   const isMobile = useMobileDetection();
   const [profileData, setProfileData] = useState({});
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false);
@@ -20,14 +19,23 @@ const Header = (props) => {
   const getData = async () => {
     try {
       const data = await getMyProfile();
-      setProfileData(data);
+      if (data.profile === null) {
+        setProfileData({ profile: profile });
+      } else {
+        setProfileData(data);
+      }
     } catch (err) {
-      setProfileData({ profile: profile });
+      console.log(err);
     }
   };
 
   useEffect(() => {
-    getData();
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      getData();
+    } else {
+      setProfileData({ profile: profile });
+    }
   }, []);
 
   const openModal = () => {
@@ -135,6 +143,8 @@ const Main = styled.div`
   .logo {
     margin-right: 2.5rem;
 
+    cursor: pointer;
+
     img {
       display: flex;
       width: 14.375rem;
@@ -165,6 +175,7 @@ const Menu = styled.div`
 
   margin-left: 0rem;
 
+  cursor: pointer;
   .subMenu {
     padding: 0.5rem;
     gap: 0.75rem;

@@ -3,6 +3,7 @@ import photo from "../../assets/search/photo.jpeg";
 import reviewIcon from "../../assets/search/reviewIcon.png";
 import starIcon from "../../assets/search/starIcon.png";
 import { useNavigate } from "react-router-dom";
+import useMobileDetection from "../common/mobileDetection";
 
 const SearchBox = ({
   id,
@@ -17,14 +18,14 @@ const SearchBox = ({
   review,
 }) => {
   const navigate = useNavigate();
+  const isMobile = useMobileDetection();
 
   const onClickPage = () => {
     navigate(`/photographers/${id}`);
   };
 
-  const starValue = !isNaN(parseFloat(star)) ? parseFloat(star).toFixed(1) : "";
+  const starValue = !isNaN(parseFloat(star)) ? parseFloat(star).toFixed(1) : 0;
 
-  const tagValues = Object.values(tags).filter((tag) => tag !== null);
   const tag = Object.values(tags)
     .filter((tag) => tag !== null)
     .map((tagValue) => `#${tagValue}`)
@@ -37,22 +38,30 @@ const SearchBox = ({
       </Photo>
       <Info>
         <TopInfo>
-          <Photographer>{photographer} 작가</Photographer>
+          <Photographer>
+            {isMobile ? <>{photographer}</> : <>{photographer} 작가</>}
+          </Photographer>
           <Star>
             <img src={starIcon} />
             {starValue} ({review})
           </Star>
         </TopInfo>
-        {regionCount > 1 ? (
-          <Region>
-            {region} {subregion} 외 {regionCount - 1}곳 에서 활동중
-          </Region>
+        {regionCount == 0 ? (
+          <></>
         ) : (
-          <Region>
-            {region} {subregion}에서 활동중
-          </Region>
+          <>
+            {regionCount > 1 ? (
+              <Region>
+                {region} {subregion} 외 {regionCount - 1}곳 에서 활동중
+              </Region>
+            ) : (
+              <Region>
+                {region} {subregion}에서 활동중
+              </Region>
+            )}
+          </>
         )}
-        <Price>{price}원 ~</Price>
+        <Price> {price ? price.toLocaleString() + "원 ~" : "없음"}</Price>
       </Info>
     </Wrapper>
   );
@@ -64,6 +73,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   max-width: 320px;
 
+  cursor: pointer;
   @media (max-width: 768px) {
     width: 100%;
     align-items: center;
@@ -129,14 +139,15 @@ const Photographer = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 175px;
+  max-width: 185px;
 
   @media (max-width: 768px) {
-    font-size: 10px;
+    font-size: 0.75rem;
     height: 15px;
-    max-width: 48px;
+    max-width: 65px;
   }
 `;
+
 const Region = styled.div`
   color: #777;
 
@@ -147,8 +158,7 @@ const Region = styled.div`
   line-height: normal;
 
   @media (max-width: 768px) {
-    font-size: 2px;
-    /* width: 108px; */
+    font-size: 0.7rem;
   }
 `;
 const Price = styled.div`
@@ -163,7 +173,7 @@ const Price = styled.div`
   height: 35px;
   margin-top: 6px;
   @media (max-width: 768px) {
-    font-size: 5px;
+    font-size: 0.75rem;
     height: 10px;
   }
 `;
@@ -187,6 +197,7 @@ const Star = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  min-width: 2.5rem;
 
   display: flex;
   align-items: center;
@@ -194,7 +205,7 @@ const Star = styled.div`
   text-align: center;
 
   @media (max-width: 768px) {
-    font-size: 5px;
+    font-size: 0.7rem;
   }
 
   img {
