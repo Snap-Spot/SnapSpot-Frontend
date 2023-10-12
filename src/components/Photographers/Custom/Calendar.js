@@ -111,7 +111,7 @@ const StyledCalendar = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 30.5rem;
+  max-width: 30rem;
 
   @media (max-width: 768px) {
     font-size: 1rem;
@@ -162,7 +162,7 @@ const StyledCalendar = styled.div`
     margin-right: 1rem;
     @media (max-width: 768px) {
       width: 2.2rem;
-      margin: 0.1rem 0.4rem;
+      margin: 0.1rem 0.3rem;
     }
   }
 
@@ -183,7 +183,7 @@ const StyledCalendar = styled.div`
     line-height: normal;
     @media (max-width: 768px) {
       width: 2.2rem;
-      margin: 0.17rem 0.4rem;
+      margin: 0.17rem 0.3rem;
       font-size: 1rem;
     }
   }

@@ -139,7 +139,7 @@ const DayContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 1.8rem;
+  height: 1.9rem;
 `;
 
 const Dot = styled.img`

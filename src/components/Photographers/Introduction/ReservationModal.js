@@ -270,7 +270,8 @@ const Conatiner = styled.div`
   padding-top: 1.5rem;
 
   @media (max-width: 768px) {
-    width: 21rem;
+    /* width: 21rem; */
+    width: 80%;
     padding: 10px 15px;
     padding-bottom: 25px;
     top: 7rem;
