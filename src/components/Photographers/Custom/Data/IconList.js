@@ -29,4 +29,4 @@ export const icon_src = [
 ];
 
 // 아이콘 이미지 리스트
-export const icon_img = [home, instagram, kakao, blog, twitter];
+export const icon_img = [home, instagram, kakao, twitter, blog];

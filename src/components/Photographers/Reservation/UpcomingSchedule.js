@@ -119,6 +119,7 @@ const TitleContainer = styled.div`
   margin-right: 3rem;
 
   @media (max-width: 768px) {
+    width: 4rem;
     margin-right: 1rem;
     margin-top: 0.5rem;
   }

@@ -16,7 +16,7 @@ const ReservationDetail = () => {
     try {
       const data = await getMyReservation(planId);
       setReservation(data);
-      console.log("예약상세", data);
+      // console.log("예약상세", data);
     } catch (err) {
       console.log(err);
     }
@@ -89,6 +89,7 @@ const Title = styled.h2`
   @media (max-width: 768px) {
     margin-bottom: 1.7rem;
     font-size: 18px;
+    margin-top: 0rem;
   }
 `;
 

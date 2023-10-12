@@ -54,7 +54,7 @@ const Line2 = styled(Line)`
   margin-bottom: 3rem;
 
   @media (max-width: 768px) {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
 `;
 

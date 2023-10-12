@@ -16,7 +16,6 @@ const ReservationContainer = ({ data }) => {
   // 해당 날짜에 일치하는 일정 보여주기
   let filteredData = data.filter((el) => {
     let newDate = new Date(el.planDate);
-    console.log(selectDate);
     return (
       newDate.getMonth() === selectMonth && newDate.getDate() === selectDate
     );
@@ -33,6 +32,7 @@ const ReservationContainer = ({ data }) => {
           month={selectMonth}
           setSelectDay={setSelectDay}
           selectDay={selectDay}
+          planDates={data.map((el) => el.planDate.slice(0, 10))}
         />
         <ScheduleContainer>
           <SelectedDate>
@@ -69,7 +69,7 @@ const Title = styled.h2`
   @media (max-width: 768px) {
     margin-bottom: 1.7rem;
     font-size: 18px;
-    margin-top: 1rem;
+    margin-top: 0rem;
   }
 `;
 

@@ -51,7 +51,7 @@ const FilterContainer = styled.div`
   @media (max-width: 768px) {
     font-size: 16px;
     width: ${(props) => (props.short ? "72px" : "100px")};
-    height: ${(props) => (props.open ? "140px" : "30px")};
+    height: ${(props) => (props.open ? "165px" : "30px")};
   }
 `;
 

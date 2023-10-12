@@ -159,9 +159,10 @@ const FileSelectBtn = styled.img`
 
   @media (max-width: 768px) {
     margin-left: 5rem;
-    margin-top: -5rem;
+    margin-top: -4.3rem;
     width: 9.8rem;
     height: 38px;
+    border-radius: 10px;
   }
 `;
 
@@ -205,7 +206,7 @@ const FileInput = styled.div`
 
   @media (max-width: 768px) {
     width: 18.5rem;
-    height: 70px;
+    height: 55px;
   }
 `;
 
@@ -233,13 +234,13 @@ const CancelBtn = styled.button`
   background: #e6e6e6;
   margin-right: 1rem;
   margin-left: 1rem;
-  font-weight: 500;
   cursor: pointer;
 
   @media (max-width: 768px) {
-    width: 130px;
+    width: 120px;
     height: 50px;
     border-radius: 15px;
+    font-size: 16px;
   }
 `;
 

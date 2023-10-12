@@ -70,6 +70,7 @@ const CancelIcon = styled.img`
   @media (max-width: 768px) {
     width: 25px;
     height: 25px;
+    margin-top: 0.2rem;
   }
 `;
 

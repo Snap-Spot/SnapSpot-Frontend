@@ -34,6 +34,11 @@ const Icon = styled.img`
   width: 38px;
   height: 38px;
   margin-right: 0.5rem;
+
+  @media (max-width: 768px) {
+    width: 25px;
+    height: 25px;
+  }
 `;
 
 const Input = styled.input`

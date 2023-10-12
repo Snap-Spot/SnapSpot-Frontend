@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import prev from "../../../assets/photograph/prev_btn.png";
 import next from "../../../assets/photograph/next_btn.png";
+import dot from "../../../assets/photograph/dot.png";
 
 const Calendar = ({
   setSelect,
@@ -9,6 +10,7 @@ const Calendar = ({
   month,
   setSelectDay,
   selectDay,
+  planDates,
 }) => {
   const date = new Date();
   const currentYear = date.getFullYear();
@@ -109,14 +111,21 @@ const Calendar = ({
                   </RemainDate>
                 );
               } else {
+                const formattedDate = `${currentYear}-${month + 1}-${day
+                  .toString()
+                  .padStart(2, "0")}`;
+                const showDot = planDates.includes(formattedDate);
                 return (
-                  <Day
-                    key={dayIndex}
-                    onClick={() => setSelect(day)}
-                    isSelect={select === day ? true : false}
-                  >
-                    {day}
-                  </Day>
+                  <DayContainer>
+                    <Day
+                      key={dayIndex}
+                      onClick={() => setSelect(day)}
+                      isSelect={select === day ? true : false}
+                    >
+                      {day}
+                    </Day>
+                    {showDot && <Dot src={dot} />}
+                  </DayContainer>
                 );
               }
             })}
@@ -126,6 +135,17 @@ const Calendar = ({
     </Center>
   );
 };
+const DayContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 1.8rem;
+`;
+
+const Dot = styled.img`
+  width: 0.4rem;
+  margin-top: 0.2rem;
+`;
 
 const Day = styled.div`
   color: ${(props) =>
@@ -152,6 +172,9 @@ const Day = styled.div`
 const RemainDate = styled(Day)`
   color: ${(props) =>
     props.cur === "true" ? "rgba(129, 129, 129, 0.40)" : "#000"};
+  height: 1.8rem;
+  display: flex;
+  align-items: flex-start;
 `;
 
 const Line = styled.div`
@@ -182,7 +205,6 @@ const Center = styled.div`
 `;
 
 const Container = styled.div`
-  /* width: 459px; */
   width: 90%;
   display: flex;
   flex-direction: column;

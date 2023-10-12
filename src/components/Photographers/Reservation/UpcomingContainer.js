@@ -9,14 +9,13 @@ const UpcomingContainer = ({ reservation }) => {
 
   return (
     <>
-      <Title onClick={() => navigate("/photographer/reservationlist")}>
-        곧 돌아오는 <Highlight>촬영 일정</Highlight>이 있어요
-        <Arrow src={arrow} />
-      </Title>
-      {reservation &&
-        reservation
-          .slice(0, 3)
-          .map((item, idx) => (
+      {reservation.length && (
+        <>
+          <Title onClick={() => navigate("/photographer/reservationlist")}>
+            곧 돌아오는 <Highlight>촬영 일정</Highlight>이 있어요
+            <Arrow src={arrow} />
+          </Title>
+          {reservation.slice(0, 3).map((item, idx) => (
             <UpcomingSchedule
               key={idx}
               nickname={item.customer.nickname}
@@ -32,6 +31,8 @@ const UpcomingContainer = ({ reservation }) => {
               btn_text="예약완료"
             />
           ))}
+        </>
+      )}
     </>
   );
 };
@@ -55,7 +56,7 @@ const Title = styled.h2`
   @media (max-width: 768px) {
     margin-bottom: 1.7rem;
     font-size: 18px;
-    margin-top: 3rem;
+    margin-top: 1rem;
   }
 `;
 

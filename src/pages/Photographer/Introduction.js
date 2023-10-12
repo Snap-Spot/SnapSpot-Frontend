@@ -19,7 +19,7 @@ const Introduction = () => {
   const GetPhotographerInfo = async () => {
     try {
       const data = await getPhotographer(id);
-      console.log("data", data.photographer);
+      // console.log("data", data.photographer);
       setData(data.photographer);
     } catch (err) {
       console.log(err);
@@ -36,7 +36,7 @@ const Introduction = () => {
         {modalOpen && (
           <ReservationModal setModalOpen={setModalOpen} photographerId={id} />
         )}
-        {data && priceModalOpen && (
+        {priceModalOpen && (
           <PriceModal
             setPriceModalOpen={setPriceModalOpen}
             paymentImage={data.paymentImage}
