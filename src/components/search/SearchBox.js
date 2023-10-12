@@ -139,7 +139,7 @@ const Photographer = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 175px;
+  max-width: 185px;
 
   @media (max-width: 768px) {
     font-size: 0.75rem;
