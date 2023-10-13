@@ -6,7 +6,9 @@ const HomeMenu = ({ isHomeMenuOpen, setIsHomeMenuOpen }) => {
   const navigate = useNavigate();
 
   const onClickPhotogreapher = () => {
+    localStorage.setItem("currentPage", "1");
     navigate(`/photographers`);
+    window.location.reload();
   };
 
   const onClickFeed = () => {
