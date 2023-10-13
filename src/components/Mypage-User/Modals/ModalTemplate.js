@@ -22,15 +22,19 @@ const ModalTemplate = ({ isOverflow = 0, title, content, setShowModal }) => {
     setShowModal(false);
   };
   return (
-    <Wrapper onClick={closeModal}>
-      <Modal $isOverflow={isOverflow} onClick={(e) => e.stopPropagation()}>
-        <div className="title">
-          {title}
-          <img src={close} alt="" onClick={closeModal} />
+    <>
+      <Wrapper onClick={closeModal}>
+        <div className="space-alloc">
+          <Modal $isOverflow={isOverflow} onClick={(e) => e.stopPropagation()}>
+            <div className="title">
+              {title}
+              <img src={close} alt="" onClick={closeModal} />
+            </div>
+            {content}
+          </Modal>
         </div>
-        {content}
-      </Modal>
-    </Wrapper>
+      </Wrapper>
+    </>
   );
 };
 
@@ -53,19 +57,26 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow-y: auto; //수정
+  overflow-y: scroll; //수정
+
+  .space-alloc {
+    position: absolute;
+    top: 14rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    width: 100vw;
+    height: 1000px;
+  }
 `;
 
 const Modal = styled.div`
-  position: absolute;
-  top: 14rem;
+  /* position: absolute;
+  top: 14rem; */
 
-  /* margin-top: ${(props) => (props.$isOverflow === 1 ? "400px" : "0px")};
-  @media (max-width: 768px) {
-    //모바일
-    margin-top: ${(props) => (props.$isOverflow === 1 ? "200px" : "0px")};
-  } */
   width: 880px;
+
   display: flex;
   flex-direction: column;
   padding: 40px 32px;
