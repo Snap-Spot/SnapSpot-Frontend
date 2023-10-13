@@ -140,7 +140,7 @@ const StyledCalendar = styled.div`
     font-weight: 700;
     line-height: normal;
     @media (max-width: 768px) {
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
   }
 
@@ -154,14 +154,14 @@ const StyledCalendar = styled.div`
     font-weight: 400;
     line-height: normal;
     @media (max-width: 768px) {
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
   }
   .react-datepicker__day-name {
     width: 1.7rem;
     margin-right: 1rem;
     @media (max-width: 768px) {
-      width: 2.2rem;
+      width: 2rem;
       margin: 0.1rem 0.3rem;
     }
   }
@@ -182,9 +182,9 @@ const StyledCalendar = styled.div`
     font-weight: 400;
     line-height: normal;
     @media (max-width: 768px) {
-      width: 2.2rem;
+      width: 2rem;
       margin: 0.17rem 0.3rem;
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
   }
   .react-datepicker__day--outside-month {

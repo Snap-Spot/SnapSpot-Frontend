@@ -65,8 +65,6 @@ const Custom = () => {
       setTag(res.tags);
       setUnableDates(res.unableSchedules.unableDates);
       setImage(res.images);
-
-      // console.log("결과", res);
     } catch (err) {
       console.log(err);
     }

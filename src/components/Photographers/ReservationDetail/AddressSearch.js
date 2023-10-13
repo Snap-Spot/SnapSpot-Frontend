@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import DaumPostcode from "react-daum-postcode";
 
-function AddressSearch({setPlaceAddress, placeAddress}) {
+function AddressSearch({ setPlaceAddress, placeAddress }) {
   // const [address, setAddress] = useState(""); // 주소 상태
   const [popupVisible, setPopupVisible] = useState(false); // 주소 검색 팝업
 
@@ -31,7 +31,7 @@ function AddressSearch({setPlaceAddress, placeAddress}) {
         <PopupContainer>
           <PopupContent>
             <Header>
-              <p>주소를 검색하고 선택해주세요.</p>
+              <P>주소를 검색하고 선택해주세요.</P>
               <CloseBtn onClick={() => setPopupVisible(false)}>x</CloseBtn>
             </Header>
             <DaumPostcode
@@ -48,7 +48,20 @@ function AddressSearch({setPlaceAddress, placeAddress}) {
   );
 }
 
-const Container = styled.div``;
+const P = styled.p`
+  @media (max-width: 768px) {
+    font-size: 15px;
+  }
+`;
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
 
 const Header = styled.div`
   display: flex;
@@ -64,9 +77,10 @@ const CloseBtn = styled.button`
   margin-right: 1rem;
   margin-top: -0.3rem;
   cursor: pointer;
+  color: black;
 
   @media (max-width: 768px) {
-    font-size: 25px;
+    font-size: 23px;
     margin-right: 0.4rem;
   }
 `;
@@ -127,11 +141,13 @@ const SearchBtn = styled.input`
   font-weight: 500;
   border: 1px solid gray;
   background-color: #fafafa;
+  margin-top: 0.8rem;
+  color: black;
 
   @media (max-width: 768px) {
     font-size: 12px;
     margin-top: 0.5rem;
-    margin-left: 9.3rem;
+    margin-left: auto;
     width: 4rem;
     height: 1.5rem;
   }

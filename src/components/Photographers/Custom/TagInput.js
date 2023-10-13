@@ -46,6 +46,7 @@ const Input = styled.input`
     width: 24%;
     height: 34px;
     margin-right: 0.5rem;
+    font-size: 14px;
   }
 `;
 

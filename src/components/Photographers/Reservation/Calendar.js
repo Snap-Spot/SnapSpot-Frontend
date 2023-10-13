@@ -246,8 +246,8 @@ const DateContainer = styled(WeekContainer)`
   padding-bottom: 1.4rem;
 
   @media (max-width: 768px) {
-    padding-top: 0.9rem;
-    padding-bottom: 1em;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
   }
 `;
 

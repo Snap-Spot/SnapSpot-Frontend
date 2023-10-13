@@ -144,6 +144,10 @@ const DeleteIcon = styled.img`
   width: 0.7rem;
   height: 0.7rem;
   margin-left: 0.5rem;
+  @media (max-width: 768px) {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
 `;
 
 const Option = styled.div`
@@ -252,7 +256,7 @@ const Subregion = styled.div`
     text-align: center;
 
     font-family: Noto Sans KR;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     font-style: normal;
     font-weight: 400;
     margin-right: 0rem;
@@ -278,8 +282,8 @@ const SelectedOption = styled(Subregion)`
   padding-right: 0.5rem;
 
   @media (max-width: 768px) {
-    width: 60%;
-    padding: 0.5rem 0.6rem;
+    width: 50%;
+    padding: 0.5rem 0.5rem;
     margin: 0;
     border-radius: 10px;
   }
