@@ -124,6 +124,7 @@ const Status = styled.div`
 
   @media (max-width: 768px) {
     margin-right: 0rem;
+    height: ${(props) => (props.open ? "17rem" : "1.5rem")};
   }
 `;
 

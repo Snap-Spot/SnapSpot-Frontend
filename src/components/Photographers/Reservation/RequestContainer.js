@@ -9,14 +9,13 @@ const RequestContainer = ({ request }) => {
 
   return (
     <>
-      <Title onClick={() => navigate("/photographer/request")}>
-        새로 들어온 <Highlight>촬영 요청</Highlight>이 있어요
-        <Arrow src={arrow} />
-      </Title>
-      {request &&
-        request
-          .slice(0, 3)
-          .map((item, idx) => (
+      {request.length > 0 && (
+        <>
+          <Title onClick={() => navigate("/photographer/request")}>
+            새로 들어온 <Highlight>촬영 요청</Highlight>이 있어요
+            <Arrow src={arrow} />
+          </Title>
+          {request.slice(0, 3).map((item, idx) => (
             <UpcomingSchedule
               key={idx}
               nickname={item.customer.nickname}
@@ -32,6 +31,8 @@ const RequestContainer = ({ request }) => {
               btn_text="예약신청"
             />
           ))}
+        </>
+      )}
     </>
   );
 };

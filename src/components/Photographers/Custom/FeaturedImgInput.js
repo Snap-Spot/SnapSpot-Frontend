@@ -94,8 +94,9 @@ const PreImgs = styled.img`
   cursor: pointer;
 
   @media (max-width: 768px) {
-    width: 90px;
-    height: 88px;
+    width: 79px;
+    height: 79px;
+    border-radius: 15px;
   }
 `;
 

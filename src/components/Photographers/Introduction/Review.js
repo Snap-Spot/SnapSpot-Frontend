@@ -4,6 +4,7 @@ import Paging from "../../../components/Photographers/Review/Paging/Paging";
 import Filtering from "../../../components/Photographers/Introduction/ReviewFiltering";
 import ReviewPhoto from "../../../components/Photographers/Introduction/ReviewPhoto";
 import { useEffect, useState } from "react";
+import ReviewFiltering from "../../../components/Photographers/Introduction/ReviewFiltering";
 
 const ReviewContainer = ({ reviewData }) => {
   const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
@@ -37,7 +38,10 @@ const ReviewContainer = ({ reviewData }) => {
       )}
       <Row>
         <Length>총 {products.totalReview}개</Length>
-        <Filtering />
+        <ReviewFiltering
+          setCurrentPosts={setCurrentPosts}
+          currentPosts={currentPosts}
+        />
       </Row>
       <Line2 />
       <ReviewList>
@@ -79,7 +83,7 @@ const Length = styled.p`
   font-size: 20px;
 
   @media (max-width: 768px) {
-    font-size: 13px;
+    font-size: 15px;
   }
 `;
 
@@ -104,7 +108,7 @@ const Review = styled.h2`
     font-size: 24px;
     font-weight: 400;
     margin-bottom: 2rem;
-    margin-top: 3rem;
+    margin-top: 1rem;
   }
 `;
 

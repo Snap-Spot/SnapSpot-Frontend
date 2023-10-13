@@ -188,10 +188,19 @@ const ScheduleDetail = ({
             )}
           </BtnContainer>
         </Row2>
-        {isMobile && <Btn>예약신청</Btn>}
+        {isMobile && (
+          <BtnContainer2>
+            <Btn>{status_list[status][0]}</Btn>
+            {review.length > 0 && (
+              <Btn style={{ marginLeft: "1rem", display: "inline" }}>
+                리뷰작성
+              </Btn>
+            )}
+          </BtnContainer2>
+        )}
         <Headcount>스냅 예약번호 {reservationNum}</Headcount>
         <Row>
-          <TitleContainer isMargin={status === "DELIVERY" ? "t" : "f"}>
+          <TitleContainer ismargin={status === "DELIVERY" ? "t" : "f"}>
             <SubTitle>날짜</SubTitle>
             <SubTitle>시간</SubTitle>
             <SubTitle>장소</SubTitle>
@@ -209,12 +218,12 @@ const ScheduleDetail = ({
                 </SubTitle>
               </>
             )}
-            {isMobile ? (
-              <SubTitle>메세지</SubTitle>
-            ) : status !== "DELIVERY" ? (
-              <SubTitle>메세지에 전달사항을 입력해주세요</SubTitle>
-            ) : (
+            {status === "DELIVERY" ? (
               ""
+            ) : isMobile ? (
+              <SubTitle>메세지</SubTitle>
+            ) : (
+              <SubTitle>메세지에 전달사항을 입력해주세요</SubTitle>
             )}
           </TitleContainer>
           <ContentContainer>
@@ -297,6 +306,8 @@ const ScheduleDetail = ({
     </>
   );
 };
+
+const BtnContainer2 = styled.div``;
 
 const RejectBtn = styled.button`
   border-radius: 18px;
@@ -387,7 +398,7 @@ const PriceInput = styled(Input)`
 const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: ${(props) => (props.isMargin === "t" ? "1.5rem" : "-5rem")};
+  margin-right: ${(props) => (props.ismargin === "t" ? "1.5rem" : "-5rem")};
   @media (max-width: 768px) {
     margin-right: 1rem;
   }
@@ -490,7 +501,7 @@ const ReviewTitle = styled(SubTitle)`
   font-size: 1rem;
   margin-top: 4rem;
   @media (max-width: 768px) {
-    width: 10rem;
+    width: 12rem;
     margin-top: 5rem;
   }
 `;
