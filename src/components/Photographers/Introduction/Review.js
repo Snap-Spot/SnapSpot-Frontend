@@ -67,7 +67,7 @@ const ReviewContainer = ({ reviewData }) => {
             />
           </>
         ) : (
-          <Content>리뷰가 없습니다.</Content>
+          <Content>후기가 없습니다.</Content>
         )}
       </ReviewList>
     </Container>
