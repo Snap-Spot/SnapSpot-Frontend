@@ -285,7 +285,6 @@ const RegionList = styled.div`
     display: flex;
     flex-direction: row;
     overflow: auto;
-    /* padding-bottom: 0.7rem; */
     border: none;
   }
 `;
@@ -301,7 +300,6 @@ const Region = styled.div`
   margin-right: 1rem;
 
   margin: 0.15rem 1rem 0.15rem 0;
-  /* padding: 0.05rem; */
 
   ${(props) =>
     props.isselected === "true" &&
