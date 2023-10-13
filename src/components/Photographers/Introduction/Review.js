@@ -32,7 +32,7 @@ const ReviewContainer = ({ reviewData }) => {
 
   return (
     <Container>
-      <Review>후기</Review>
+      <Review>리뷰</Review>
       {currentPosts && currentPosts.length > 0 && (
         <ReviewPhoto reviews={products.reviews} />
       )}
@@ -67,7 +67,7 @@ const ReviewContainer = ({ reviewData }) => {
             />
           </>
         ) : (
-          <Content>후기가 없습니다.</Content>
+          <Content>리뷰가 없습니다.</Content>
         )}
       </ReviewList>
     </Container>
