@@ -214,7 +214,7 @@ const ReservationBtn = styled.button`
   cursor: pointer;
 
   @media (max-width: 768px) {
-    width: 335px;
+    /* width: 335px; */
     height: 47px;
     padding: 0px 22px;
     font-size: 18px;

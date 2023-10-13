@@ -70,8 +70,9 @@ const Star = styled.img`
 `;
 
 const ReviewContainer = styled.div`
-  height: 10rem;
-  padding-top: 2.5rem;
+  height: 8rem;
+  padding-top: 1.8rem;
+  padding-bottom: 1.8rem;
   border-bottom: ${(props) =>
     props.isLine === "none" ? "none" : "1px solid #d9d9d9"};
   display: flex;
@@ -86,12 +87,13 @@ const ReviewContainer = styled.div`
 
 const ProfileContainer = styled.div`
   display: flex;
-  width: 14rem;
+  width: 11rem;
 
   @media (max-width: 768px) {
+    width: 10rem;
     flex-direction: column;
     align-items: center;
-    margin-right: 1rem;
+    margin-right: 0.5rem;
     margin-left: 0;
   }
 `;
@@ -99,7 +101,7 @@ const ProfileContainer = styled.div`
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 33rem;
+  width: 36rem;
   margin-right: 1rem;
 
   @media (max-width: 768px) {
@@ -137,7 +139,7 @@ const Title = styled.p`
   margin-top: 0;
 
   @media (max-width: 768px) {
-    margin-top: 0.3rem;
+    margin: 0rem;
     font-size: 14px;
   }
 `;
@@ -153,9 +155,10 @@ const Content = styled.p`
 
 const Date = styled.p`
   font-size: 0.7rem;
+  margin-top: auto;
+  margin-bottom: 0;
 
   @media (max-width: 768px) {
-    margin: 0;
     font-size: 0.6rem;
     color: #777777;
   }

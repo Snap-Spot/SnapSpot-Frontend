@@ -44,28 +44,30 @@ const Introduction = () => {
         )}
       </Center>
       <LayOut>
-        {data && (
-          <>
-            <ProfileContainer>
-              <Title>작가님을 소개합니다!</Title>
-              <Profile
-                photographerId={id}
-                setModalOpen={setModalOpen}
-                nickname={data.member.nickname}
-                profile={data.member.profile}
-                lowestPay={data.lowestPay}
-                areas={data.areas}
-                sns={data.sns}
-                bio={data.bio}
-                setPriceModalOpen={setPriceModalOpen}
-              />
-            </ProfileContainer>
-            {data.images.image1 !== null && (
-              <ExCarousel carouselList={data.images} />
-            )}
-            <ReviewContainer reviewData={data.review} />
-          </>
-        )}
+        <Container>
+          {data && (
+            <>
+              <ProfileContainer>
+                <Title>작가님을 소개합니다!</Title>
+                <Profile
+                  photographerId={id}
+                  setModalOpen={setModalOpen}
+                  nickname={data.member.nickname}
+                  profile={data.member.profile}
+                  lowestPay={data.lowestPay}
+                  areas={data.areas}
+                  sns={data.sns}
+                  bio={data.bio}
+                  setPriceModalOpen={setPriceModalOpen}
+                />
+              </ProfileContainer>
+              {data.images.image1 !== null && (
+                <ExCarousel carouselList={data.images} />
+              )}
+              <ReviewContainer reviewData={data.review} />
+            </>
+          )}
+        </Container>
       </LayOut>
     </>
   );
@@ -85,8 +87,22 @@ const ProfileContainer = styled.div`
   margin-top: 2rem;
 
   @media (max-width: 768px) {
-    width: 21rem;
+    width: 95%;
     margin-top: 1rem;
+  }
+`;
+
+const Container = styled.div`
+  width: 75%;
+  max-width: 1052px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    width: 90%;
+    margin-bottom: 5rem;
   }
 `;
 
