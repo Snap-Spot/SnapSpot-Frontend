@@ -80,7 +80,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const Photo = styled.div`
+const Photo = styled(({ image, ...rest }) => <div {...rest} />)`
   display: flex;
   height: 320px;
   flex-direction: column;
@@ -104,7 +104,6 @@ const Photo = styled.div`
     background-size: cover;
   }
 `;
-
 const Tag = styled.p`
   color: #fff;
   text-align: right;
