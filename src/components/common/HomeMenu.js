@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const HomeMenu = ({ isHomeMenuOpen, setIsHomeMenuOpen }) => {
+const HomeMenu = () => {
   const navigate = useNavigate();
 
   const onClickPhotogreapher = () => {

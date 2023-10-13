@@ -203,9 +203,9 @@ const Menu = styled.div`
 
     @media (max-width: 768px) {
       margin-right: 1rem;
-      width: 1.5rem;
-      height: 1.5rem;
-      border-radius: 1.5rem;
+      width: 1.8rem;
+      height: 1.8rem;
+      border-radius: 1.8rem;
     }
   }
 
