@@ -6,23 +6,21 @@ import Banner_Sample from "../../assets/main/banner2.png";
 import Left_Arrow from "../../assets/main/main_arrow_left.png";
 import Right_Arrow from "../../assets/main/main_arrow_right.png";
 
-const items = [
-  <div className="item" data-value="1">
-    <img src={Banner_Sample} alt="배너 샘플" className="item-image" />
-  </div>,
-  <div className="item" data-value="2">
-    <img src={Banner_Sample} alt="배너 샘플" className="item-image" />
-  </div>,
-  <div className="item" data-value="3">
-    <img src={Banner_Sample} alt="배너 샘플" className="item-image" />
-  </div>,
-  <div className="item" data-value="4">
-    <img src={Banner_Sample} alt="배너 샘플" className="item-image" />
-  </div>,
-  <div className="item" data-value="5">
-    <img src={Banner_Sample} alt="배너 샘플" className="item-image" />
-  </div>,
-];
+const itemsArr = [1, 2, 3, 4, 5];
+
+const items = itemsArr.map((value, index) => (
+  <div className="item" data-value={value} key={index}>
+    <img
+      src={Banner_Sample}
+      alt="banner_sample"
+      style={{ cursor: "pointer" }}
+      className="item-image"
+      onClick={() => {
+        window.location.href = "/event";
+      }}
+    />
+  </div>
+));
 
 const renderSlideInfo = ({ item, itemsCount }) => {
   return `${item}/${itemsCount}`;

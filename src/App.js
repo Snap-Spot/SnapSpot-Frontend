@@ -25,6 +25,7 @@ import { Routes, Route } from "react-router-dom";
 import KakaoSignUpPage from "./pages/SignUpPage/KakaoSignUpPage";
 import { LoadingProvider } from "./components/common/LoadingContext";
 import PrivateRoute from "./components/Route/PrivateRoute";
+import EventPage from "./pages/EventPage/EventPage";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/auth/kakao-login" element={<KakaoLoginPage />} />
         <Route path="/auth/kakao-signup" element={<KakaoSignUpPage />} />
 
+        <Route path="/event" element={<EventPage />} />
         <Route path="/search" element={<SearchPage />} />
 
         <Route path="photographers/:id" element={<Introduction />} />
