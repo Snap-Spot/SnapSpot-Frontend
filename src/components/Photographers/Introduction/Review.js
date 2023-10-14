@@ -32,7 +32,7 @@ const ReviewContainer = ({ reviewData }) => {
 
   return (
     <Container>
-      <Review>후기</Review>
+      <Review>리뷰</Review>
       {currentPosts && currentPosts.length > 0 && (
         <ReviewPhoto reviews={products.reviews} />
       )}

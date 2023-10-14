@@ -62,7 +62,6 @@ const Profile = ({
             <SubTitle>작가명</SubTitle>
             <Align>
               <HighLight>{nickname}</HighLight>
-
               <Heart
                 src={clickedHeart ? clickedheart : heart}
                 onClick={handleHeartClick}
@@ -192,7 +191,7 @@ const Heart = styled.img`
 
   @media (max-width: 768px) {
     position: absolute;
-    margin-top: 20rem;
+    top: 21rem;
     margin-left: 4rem;
   }
 `;
@@ -264,6 +263,7 @@ const Content = styled.p`
   @media (max-width: 768px) {
     margin: 0;
     margin-bottom: 0.5rem;
+    font-size: 16px;
   }
 `;
 

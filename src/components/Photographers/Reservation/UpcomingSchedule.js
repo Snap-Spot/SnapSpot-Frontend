@@ -66,6 +66,9 @@ const ReservationNum = styled.p`
   color: #777777;
   margin-top: 0.3rem;
   font-weight: 400;
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const Padding = styled.div`
@@ -121,18 +124,24 @@ const TitleContainer = styled.div`
   @media (max-width: 768px) {
     width: 4rem;
     margin-right: 1rem;
-    margin-top: 0.5rem;
+    margin-top: 0.3rem;
   }
 `;
 
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
+  @media (max-width: 768px) {
+    margin-top: 0.3rem;
+  }
 `;
 
 const Arrow = styled.img`
   width: 0.5rem;
   margin-left: 0.2rem;
+  @media (max-width: 768px) {
+    width: 0.4rem;
+  }
 `;
 
 const Profile = styled.img`
@@ -180,6 +189,11 @@ const Btn = styled.button`
   width: 3.7rem;
   height: 1.8rem;
   border: none;
+  @media (max-width: 768px) {
+    width: 4.5rem;
+    height: 2rem;
+    font-size: 14px;
+  }
 `;
 
 const Detail = styled.p`
@@ -187,6 +201,9 @@ const Detail = styled.p`
   margin-top: 0;
   margin-bottom: 0;
   cursor: pointer;
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 
 const SnapType = styled.p`
@@ -215,8 +232,9 @@ const SubTitle = styled.h3`
   margin-bottom: 0;
 
   @media (max-width: 768px) {
-    font-size: 15px;
-    margin-top: 0.3rem;
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
   }
 `;
 

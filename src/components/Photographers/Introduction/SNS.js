@@ -34,7 +34,6 @@ const Input = styled.p`
 
   @media (max-width: 768px) {
     width: 90%;
-    font-size: 14px;
   }
 `;
 

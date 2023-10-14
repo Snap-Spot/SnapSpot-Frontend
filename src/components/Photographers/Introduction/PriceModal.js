@@ -27,6 +27,8 @@ const Message = styled.p`
 
 const Img = styled.img`
   margin-top: 1rem;
+  max-width: 100%;
+  height: auto;
 `;
 
 const BG = styled.div`

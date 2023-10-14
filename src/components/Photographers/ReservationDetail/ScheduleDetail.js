@@ -321,6 +321,7 @@ const RejectBtn = styled.button`
   font-size: 18px;
   margin-right: 0.8rem;
   cursor: pointer;
+  color: black;
 
   @media (max-width: 768px) {
     font-size: 13px;
@@ -358,6 +359,7 @@ const MessageBox = styled.textarea`
     font-size: 13px;
     border-radius: 20px;
     height: 70px;
+    margin-top: 0;
   }
 `;
 
@@ -390,7 +392,7 @@ const PriceInput = styled(Input)`
 
   @media (max-width: 768px) {
     width: 100px;
-    height: 20px;
+    height: 18px;
     font-size: 14px;
   }
 `;
@@ -401,6 +403,7 @@ const TitleContainer = styled.div`
   margin-right: ${(props) => (props.ismargin === "t" ? "1.5rem" : "-5rem")};
   @media (max-width: 768px) {
     margin-right: 1rem;
+    margin-bottom: auto;
   }
 `;
 
@@ -492,7 +495,8 @@ const SubTitle = styled.h3`
 
   @media (max-width: 768px) {
     font-size: 14px;
-    margin-top: 0.6rem;
+    margin-top: 0rem;
+    margin-bottom: 0.6rem;
     width: 6rem;
   }
 `;
@@ -525,7 +529,9 @@ const Content = styled.p`
   margin-top: 0.6rem;
 
   @media (max-width: 768px) {
-    font-size: 13px;
+    font-size: 14px;
+    margin-top: 0rem;
+    margin-bottom: 0.6rem;
   }
 `;
 
