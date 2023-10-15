@@ -81,7 +81,7 @@ const ReviewContainer = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     padding-top: 1.5rem;
-    height: 8rem;
+    height: 7rem;
   }
 `;
 

@@ -80,7 +80,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const Photo = styled.div`
+const Photo = styled(({ image, ...rest }) => <div {...rest} />)`
   display: flex;
   height: 320px;
   flex-direction: column;
@@ -104,7 +104,6 @@ const Photo = styled.div`
     background-size: cover;
   }
 `;
-
 const Tag = styled.p`
   color: #fff;
   text-align: right;
@@ -143,7 +142,7 @@ const Photographer = styled.div`
 
   @media (max-width: 768px) {
     font-size: 0.75rem;
-    height: 15px;
+    height: 17px;
     max-width: 65px;
   }
 `;
@@ -156,6 +155,8 @@ const Region = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+
+  margin-top: 0.1rem;
 
   @media (max-width: 768px) {
     font-size: 0.7rem;
@@ -171,10 +172,12 @@ const Price = styled.div`
   line-height: normal;
 
   height: 35px;
-  margin-top: 6px;
+  margin-top: 0.2rem;
+
   @media (max-width: 768px) {
     font-size: 0.75rem;
     height: 10px;
+    margin-top: 3px;
   }
 `;
 

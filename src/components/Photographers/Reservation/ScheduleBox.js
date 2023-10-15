@@ -85,18 +85,25 @@ const TitleContainer = styled.div`
   @media (max-width: 768px) {
     width: 4rem;
     margin-right: 1rem;
-    margin-top: 0.5rem;
+    margin-top: 0.3rem;
   }
 `;
 
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
+  @media (max-width: 768px) {
+    margin-top: 0.3rem;
+  }
 `;
 
 const Arrow = styled.img`
   width: 0.5rem;
   margin-left: 0.2rem;
+
+  @media (max-width: 768px) {
+    width: 0.4rem;
+  }
 `;
 
 const Container = styled.div`
@@ -155,13 +162,16 @@ const Btn = styled.button`
   @media (max-width: 768px) {
     width: 4.5rem;
     height: 2rem;
-    font-size: 0.9rem;
+    font-size: 14px;
   }
 `;
 
 const Detail = styled.p`
   cursor: pointer;
   font-size: 0.9rem;
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 
 const SnapType = styled.p`
@@ -190,8 +200,9 @@ const SubTitle = styled.h3`
   margin-bottom: 0;
 
   @media (max-width: 768px) {
-    font-size: 15px;
-    margin-top: 0.3rem;
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
   }
 `;
 

@@ -2,11 +2,13 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const HomeMenu = ({ isHomeMenuOpen, setIsHomeMenuOpen }) => {
+const HomeMenu = () => {
   const navigate = useNavigate();
 
   const onClickPhotogreapher = () => {
+    localStorage.setItem("currentPage", "1");
     navigate(`/photographers`);
+    window.location.reload();
   };
 
   const onClickFeed = () => {

@@ -79,7 +79,6 @@ const Search = styled.div`
   margin-right: 2rem;
 
   @media (max-width: 768px) {
-    /* width: 22.375rem; */
     width: 95%;
     height: 2.375rem;
     margin-right: 0rem;
@@ -100,7 +99,7 @@ const Search = styled.div`
     @media (max-width: 768px) {
       width: 16rem;
       height: 1.25rem;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       margin-left: 1.25rem;
     }
 
@@ -130,5 +129,3 @@ const Search = styled.div`
     }
   }
 `;
-
-const Input = styled.input``;

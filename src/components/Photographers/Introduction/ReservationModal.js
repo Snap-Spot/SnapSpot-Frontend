@@ -145,6 +145,7 @@ const CancelBtn = styled.button`
   margin-left: 1rem;
   font-weight: 500;
   cursor: pointer;
+  color: black;
 
   @media (max-width: 768px) {
     width: 120px;

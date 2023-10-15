@@ -124,7 +124,7 @@ const SearchPage = () => {
                       )}
                     </SubTitle>
                     <GridBox>
-                      <div class="grid">
+                      <div className="grid">
                         {nicknameData.slice(0, 3).map(
                           (
                             data //상단 3개까지만 표시
@@ -211,7 +211,7 @@ const GridBox = styled.div`
     grid-template-columns: repeat(3, 1fr);
 
     &:first-child {
-      margin-bottom: 10rem;
+      margin-bottom: 5rem;
     }
 
     @media (max-width: 768px) {
@@ -269,7 +269,7 @@ const SubTitle = styled.div`
 
   @media (max-width: 768px) {
     font-size: 14px;
-    margin-top: 0.75rem;
+    margin-top: 1rem;
   }
 
   img {
