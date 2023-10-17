@@ -1,32 +1,41 @@
+import { Routes, Route } from "react-router-dom";
+import "./styles/Font.css";
+
+import SignUpInfoPage from "./pages/SignUpPage/SignUpInfoPage";
+import SignUpMemberPage from "./pages/SignUpPage/SignUpMemberPage";
+import KakaoSignUpPage from "./pages/SignUpPage/KakaoSignUpPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import KakaoLoginPage from "./pages/LoginPage/KakaoLoginPage";
+
 import MyReservePage from "./pages/MyPage/MyReservePage";
 import DetailReservePage from "./pages/MyPage/DetailReservePage";
-import "./styles/Font.css";
+import MyHeartsPage from "./pages/MyPage/MyHeartsPage";
+import BestSnapPage from "./pages/MyPage/BestSnapPage";
+import UserMypage from "./pages/MyPage/UserMypage";
+import SettingsPage from "./pages/MyPage/SettingsPage";
+
 import ReservationDetail from "./pages/Photographer/ReservationDetail";
 import Reservation from "./pages/Photographer/Reservation";
 import Custom from "./pages/Photographer/Custom";
 import Review from "./pages/Photographer/Review";
-import SearchPage from "./pages/serach/SearchPage";
-import Footer from "./components/common/Footer";
-import SignUpInfoPage from "./pages/SignUpPage/SignUpInfoPage";
-import SignUpMemberPage from "./pages/SignUpPage/SignUpMemberPage";
-import Photographerlist from "./pages/serach/Photographerlist";
-import UserMypage from "./pages/MyPage/UserMypage";
-import SettingsPage from "./pages/MyPage/SettingsPage";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import MyHeartsPage from "./pages/MyPage/MyHeartsPage";
-import SpotListPage from "./pages/SpotListPage/SpotListPage";
-import BestSnapPage from "./pages/MyPage/BestSnapPage";
-import KakaoLoginPage from "./pages/LoginPage/KakaoLoginPage";
 import RequestList from "./pages/Photographer/RequestList";
 import ReservationList from "./pages/Photographer/ReservationList";
 import Introduction from "./pages/Photographer/Introduction";
+
+import SearchPage from "./pages/serach/SearchPage";
+import Photographerlist from "./pages/serach/Photographerlist";
+
 import MainPage from "./pages/MainPage/MainPage";
-import { Routes, Route } from "react-router-dom";
-import KakaoSignUpPage from "./pages/SignUpPage/KakaoSignUpPage";
-import { LoadingProvider } from "./components/common/LoadingContext";
+import SpotListPage from "./pages/SpotListPage/SpotListPage";
+import EventPage from "./pages/EventPage/EventPage";
+
 import PrivateRoute from "./components/Route/PrivateRoute";
+import Footer from "./components/common/Footer";
+import { LoadingProvider } from "./components/common/LoadingContext";
+import RouteChangeTracker from "./components/Route/RouteChangeTracker";
 
 function App() {
+  RouteChangeTracker();
   return (
     <LoadingProvider>
       <Routes>
@@ -38,6 +47,7 @@ function App() {
         <Route path="/auth/kakao-login" element={<KakaoLoginPage />} />
         <Route path="/auth/kakao-signup" element={<KakaoSignUpPage />} />
 
+        <Route path="/event" element={<EventPage />} />
         <Route path="/search" element={<SearchPage />} />
 
         <Route path="photographers/:id" element={<Introduction />} />

@@ -5,7 +5,7 @@ export const categoryList = [
     id: 0,
   },
   {
-    eng: "FRIENDSHIP",
+    eng: "FRIEND",
     kor: "우정스냅",
     id: 1,
   },
@@ -23,6 +23,11 @@ export const categoryList = [
     eng: "FAMILY",
     kor: "가족스냅",
     id: 4,
+  },
+  {
+    eng: "ETC",
+    kor: "기타",
+    id: 5,
   },
 ];
 

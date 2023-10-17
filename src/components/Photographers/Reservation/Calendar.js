@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import prev from "../../../assets/photograph/prev_btn.png";
 import next from "../../../assets/photograph/next_btn.png";
 import dot from "../../../assets/photograph/dot.png";
+import { setYear } from "date-fns";
 
 const Calendar = ({
   setSelect,
@@ -10,6 +11,8 @@ const Calendar = ({
   month,
   setSelectDay,
   selectDay,
+  selectYear,
+  setSelectYear,
   planDates,
 }) => {
   const date = new Date();
@@ -86,11 +89,31 @@ const Calendar = ({
     <Center>
       <Container>
         <CalendarHeader>
-          <PrevBtn src={prev} onClick={() => setMonth(month - 1)} />
+          <PrevBtn
+            src={prev}
+            onClick={() => {
+              if (month === 0) {
+                setMonth(11);
+                setSelectYear(selectYear - 1);
+              } else {
+                setMonth(month - 1);
+              }
+            }}
+          />
           <CurrentDate>
-            {currentYear}년 {month + 1}월
+            {selectYear}년 {month + 1}월
           </CurrentDate>
-          <NextBtn src={next} onClick={() => setMonth(month + 1)} />
+          <NextBtn
+            src={next}
+            onClick={() => {
+              if (month === 11) {
+                setMonth(0); // 12월의 경우, 다음 해의 1월로 설정
+                setSelectYear(selectYear + 1);
+              } else {
+                setMonth(month + 1);
+              }
+            }}
+          />
         </CalendarHeader>
         <WeekContainer>
           {week.map((el, i) => (
