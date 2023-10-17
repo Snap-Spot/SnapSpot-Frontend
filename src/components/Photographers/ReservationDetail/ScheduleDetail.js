@@ -60,6 +60,7 @@ const ScheduleDetail = ({
       const data = await postMessage(planId, message);
       alert("공지사항을 전달했습니다.");
       setChange(change + 1);
+      setMessage("");
     } catch (err) {
       console.log(err);
     }
