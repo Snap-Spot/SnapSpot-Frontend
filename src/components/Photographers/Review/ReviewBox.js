@@ -54,6 +54,7 @@ const ScoreContainer = styled.div`
 
   @media (max-width: 768px) {
     justify-content: flex-end;
+    margin-right: 0.4rem;
   }
 `;
 
@@ -90,7 +91,7 @@ const ProfileContainer = styled.div`
   width: 11rem;
 
   @media (max-width: 768px) {
-    width: 10rem;
+    width: 6rem;
     flex-direction: column;
     align-items: center;
     margin-right: 0.5rem;

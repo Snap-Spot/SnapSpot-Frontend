@@ -8,6 +8,7 @@ import ReviewBox from "../Review/ReviewBox";
 import AddressSearch from "./AddressSearch";
 import { putDeposit } from "../../../api/plan";
 import { useParams } from "react-router-dom";
+import { postMessage } from "../../../api/message";
 import { status_list } from "../Reservation/MockData/status";
 import PhotoChatBox from "./PhotoChatBox";
 import FileInputModal from "./FileInputModal";
@@ -53,6 +54,16 @@ const ScheduleDetail = ({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const postMessages = async () => {
+    try {
+      const data = await postMessage(planId, message);
+      alert("공지사항을 전달했습니다.");
+      setChange(change + 1);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const putDeposits = async () => {
     try {
@@ -125,6 +136,7 @@ const ScheduleDetail = ({
           identify={1}
           setChange={setChange}
           change={change}
+          setMessage={setMessage}
         />
       )}
       {isPhotoModal && (
@@ -164,7 +176,7 @@ const ScheduleDetail = ({
                 onClick={() => {
                   if (status === "DEPOSIT") {
                     setIsConfirmDeposit(!isConfirmDeposit);
-                  } else if (status === "COMPLETE") {
+                  } else if (status === "COMPLETE" || status === "TODAY") {
                     if (message.length === 0) {
                       setIsMinInput(false);
                     } else {
@@ -177,7 +189,6 @@ const ScheduleDetail = ({
                       alert("내용을 모두 입력해주세요.");
                     } else if (status === "REQUEST") {
                       putDeposits();
-
                       setMessage("");
                     }
                   }
@@ -218,7 +229,7 @@ const ScheduleDetail = ({
                 </SubTitle>
               </>
             )}
-            {status === "DELIVERY" ? (
+            {status === "DELIVERY" || status === "REFUSE" ? (
               ""
             ) : isMobile ? (
               <SubTitle>메세지</SubTitle>
@@ -250,19 +261,29 @@ const ScheduleDetail = ({
             )}
           </ContentContainer>
         </Row>
-        {status !== "DELIVERY" && (
+        {status === "REQUEST" && (
           <MessageBox
             placeholder="입금 요청 시, 추가적인 공지사항과 입금받으실 계좌번호를 작성해주세요. (예약 거절시에는 거절 사유를 적어주세요.)"
             onChange={handleMessageChange}
             value={message}
           />
         )}
-        {status === "RESERVED" ||
-          (status === "TODAY" && (
-            <BtnContainer style={{ marginTop: "2rem" }}>
-              <RequestBtn>공지사항 보내기</RequestBtn>
-            </BtnContainer>
-          ))}
+        {(status === "DEPOSIT" ||
+          status === "RESERVED" ||
+          status === "TODAY") && (
+          <MessageBox
+            placeholder="메세지를 입력해주세요."
+            onChange={handleMessageChange}
+            value={message}
+          />
+        )}
+        {(status === "RESERVED" || status === "TODAY") && (
+          <BtnContainer style={{ marginTop: "2rem" }}>
+            <RequestBtn onClick={() => postMessages()}>
+              공지사항 보내기
+            </RequestBtn>
+          </BtnContainer>
+        )}
         {status === "DELIVERY" && review.length > 0 && (
           <>
             {/* 리뷰 확인 */}
@@ -416,7 +437,7 @@ const ContentContainer = styled.div`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 1.7rem;
+  margin-bottom: 8.7rem;
   width: 100%;
 `;
 

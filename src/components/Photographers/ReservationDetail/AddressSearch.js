@@ -10,6 +10,7 @@ function AddressSearch({ setPlaceAddress, placeAddress }) {
   const handleAddress = (data) => {
     setPlaceAddress(data.address);
     setPopupVisible(false);
+    console.log("우편번호", data);
   };
 
   return (

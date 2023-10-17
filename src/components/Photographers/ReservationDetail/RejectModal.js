@@ -13,6 +13,7 @@ const RejectModal = ({
   identify,
   setChange,
   change,
+  setMessage,
 }) => {
   const putReject = async () => {
     try {
@@ -29,6 +30,7 @@ const RejectModal = ({
     try {
       const data = await putPlansReserve(planId, message);
       console.log("예약완료", data);
+      setMessage("");
       setChange(change + 1);
     } catch (err) {
       console.log(err);
