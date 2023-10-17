@@ -177,7 +177,7 @@ const TopInfo = styled.div`
 const Star = styled.div`
   color: #000;
   font-family: Noto Sans KR;
-  font-size: 1rem
+  font-size: 1rem;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
