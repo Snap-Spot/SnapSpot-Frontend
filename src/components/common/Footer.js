@@ -6,12 +6,13 @@ import instagram from "../../assets/common/instagram.png";
 
 const Footer = () => {
   const onClickGithub = () => {
-    window.location.href = "https://github.com/Snap-Spot";
+    window.open("https://github.com/Snap-Spot");
   };
 
   const onClickInstagram = () => {
-    window.location.href =
-      "https://instagram.com/snapspot_official?igshid=MzRlODBiNWFlZA==";
+    window.open(
+      "https://instagram.com/snapspot_official?igshid=MzRlODBiNWFlZA=="
+    );
   };
 
   return (

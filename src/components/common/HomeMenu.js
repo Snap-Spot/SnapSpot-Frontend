@@ -15,6 +15,10 @@ const HomeMenu = () => {
     navigate(`/spot-list`);
   };
 
+  const onClickInquiry = () => {
+    window.open("https://forms.gle/fXMUjT2QYxhPxquj7");
+  };
+
   return (
     <Wrapper>
       <MenuDiv>
@@ -26,7 +30,7 @@ const HomeMenu = () => {
           <p>피드</p>
         </Menu>
         <Line />
-        <Menu isLast>
+        <Menu isLast onClick={onClickInquiry}>
           <p>문의하기</p>
         </Menu>
       </MenuDiv>
