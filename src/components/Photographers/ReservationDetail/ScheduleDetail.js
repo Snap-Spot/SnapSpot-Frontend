@@ -211,7 +211,9 @@ const ScheduleDetail = ({
         )}
         <Headcount>스냅 예약번호 {reservationNum}</Headcount>
         <Row>
-          <TitleContainer ismargin={status === "DELIVERY" ? "t" : "f"}>
+          <TitleContainer
+            ismargin={status === "DELIVERY" || status === "REFUSE" ? "t" : "f"}
+          >
             <SubTitle>날짜</SubTitle>
             <SubTitle>시간</SubTitle>
             <SubTitle>장소</SubTitle>
