@@ -6,7 +6,13 @@ import instagram from "../../assets/common/instagram.png";
 
 const Footer = () => {
   const onClickGithub = () => {
-    window.location.href = "https://github.com/Snap-Spot";
+    window.open("https://github.com/Snap-Spot");
+  };
+
+  const onClickInstagram = () => {
+    window.open(
+      "https://instagram.com/snapspot_official?igshid=MzRlODBiNWFlZA=="
+    );
   };
 
   return (
@@ -16,7 +22,11 @@ const Footer = () => {
         <p>이선의 곽지우 조민서 이주희 김민정 송지민 김예지 조은비 김이원</p>
       </div>
       <div className="icon">
-        <InstagramLogo src={instagram} alt="인스타그램" />
+        <InstagramLogo
+          src={instagram}
+          onClick={onClickInstagram}
+          alt="인스타그램"
+        />
         <GitLogo src={git} onClick={onClickGithub} alt="깃허브" />
       </div>
     </Wrapper>
