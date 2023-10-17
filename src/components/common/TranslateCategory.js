@@ -24,6 +24,11 @@ export const categoryList = [
     kor: "가족스냅",
     id: 4,
   },
+  {
+    eng: "ETC",
+    kor: "기타",
+    id: 5,
+  },
 ];
 
 export const getCategoryFromEng = (engString) => {
