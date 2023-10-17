@@ -36,7 +36,8 @@ const ReviewModal = ({ planId }) => {
     try {
       const res = await postReview(inputs);
       if (res.stauts === 201) {
-        alert(res.message);
+        alert("리뷰가 등록되었습니다.");
+        window.location.reload();
       }
     } catch (err) {
       alert("제목, 별점, 리뷰, 사진을 모두 작성 및 첨부해주세요");
