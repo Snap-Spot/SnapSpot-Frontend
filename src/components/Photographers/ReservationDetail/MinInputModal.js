@@ -8,7 +8,7 @@ const MinInputModal = ({ setIsMinInput, isMinInput, text }) => {
       <Conatiner>
         <CancelBtn src={cancel} onClick={() => setIsMinInput(!isMinInput)} />
         <WarnIcon src={redWarn} />
-        <Warning>100자 이상 입력해 주세요</Warning>
+        <Warning>50자 이상 입력해 주세요</Warning>
         <Content>{text}</Content>
       </Conatiner>
       <BG></BG>

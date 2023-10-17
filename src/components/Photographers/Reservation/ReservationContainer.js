@@ -9,9 +9,11 @@ const ReservationContainer = ({ data }) => {
   const currentDate = date.getDate();
   const currentMonth = date.getMonth();
   const currentDay = date.getDay();
+  const currentYear = date.getFullYear();
   const [selectDate, setSelectDate] = useState(currentDate);
   const [selectMonth, setSelectMonth] = useState(currentMonth);
   const [selectDay, setSelectDay] = useState(currentDay);
+  const [selectYear, setSelectYear] = useState(currentYear);
 
   // 해당 날짜에 일치하는 일정 보여주기
   let filteredData = data.filter((el) => {
@@ -32,13 +34,15 @@ const ReservationContainer = ({ data }) => {
           month={selectMonth}
           setSelectDay={setSelectDay}
           selectDay={selectDay}
+          selectYear={selectYear}
+          setSelectYear={setSelectYear}
           planDates={data.map((el) => el.planDate.slice(0, 10))}
         />
         <ScheduleContainer>
           <SelectedDate>
             {selectMonth + 1}월 {selectDate}일 {selectDay}요일
           </SelectedDate>
-          {filteredData &&
+          {filteredData.length > 0 ? (
             filteredData.map((item, idx) => (
               <ScheduleBox
                 key={idx}
@@ -53,12 +57,21 @@ const ReservationContainer = ({ data }) => {
                 profile={item.customer.profile}
                 status={item.status}
               />
-            ))}
+            ))
+          ) : (
+            <P>일정이 없습니다.</P>
+          )}
         </ScheduleContainer>
       </Container>
     </>
   );
 };
+
+const P = styled.p`
+  padding-left: 1.4rem;
+  font-size: 14px;
+  margin-top: 0;
+`;
 
 const Title = styled.h2`
   font-size: 24px;

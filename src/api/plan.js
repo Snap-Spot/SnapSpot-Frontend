@@ -110,9 +110,11 @@ export const putDeposit = async (
       placeAddress: placeAddress,
       message: message,
     });
+    alert("입금 요청이 완료되었습니다.");
     return res.data;
   } catch (err) {
     console.log("입금 요청 에러", err);
+    alert("서버 에러");
   }
 };
 //고객의 예약 변경

@@ -78,7 +78,7 @@ const ScheduleDetail = ({
           isOpen={isReject}
           title="정말 거절하시겠어요?"
           content="만약 비슷한 시간대에 촬영이 가능하신 경우, 메세지에 변경 가능한 촬영
-          시간대를 적어주세요. 100자 이상으로 전달사항을 작성해주셔야 거절이
+          시간대를 적어주세요. 50자 이상으로 전달사항을 작성해주셔야 거절이
           가능해요."
           status={status}
           message={message}
@@ -92,7 +92,7 @@ const ScheduleDetail = ({
         <MinInputModal
           setIsMinInput={setIsDepositModal}
           isMinInput={isDepositModal}
-          text="압금 요청 시 추가적인 공지사항과 입금받으실 계좌번호를 작성해주세요. 100자 이상으로 전달사항을 작성해주셔야 요청이
+          text="압금 요청 시 추가적인 공지사항과 입금받으실 계좌번호를 작성해주세요. 50자 이상으로 전달사항을 작성해주셔야 요청이
           가능해요."
         />
       )}
@@ -101,7 +101,7 @@ const ScheduleDetail = ({
           setIsMinInput={setIsRejectModal}
           isMinInput={isRejectModal}
           text="만약 비슷한 시간대에 촬영이 가능하신 경우, 메세지에 변경 가능한 촬영
-        시간대를 적어주세요. 100자 이상으로 전달사항을 작성해주셔야 거절이
+        시간대를 적어주세요. 50자 이상으로 전달사항을 작성해주셔야 거절이
         가능해요."
         />
       )}
@@ -109,7 +109,7 @@ const ScheduleDetail = ({
         <MinInputModal
           setIsMinInput={setIsMinInput}
           isMinInput={isMinInput}
-          text="사진과 함께 전달할 메세지를 작성해주세요. 100자 이상으로 전달사항을 작성해주셔야 전달이
+          text="사진과 함께 전달할 메세지를 작성해주세요. 50자 이상으로 전달사항을 작성해주셔야 전달이
           가능해요."
         />
       )}
@@ -149,7 +149,7 @@ const ScheduleDetail = ({
             {status === "REQUEST" && (
               <RejectBtn
                 onClick={() => {
-                  if (message.length < 100) {
+                  if (message.length < 50) {
                     setIsRejectModal(false);
                   } else {
                     setIsReject(!isReject);
@@ -171,13 +171,13 @@ const ScheduleDetail = ({
                       setIsPhotoModal(true);
                     }
                   } else {
-                    if (message.length < 100) {
+                    if (message.length < 50) {
                       setIsDepositModal(false);
                     } else if (!prices || !placeAddressinput) {
                       alert("내용을 모두 입력해주세요.");
                     } else if (status === "REQUEST") {
                       putDeposits();
-                      alert("입금 요청이 완료되었습니다.");
+
                       setMessage("");
                     }
                   }
