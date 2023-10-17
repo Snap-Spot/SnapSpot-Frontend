@@ -74,7 +74,6 @@ const ScheduleDetail = ({
         placeAddressinput,
         message
       );
-      console.log("입금결과", data);
       setChange(change + 1);
     } catch (err) {
       console.log(err);
