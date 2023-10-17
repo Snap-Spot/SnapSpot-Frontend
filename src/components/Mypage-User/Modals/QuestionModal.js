@@ -10,11 +10,11 @@ const QuestionModal = ({ planId }) => {
     if (contents !== "") {
       const res = await postMessage(planId, contents);
       if (res.status === 200) {
-        alert("문의 메세지를 전송했습니다.");
+        alert("메세지를 전송했습니다.");
         window.location.reload();
       }
     } else {
-      alert("문의할 내용을 작성해주세요.");
+      alert("메세지를 작성해주세요.");
     }
   };
   return (
@@ -23,7 +23,7 @@ const QuestionModal = ({ planId }) => {
 
       <Form
         onChange={handleChange}
-        placeholder="문의할 내용을 작성해주세요 (500자 이내)"
+        placeholder="메세지를 작성해주세요 (500자 이내)"
         value={contents}
       />
       <div className="button" onClick={submitQuestion}>
