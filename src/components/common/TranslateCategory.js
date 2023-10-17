@@ -5,7 +5,7 @@ export const categoryList = [
     id: 0,
   },
   {
-    eng: "FRIENDSHIP",
+    eng: "FRIEND",
     kor: "우정스냅",
     id: 1,
   },
