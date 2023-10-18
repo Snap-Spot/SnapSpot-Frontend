@@ -13,11 +13,12 @@ const RejectModal = ({
   identify,
   setChange,
   change,
+  setMessage,
 }) => {
   const putReject = async () => {
     try {
       const data = await putRejectReservation(planId, message);
-      console.log(data);
+      // console.log(data);
       alert("예약이 취소되었습니다.");
       navigate("/photographer/reserve");
     } catch (err) {
@@ -28,7 +29,8 @@ const RejectModal = ({
   const putPlansReserveation = async () => {
     try {
       const data = await putPlansReserve(planId, message);
-      console.log("예약완료", data);
+      // console.log("예약완료", data);
+      setMessage("");
       setChange(change + 1);
     } catch (err) {
       console.log(err);

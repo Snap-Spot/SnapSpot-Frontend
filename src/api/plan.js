@@ -171,7 +171,6 @@ export const putDelivery = async (planId, contents, file) => {
 
     const response = await client.put(`/plans/delivery`, formData, config);
 
-    console.log("응답 데이터:", response);
     return response;
   } catch (error) {
     console.error("에러 발생:", error.response);
