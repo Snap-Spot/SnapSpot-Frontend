@@ -20,7 +20,7 @@ const FileInputModal = ({
   const sendDelivery = async () => {
     try {
       const res = await putDelivery(planId, contents, imgfile);
-      console.log("응답", res);
+      // console.log("응답", res);
       alert("성공적으로 전달되었습니다!");
       setIsPhotoModal(false);
       setChange(change + 1);
