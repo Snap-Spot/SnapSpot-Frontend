@@ -26,21 +26,21 @@ const ReservationItem = ({ item }) => {
   return (
     <Wrapper>
       <Header>
-        <div className="left-content">
+        <div className="top-content">
           <div className="date">
             {date}({day})
           </div>
-          <div className="id">스냅 예약번호&nbsp;&nbsp;{item.planId}</div>
-        </div>
-        <div
-          className="right-content"
-          onClick={() => navigate(`/mypage/reservation/${item.planId}`)}
-        >
-          상세보기
-          <div className="arrow">
-            <img src={arrow} alt="" />
+          <div
+            className="right-content"
+            onClick={() => navigate(`/mypage/reservation/${item.planId}`)}
+          >
+            상세보기
+            <div className="arrow">
+              <img src={arrow} alt="" />
+            </div>
           </div>
         </div>
+        <div className="id">스냅 예약번호&nbsp;&nbsp;{item.planId}</div>
       </Header>
       <div className="line"></div>
       <Footer>
@@ -103,10 +103,16 @@ const Header = styled.div`
   height: 30%;
   margin: 0px 40px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   @media (max-width: 768px) {
     //모바일
     margin: 0px 16px;
+  }
+  .top-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   .date {
@@ -118,7 +124,8 @@ const Header = styled.div`
   .id {
     color: var(--darkgrey, #777);
     font-size: 0.9rem;
-    margin-top: 3px;
+
+    margin-bottom: 3px;
     @media (max-width: 768px) {
       font-size: 12px;
     }
