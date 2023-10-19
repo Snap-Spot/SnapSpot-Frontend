@@ -46,7 +46,9 @@ client.interceptors.response.use(
         // accessToken, refreshToken 로컬스토리지 저장
         localStorage.setItem("accessToken", res.data.accessToken);
         localStorage.setItem("refreshToken", res.data.refreshToken);
-
+        // 새로운 token 적용을 위한 새로고침
+        window.location.reload();
+        
         // 기존 API header로 새로 받은 accessToken 넣어주기
         originalConfig.headers["Authorization"] = res.data.accessToken;
         // 기존 API 실행
