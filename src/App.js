@@ -48,7 +48,7 @@ function App() {
         <Route path="/auth/kakao-login" element={<KakaoLoginPage />} />
         <Route path="/auth/kakao-signup" element={<KakaoSignUpPage />} />
 
-        <Route path="/event" element={<EventPage />} />
+        <Route path="/event/:id" element={<EventPage />} />
         <Route path="/search" element={<SearchPage />} />
 
         <Route path="photographers/:id" element={<Introduction />} />
@@ -80,7 +80,7 @@ function App() {
             element={<ReservationList />}
           />
         </Route>
-        
+
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
