@@ -16,7 +16,6 @@ const ReservationDetail = () => {
     try {
       const data = await getMyReservation(planId);
       setReservation(data);
-      // console.log("예약상세", data);
     } catch (err) {
       console.log(err);
     }
