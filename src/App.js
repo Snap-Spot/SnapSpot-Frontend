@@ -28,6 +28,7 @@ import Photographerlist from "./pages/serach/Photographerlist";
 import MainPage from "./pages/MainPage/MainPage";
 import SpotListPage from "./pages/SpotListPage/SpotListPage";
 import EventPage from "./pages/EventPage/EventPage";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
 import PrivateRoute from "./components/Route/PrivateRoute";
 import Footer from "./components/common/Footer";
@@ -79,6 +80,8 @@ function App() {
             element={<ReservationList />}
           />
         </Route>
+        
+        <Route path="/*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
     </LoadingProvider>
