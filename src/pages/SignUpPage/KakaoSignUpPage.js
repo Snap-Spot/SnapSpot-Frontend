@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import Loading from "../../assets/signup/loading.png";
 import axios from "axios";
@@ -15,8 +15,6 @@ const KakaoSignUpPage = () => {
   const REST_API_KEY = process.env.REACT_APP_REST_API_KEY;
   const REDIRECT_URI = encodeURI(`${CLIENT_MAIN_URL}/auth/kakao-signup`);
   const TOKEN_ADDRESS = `https://kauth.kakao.com/oauth/token?grant_type=${GRANT_TYPE}&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${KAKAO_A_CODE}`; // 토큰 요청
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     axios
