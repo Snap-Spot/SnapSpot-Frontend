@@ -1,14 +1,22 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
 import Header from "../../components/common/Header";
 import EventItem from "../../components/Event/EventItem";
 
+import { bannerData } from "../../components/Main/MainSlider";
+
 const EventPage = () => {
+  // url parameter
+  const param = useParams();
+  // event 관련 data
+  const eventData = bannerData[param.id - 1];
+
   return (
     <>
       <Header />
       <Wrapper>
-        <EventItem />
+        <EventItem eventData={eventData}/>
       </Wrapper>
     </>
   );
