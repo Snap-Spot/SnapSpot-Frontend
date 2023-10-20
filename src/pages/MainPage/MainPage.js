@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { styled } from "styled-components";
 import MainSlider from "../../components/Main/MainSlider";
 import RecommendSection from "../../components/Main/RecommendSection";

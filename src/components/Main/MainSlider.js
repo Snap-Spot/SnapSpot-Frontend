@@ -2,21 +2,33 @@ import React, { useState, useEffect, useRef } from "react";
 import { styled } from "styled-components";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-import Banner_Sample from "../../assets/main/banner2.png";
-import Left_Arrow from "../../assets/main/main_arrow_left.png";
-import Right_Arrow from "../../assets/main/main_arrow_right.png";
 
-const itemsArr = [1, 2, 3, 4, 5];
+import banner_new_member from "../../assets/main/banner_new_member.png";
+import banner_october from "../../assets/main/banner_october.png";
+import banner_jeju from "../../assets/main/banner_jeju.png";
+import banner_graduation from "../../assets/main/banner_graduation.png";
+import banner_wedding from "../../assets/main/banner_wedding.png";
 
-const items = itemsArr.map((value, index) => (
-  <div className="item" data-value={value} key={index}>
+import left_arrow from "../../assets/main/main_arrow_left.png";
+import right_arrow from "../../assets/main/main_arrow_right.png";
+
+export const bannerData = [
+  { id: 1, name: "신규 가입", image: banner_new_member, discount: "11%" },
+  { id: 2, name: "10월", image: banner_october, discount: "2만원" },
+  { id: 3, name: "제주도 스냅", image: banner_jeju, discount: "3만원" },
+  { id: 4, name: "졸업스냅", image: banner_graduation, discount: "7%" },
+  { id: 5, name: "웨딩스냅", image: banner_wedding, discount: "2만원" },
+];
+
+const items = bannerData.map((value) => (
+  <div className="item" data-value={value.id} key={value.id}>
     <img
-      src={Banner_Sample}
-      alt="banner_sample"
+      src={value.image}
+      alt={"banner" + value.id}
       style={{ cursor: "pointer" }}
       className="item-image"
       onClick={() => {
-        window.location.href = "/event";
+        window.location.href = `/event/${value.id}`;
       }}
     />
   </div>
@@ -27,11 +39,15 @@ const renderSlideInfo = ({ item, itemsCount }) => {
 };
 
 const renderPrevButton = ({ isDisabled }) => {
-  return <img src={Left_Arrow} className="prev-next-button" />;
+  return (
+    <img src={left_arrow} alt="prev-button" className="prev-next-button" />
+  );
 };
 
 const renderNextButton = ({ isDisabled }) => {
-  return <img src={Right_Arrow} className="prev-next-button" />;
+  return (
+    <img src={right_arrow} alt="next-button" className="prev-next-button" />
+  );
 };
 
 const MainSlider = () => {

@@ -1,9 +1,9 @@
 import React from "react";
 import { styled } from "styled-components";
-import coupon from "../../assets/event/wedding_coupon.png";
+import coupon from "../../assets/event/coupon.png";
 import { useNavigate } from "react-router-dom";
 
-const EventItem = () => {
+const EventItem = ({ eventData }) => {
   const navigate = useNavigate();
   const isSignUp = () => {
     if (!!localStorage.getItem("accessToken")) {
@@ -18,15 +18,20 @@ const EventItem = () => {
   };
   return (
     <>
-      <Title>웨딩 스냅사진 할인 쿠폰</Title>
+      <Title>{eventData.name} 할인 쿠폰</Title>
       <SubTitle>
         <div className="text1">스냅스팟이</div>
         <div className="text2">여러분께 드리는</div>
-        <div className="text3">웨딩 스냅사진 할인 쿠폰</div>
+        <div className="text3">{eventData.name} 할인 쿠폰</div>
       </SubTitle>
       <CouponDiv>
-        <img src={coupon} alt="coupon" />
-        <span>지급 기간 : 10월 30일 ~ 11월 6일</span>
+        <CouponImage>
+          <img src={coupon} alt="coupon" />
+          <div className="coupon-title">{eventData.name} 할인 쿠폰</div>
+          <div className="coupon-condition">{eventData.name} 한정</div>
+          <div className="coupon-discount">{eventData.discount} 할인</div>
+        </CouponImage>
+        <span>지급 기간 : 10월 23일 ~ 10월 30일</span>
       </CouponDiv>
       <ButtonDiv>
         <button className="signup-download" onClick={isSignUp}>
@@ -80,11 +85,6 @@ const CouponDiv = styled.div`
 
   width: 50%;
 
-  img {
-    /* box-shadow: 0px 4px 18px 0px rgba(0, 0, 0, 0.25); */
-    filter: drop-shadow(0rem 0.25rem 0.5rem rgba(0, 0, 0, 0.25));
-  }
-
   span {
     text-align: right;
     font-size: 0.8rem;
@@ -93,6 +93,56 @@ const CouponDiv = styled.div`
 
   @media (max-width: 768px) {
     width: 80%;
+  }
+`;
+
+const CouponImage = styled.div`
+  width: 100%;
+  position: relative;
+  img {
+    width: 100%;
+    /* box-shadow: 0px 4px 18px 0px rgba(0, 0, 0, 0.25); */
+    filter: drop-shadow(0rem 0.25rem 0.5rem rgba(0, 0, 0, 0.25));
+  }
+
+  div {
+    position: absolute;
+    font-weight: 700;
+  }
+
+  .coupon-title {
+    font-size: 1.8vw;
+
+    top: 21%;
+    left: 14%;
+
+    @media (max-width: 768px) {
+      font-size: 3.44vw;
+    }
+  }
+
+  .coupon-condition {
+    font-size: 1.1vw;
+    color: var(--lightgrey2, #dbdbdb);
+
+    top: 63%;
+    left: 14%;
+
+    @media (max-width: 768px) {
+      font-size: 1.2vw;
+    }
+  }
+
+  .coupon-discount {
+    font-size: 2.2vw;
+    color: var(--sub_color2, #A6B9FF);
+
+    top: 58.5%;
+    right: 6.5%;
+
+    @media (max-width: 768px) {
+      font-size: 4.3vw;
+    }
   }
 `;
 

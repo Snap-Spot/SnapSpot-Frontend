@@ -13,7 +13,8 @@ const LoginForm = () => {
       // 회원가입 페이지로 이동
       navigate("/signup/member");
     } else {
-      // 비밀번호 찾기 페이지로 이동
+      // 비밀번호 찾기 - 문의하기 폼으로 이동
+      window.open("https://forms.gle/fXMUjT2QYxhPxquj7");
     }
   };
 
@@ -110,7 +111,13 @@ const LoginForm = () => {
           회원가입
         </EtcText>
         <EtcText>|</EtcText>
-        <EtcText>비밀번호 찾기</EtcText>
+        <EtcText
+          onClick={() => {
+            navigateToPage("inquiry");
+          }}
+        >
+          비밀번호 찾기
+        </EtcText>
       </BottomDiv>
     </SignUpWrapper>
   );

@@ -48,11 +48,11 @@ client.interceptors.response.use(
         localStorage.setItem("refreshToken", res.data.refreshToken);
         // 새로운 token 적용을 위한 새로고침
         window.location.reload();
-        
+
         // 기존 API header로 새로 받은 accessToken 넣어주기
         originalConfig.headers["Authorization"] = res.data.accessToken;
         // 기존 API 실행
-        refreshClient(originalConfig);
+        return refreshClient(originalConfig);
       } catch (err) {
         // 토큰 재발급 실패할 경우 (refreshToken까지 만료된 경우)
         console.log(err, "토큰 재발급 에러");
@@ -61,7 +61,7 @@ client.interceptors.response.use(
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
         // 로그인 페이지로 이동
-        window.location.replace("/login");
+        return window.location.replace("/login");
       }
     }
     return Promise.reject(error);
